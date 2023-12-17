@@ -6,7 +6,7 @@ package Controlador;
 
 /**
  *
- * @author yumii
+ * @author yumii 
  */
 public class prueba2 extends javax.swing.JFrame {
 
