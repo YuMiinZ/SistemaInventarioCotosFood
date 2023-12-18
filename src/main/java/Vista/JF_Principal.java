@@ -193,7 +193,10 @@ public class JF_Principal extends javax.swing.JFrame {
         addMenuItemWithSeparator(reportesSubMenu, "Reporte de costode mercadería más vendida");
         addMenuItemWithSeparator(reportesSubMenu, "Reporte de productos estancados");
         addMenuItemWithSeparator(reportesSubMenu, "Reporte de cantidad de productos mínimos");
-        addMenuItemWithSeparator(reportesSubMenu, "Reporte de carné por vencerse");
+        
+        JMenuItem notificacionesMenu = new JMenuItem("Notificaciones");
+        notificacionesMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
+        applyStyles(notificacionesMenu);
 
         JMenuItem consumoEmpleadoMenu = new JMenuItem("Consumo cliente");
         consumoEmpleadoMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
@@ -202,7 +205,8 @@ public class JF_Principal extends javax.swing.JFrame {
         JMenuItem menuMenu = new JMenuItem("Menú");
         menuMenu.setFont(new Font("Montserrat", Font.BOLD, 18));
         applyStyles(menuMenu);
-
+           
+        menu.add(notificacionesMenu);
         menu.add(inventarioSubMenu);
         menu.add(consumoEmpleadoMenu);
         menu.add(menuMenu);
