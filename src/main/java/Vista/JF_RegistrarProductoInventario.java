@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  *
  * @author yumii
  */
-public class JF_ModificarEmpleado extends javax.swing.JFrame {
+public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private boolean menuAbierto = false;
     
     private JPopupMenu menu = new JPopupMenu();
@@ -26,7 +26,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form JF_Principal
      */
-    public JF_ModificarEmpleado() {
+    public JF_RegistrarProductoInventario() {
         initComponents();
         customComponents();
         eventComponents();
@@ -47,28 +47,28 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblTelefono = new javax.swing.JLabel();
+        lblProveedor = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
-        lblVacaciones = new javax.swing.JLabel();
-        txtVacaciones = new javax.swing.JTextField();
-        lblFechaCarnetAlimentos2 = new javax.swing.JLabel();
-        txtFechaCarnetAlimentos = new javax.swing.JTextField();
-        lblFechaCarnetAlimentos = new javax.swing.JLabel();
-        lblAlergias = new javax.swing.JLabel();
-        txtAlergias = new javax.swing.JTextField();
-        lblTipoSangre = new javax.swing.JLabel();
-        lblFechaIngreso = new javax.swing.JLabel();
-        txtFechaIngreso = new javax.swing.JTextField();
-        cmboxTipoSangre = new javax.swing.JComboBox<>();
-        btnAgregar = new javax.swing.JButton();
+        lblPrecio = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        lblCantMinima = new javax.swing.JLabel();
+        txtCantMinima = new javax.swing.JTextField();
+        lblDiaCompra = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
+        cmboxEstado = new javax.swing.JComboBox<>();
+        txtUnidadMedida = new javax.swing.JTextField();
+        lblUnidadMedida = new javax.swing.JLabel();
+        spnPrecio = new javax.swing.JSpinner();
+        cmboxProveedor = new javax.swing.JComboBox<>();
+        cmboxDiaCompra = new javax.swing.JComboBox<>();
+        spnCantidad = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -76,9 +76,9 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblTelefono.setText("Telefono");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 470, -1));
+        lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblProveedor.setText("Proveedor");
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
@@ -87,21 +87,21 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 470, 38));
 
-        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
-        btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
+        btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 660, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 780, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
-        lblTitulo.setText("Registrar Empleado");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
+        lblTitulo.setText("Registrar Producto Inventario");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
         jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
@@ -138,14 +138,6 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
 
-        txtTelefono.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 470, 38));
-
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
@@ -156,77 +148,72 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
 
-        lblVacaciones.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblVacaciones.setText("Vacaciones");
-        jPanel1.add(lblVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 470, -1));
+        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblPrecio.setText("Precio");
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 470, -1));
 
-        txtVacaciones.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtVacaciones.addActionListener(new java.awt.event.ActionListener() {
+        lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblCantidad.setText("Cantidad");
+        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 660, 510, -1));
+
+        lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblCantMinima.setText("Cantidad Mínima");
+        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 180, 470, -1));
+
+        txtCantMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(txtCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 470, 38));
+
+        lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblDiaCompra.setText("Día de Compra");
+        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 470, -1));
+
+        lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblEstado.setText("Estado");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, 470, -1));
+
+        cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
+        cmboxEstado.setSelectedIndex(-1);
+        cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVacacionesActionPerformed(evt);
+                cmboxEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 470, 38));
+        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 470, 40));
 
-        lblFechaCarnetAlimentos2.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblFechaCarnetAlimentos2.setText("carnet de manipulación");
-        jPanel1.add(lblFechaCarnetAlimentos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 700, 590, -1));
-
-        txtFechaCarnetAlimentos.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtFechaCarnetAlimentos.addActionListener(new java.awt.event.ActionListener() {
+        txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaCarnetAlimentosActionPerformed(evt);
+                txtUnidadMedidaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 750, 470, 38));
+        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 710, 470, 38));
 
-        lblFechaCarnetAlimentos.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblFechaCarnetAlimentos.setText("Fecha de vencimiento de");
-        jPanel1.add(lblFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 660, 610, -1));
+        lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblUnidadMedida.setText("Unidad de Medida");
+        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 660, 510, -1));
 
-        lblAlergias.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblAlergias.setText("Alergias");
-        jPanel1.add(lblAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 180, 470, -1));
+        spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 470, 40));
 
-        txtAlergias.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 470, 38));
-
-        lblTipoSangre.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblTipoSangre.setText("Tipo de Sangre");
-        jPanel1.add(lblTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 470, -1));
-
-        lblFechaIngreso.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblFechaIngreso.setText("Fecha de Ingreso");
-        jPanel1.add(lblFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, 470, -1));
-
-        txtFechaIngreso.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtFechaIngreso.addActionListener(new java.awt.event.ActionListener() {
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaIngresoActionPerformed(evt);
+                cmboxProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 470, 38));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 470, 40));
 
-        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
-        cmboxTipoSangre.setSelectedIndex(-1);
-        cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {
+        cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxDiaCompra.setSelectedIndex(-1);
+        cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxTipoSangreActionPerformed(evt);
+                cmboxDiaCompraActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 470, 40));
+        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 470, 40));
 
-        btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
-        btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 660, 199, 50));
+        spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 470, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,37 +231,29 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void txtVacacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVacacionesActionPerformed
+    private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtVacacionesActionPerformed
+    }//GEN-LAST:event_cmboxEstadoActionPerformed
 
-    private void txtFechaCarnetAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCarnetAlimentosActionPerformed
+    private void txtUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadMedidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaCarnetAlimentosActionPerformed
+    }//GEN-LAST:event_txtUnidadMedidaActionPerformed
 
-    private void txtFechaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaIngresoActionPerformed
+    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaIngresoActionPerformed
+    }//GEN-LAST:event_cmboxProveedorActionPerformed
 
-    private void cmboxTipoSangreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoSangreActionPerformed
+    private void cmboxDiaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxDiaCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxTipoSangreActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_cmboxDiaCompraActionPerformed
 
     private void customComponents(){
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
@@ -314,13 +293,13 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JF_ModificarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JF_ModificarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JF_ModificarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JF_ModificarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -342,7 +321,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarEmpleado().setVisible(true);
+                new JF_RegistrarProductoInventario().setVisible(true);
             }
         });
     }
@@ -464,27 +443,27 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cmboxTipoSangre;
+    private javax.swing.JComboBox<String> cmboxDiaCompra;
+    private javax.swing.JComboBox<String> cmboxEstado;
+    private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblAlergias;
+    private javax.swing.JLabel lblCantMinima;
+    private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCotosFood;
-    private javax.swing.JLabel lblFechaCarnetAlimentos;
-    private javax.swing.JLabel lblFechaCarnetAlimentos2;
-    private javax.swing.JLabel lblFechaIngreso;
+    private javax.swing.JLabel lblDiaCompra;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblTelefono;
-    private javax.swing.JLabel lblTipoSangre;
+    private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblVacaciones;
-    private javax.swing.JTextField txtAlergias;
-    private javax.swing.JTextField txtFechaCarnetAlimentos;
-    private javax.swing.JTextField txtFechaIngreso;
+    private javax.swing.JLabel lblUnidadMedida;
+    private javax.swing.JSpinner spnCantidad;
+    private javax.swing.JSpinner spnPrecio;
+    private javax.swing.JTextField txtCantMinima;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtVacaciones;
+    private javax.swing.JTextField txtUnidadMedida;
     // End of variables declaration//GEN-END:variables
 }

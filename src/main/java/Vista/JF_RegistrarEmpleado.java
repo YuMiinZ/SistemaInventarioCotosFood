@@ -76,7 +76,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblTelefono.setText("Telefono");
+        lblTelefono.setText("Teléfono");
         jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
@@ -206,7 +206,9 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 470, 38));
 
+        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,26));
         cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
+        cmboxTipoSangre.setSelectedIndex(-1);
         cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmboxTipoSangreActionPerformed(evt);
