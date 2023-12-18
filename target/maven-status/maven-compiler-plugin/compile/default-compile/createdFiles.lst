@@ -1,6 +1,8 @@
-Vista\JF_Principal.class
 CotosFood_SistemaInventario.class
-Vista\JF_Principal$1.class
-Modelo\ConexionBD.class
-Controlador\Prueba.class
+Vista\JF_Principal.class
 Modelo\pruebaconexion.class
+Vista\MenuPersonalizado.class
+Vista\JF_Principal$1.class
+Controlador\Controlador.class
+Vista\JF_Principal$2.class
+Modelo\ConexionBD.class

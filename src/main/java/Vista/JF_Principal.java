@@ -4,19 +4,29 @@
  */
 package Vista;
 
-import Modelo.ConexionBD;
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author yumii
  */
 public class JF_Principal extends javax.swing.JFrame {
+    private boolean menuAbierto = false;
+    private JPopupMenu menu = new JPopupMenu();
 
     /**
      * Creates new form JF_Principal
      */
     public JF_Principal() {
         initComponents();
+        customComponents();
+        eventComponents();
+        crearMenu();
+        cerrarMenu();
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -29,34 +39,60 @@ public class JF_Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnMenu = new javax.swing.JButton();
+        lblCotosFood = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1747, 1291));
 
-        jButton1.setText("jButton1");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(238, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(87, 87, 87))
+        lblFondo.setMaximumSize(new java.awt.Dimension(3000, 3000));
+        lblFondo.setMinimumSize(new java.awt.Dimension(1747, 1186));
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 53, 1750, 1310));
+
+        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
+
+        btnMenu.setBorderPainted(false);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
+        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setText("Cotos Food");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblCotosFood)
+                .addContainerGap(1615, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(95, 95, 95))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,12 +102,29 @@ public class JF_Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void customComponents(){
+        setImageLabel(lblFondo, "src/main/resources/Imagenes/Fondo4.jpeg");
+        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+    }
+    
+    private void eventComponents() {
+        btnMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (menuAbierto) {
+                    cerrarMenu();
+                } else {
+                    mostrarMenu();
+                }
+                menuAbierto = !menuAbierto; // Cambia el estado del menú
+            }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        ConexionBD conexion = new ConexionBD();
-        conexion.crearConexion();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -102,9 +155,114 @@ public class JF_Principal extends javax.swing.JFrame {
             }
         });
     }
+   
 
+    private void cerrarMenu() {
+        menu.setVisible(false); // Cierra el menú si está visible
+    }
+    
+    private void mostrarMenu() {
+        menu.show(this, 0, 84);
+        menu.setVisible(true); // Cierra el menú si está visible
+
+    }
+
+    private void crearMenu() {
+        menu.setUI(new MenuPersonalizado());
+
+        JMenu inventarioSubMenu = new JMenu("Inventario");
+        inventarioSubMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
+        applyStyles(inventarioSubMenu);
+        addMenuItemWithSeparator(inventarioSubMenu, "Lista de inventario");
+        addMenuItemWithSeparator(inventarioSubMenu, "Compra por día");
+        addMenuItemWithSeparator(inventarioSubMenu, "Compra por proveedor");
+        addMenuItemWithSeparator(inventarioSubMenu, "Registrar proveedor");
+        addMenuItemWithSeparator(inventarioSubMenu, "Editar proveedor");
+
+        JMenu empleadoSubMenu = new JMenu("Empleado");
+        empleadoSubMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
+        applyStyles(empleadoSubMenu);
+        addMenuItemWithSeparator(empleadoSubMenu, "Registrar empleado");
+        addMenuItemWithSeparator(empleadoSubMenu, "Editar empleado");
+        addMenuItemWithSeparator(empleadoSubMenu, "Consumo empleado");
+
+        JMenu reportesSubMenu = new JMenu("Reportes");
+        reportesSubMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
+        applyStyles(reportesSubMenu);
+        addMenuItemWithSeparator(reportesSubMenu, "Reporte de ventas");
+        addMenuItemWithSeparator(reportesSubMenu, "Reporte de costode mercadería más vendida");
+        addMenuItemWithSeparator(reportesSubMenu, "Reporte de productos estancados");
+        addMenuItemWithSeparator(reportesSubMenu, "Reporte de cantidad de productos mínimos");
+        addMenuItemWithSeparator(reportesSubMenu, "Reporte de carné por vencerse");
+
+        JMenuItem consumoEmpleadoMenu = new JMenuItem("Consumo cliente");
+        consumoEmpleadoMenu.setFont(new Font("Montserrat", Font.BOLD, 16));
+        applyStyles(consumoEmpleadoMenu);
+
+        JMenuItem menuMenu = new JMenuItem("Menú");
+        menuMenu.setFont(new Font("Montserrat", Font.BOLD, 18));
+        applyStyles(menuMenu);
+
+        menu.add(inventarioSubMenu);
+        menu.add(consumoEmpleadoMenu);
+        menu.add(menuMenu);
+        menu.add(empleadoSubMenu);
+        menu.add(reportesSubMenu);
+
+        
+        menu.setPreferredSize(new Dimension(175, getContentPane().getHeight() - 97));
+    }
+
+    private void addMenuItemWithSeparator(JMenu menu, String itemName) {
+        JMenuItem menuItem = new JMenuItem(itemName);
+        menuItem.setFont(new Font("Montserrat", Font.BOLD, 14));
+        applyStyles(menuItem);
+        menu.add(menuItem);
+
+        JPanel spacePanel = new JPanel();
+        spacePanel.setPreferredSize(new Dimension(0, 16)); // Altura del espacio entre elementos
+        spacePanel.setBackground(new Color(57, 145, 151)); // Color del espacio
+        menu.add(spacePanel);
+    }
+
+    private void addMenuItem(JMenu parentMenu, String itemName) {
+        JMenuItem menuItem = new JMenuItem(itemName);
+        applyStyles(menuItem);
+        parentMenu.add(menuItem);
+    }
+
+    private void applyStyles(JMenuItem menuItem) {
+        menuItem.setForeground(Color.WHITE);
+        menuItem.setBackground(new Color(57, 145, 151));
+        menuItem.setOpaque(true);
+    }
+
+    
+    private void setButtonTransparent(){
+        btnMenu.setOpaque(false);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setBorderPainted(false);
+    }
+    
+    private void setButtonIcon(JButton button, String imagePath){
+        ImageIcon image = new ImageIcon(imagePath);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
+        button.setIcon(icon);
+        button.repaint();
+    }
+    
+    private void setImageLabel(JLabel lblName, String imagePath) {
+        ImageIcon image = new ImageIcon(imagePath);
+        Image scaledImage = image.getImage().getScaledInstance(lblName.getWidth(), lblName.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        lblName.setIcon(scaledIcon);
+        this.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCotosFood;
+    private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }
