@@ -8,11 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 /**
  *
  * @author yumii
  */
-public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
+public class JF_Notificaciones extends javax.swing.JFrame {
     private boolean menuAbierto = false;
     
     private JPopupMenu menu = new JPopupMenu();
@@ -26,7 +28,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     /**
      * Creates new form JF_Principal
      */
-    public JF_RegistrarProductoInventario() {
+    public JF_Notificaciones() {
         initComponents();
         customComponents();
         eventComponents();
@@ -47,28 +49,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblProveedor = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        lblPrecio = new javax.swing.JLabel();
-        lblCantidad = new javax.swing.JLabel();
-        lblCantMinima = new javax.swing.JLabel();
-        txtCantMinima = new javax.swing.JTextField();
-        lblDiaCompra = new javax.swing.JLabel();
-        lblEstado = new javax.swing.JLabel();
-        cmboxEstado = new javax.swing.JComboBox<>();
-        txtUnidadMedida = new javax.swing.JTextField();
-        lblUnidadMedida = new javax.swing.JLabel();
-        spnPrecio = new javax.swing.JSpinner();
-        cmboxProveedor = new javax.swing.JComboBox<>();
-        cmboxDiaCompra = new javax.swing.JComboBox<>();
-        spnCantidad = new javax.swing.JSpinner();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableNotificacion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -76,31 +64,9 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 470, -1));
-
-        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 470, -1));
-
-        txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 470, 38));
-
-        btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
-        btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 780, 199, 50));
-
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
-        lblTitulo.setText("Registrar Producto Inventario");
+        lblTitulo.setText("Notificaciones");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
@@ -148,72 +114,48 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
 
-        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 470, -1));
+        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
 
-        lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblCantidad.setText("Cantidad");
-        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 660, 510, -1));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1070, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
 
-        lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblCantMinima.setText("Cantidad Mínima");
-        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 180, 470, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
 
-        txtCantMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 470, 38));
+        tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        tableNotificacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Notificaciones", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
 
-        lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblDiaCompra.setText("Día de Compra");
-        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 470, -1));
-
-        lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, 470, -1));
-
-        cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
-        cmboxEstado.setSelectedIndex(-1);
-        cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxEstadoActionPerformed(evt);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 470, 40));
+        tableNotificacion.setAlignmentX(0.0F);
+        tableNotificacion.setAlignmentY(0.0F);
+        tableNotificacion.setColumnSelectionAllowed(true);
+        tableNotificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tableNotificacion);
 
-        txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnidadMedidaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 710, 470, 38));
-
-        lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblUnidadMedida.setText("Unidad de Medida");
-        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 660, 510, -1));
-
-        spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 470, 40));
-
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxProveedorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 470, 40));
-
-        cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        cmboxDiaCompra.setSelectedIndex(-1);
-        cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxDiaCompraActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 470, 40));
-
-        spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 470, 40));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 1070, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,43 +165,65 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxEstadoActionPerformed
-
-    private void txtUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadMedidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnidadMedidaActionPerformed
-
-    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxProveedorActionPerformed
-
-    private void cmboxDiaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxDiaCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxDiaCompraActionPerformed
-
     private void customComponents(){
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        
+        jScrollPane1.setBackground(Color.WHITE);
+        jScrollPane1.setBorder(null);
+        
+        tableNotificacion.setBackground(Color.WHITE);
+        tableNotificacion.setBorder(null);
+        tableNotificacion.setShowGrid(false);
+        tableNotificacion.setFillsViewportHeight(true);
+        
+        JTableHeader tableHeader = tableNotificacion.getTableHeader();
+        tableHeader.setPreferredSize(new Dimension(0, 0));
 
-}
+        // Crear un renderizador de celdas personalizado para centrar el texto y ajustar el tamaño de la fuente
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                
+                if (column == 0) { 
+                    setHorizontalAlignment(JLabel.LEFT); 
+                } else if (column == 1) { 
+                    setHorizontalAlignment(JLabel.RIGHT); 
+                }
+                
+                // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
+                rendererComponent.setBackground(table.getBackground());
+
+                // Establecer el color del texto según el estado de selección
+                if (isSelected) {
+                    rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
+                } else {
+                    rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
+                }
+
+                return rendererComponent;
+            }
+        };
+        
+        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
+
+        for (int i = 0; i < tableNotificacion.getColumnCount(); i++) {
+            tableNotificacion.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+        
+        tableNotificacion.setRowHeight(tableNotificacion.getRowHeight() + 30);
+    }
 
     
     private void eventComponents() {
@@ -293,13 +257,13 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Notificaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Notificaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Notificaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JF_RegistrarProductoInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Notificaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -321,7 +285,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_RegistrarProductoInventario().setVisible(true);
+                new JF_Notificaciones().setVisible(true);
             }
         });
     }
@@ -442,28 +406,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         this.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cmboxDiaCompra;
-    private javax.swing.JComboBox<String> cmboxEstado;
-    private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblCantMinima;
-    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCotosFood;
-    private javax.swing.JLabel lblDiaCompra;
-    private javax.swing.JLabel lblEstado;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblPrecio;
-    private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblUnidadMedida;
-    private javax.swing.JSpinner spnCantidad;
-    private javax.swing.JSpinner spnPrecio;
-    private javax.swing.JTextField txtCantMinima;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtUnidadMedida;
+    private javax.swing.JTable tableNotificacion;
     // End of variables declaration//GEN-END:variables
 }
