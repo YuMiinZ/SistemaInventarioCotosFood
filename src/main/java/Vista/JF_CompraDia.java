@@ -17,14 +17,8 @@ import javax.swing.table.JTableHeader;
  */
 public class JF_CompraDia extends javax.swing.JFrame {
     private boolean menuAbierto = false;
-    
-    private JPopupMenu menu = new JPopupMenu();
-    private JMenuItem[] inventarioItems;
-    private JMenuItem[] empleadoItems;
-    private JMenuItem[] reportesItems;
-    private JMenuItem notificacionesMenu;
-    private JMenuItem consumoClienteMenu;
-    private JMenuItem menuMenu;
+    private MenuBoton menu;
+
 
     /**
      * Creates new form JF_Principal
@@ -33,8 +27,8 @@ public class JF_CompraDia extends javax.swing.JFrame {
         initComponents();
         customComponents();
         eventComponents();
-        crearMenu();
-        cerrarMenu();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu.cerrarMenu();
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -246,9 +240,9 @@ public class JF_CompraDia extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (menuAbierto) {
-                    cerrarMenu();
+                    menu.cerrarMenu();
                 } else {
-                    mostrarMenu();
+                    menu.mostrarMenu();
                 }
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
@@ -320,107 +314,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
             }
         });
     }
-   
-
-    private void cerrarMenu() {
-        menu.setVisible(false); // Cierra el menú si está visible
-    }
     
-    private void mostrarMenu() {
-        menu.show(this, 7, 84);
-        menu.setVisible(true); // Cierra el menú si está visible
-
-    }
-
-    private void crearMenu() {
-        menu.setUI(new MenuPersonalizado());
-
-        inventarioItems = new JMenuItem[]{
-                createMenuItem("Lista de inventario"),
-                createMenuItem("Compra por día"),
-                createMenuItem("Compra por proveedor"),
-                createMenuItem("Registrar proveedor"),
-                createMenuItem("Editar proveedor")
-        };
-        JMenu inventarioSubMenu = createMenuWithItems("Inventario", inventarioItems);
-        inventarioSubMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-        
-        empleadoItems = new JMenuItem[]{
-                createMenuItem("Registrar empleado"),
-                createMenuItem("Editar empleado"),
-                createMenuItem("Consumo empleado")
-        };
-        JMenu empleadoSubMenu = createMenuWithItems("Empleado", empleadoItems);
-        empleadoSubMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-        
-        reportesItems = new JMenuItem[]{
-                createMenuItem("Reporte de ventas"),
-                createMenuItem("Reporte de costode mercadería más vendida"),
-                createMenuItem("Reporte de productos estancados"),
-                createMenuItem("Reporte de cantidad de productos mínimos")
-        };
-        JMenu reportesSubMenu = createMenuWithItems("Reportes", reportesItems);
-        reportesSubMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-        
-        notificacionesMenu = createMenuItem("Notificaciones");
-        notificacionesMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-        
-        consumoClienteMenu = createMenuItem("Consumo cliente");
-        consumoClienteMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-        
-        menuMenu = createMenuItem("Menú");
-        menuMenu.setFont(new Font("Montserrat", Font.BOLD, 24));
-
-        menu.add(notificacionesMenu);
-        menu.add(inventarioSubMenu);
-        menu.add(consumoClienteMenu);
-        menu.add(menuMenu);
-        menu.add(empleadoSubMenu);
-        menu.add(reportesSubMenu);
-
-        menu.setPreferredSize(new Dimension(300, getContentPane().getHeight() - 97));
-    }
-
-    private JMenuItem createMenuItem(String itemName) {
-        JMenuItem menuItem = new JMenuItem(itemName);
-        menuItem.setFont(new Font("Montserrat", Font.BOLD, 20));
-        applyStyles(menuItem);
-        return menuItem;
-    }
-
-    private JMenu createMenuWithItems(String menuName, JMenuItem[] items) {
-        JMenu subMenu = new JMenu(menuName);
-        applyStyles(subMenu);
-
-        for (JMenuItem item : items) {
-            addMenuItemWithSeparator(subMenu, item);
-        }
-
-        return subMenu;
-    }
-
-    private void addMenuItemWithSeparator(JMenu menu, JMenuItem menuItem) {
-        applyStyles(menuItem);
-        menu.add(menuItem);
-
-        JPanel spacePanel = new JPanel();
-        spacePanel.setPreferredSize(new Dimension(0, 16));
-        spacePanel.setBackground(new Color(57, 145, 151));
-        menu.add(spacePanel);
-    }
-
-    private void applyStyles(JMenuItem menuItem) {
-        menuItem.setForeground(Color.WHITE);
-        menuItem.setBackground(new Color(57, 145, 151));
-        menuItem.setOpaque(true);
-    }
-
-    
-    private void setButtonTransparent(){
-        btnMenu.setOpaque(false);
-        btnMenu.setContentAreaFilled(false);
-        btnMenu.setBorderPainted(false);
-    }
     
     private void setButtonIcon(JButton button, String imagePath){
         ImageIcon image = new ImageIcon(imagePath);
@@ -429,13 +323,6 @@ public class JF_CompraDia extends javax.swing.JFrame {
         button.repaint();
     }
     
-    private void setImageLabel(JLabel lblName, String imagePath) {
-        ImageIcon image = new ImageIcon(imagePath);
-        Image scaledImage = image.getImage().getScaledInstance(lblName.getWidth(), lblName.getHeight(), Image.SCALE_DEFAULT);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        lblName.setIcon(scaledIcon);
-        this.repaint();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;

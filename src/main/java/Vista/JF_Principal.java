@@ -15,13 +15,7 @@ import java.awt.event.ActionListener;
 public class JF_Principal extends javax.swing.JFrame {
     private boolean menuAbierto = false;
     
-    private JPopupMenu menu = new JPopupMenu();
-    private JMenuItem[] inventarioItems;
-    private JMenuItem[] empleadoItems;
-    private JMenuItem[] reportesItems;
-    private JMenuItem notificacionesMenu;
-    private JMenuItem consumoClienteMenu;
-    private JMenuItem menuMenu;
+    private MenuBoton menu;
 
     /**
      * Creates new form JF_Principal
@@ -31,8 +25,13 @@ public class JF_Principal extends javax.swing.JFrame {
         crearMenu();
         customComponents();
         eventComponents();
+<<<<<<< HEAD
         
         cerrarMenu();
+=======
+        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu.cerrarMenu();
+>>>>>>> 846a84d7277a2c25ec00f32a435cf9b26fe56f1a
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -123,9 +122,9 @@ public class JF_Principal extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (menuAbierto) {
-                    cerrarMenu();
+                    menu.cerrarMenu();
                 } else {
-                    mostrarMenu();
+                    menu.mostrarMenu();
                 }
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
@@ -188,6 +187,7 @@ public class JF_Principal extends javax.swing.JFrame {
         });
     }
    
+<<<<<<< HEAD
 
     private void cerrarMenu() {
         menu.setVisible(false); // Cierra el menú si está visible
@@ -288,6 +288,8 @@ public class JF_Principal extends javax.swing.JFrame {
         btnMenu.setBorderPainted(false);
     }
     
+=======
+>>>>>>> 846a84d7277a2c25ec00f32a435cf9b26fe56f1a
     protected void mostrarFondo(boolean mostrar) {
         lblFondo.setVisible(mostrar);
     }
