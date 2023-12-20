@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 /**
  *
  * @author yumii
@@ -136,7 +137,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         lblFiltro.setText("Proveedor");
         jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 150, 30));
 
-        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,20));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
         jComboBox1.setSelectedIndex(-1);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,28 +150,18 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         tableCompraProveedor.setFont(new Font("Montserrat", Font.PLAIN, 20));
         tableCompraProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Prueba", "Prueba"},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"Prueba"}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
+                java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tableCompraProveedor);
@@ -199,58 +190,62 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void customComponents(){
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
-  
-            
-        /*jScrollPane1.setBackground(Color.WHITE);
-        jScrollPane1.setBorder(null);
-        
-        tableCompraProveedor.setBackground(Color.WHITE);
-        tableCompraProveedor.setBorder(null);
-        tableCompraProveedor.setShowGrid(false);
-        tableCompraProveedor.setFillsViewportHeight(true);*/
-        
-        JTableHeader tableHeader = tableCompraProveedor.getTableHeader();
-        tableHeader.setPreferredSize(new Dimension(0, 0));
+ private void customComponents() {
+    setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+    setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
 
-        // Crear un renderizador de celdas personalizado para centrar el texto y ajustar el tamaño de la fuente
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                
-                if (column == 0) { 
-                    setHorizontalAlignment(JLabel.LEFT); 
-                } else if (column == 1) { 
-                    setHorizontalAlignment(JLabel.RIGHT); 
-                }
-                
-                // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-                rendererComponent.setBackground(table.getBackground());
+    jScrollPane1.setBackground(Color.WHITE);
+    jScrollPane1.setBorder(null);
 
-                // Establecer el color del texto según el estado de selección
-                if (isSelected) {
-                    rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-                } else {
-                    rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-                }
+    tableCompraProveedor.setBackground(Color.WHITE);
+    tableCompraProveedor.setBorder(null);
+    tableCompraProveedor.setShowGrid(false);
+    tableCompraProveedor.setFillsViewportHeight(true);
 
-                return rendererComponent;
+    JTableHeader tableHeader = tableCompraProveedor.getTableHeader();
+    tableHeader.setPreferredSize(new Dimension(0, 0));
+
+    /*tableCompraProveedor.setModel(model);
+
+    model.addColumn("Columna 1");
+    model.addColumn("Editar");
+
+    model.addRow(new Object[]{"Dato 1", "Editar"});
+    model.addRow(new Object[]{"Dato 2", "Editar"});
+    model.addRow(new Object[]{"Dato 3", "Editar"});*/
+        // Renderizador de celdas personalizado
+    
+        // Renderizador de celdas personalizado
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            if (column == 0) {
+                setHorizontalAlignment(JLabel.LEFT);
             }
-        };
-        
-        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
 
-        for (int i = 0; i < tableCompraProveedor.getColumnCount(); i++) {
-            tableCompraProveedor.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+            // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
+            rendererComponent.setBackground(table.getBackground());
+
+            // Establecer el color del texto según el estado de selección
+            if (isSelected) {
+                rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
+            } else {
+                rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
+            }
+
+            return rendererComponent;
         }
-        
-        tableCompraProveedor.setRowHeight(tableCompraProveedor.getRowHeight() + 30);
-        tableCompraProveedor.getColumnModel().getColumn(1).setCellEditor(new TablaBotonPersonalizado(new JCheckBox()));
-    }
+    };
 
+    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
+
+    for (int i = 0; i < tableCompraProveedor.getColumnCount(); i++) {
+        tableCompraProveedor.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+    }
+    tableCompraProveedor.setRowHeight(tableCompraProveedor.getRowHeight() + 30);
+}
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {

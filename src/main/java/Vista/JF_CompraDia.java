@@ -136,7 +136,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
         lblFiltro.setText("Día");
         jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 70, 30));
 
-        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,20));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
         jComboBox1.setSelectedIndex(-1);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,28 +149,18 @@ public class JF_CompraDia extends javax.swing.JFrame {
         tableCompraDia.setFont(new Font("Montserrat", Font.PLAIN, 20));
         tableCompraDia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Prueba", "Prueba"},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
+                java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tableCompraDia);

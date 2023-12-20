@@ -28,9 +28,10 @@ public class JF_Principal extends javax.swing.JFrame {
      */
     public JF_Principal() {
         initComponents();
+        crearMenu();
         customComponents();
         eventComponents();
-        crearMenu();
+        
         cerrarMenu();
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -109,7 +110,9 @@ public class JF_Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+            
     private void customComponents(){
         setImageLabel(lblFondo, "src/main/resources/Imagenes/Fondo4.jpeg");
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
@@ -127,6 +130,27 @@ public class JF_Principal extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        for (JMenuItem item : inventarioItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+
+        for (JMenuItem item : empleadoItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+
+        for (JMenuItem item : reportesItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+        
+        notificacionesMenu.addActionListener(e -> mostrarMensaje(notificacionesMenu.getText()));
+        consumoClienteMenu.addActionListener(e -> mostrarMensaje(consumoClienteMenu.getText()));
+        menuMenu.addActionListener(e -> mostrarMensaje(menuMenu.getText()));
+    }
+    
+    private void mostrarMensaje(String nombreMenu) {
+        JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        menuAbierto = !menuAbierto;
     }
     
     /**
@@ -257,7 +281,6 @@ public class JF_Principal extends javax.swing.JFrame {
         menuItem.setBackground(new Color(57, 145, 151));
         menuItem.setOpaque(true);
     }
-
     
     private void setButtonTransparent(){
         btnMenu.setOpaque(false);

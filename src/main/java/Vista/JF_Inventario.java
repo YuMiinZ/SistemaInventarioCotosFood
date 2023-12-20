@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 /**
  *
  * @author yumii
@@ -197,51 +199,74 @@ public class JF_Inventario extends javax.swing.JFrame {
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
         
         jScrollPane1.setBackground(Color.WHITE);
-        jScrollPane1.setBorder(null);
-        
-        tableInventario.setBackground(Color.WHITE);
-        tableInventario.setBorder(null);
-        tableInventario.setShowGrid(false);
-        tableInventario.setFillsViewportHeight(true);
-        
-        JTableHeader tableHeader = tableInventario.getTableHeader();
-        tableHeader.setPreferredSize(new Dimension(0, 0));
+    jScrollPane1.setBorder(null);
 
-        // Crear un renderizador de celdas personalizado para centrar el texto y ajustar el tamaño de la fuente
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                
-                if (column == 0) { 
-                    setHorizontalAlignment(JLabel.LEFT); 
-                } else if (column == 1) { 
-                    setHorizontalAlignment(JLabel.RIGHT); 
-                }
-                
-                // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-                rendererComponent.setBackground(table.getBackground());
+    tableInventario.setBackground(Color.WHITE);
+    tableInventario.setBorder(null);
+    tableInventario.setShowGrid(false);
+    tableInventario.setFillsViewportHeight(true);
 
-                // Establecer el color del texto según el estado de selección
-                if (isSelected) {
-                    rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-                } else {
-                    rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-                }
+    JTableHeader tableHeader = tableInventario.getTableHeader();
+    tableHeader.setPreferredSize(new Dimension(0, 0));
 
-                return rendererComponent;
-            }
-        };
-        
-        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
+    
 
-        for (int i = 0; i < tableInventario.getColumnCount(); i++) {
-            tableInventario.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+    DefaultTableModel model = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 1; // Hacer editables solo los botones de la segunda columna
         }
-        
-        tableInventario.setRowHeight(tableInventario.getRowHeight() + 30);
-}
+    };
 
+    tableInventario.setModel(model);
+
+    model.addColumn("Columna 1");
+    model.addColumn("Editar");
+
+    model.addRow(new Object[]{"Dato 1", "Editar"});
+    model.addRow(new Object[]{"Dato 2", "Editar"});
+    model.addRow(new Object[]{"Dato 3", "Editar"});
+        // Renderizador de celdas personalizado
+    
+        // Renderizador de celdas personalizado
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            if (column == 0) {
+                setHorizontalAlignment(JLabel.LEFT);
+            } else if (column == 1) {
+                setHorizontalAlignment(JLabel.RIGHT);
+            }
+
+            // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
+            rendererComponent.setBackground(table.getBackground());
+
+            // Establecer el color del texto según el estado de selección
+            if (isSelected) {
+                rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
+            } else {
+                rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
+            }
+
+            return rendererComponent;
+        }
+    };
+
+    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
+
+    for (int i = 0; i < tableInventario.getColumnCount(); i++) {
+        tableInventario.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+    }
+    
+    // Renderizador y editor personalizados para el botón en la columna "Editar"
+    tableInventario.getColumn("Editar").setCellRenderer(new ButtonRenderer());
+    tableInventario.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
+
+    tableInventario.setRowHeight(tableInventario.getRowHeight() + 30);
+    tableInventario.getColumnModel().getColumn(0).setPreferredWidth(950);
+}
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
@@ -256,6 +281,52 @@ public class JF_Inventario extends javax.swing.JFrame {
             }
         });
     }
+    
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    // Clase para definir la acción al hacer clic en el botón de la celda
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton("Editar");
+            button.setOpaque(true);
+
+            button.addActionListener(e -> {
+                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
+                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
+                }*/
+                JOptionPane.showMessageDialog(
+                null,
+                "Fila seleccionada: " + tableInventario.convertRowIndexToModel(tableInventario.getEditingRow()));
+            });
+            button.setFocusPainted(false);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+        
+        @Override
+        public Object getCellEditorValue() {
+            return button.getText();
+        }
+    }
+
     
     /**
      * @param args the command line arguments
