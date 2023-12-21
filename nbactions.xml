@@ -13,7 +13,11 @@
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs></exec.appArgs>
+<<<<<<< HEAD
+                <exec.mainClass>Vista.JF_NuevaComanda</exec.mainClass>
+=======
                 <exec.mainClass>Vista.JF_Inventario</exec.mainClass>
+>>>>>>> b2f72738e2bc35819fa68ff91c9dc82c10316548
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -30,7 +34,11 @@
                 <exec.vmArgs>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs></exec.appArgs>
+<<<<<<< HEAD
+                <exec.mainClass>Vista.JF_NuevaComanda</exec.mainClass>
+=======
                 <exec.mainClass>Vista.JF_Inventario</exec.mainClass>
+>>>>>>> b2f72738e2bc35819fa68ff91c9dc82c10316548
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -47,7 +55,11 @@
             <properties>
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+<<<<<<< HEAD
+                <exec.mainClass>Vista.JF_NuevaComanda</exec.mainClass>
+=======
                 <exec.mainClass>Vista.JF_Inventario</exec.mainClass>
+>>>>>>> b2f72738e2bc35819fa68ff91c9dc82c10316548
                 <exec.executable>java</exec.executable>
                 <exec.appArgs></exec.appArgs>
             </properties>
