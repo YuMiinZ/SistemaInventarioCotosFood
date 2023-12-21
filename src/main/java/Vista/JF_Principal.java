@@ -184,3 +184,4 @@ public class JF_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }
+

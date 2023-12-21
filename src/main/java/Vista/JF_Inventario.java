@@ -236,7 +236,7 @@ public class JF_Inventario extends javax.swing.JFrame {
     tableInventario.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
 
     tableInventario.setRowHeight(tableInventario.getRowHeight() + 30);
-    tableInventario.getColumnModel().getColumn(0).setPreferredWidth(950);
+    tableInventario.getColumnModel().getColumn(0).setPreferredWidth(950);//475
 }
     
     private void eventComponents() {
