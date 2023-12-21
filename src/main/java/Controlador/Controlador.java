@@ -8,6 +8,6 @@ package Controlador;
  *
  * @author yumii
  */
-public class Prueba {
+public class Controlador {
     
 }
