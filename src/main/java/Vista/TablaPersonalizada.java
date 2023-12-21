@@ -18,7 +18,9 @@ public class TablaPersonalizada {
         scrollPane.setBorder(null);
     }
 
-    public static void setTableProperties(JTable table, boolean boton) {
+    public static void setTableProperties(JTable table, DefaultTableModel model, boolean boton) {
+        String columnName = null;
+        
         table.setBackground(Color.WHITE);
         table.setBorder(null);
         table.setShowGrid(false);
@@ -27,31 +29,30 @@ public class TablaPersonalizada {
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setPreferredSize(new Dimension(0, 0));
 
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        table.setModel(model);
 
-                    if (column == 0 || (column == 1 && !boton)) {
-                        setHorizontalAlignment(JLabel.LEFT);
-                    } else {
-                        setHorizontalAlignment(JLabel.RIGHT);
-                    }
-
-                    rendererComponent.setBackground(table.getBackground());
-
-                    if (isSelected) {
-                        rendererComponent.setForeground(Color.BLACK);
-                    } else {
-                        rendererComponent.setForeground(table.getForeground());
-                    }
-
-                    return rendererComponent;
-                }
-            });
-            table.getColumnModel().getColumn(i).setPreferredWidth(120);
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
+        
+        int countColumn = table.getColumnCount();
+        
+        if(countColumn == 2 && boton){
+            table.getColumnModel().getColumn(0).setPreferredWidth(950);
+            columnName = table.getColumnName(1);
+        } else if (countColumn == 2 && !boton){
+            table.getColumnModel().getColumn(0).setPreferredWidth(950);
+        } else if (countColumn == 3 && boton){
+            table.getColumnModel().getColumn(0).setPreferredWidth(475);
+            table.getColumnModel().getColumn(1).setPreferredWidth(475);
+            columnName = table.getColumnName(2);
         }
+
+        if( columnName != null){
+            table.getColumn(columnName).setCellRenderer(new ButtonRenderer());
+        }
+        
+
+
 
         table.setRowHeight(table.getRowHeight() + 30);
     }

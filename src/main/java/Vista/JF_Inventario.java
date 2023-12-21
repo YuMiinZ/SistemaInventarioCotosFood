@@ -137,7 +137,7 @@ public class JF_Inventario extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
 
-        tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -192,52 +192,25 @@ public class JF_Inventario extends javax.swing.JFrame {
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
         
-        jScrollPane1.setBackground(Color.WHITE);
-    jScrollPane1.setBorder(null);
-
-    tableInventario.setBackground(Color.WHITE);
-    tableInventario.setBorder(null);
-    tableInventario.setShowGrid(false);
-    tableInventario.setFillsViewportHeight(true);
-
-    JTableHeader tableHeader = tableInventario.getTableHeader();
-    tableHeader.setPreferredSize(new Dimension(0, 0));
-
-    
-
-    DefaultTableModel model = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return column == 1; // Hacer editables solo los botones de la segunda columna
-        }
-    };
-
-    tableInventario.setModel(model);
-
-    model.addColumn("Columna 1");
-    model.addColumn("Editar");
-
-    model.addRow(new Object[]{"Dato 1", "Editar"});
-    model.addRow(new Object[]{"Dato 2", "Editar"});
-    model.addRow(new Object[]{"Dato 3", "Editar"});
-        // Renderizador de celdas personalizado
-    
-        // Renderizador de celdas personalizado
-    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-
-    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-    for (int i = 0; i < tableInventario.getColumnCount(); i++) {
-        tableInventario.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableInventario, model, true);
+        
+        tableInventario.getColumn("Editar").setCellEditor(new JF_Inventario.ButtonEditor(new JCheckBox()));
     }
     
-    // Renderizador y editor personalizados para el botón en la columna "Editar"
-    tableInventario.getColumn("Editar").setCellRenderer(new ButtonRenderer());
-    tableInventario.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+        model.addColumn("Editar");
 
-    tableInventario.setRowHeight(tableInventario.getRowHeight() + 30);
-    tableInventario.getColumnModel().getColumn(0).setPreferredWidth(950);//475
-}
+        model.addRow(new Object[]{"Arroz", "300 gramos", "Editar"});
+        model.addRow(new Object[]{"Frijoles", "300 gramos", "Editar"});
+        model.addRow(new Object[]{"Leche", "3 cajas", "Editar"});
+
+        return model;
+    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
@@ -253,17 +226,6 @@ public class JF_Inventario extends javax.swing.JFrame {
         });
     }
     
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
 
     // Clase para definir la acción al hacer clic en el botón de la celda
     class ButtonEditor extends DefaultCellEditor {

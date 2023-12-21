@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 /**
  *
  * @author yumii
@@ -135,16 +137,16 @@ public class JF_Menu extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
 
-        tableMenu.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        tableMenu.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
             },
             new String [] {
-                "Producto", ""
+                "Producto", "Editar"
             }
         ) {
             Class[] types = new Class [] {
@@ -186,12 +188,28 @@ public class JF_Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    
     private void customComponents(){
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
-        
+
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        TablaPersonalizada.setTableProperties(tableMenu, true); //true = segunda columna será un botón
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableMenu, model, true);
+        
+        tableMenu.getColumn("Editar").setCellEditor(new JF_Menu.ButtonEditor(new JCheckBox()));
+    }
+    
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Editar");
+
+        model.addRow(new Object[]{"Dato 1", "Editar"});
+        model.addRow(new Object[]{"Dato 2", "Editar"});
+        model.addRow(new Object[]{"Dato 3", "Editar"});
+
+        return model;
     }
 
     
@@ -207,6 +225,39 @@ public class JF_Menu extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+    }
+
+    // Clase para definir la acción al hacer clic en el botón de la celda
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton("Editar");
+            button.setOpaque(true);
+
+            button.addActionListener(e -> {
+                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
+                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
+                }*/
+                JOptionPane.showMessageDialog(
+                null,
+                "Fila seleccionada: " + tableMenu.convertRowIndexToModel(tableMenu.getEditingRow()));
+            });
+            button.setFocusPainted(false);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+        
+        @Override
+        public Object getCellEditorValue() {
+            return button.getText();
+        }
     }
     
     /**

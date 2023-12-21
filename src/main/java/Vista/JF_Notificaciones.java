@@ -125,7 +125,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
 
-        tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableNotificacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -175,75 +175,24 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
         
-        jScrollPane1.setBackground(Color.WHITE);
-    jScrollPane1.setBorder(null);
-
-    tableNotificacion.setBackground(Color.WHITE);
-    tableNotificacion.setBorder(null);
-    tableNotificacion.setShowGrid(false);
-    tableNotificacion.setFillsViewportHeight(true);
-
-    JTableHeader tableHeader = tableNotificacion.getTableHeader();
-    tableHeader.setPreferredSize(new Dimension(0, 0));
-
-    
-
-    DefaultTableModel model = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return column == 1; // Hacer editables solo los botones de la segunda columna
-        }
-    };
-
-    tableNotificacion.setModel(model);
-
-    model.addColumn("Columna 1");
-    model.addColumn("Editar");
-
-    model.addRow(new Object[]{"Dato 1", "Editar"});
-    model.addRow(new Object[]{"Dato 2", "Editar"});
-    model.addRow(new Object[]{"Dato 3", "Editar"});
-        // Renderizador de celdas personalizado
-    
-        // Renderizador de celdas personalizado
-    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-            if (column == 0) {
-                setHorizontalAlignment(JLabel.LEFT);
-            } else if (column == 1) {
-                setHorizontalAlignment(JLabel.RIGHT);
-            }
-
-            // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-            rendererComponent.setBackground(table.getBackground());
-
-            // Establecer el color del texto según el estado de selección
-            if (isSelected) {
-                rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-            } else {
-                rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-            }
-
-            return rendererComponent;
-        }
-    };
-
-    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-    for (int i = 0; i < tableNotificacion.getColumnCount(); i++) {
-        tableNotificacion.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
+        
+        tableNotificacion.getColumn("Eliminar").setCellEditor(new JF_Notificaciones.ButtonEditor(new JCheckBox()));
     }
     
-    // Renderizador y editor personalizados para el botón en la columna "Editar"
-    tableNotificacion.getColumn("Editar").setCellRenderer(new ButtonRenderer());
-    tableNotificacion.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Eliminar");
 
-    tableNotificacion.setRowHeight(tableNotificacion.getRowHeight() + 30);
-    tableNotificacion.getColumnModel().getColumn(0).setPreferredWidth(950);
-}
+        model.addRow(new Object[]{"Vencimiento próximo carné de manipulación de alimentos Juan Mora el 24-12-2023", "Eliminar"});
+        model.addRow(new Object[]{"Dato 2", "Eliminar"});
+        model.addRow(new Object[]{"Dato 3", "Eliminar"});
+
+        return model;
+    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
@@ -259,17 +208,6 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         });
     }
     
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
 
     // Clase para definir la acción al hacer clic en el botón de la celda
     class ButtonEditor extends DefaultCellEditor {
@@ -277,7 +215,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
 
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
-            button = new JButton("Editar");
+            button = new JButton("Eliminar");
             button.setOpaque(true);
 
             button.addActionListener(e -> {
