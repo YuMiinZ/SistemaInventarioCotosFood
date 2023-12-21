@@ -160,6 +160,7 @@ public class JF_Menu extends javax.swing.JFrame {
         tableMenu.setColumnSelectionAllowed(true);
         tableMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tableMenu);
+        tableMenu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 1070, 460));
 
@@ -189,50 +190,8 @@ public class JF_Menu extends javax.swing.JFrame {
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
         
-        jScrollPane1.setBackground(Color.WHITE);
-        jScrollPane1.setBorder(null);
-        
-        tableMenu.setBackground(Color.WHITE);
-        tableMenu.setBorder(null);
-        tableMenu.setShowGrid(false);
-        tableMenu.setFillsViewportHeight(true);
-        
-        JTableHeader tableHeader = tableMenu.getTableHeader();
-        tableHeader.setPreferredSize(new Dimension(0, 0));
-
-        // Crear un renderizador de celdas personalizado para centrar el texto y ajustar el tamaño de la fuente
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                
-                if (column == 0) { 
-                    setHorizontalAlignment(JLabel.LEFT); 
-                } else if (column == 1) { 
-                    setHorizontalAlignment(JLabel.RIGHT); 
-                }
-                
-                // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-                rendererComponent.setBackground(table.getBackground());
-
-                // Establecer el color del texto según el estado de selección
-                if (isSelected) {
-                    rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-                } else {
-                    rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-                }
-
-                return rendererComponent;
-            }
-        };
-        
-        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-        for (int i = 0; i < tableMenu.getColumnCount(); i++) {
-            tableMenu.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-        }
-        
-        tableMenu.setRowHeight(tableMenu.getRowHeight() + 30);
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        TablaPersonalizada.setTableProperties(tableMenu, true); //true = segunda columna será un botón
     }
 
     
