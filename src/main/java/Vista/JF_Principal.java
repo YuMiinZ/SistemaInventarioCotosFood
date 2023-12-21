@@ -12,20 +12,21 @@ import java.awt.event.ActionListener;
  *
  * @author yumii
  */
-public class JF_Principal extends javax.swing.JFrame {    
-    private final MenuBoton menu;
+public class JF_Principal extends javax.swing.JFrame {
+    private boolean menuAbierto = false;
+    
+    private MenuBoton menu;
 
     /**
      * Creates new form JF_Principal
      */
     public JF_Principal() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.programarMenu();
-        menu.cerrarMenu();
         customComponents();
         eventComponents();
-
+        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu.cerrarMenu();
+        
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -102,9 +103,7 @@ public class JF_Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-            
+
     private void customComponents(){
         setImageLabel(lblFondo, "src/main/resources/Imagenes/Fondo4.jpeg");
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
@@ -114,16 +113,16 @@ public class JF_Principal extends javax.swing.JFrame {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menu.menuAbierto) {
+                if (menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
+                menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
     }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -158,6 +157,7 @@ public class JF_Principal extends javax.swing.JFrame {
             }
         });
     }
+   
     protected void mostrarFondo(boolean mostrar) {
         lblFondo.setVisible(mostrar);
     }
