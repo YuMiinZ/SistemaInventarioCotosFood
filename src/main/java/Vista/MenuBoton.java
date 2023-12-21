@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
@@ -26,6 +27,8 @@ public class MenuBoton extends JPopupMenu{
     private final JMenuItem notificacionesMenu;
     private final JMenuItem consumoClienteMenu;
     private final JMenuItem menuMenu;
+    public boolean menuAbierto = false;
+    
     private JFrame dad;
     
     
@@ -117,4 +120,27 @@ public class MenuBoton extends JPopupMenu{
         this.setVisible(true); // Cierra el menú si está visible
     }
     
+    public void programarMenu(){
+        for (JMenuItem item : inventarioItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+
+        for (JMenuItem item : empleadoItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+
+        for (JMenuItem item : reportesItems) {
+            item.addActionListener(e -> mostrarMensaje(item.getText()));
+        }
+        
+        notificacionesMenu.addActionListener(e -> mostrarMensaje(notificacionesMenu.getText()));
+        consumoClienteMenu.addActionListener(e -> mostrarMensaje(consumoClienteMenu.getText()));
+        menuMenu.addActionListener(e -> mostrarMensaje(menuMenu.getText()));
+    }
+    
+    private void mostrarMensaje(String nombreMenu) {
+        JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        cerrarMenu();
+        menuAbierto = !menuAbierto;
+    }
 }

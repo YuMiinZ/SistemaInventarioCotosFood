@@ -223,30 +223,7 @@ public class JF_Inventario extends javax.swing.JFrame {
         // Renderizador de celdas personalizado
     
         // Renderizador de celdas personalizado
-    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-            if (column == 0) {
-                setHorizontalAlignment(JLabel.LEFT);
-            } else if (column == 1) {
-                setHorizontalAlignment(JLabel.RIGHT);
-            }
-
-            // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-            rendererComponent.setBackground(table.getBackground());
-
-            // Establecer el color del texto según el estado de selección
-            if (isSelected) {
-                rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-            } else {
-                rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-            }
-
-            return rendererComponent;
-        }
-    };
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 
     cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
 
