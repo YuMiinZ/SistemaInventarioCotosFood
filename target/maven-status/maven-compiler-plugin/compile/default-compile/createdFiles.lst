@@ -12,8 +12,10 @@ Vista\JF_RegistrarProductoInventario$1.class
 Vista\JF_ComandasEmpleado$3.class
 Vista\JF_Principal$1.class
 Vista\JF_ComandasMesa$5.class
+Vista\JF_ModificarEmpleado$9.class
 Vista\JF_ModificarProductoInventario$6.class
 Modelo\ConexionBD.class
+Vista\JF_ModificarEmpleado$1.class
 Vista\JF_Notificaciones$2.class
 Vista\JF_ModificarProductoMenu$3.class
 Vista\JF_ModificarProductoInventario$1.class
@@ -57,6 +59,7 @@ Vista\JF_Notificaciones$4.class
 Vista\JF_RegistrarEmpleado$6.class
 Vista\JF_RegistrarEmpleado$5.class
 Vista\JF_ComandasEmpleado$5.class
+Vista\JF_ModificarEmpleado$6.class
 Vista\JF_ListaConsumoEmpleado$1.class
 Vista\JF_RegistrarEmpleado.class
 Vista\JF_Inventario$ButtonEditor.class
@@ -80,12 +83,14 @@ Vista\JF_ComandasEmpleado.class
 Vista\JF_ModificarProductoInventario$5.class
 Vista\JF_VerComandaEmpleado.class
 Vista\JF_RegistrarProductoMenu$6.class
+Vista\JF_ModificarEmpleado$7.class
 Vista\JF_ListaCuentas.class
 Vista\JF_RegistrarProductoInventario$7.class
 Vista\JF_Principal$2.class
 Vista\JF_NuevaComandaEmpleado$6.class
 Vista\JF_Menu$3.class
 Vista\JF_ModificarProveedor$4.class
+Vista\JF_ModificarEmpleado$5.class
 Vista\JF_NuevaComanda$4.class
 Vista\JF_ListaConsumoEmpleado.class
 Vista\JF_NuevaComanda.class
@@ -94,6 +99,7 @@ Vista\JF_ListaConsumoEmpleado$3.class
 Vista\JF_AgregarEmpleado$1.class
 Vista\JF_AgregarEmpleado.class
 Vista\JF_NuevaComandaEmpleado$4.class
+Vista\JF_ModificarEmpleado$8.class
 Vista\JF_NuevaComanda$1.class
 Vista\JF_RegistrarProductoMenu$5.class
 Vista\JF_RegistrarProveedor$1.class
@@ -109,6 +115,7 @@ Vista\JF_RegistrarProductoMenu$2.class
 Vista\JF_Inventario$3.class
 Vista\JF_RegistrarProductoInventario$8.class
 Vista\JF_Menu$ButtonEditor.class
+Vista\JF_ModificarEmpleado.class
 Vista\JF_RegistrarProductoInventario$5.class
 Vista\ButtonRenderer.class
 Vista\JF_VerComandaEmpleado$3.class
@@ -120,6 +127,7 @@ Vista\MenuPersonalizado.class
 Vista\JF_ComandasMesa$6.class
 Vista\JF_RegistrarProductoInventario$2.class
 Vista\MenuBoton.class
+Vista\JF_ModificarEmpleado$2.class
 Vista\JF_ComandasEmpleado$4.class
 Vista\JF_Notificaciones$1.class
 Vista\JF_NuevaComandaEmpleado$1.class
@@ -132,6 +140,7 @@ Vista\JF_RegistrarProductoMenu$4.class
 Vista\JF_CompraProveedor$2.class
 Vista\JF_RegistrarEmpleado$2.class
 Vista\JF_VerComandaMesa$2.class
+Vista\JF_ModificarEmpleado$3.class
 Vista\JF_ModificarProveedor$6.class
 Vista\JF_NuevaComanda$2.class
 Vista\JF_RegistrarProveedor$3.class
@@ -145,7 +154,9 @@ Vista\JF_Inventario.class
 Vista\JF_ModificarProductoInventario$8.class
 Vista\JF_RegistrarProductoMenu$3.class
 Vista\JF_RegistrarProveedor$4.class
+Vista\JF_ModificarEmpleado$10.class
 Vista\JF_NuevaComandaEmpleado.class
+Vista\JF_ModificarEmpleado$4.class
 Vista\JF_ModificarProductoMenu$5.class
 Vista\JF_Inventario$5.class
 Vista\JF_ModificarProveedor$1.class
