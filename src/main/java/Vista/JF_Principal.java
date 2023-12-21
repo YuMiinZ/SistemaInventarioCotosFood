@@ -8,29 +8,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 /**
  *
  * @author yumii
  */
-public class JF_Menu extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
-    
-    private MenuBoton menu;
+public class JF_Principal extends javax.swing.JFrame {    
+    private final MenuBoton menu;
 
     /**
      * Creates new form JF_Principal
      */
-    public JF_Menu() {
+    public JF_Principal() {
         initComponents();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu.programarMenu();
+        menu.cerrarMenu();
         customComponents();
         eventComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
-        
+
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
     }
 
     /**
@@ -43,37 +39,20 @@ public class JF_Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAgregar = new javax.swing.JButton();
-        lblTitulo = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableMenu = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
-        btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Nuevo Producto");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 710, 290, 50));
-
-        lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
-        lblTitulo.setText("Menú");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+        lblFondo.setBackground(new java.awt.Color(255, 255, 255));
+        lblFondo.setMaximumSize(new java.awt.Dimension(3000, 3000));
+        lblFondo.setMinimumSize(new java.awt.Dimension(1747, 1186));
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 53, 1750, 1310));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
         jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
@@ -91,11 +70,11 @@ public class JF_Menu extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(32, 32, 32)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(1602, Short.MAX_VALUE))
+                .addContainerGap(1599, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,64 +84,10 @@ public class JF_Menu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
-
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
-        btnRegresar.setBorderPainted(false);
-        btnRegresar.setContentAreaFilled(false);
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
-
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
-
-        tableMenu.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        tableMenu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Producto", ""
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableMenu.setAlignmentX(0.0F);
-        tableMenu.setAlignmentY(0.0F);
-        tableMenu.setColumnSelectionAllowed(true);
-        tableMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(tableMenu);
-        tableMenu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 1070, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,38 +102,28 @@ public class JF_Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
+    
+    
+            
     private void customComponents(){
+        setImageLabel(lblFondo, "src/main/resources/Imagenes/Fondo4.jpeg");
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
-        
-        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        TablaPersonalizada.setTableProperties(tableMenu, true); //true = segunda columna será un botón
     }
-
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -226,37 +141,25 @@ public class JF_Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JF_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JF_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JF_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JF_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JF_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Menu().setVisible(true);
+                new JF_Principal().setVisible(true);
             }
         });
+    }
+    protected void mostrarFondo(boolean mostrar) {
+        lblFondo.setVisible(mostrar);
     }
     
     private void setButtonIcon(JButton button, String imagePath){
@@ -266,16 +169,18 @@ public class JF_Menu extends javax.swing.JFrame {
         button.repaint();
     }
     
+    private void setImageLabel(JLabel lblName, String imagePath) {
+        ImageIcon image = new ImageIcon(imagePath);
+        Image scaledImage = image.getImage().getScaledInstance(lblName.getWidth(), lblName.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        lblName.setIcon(scaledIcon);
+        this.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnMenu;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCotosFood;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tableMenu;
+    private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }
