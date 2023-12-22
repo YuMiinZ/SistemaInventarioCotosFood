@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

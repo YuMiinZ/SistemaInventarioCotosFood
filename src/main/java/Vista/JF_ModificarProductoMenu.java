@@ -4,17 +4,21 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
+import Vista.TablaSpinnerPersonalizada.SpinnerEditor;
+import Vista.TablaSpinnerPersonalizada.SpinnerRenderer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yumii
  */
 public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private boolean menuAbierto = false;
-    
     private MenuBoton menu;
 
     /**
@@ -40,11 +44,12 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmboxIngredientes = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         lblPrecio = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
+        btnAgregarIngredientes = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
@@ -54,11 +59,13 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         lblIngredientes = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         cmboxEstado = new javax.swing.JComboBox<>();
-        scrollIngredientes = new javax.swing.JScrollPane();
-        listIngredientes = new javax.swing.JList<>();
         spnCostoElaboracion = new javax.swing.JSpinner();
         spnPrecio = new javax.swing.JSpinner();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableIngredientes = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
+
+        cmboxIngredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {null, "Arroz", "Frijoles", "Tomate", "Lechuga" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -75,18 +82,23 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 470, 38));
-
-        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
-        btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 670, 199, 50));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 470, 38));
+
+        btnAgregarIngredientes.setBackground(new java.awt.Color(0, 72, 121));
+        btnAgregarIngredientes.setFont(new Font ("Montserrat", Font.BOLD,14));
+        btnAgregarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarIngredientes.setText("Agregar Ingrediente");
+        btnAgregarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarIngredientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 470, 190, 30));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
@@ -160,21 +172,29 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         });
         jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 580, 470, 40));
 
-        listIngredientes.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        listIngredientes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        scrollIngredientes.setViewportView(listIngredientes);
-
-        jPanel1.add(scrollIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 460, 190));
-
         spnCostoElaboracion.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(spnCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 470, 40));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 470, 40));
+
+        tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Ingrediente", "Cantidad"
+            }
+        ));
+        jScrollPane1.setViewportView(tableIngredientes);
+        if (tableIngredientes.getColumnModel().getColumnCount() > 0) {
+            tableIngredientes.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(cmboxIngredientes));
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 470, 210));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -203,9 +223,9 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnAgregarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarIngredientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_btnAgregarIngredientesActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -219,11 +239,44 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
     private void customComponents(){
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableIngredientes, model, false);
+        tableIngredientes.getColumnModel().getColumn(0).setPreferredWidth(500);
 
+    }
+    
+private DefaultTableModel llenarTabla() {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Ingrediente");
+    model.addColumn("Cantidad");
+
+    DefaultComboBoxModel<String> comboModel = (DefaultComboBoxModel<String>) cmboxIngredientes.getModel();
+
+    for (int i = 0; i < comboModel.getSize(); i++) {
+        String item = comboModel.getElementAt(i);
+        model.addRow(new Object[]{item, 0}); // Asumiendo que la cantidad inicial es 0
+    }
+
+    tableIngredientes.setModel(model);
+    tableIngredientes.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(cmboxIngredientes)); // Editor para la columna del JComboBox
+    tableIngredientes.getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor()); // Editor para la columna de cantidad con JSpinner
+    tableIngredientes.getColumnModel().getColumn(1).setCellRenderer(new SpinnerRenderer()); // Renderizador para la columna de cantidad con JSpinner
+    // Configuración de los bordes
+    TablaSpinnerPersonalizada.setCellBorders(tableIngredientes);
+    return model;
 }
+
+
+
 
     
     private void eventComponents() {
@@ -236,6 +289,14 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
                     menu.mostrarMenu();
                 }
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
+            }
+        });
+        
+        btnAgregarIngredientes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
+                model.addRow(new Object[]{"", 0}); // Agrega una fila con los valores iniciales vacíos
             }
         });
     }
@@ -305,6 +366,8 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
             }
         });
     }
+   
+    
     
     private void setButtonIcon(JButton button, String imagePath){
         ImageIcon image = new ImageIcon(imagePath);
@@ -315,12 +378,14 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnAgregarIngredientes;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmboxEstado;
+    private javax.swing.JComboBox<String> cmboxIngredientes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCostoElaboracion;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblEstado;
@@ -328,10 +393,9 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JList<String> listIngredientes;
-    private javax.swing.JScrollPane scrollIngredientes;
     private javax.swing.JSpinner spnCostoElaboracion;
     private javax.swing.JSpinner spnPrecio;
+    private javax.swing.JTable tableIngredientes;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
