@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Vista;
+package Vista.Clases;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -14,14 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class TablaSpinnerPersonalizada {
 
-    public static void setSpinnerColumn(JTable table, int columnIndex) {
-        table.getColumnModel().getColumn(columnIndex).setCellEditor(new SpinnerEditor());
-        table.getColumnModel().getColumn(columnIndex).setCellRenderer(new SpinnerRenderer());
-        table.getColumnModel().getColumn(0).setPreferredWidth(500);
-        //setCellBorders(table);
-    }
-
-    static class SpinnerEditor extends DefaultCellEditor {
+    public static class SpinnerEditor extends DefaultCellEditor {
         private final JSpinner spinner;
 
         public SpinnerEditor() {
@@ -49,7 +42,7 @@ public class TablaSpinnerPersonalizada {
         }
     }
 
-    static class SpinnerRenderer extends DefaultTableCellRenderer {
+    public static class SpinnerRenderer extends DefaultTableCellRenderer {
         private final JSpinner spinner = new JSpinner();
 
         public SpinnerRenderer() {

@@ -4,10 +4,11 @@
  */
 package Vista;
 
+import Vista.Clases.TablaSpinnerPersonalizada;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import Vista.TablaSpinnerPersonalizada.SpinnerEditor;
-import Vista.TablaSpinnerPersonalizada.SpinnerRenderer;
+import Vista.Clases.TablaSpinnerPersonalizada.SpinnerEditor;
+import Vista.Clases.TablaSpinnerPersonalizada.SpinnerRenderer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,6 +64,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         spnPrecio = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableIngredientes = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
 
         cmboxIngredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {null, "Arroz", "Frijoles", "Tomate", "Lechuga" }));
@@ -196,6 +198,17 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 470, 210));
 
+        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
+        btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 670, 199, 50));
+
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,13 +248,17 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmboxEstadoActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void customComponents(){
         setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
@@ -379,6 +396,7 @@ private DefaultTableModel llenarTabla() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarIngredientes;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmboxEstado;

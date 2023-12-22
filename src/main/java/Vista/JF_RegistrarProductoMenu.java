@@ -4,10 +4,11 @@
  */
 package Vista;
 
+import Vista.Clases.TablaSpinnerPersonalizada;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import Vista.TablaSpinnerPersonalizada.SpinnerEditor;
-import Vista.TablaSpinnerPersonalizada.SpinnerRenderer;
+import Vista.Clases.TablaSpinnerPersonalizada.SpinnerEditor;
+import Vista.Clases.TablaSpinnerPersonalizada.SpinnerRenderer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
