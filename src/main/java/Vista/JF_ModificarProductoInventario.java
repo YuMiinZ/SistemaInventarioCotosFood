@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     private boolean menuAbierto = false;
+    private int dato;
     
     private MenuBoton menu;
 
@@ -22,7 +23,8 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     /**
      * Creates new form JF_Principal
      */
-    public JF_ModificarProductoInventario() {
+    public JF_ModificarProductoInventario(int dato) {
+        this.dato = dato;
         initComponents();
         customComponents();
         eventComponents();
@@ -286,6 +288,19 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(e -> { regresar();});
+    }
+    
+    private void regresar(){
+        try {
+            JF_Inventario ventana = new JF_Inventario();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
     /**
@@ -349,7 +364,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProductoInventario().setVisible(true);
+                new JF_ModificarProductoInventario(-1).setVisible(true);
             }
         });
     }

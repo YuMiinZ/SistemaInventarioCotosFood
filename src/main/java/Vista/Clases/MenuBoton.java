@@ -168,7 +168,7 @@ public final class MenuBoton extends JPopupMenu{
         menuAbierto = true;
     }
     
-    public void programarMenu(){
+    private void programarMenu(){
         for (JMenuItem item : inventarioItems) {
             item.addActionListener(e -> abrirVentanas(item.getText()));
         }
@@ -233,5 +233,9 @@ public final class MenuBoton extends JPopupMenu{
             JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } 
         cerrarMenu();
+    }
+    
+    public void regresarVentanaPrincipal(){
+        abrirVentana(JF_Principal.class);
     }
 }

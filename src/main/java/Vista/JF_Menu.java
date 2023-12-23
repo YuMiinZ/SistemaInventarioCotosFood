@@ -227,6 +227,8 @@ public class JF_Menu extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        
     }
 
     // Clase para definir la acción al hacer clic en el botón de la celda
@@ -247,6 +249,8 @@ public class JF_Menu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(
                 null,
                 "Fila seleccionada: " + tableMenu.convertRowIndexToModel(tableMenu.getEditingRow()));
+                abrirVentana(tableMenu.getEditingRow());
+                
             });
             button.setFocusPainted(false);
         }
@@ -259,6 +263,17 @@ public class JF_Menu extends javax.swing.JFrame {
         @Override
         public Object getCellEditorValue() {
             return button.getText();
+        }
+    }
+    
+    private void abrirVentana(int dato){
+        try {
+            JF_ModificarProductoMenu ventanaModificarProducto = new JF_ModificarProductoMenu(dato);
+            ventanaModificarProducto.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
         }
     }
     

@@ -21,11 +21,15 @@ import javax.swing.table.DefaultTableModel;
 public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private boolean menuAbierto = false;
     private MenuBoton menu;
+    private int dato;
 
     /**
      * Creates new form JF_Principal
+     * @param dato
      */
-    public JF_ModificarProductoMenu() {
+    public JF_ModificarProductoMenu(int dato) {
+        this.dato = dato;
+        JOptionPane.showMessageDialog(null,"Fila seleccionada: " + dato);
         initComponents();
         customComponents();
         eventComponents();
@@ -316,6 +320,19 @@ private DefaultTableModel llenarTabla() {
                 model.addRow(new Object[]{"", 0}); // Agrega una fila con los valores iniciales vacíos
             }
         });
+        
+        btnRegresar.addActionListener(e -> { regresar();});
+    }
+    
+    private void regresar(){
+        try {
+            JF_Menu ventana = new JF_Menu();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
     /**
@@ -379,7 +396,7 @@ private DefaultTableModel llenarTabla() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProductoMenu().setVisible(true);
+                new JF_ModificarProductoMenu(-1).setVisible(true);
             }
         });
     }
