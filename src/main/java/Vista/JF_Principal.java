@@ -25,7 +25,7 @@ public class JF_Principal extends javax.swing.JFrame {
         customComponents();
         eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
+         menu.cerrarMenu();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 

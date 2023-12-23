@@ -16,6 +16,10 @@ import Vista.JF_RegistrarProveedor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -130,6 +134,27 @@ public final class MenuBoton extends JPopupMenu{
         this.setPreferredSize(new Dimension(x, y));
         
         programarMenu();
+        agregarFocusListener();
+    }
+    
+    private void agregarFocusListener() {
+        dad.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (menuAbierto) {
+                    cerrarMenu();
+                }
+            }
+        });
+        
+        dad.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                if (menuAbierto) {
+                    cerrarMenu();
+                }
+            }
+        });
     }
     
     public  void cerrarMenu() {

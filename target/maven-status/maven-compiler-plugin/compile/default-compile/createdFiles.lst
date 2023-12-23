@@ -23,6 +23,7 @@ Vista\JF_ModificarProductoMenu$3.class
 Vista\JF_ModificarProductoInventario$1.class
 Vista\JF_NuevaComanda$3.class
 Vista\JF_Menu.class
+Vista\Clases\MenuBoton$1.class
 Vista\JF_ModificarProductoInventario$3.class
 Vista\JF_NuevaComandaEmpleado$5.class
 Vista\JF_RegistrarProductoMenu$1.class
@@ -104,6 +105,7 @@ Vista\JF_NuevaComanda$1.class
 Vista\JF_RegistrarProductoMenu$5.class
 Vista\JF_RegistrarProveedor$1.class
 Vista\Clases\TablaSpinnerPersonalizada$SpinnerRenderer.class
+Vista\JF_ComandasEmpleado$2.class
 Vista\JF_NuevaComandaEmpleado$7.class
 Vista\JF_NuevaComanda$7.class
 Vista\JF_ModificarProductoMenu$4.class
@@ -132,7 +134,6 @@ Vista\JF_NuevaComandaEmpleado$1.class
 Vista\JF_RegistrarProveedor.class
 Vista\JF_RegistrarEmpleado$9.class
 CotosFood_SistemaInventario.class
-Vista\IWindowClosedListener.class
 Vista\JF_VerComandaEmpleado$2.class
 Vista\JF_ModificarProductoInventario$7.class
 Vista\JF_RegistrarProductoMenu$4.class
