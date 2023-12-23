@@ -243,8 +243,9 @@ public class JF_Reportes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Reportes("reporte1").setVisible(true);
+                new JF_Reportes(args[0]).setVisible(true);
             }
+
         });
     }
 

@@ -23,10 +23,11 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
      */
     public JF_ModificarEmpleado() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
