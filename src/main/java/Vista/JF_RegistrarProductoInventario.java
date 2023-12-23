@@ -270,6 +270,19 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(e -> { regresar();});
+    }
+    
+    private void regresar(){
+        try {
+            JF_Inventario ventana = new JF_Inventario();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
     /**

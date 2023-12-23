@@ -183,6 +183,13 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
                 menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
+            }
+        });
     }
     
     /**

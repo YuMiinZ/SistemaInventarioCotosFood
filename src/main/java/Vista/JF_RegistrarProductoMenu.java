@@ -301,6 +301,19 @@ private DefaultTableModel llenarTabla() {
                 model.addRow(new Object[]{"", 0}); // Agrega una fila con los valores iniciales vacíos
             }
         });
+        
+        btnRegresar.addActionListener(e -> { regresar();});
+    }
+    
+    private void regresar(){
+        try {
+            JF_Menu ventana = new JF_Menu();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
     /**
