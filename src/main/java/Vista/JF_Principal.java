@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,9 +14,8 @@ import java.awt.event.ActionListener;
  * @author yumii
  */
 public class JF_Principal extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     
-    private MenuBoton menu;
+    private final MenuBoton menu;
 
     /**
      * Creates new form JF_Principal
@@ -25,8 +25,7 @@ public class JF_Principal extends javax.swing.JFrame {
         customComponents();
         eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
-        
+         menu.cerrarMenu();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -113,12 +112,11 @@ public class JF_Principal extends javax.swing.JFrame {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
             }
         });
     }

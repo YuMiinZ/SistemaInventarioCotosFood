@@ -4,20 +4,18 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 /**
  *
  * @author yumii
  */
 public class JF_CompraProveedor extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     private MenuBoton menu;
     
     /**
@@ -25,10 +23,11 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
      */
     public JF_CompraProveedor() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -184,72 +183,44 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
  private void customComponents() {
-    setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-    setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+    menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+    menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
 
-    jScrollPane1.setBackground(Color.WHITE);
-    jScrollPane1.setBorder(null);
 
-    tableCompraProveedor.setBackground(Color.WHITE);
-    tableCompraProveedor.setBorder(null);
-    tableCompraProveedor.setShowGrid(false);
-    tableCompraProveedor.setFillsViewportHeight(true);
-
-    JTableHeader tableHeader = tableCompraProveedor.getTableHeader();
-    tableHeader.setPreferredSize(new Dimension(0, 0));
-
-    /*tableCompraProveedor.setModel(model);
-
-    model.addColumn("Columna 1");
-    model.addColumn("Editar");
-
-    model.addRow(new Object[]{"Dato 1", "Editar"});
-    model.addRow(new Object[]{"Dato 2", "Editar"});
-    model.addRow(new Object[]{"Dato 3", "Editar"});*/
-        // Renderizador de celdas personalizado
-    
-        // Renderizador de celdas personalizado
-    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-            if (column == 0) {
-                setHorizontalAlignment(JLabel.LEFT);
-            }
-
-            // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-            rendererComponent.setBackground(table.getBackground());
-
-            // Establecer el color del texto según el estado de selección
-            if (isSelected) {
-                rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-            } else {
-                rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-            }
-
-            return rendererComponent;
-        }
-    };
-
-    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-    for (int i = 0; i < tableCompraProveedor.getColumnCount(); i++) {
-        tableCompraProveedor.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+       TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+       DefaultTableModel model = llenarTabla();
+       TablaPersonalizada.setTableProperties(tableCompraProveedor, model, false);
     }
-    tableCompraProveedor.setRowHeight(tableCompraProveedor.getRowHeight() + 30);
-}
+    
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+
+        model.addRow(new Object[]{"Pollo", "₡300"});
+        model.addRow(new Object[]{"Frijoles", "₡300"});
+        model.addRow(new Object[]{"Leche", "₡95598"});
+
+        return model;
+    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
+            }
+        });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -351,14 +322,6 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;

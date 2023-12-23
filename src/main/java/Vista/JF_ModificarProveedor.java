@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,6 @@ import java.awt.event.ActionListener;
  * @author yumii
  */
 public class JF_ModificarProveedor extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     
     private MenuBoton menu;
 
@@ -22,10 +22,11 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
      */
     public JF_ModificarProveedor() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -42,7 +43,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblTelefono = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
+        lblProveedor = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
@@ -52,6 +53,8 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        cmboxProveedor = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -63,9 +66,9 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblTelefono.setText("Telefono");
         jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, 470, -1));
 
-        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 470, -1));
+        lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblProveedor.setText("Proveedor");
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 470, 38));
@@ -84,7 +87,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Registrar Proveedor");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
         jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
@@ -150,6 +153,14 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 600, 199, 50));
 
+        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblNombre.setText("Nombre");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 470, -1));
+
+        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedor 1", "Proveedor 2", "Proveedor 3" }));
+        cmboxProveedor.setSelectedIndex(-1);
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 470, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,8 +192,8 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void customComponents(){
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
 
 }
 
@@ -191,12 +202,19 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
+            }
+        });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -240,22 +258,19 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
     }
     
     
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
-    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtNombre;

@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,6 @@ import java.awt.event.ActionListener;
  * @author yumii
  */
 public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     
     private MenuBoton menu;
 
@@ -23,10 +23,11 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
      */
     public JF_RegistrarProductoInventario() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -251,8 +252,8 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmboxDiaCompraActionPerformed
 
     private void customComponents(){
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
 
 }
 
@@ -261,14 +262,27 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(e -> { regresar();});
+    }
+    
+    private void regresar(){
+        try {
+            JF_Inventario ventana = new JF_Inventario();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
     /**
@@ -321,12 +335,6 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         });
     }
     
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

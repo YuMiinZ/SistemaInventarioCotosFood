@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +19,6 @@ import javax.swing.table.TableCellRenderer;
  * @author yumii
  */
 public class JF_Inventario extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     private MenuBoton menu;    
 
 
@@ -26,10 +27,11 @@ public class JF_Inventario extends javax.swing.JFrame {
      */
     public JF_Inventario() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -137,7 +139,7 @@ public class JF_Inventario extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 1070, 60));
 
-        tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -189,81 +191,63 @@ public class JF_Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void customComponents(){
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
         
-        jScrollPane1.setBackground(Color.WHITE);
-    jScrollPane1.setBorder(null);
-
-    tableInventario.setBackground(Color.WHITE);
-    tableInventario.setBorder(null);
-    tableInventario.setShowGrid(false);
-    tableInventario.setFillsViewportHeight(true);
-
-    JTableHeader tableHeader = tableInventario.getTableHeader();
-    tableHeader.setPreferredSize(new Dimension(0, 0));
-
-    
-
-    DefaultTableModel model = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return column == 1; // Hacer editables solo los botones de la segunda columna
-        }
-    };
-
-    tableInventario.setModel(model);
-
-    model.addColumn("Columna 1");
-    model.addColumn("Editar");
-
-    model.addRow(new Object[]{"Dato 1", "Editar"});
-    model.addRow(new Object[]{"Dato 2", "Editar"});
-    model.addRow(new Object[]{"Dato 3", "Editar"});
-        // Renderizador de celdas personalizado
-    
-        // Renderizador de celdas personalizado
-    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-
-    cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-    for (int i = 0; i < tableInventario.getColumnCount(); i++) {
-        tableInventario.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableInventario, model, true);
+        
+        tableInventario.getColumn("Editar").setCellEditor(new JF_Inventario.ButtonEditor(new JCheckBox()));
     }
     
-    // Renderizador y editor personalizados para el botón en la columna "Editar"
-    tableInventario.getColumn("Editar").setCellRenderer(new ButtonRenderer());
-    tableInventario.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+        model.addColumn("Editar");
 
-    tableInventario.setRowHeight(tableInventario.getRowHeight() + 30);
-    tableInventario.getColumnModel().getColumn(0).setPreferredWidth(950);//475
-}
+        model.addRow(new Object[]{"Arroz", "300 gramos", "Editar"});
+        model.addRow(new Object[]{"Frijoles", "300 gramos", "Editar"});
+        model.addRow(new Object[]{"Leche", "3 cajas", "Editar"});
+
+        return model;
+    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
+            }
+        });
+        
+        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
     }
     
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
+    private void abrirVentanaAgregar(){
+        try {
+            JF_RegistrarProductoInventario ventana = new JF_RegistrarProductoInventario();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
         }
     }
+    
 
     // Clase para definir la acción al hacer clic en el botón de la celda
     class ButtonEditor extends DefaultCellEditor {
@@ -283,6 +267,7 @@ public class JF_Inventario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(
                 null,
                 "Fila seleccionada: " + tableInventario.convertRowIndexToModel(tableInventario.getEditingRow()));
+                abrirVentana(tableInventario.getEditingRow());
             });
             button.setFocusPainted(false);
         }
@@ -295,6 +280,17 @@ public class JF_Inventario extends javax.swing.JFrame {
         @Override
         public Object getCellEditorValue() {
             return button.getText();
+        }
+    }
+    
+    private void abrirVentana(int dato){
+        try {
+            JF_ModificarProductoInventario ventanaModificarProducto = new JF_ModificarProductoInventario(dato);
+            ventanaModificarProducto.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
         }
     }
 
@@ -339,13 +335,6 @@ public class JF_Inventario extends javax.swing.JFrame {
                 new JF_Inventario().setVisible(true);
             }
         });
-    }
-    
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
