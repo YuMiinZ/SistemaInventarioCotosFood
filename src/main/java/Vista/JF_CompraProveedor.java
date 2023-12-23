@@ -216,6 +216,13 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
                 menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
+            }
+        });
     }
     
     /**

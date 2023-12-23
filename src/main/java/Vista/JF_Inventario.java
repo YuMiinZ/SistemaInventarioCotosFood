@@ -226,6 +226,26 @@ public class JF_Inventario extends javax.swing.JFrame {
                 menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
+        
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
+            }
+        });
+        
+        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
+    }
+    
+    private void abrirVentanaAgregar(){
+        try {
+            JF_RegistrarProductoInventario ventana = new JF_RegistrarProductoInventario();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
     
 

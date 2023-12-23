@@ -224,7 +224,26 @@ public class JF_Menu extends javax.swing.JFrame {
             }
         });
         
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
+            }
+        });
         
+        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
+        
+    }
+    
+    private void abrirVentanaAgregar(){
+        try {
+            JF_RegistrarProductoMenu ventana = new JF_RegistrarProductoMenu();
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
     }
 
     // Clase para definir la acción al hacer clic en el botón de la celda
