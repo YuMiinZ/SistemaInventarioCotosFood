@@ -10,6 +10,7 @@ import Vista.JF_Menu;
 import Vista.JF_ModificarEmpleado;
 import Vista.JF_ModificarProveedor;
 import Vista.JF_Notificaciones;
+import Vista.JF_Principal;
 import Vista.JF_RegistrarEmpleado;
 import Vista.JF_RegistrarProveedor;
 import Vista.JF_Reportes;
@@ -167,7 +168,7 @@ public final class MenuBoton extends JPopupMenu{
         menuAbierto = true;
     }
     
-    public void programarMenu(){
+    private void programarMenu(){
         for (JMenuItem item : inventarioItems) {
             item.addActionListener(e -> abrirVentanas(item.getText()));
         }
@@ -244,5 +245,10 @@ public final class MenuBoton extends JPopupMenu{
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
         button.setIcon(icon);
         button.repaint();
+    }
+
+    
+    public void regresarVentanaPrincipal(){
+        abrirVentana(JF_Principal.class, "");
     }
 }

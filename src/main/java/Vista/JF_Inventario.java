@@ -247,6 +247,7 @@ public class JF_Inventario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(
                 null,
                 "Fila seleccionada: " + tableInventario.convertRowIndexToModel(tableInventario.getEditingRow()));
+                abrirVentana(tableInventario.getEditingRow());
             });
             button.setFocusPainted(false);
         }
@@ -259,6 +260,17 @@ public class JF_Inventario extends javax.swing.JFrame {
         @Override
         public Object getCellEditorValue() {
             return button.getText();
+        }
+    }
+    
+    private void abrirVentana(int dato){
+        try {
+            JF_ModificarProductoInventario ventanaModificarProducto = new JF_ModificarProductoInventario(dato);
+            ventanaModificarProducto.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
         }
     }
 
