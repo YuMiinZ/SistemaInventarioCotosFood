@@ -4,11 +4,14 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 /**
  *
@@ -186,51 +189,20 @@ public class JF_CompraDia extends javax.swing.JFrame {
         menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
   
-            
-        jScrollPane1.setBackground(Color.WHITE);
-        jScrollPane1.setBorder(null);
-        
-        tableCompraDia.setBackground(Color.WHITE);
-        tableCompraDia.setBorder(null);
-        tableCompraDia.setShowGrid(false);
-        tableCompraDia.setFillsViewportHeight(true);
-        
-        JTableHeader tableHeader = tableCompraDia.getTableHeader();
-        tableHeader.setPreferredSize(new Dimension(0, 0));
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(tableCompraDia, model, false);
+    }
+    
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
 
-        // Crear un renderizador de celdas personalizado para centrar el texto y ajustar el tamaño de la fuente
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                
-                if (column == 0) { 
-                    setHorizontalAlignment(JLabel.LEFT); 
-                } else if (column == 1) { 
-                    setHorizontalAlignment(JLabel.RIGHT); 
-                }
-                
-                // Mantener el color de fondo de la tabla en las celdas seleccionadas y no seleccionadas
-                rendererComponent.setBackground(table.getBackground());
+        model.addRow(new Object[]{"Pollo"});
+        model.addRow(new Object[]{"Frijoles"});
+        model.addRow(new Object[]{"Leche"});
 
-                // Establecer el color del texto según el estado de selección
-                if (isSelected) {
-                    rendererComponent.setForeground(Color.BLACK); // Color del texto si está seleccionada
-                } else {
-                    rendererComponent.setForeground(table.getForeground()); // Color del texto si no está seleccionada
-                }
-
-                return rendererComponent;
-            }
-        };
-        
-        cellRenderer.setFont(new Font("Montserrat", Font.PLAIN, 20));
-
-        for (int i = 0; i < tableCompraDia.getColumnCount(); i++) {
-            tableCompraDia.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-        }
-        
-        tableCompraDia.setRowHeight(tableCompraDia.getRowHeight() + 30);
+        return model;
     }
 
     

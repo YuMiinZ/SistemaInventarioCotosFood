@@ -6,7 +6,9 @@ package Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
 /**
  *
  * @author TomasPC
@@ -28,7 +30,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        TablaPersonalizada.setTableProperties(jTable1, true);
+        //TablaPersonalizada.setTableProperties(jTable1, true);
     }
     private void eventComponents() {
         jButton1.addActionListener(new ActionListener() {

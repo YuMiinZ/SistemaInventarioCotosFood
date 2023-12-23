@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Vista.Clases.MenuBoton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

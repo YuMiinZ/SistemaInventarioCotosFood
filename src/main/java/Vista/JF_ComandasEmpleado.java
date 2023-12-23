@@ -7,6 +7,9 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
 
 /**
  *
@@ -33,7 +36,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         jTable1.setModel(model);
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        TablaPersonalizada.setTableProperties(jTable1, true);
+        //TablaPersonalizada.setTableProperties(jTable1, true);
         
     }
     private void eventComponents() {

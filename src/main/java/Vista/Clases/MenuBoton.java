@@ -1,10 +1,25 @@
-package Vista;
+package Vista.Clases;
 
 
+import Vista.JF_CompraDia;
+import Vista.JF_CompraProveedor;
+import Vista.JF_Inventario;
+import Vista.JF_ListaConsumoEmpleado;
+import Vista.JF_ListaCuentas;
+import Vista.JF_Menu;
+import Vista.JF_ModificarEmpleado;
+import Vista.JF_ModificarProveedor;
+import Vista.JF_Notificaciones;
+import Vista.JF_RegistrarEmpleado;
+import Vista.JF_RegistrarProveedor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +39,7 @@ import javax.swing.JPopupMenu;
  *
  * @author TomasPC
  */
-public class MenuBoton extends JPopupMenu{
+public final class MenuBoton extends JPopupMenu{
     private final JMenuItem[] inventarioItems;
     private final JMenuItem[] empleadoItems;
     private final JMenuItem[] reportesItems;
@@ -32,6 +47,7 @@ public class MenuBoton extends JPopupMenu{
     private final JMenuItem consumoClienteMenu;
     private final JMenuItem menuMenu;
     public boolean menuAbierto = false;
+    
     
     private JFrame dad;
     
@@ -91,7 +107,7 @@ public class MenuBoton extends JPopupMenu{
         
         reportesItems = new JMenuItem[]{
             createMenuItem("Reporte de ventas"),
-            createMenuItem("Reporte de costode mercadería más vendida"),
+            createMenuItem("Reporte de costo de mercadería más vendida"),
             createMenuItem("Reporte de productos estancados"),
             createMenuItem("Reporte de cantidad de productos mínimos")
         };
@@ -114,38 +130,107 @@ public class MenuBoton extends JPopupMenu{
         this.add(empleadoSubMenu);
         this.add(reportesSubMenu);
         this.setPreferredSize(new Dimension(x, y));
+        
+        programarMenu();
+        agregarFocusListener();
     }
+    
+    private void agregarFocusListener() {
+        dad.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (menuAbierto) {
+                    cerrarMenu();
+                }
+            }
+        });
+        
+        dad.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                if (menuAbierto) {
+                    cerrarMenu();
+                }
+            }
+        });
+    }
+    
     public  void cerrarMenu() {
         this.setVisible(false); // Cierra el menú si está visible
+        menuAbierto = false;
     }
     
     public void mostrarMenu() {
         this.show(dad, 7, 84);
         this.setVisible(true); // Cierra el menú si está visible
+        menuAbierto = true;
     }
     
     public void programarMenu(){
         for (JMenuItem item : inventarioItems) {
-            item.addActionListener(e -> mostrarMensaje(item.getText()));
+            item.addActionListener(e -> abrirVentanas(item.getText()));
         }
 
         for (JMenuItem item : empleadoItems) {
-            item.addActionListener(e -> mostrarMensaje(item.getText()));
+            item.addActionListener(e -> abrirVentanas(item.getText()));
         }
 
         for (JMenuItem item : reportesItems) {
-            item.addActionListener(e -> mostrarMensaje(item.getText()));
+            item.addActionListener(e -> abrirVentanas(item.getText()));
         }
         
-        notificacionesMenu.addActionListener(e -> mostrarMensaje(notificacionesMenu.getText()));
-        consumoClienteMenu.addActionListener(e -> mostrarMensaje(consumoClienteMenu.getText()));
-        menuMenu.addActionListener(e -> mostrarMensaje(menuMenu.getText()));
+        notificacionesMenu.addActionListener(e -> abrirVentana(JF_Notificaciones.class));
+        consumoClienteMenu.addActionListener(e -> abrirVentana(JF_ListaCuentas.class));
+        menuMenu.addActionListener(e -> abrirVentana(JF_Menu.class));
     }
     
-    private void mostrarMensaje(String nombreMenu) {
-        JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+    private void abrirVentana(Class<?> ventanaClass) {
+        try {
+            JFrame ventana = (JFrame) ventanaClass.getDeclaredConstructor().newInstance();
+            ventana.setVisible(true);
+            dad.dispose(); 
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
+    }
+    
+    private void abrirVentanas(String nombreMenu) {
+        if (nombreMenu.equals("Lista de inventario")) {
+            abrirVentana(JF_Inventario.class);
+        } else if (nombreMenu.equals("Compra por día")) {
+            abrirVentana(JF_CompraDia.class);
+        } else if (nombreMenu.equals("Compra por proveedor")) {
+            abrirVentana(JF_CompraProveedor.class);
+        } else if (nombreMenu.equals("Registrar proveedor")) {
+            abrirVentana(JF_RegistrarProveedor.class);
+        } else if (nombreMenu.equals("Editar proveedor")) {
+            abrirVentana(JF_ModificarProveedor.class);
+        } 
+        
+        else if (nombreMenu.equals("Registrar empleado")) {
+            abrirVentana(JF_RegistrarEmpleado.class);
+        } else if (nombreMenu.equals("Editar empleado")) {
+            abrirVentana(JF_ModificarEmpleado.class);
+        } else if (nombreMenu.equals("Consumo empleado")) {
+            abrirVentana(JF_ListaConsumoEmpleado.class);
+        } 
+        
+        else if (nombreMenu.equals("Reporte de ventas")) {
+            //abrirVentana(JF_ModificarProveedor.class);
+            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        } else if (nombreMenu.equals("Reporte de costo de mercadería más vendida")) {
+            //abrirVentana(JF_ModificarProveedor.class);
+            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        } else if (nombreMenu.equals("Reporte de productos estancados")) {
+            //abrirVentana(JF_ModificarProveedor.class);
+            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        } else if (nombreMenu.equals("Reporte de cantidad de productos mínimos")) {
+            //abrirVentana(JF_ModificarProveedor.class);
+            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
+        } 
         cerrarMenu();
-        menuAbierto = !menuAbierto;
     }
     public void setButtonIcon(JButton button, String imagePath){
         ImageIcon image = new ImageIcon(imagePath);

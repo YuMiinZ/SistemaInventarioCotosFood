@@ -7,7 +7,9 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-
+import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
 /**
  *
  * @author TomasPC
