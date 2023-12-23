@@ -4,6 +4,10 @@ package Vista;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -142,5 +146,11 @@ public class MenuBoton extends JPopupMenu{
         JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         cerrarMenu();
         menuAbierto = !menuAbierto;
+    }
+    public void setButtonIcon(JButton button, String imagePath){
+        ImageIcon image = new ImageIcon(imagePath);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
+        button.setIcon(icon);
+        button.repaint();
     }
 }
