@@ -18,7 +18,6 @@ import javax.swing.table.JTableHeader;
  * @author yumii
  */
 public class JF_CompraDia extends javax.swing.JFrame {
-    private boolean menuAbierto = false;
     private MenuBoton menu;
 
 
@@ -27,10 +26,11 @@ public class JF_CompraDia extends javax.swing.JFrame {
      */
     public JF_CompraDia() {
         initComponents();
-        customComponents();
-        eventComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
         menu.cerrarMenu();
+        customComponents();
+        eventComponents();
+
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -186,8 +186,8 @@ public class JF_CompraDia extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void customComponents(){
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
   
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         DefaultTableModel model = llenarTabla();
@@ -210,12 +210,12 @@ public class JF_CompraDia extends javax.swing.JFrame {
         btnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (menuAbierto) {
+                if (menu.menuAbierto) {
                     menu.cerrarMenu();
                 } else {
                     menu.mostrarMenu();
                 }
-                menuAbierto = !menuAbierto; // Cambia el estado del menú
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
         
@@ -294,12 +294,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
     }
     
     
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
-    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;

@@ -13,18 +13,18 @@ import Vista.JF_Notificaciones;
 import Vista.JF_Principal;
 import Vista.JF_RegistrarEmpleado;
 import Vista.JF_RegistrarProveedor;
+import Vista.JF_Reportes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -181,14 +181,20 @@ public final class MenuBoton extends JPopupMenu{
             item.addActionListener(e -> abrirVentanas(item.getText()));
         }
         
-        notificacionesMenu.addActionListener(e -> abrirVentana(JF_Notificaciones.class));
-        consumoClienteMenu.addActionListener(e -> abrirVentana(JF_ListaCuentas.class));
-        menuMenu.addActionListener(e -> abrirVentana(JF_Menu.class));
+        notificacionesMenu.addActionListener(e -> abrirVentana(JF_Notificaciones.class, ""));
+        consumoClienteMenu.addActionListener(e -> abrirVentana(JF_ListaCuentas.class, ""));
+        menuMenu.addActionListener(e -> abrirVentana(JF_Menu.class, ""));
     }
     
-    private void abrirVentana(Class<?> ventanaClass) {
+    private void abrirVentana(Class<?> ventanaClass, String reporte) {
         try {
-            JFrame ventana = (JFrame) ventanaClass.getDeclaredConstructor().newInstance();
+            JFrame ventana;
+            if (ventanaClass.equals(JF_Reportes.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance(reporte);
+            }
+            else{
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor().newInstance();
+            }
             ventana.setVisible(true);
             dad.dispose(); 
 
@@ -200,42 +206,49 @@ public final class MenuBoton extends JPopupMenu{
     
     private void abrirVentanas(String nombreMenu) {
         if (nombreMenu.equals("Lista de inventario")) {
-            abrirVentana(JF_Inventario.class);
+            abrirVentana(JF_Inventario.class, nombreMenu);
         } else if (nombreMenu.equals("Compra por día")) {
-            abrirVentana(JF_CompraDia.class);
+            abrirVentana(JF_CompraDia.class, nombreMenu);
         } else if (nombreMenu.equals("Compra por proveedor")) {
-            abrirVentana(JF_CompraProveedor.class);
+            abrirVentana(JF_CompraProveedor.class, nombreMenu);
         } else if (nombreMenu.equals("Registrar proveedor")) {
-            abrirVentana(JF_RegistrarProveedor.class);
+            abrirVentana(JF_RegistrarProveedor.class, nombreMenu);
         } else if (nombreMenu.equals("Editar proveedor")) {
-            abrirVentana(JF_ModificarProveedor.class);
+            abrirVentana(JF_ModificarProveedor.class, nombreMenu);
         } 
         
         else if (nombreMenu.equals("Registrar empleado")) {
-            abrirVentana(JF_RegistrarEmpleado.class);
+            abrirVentana(JF_RegistrarEmpleado.class, nombreMenu);
         } else if (nombreMenu.equals("Editar empleado")) {
-            abrirVentana(JF_ModificarEmpleado.class);
+            abrirVentana(JF_ModificarEmpleado.class, nombreMenu);
         } else if (nombreMenu.equals("Consumo empleado")) {
-            abrirVentana(JF_ListaConsumoEmpleado.class);
+            abrirVentana(JF_ListaConsumoEmpleado.class, nombreMenu);
         } 
         
         else if (nombreMenu.equals("Reporte de ventas")) {
-            //abrirVentana(JF_ModificarProveedor.class);
+            abrirVentana(JF_Reportes.class, nombreMenu);
             JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de costo de mercadería más vendida")) {
-            //abrirVentana(JF_ModificarProveedor.class);
+            abrirVentana(JF_Reportes.class, nombreMenu);
             JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de productos estancados")) {
-            //abrirVentana(JF_ModificarProveedor.class);
+            abrirVentana(JF_Reportes.class, nombreMenu);
             JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de cantidad de productos mínimos")) {
-            //abrirVentana(JF_ModificarProveedor.class);
+            abrirVentana(JF_Reportes.class, nombreMenu);
             JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } 
         cerrarMenu();
     }
+    public void setButtonIcon(JButton button, String imagePath){
+        ImageIcon image = new ImageIcon(imagePath);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
+        button.setIcon(icon);
+        button.repaint();
+    }
+
     
     public void regresarVentanaPrincipal(){
-        abrirVentana(JF_Principal.class);
+        abrirVentana(JF_Principal.class, "");
     }
 }

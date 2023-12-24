@@ -4,19 +4,52 @@
  */
 package Vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import Vista.Clases.MenuBoton;
+
 /**
  *
  * @author TomasPC
  */
 public class JF_VerComandaEmpleado extends javax.swing.JFrame {
+    private MenuBoton menu;
 
     /**
      * Creates new form ComandaEmpleado
      */
     public JF_VerComandaEmpleado() {
         initComponents();
-    }
+        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu.cerrarMenu();
+        customComponents();
+        eventComponents();
 
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+    }
+        private void customComponents(){
+        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+
+}
+
+    
+    private void eventComponents() {
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (menu.menuAbierto) {
+                    menu.cerrarMenu();
+                } else {
+                    menu.mostrarMenu();
+                }
+                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +86,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
-        jButton1.setText("Menu");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +116,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Atras");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
