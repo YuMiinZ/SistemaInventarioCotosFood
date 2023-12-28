@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
+import java.awt.Font;
 
 /**
  *
@@ -82,7 +83,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
@@ -113,7 +114,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jButton2.setContentAreaFilled(false);
@@ -130,16 +131,16 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel6.setText("Notas");
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
 
-        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel7.setText("Platillos");
 
-        jLabel8.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel8.setText("Bebidas");
 
         jButton3.setBackground(new java.awt.Color(221, 59, 59));
@@ -153,11 +154,11 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel3.setForeground(new java.awt.Color(0, 72, 121));
         jLabel3.setText("Comanda: ");
 
-        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel4.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel4.setText("Número de Mesa");
 
         jLabel5.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
@@ -204,7 +205,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,7 +226,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(91, 91, 91))
                     .addGroup(jPanel1Layout.createSequentialGroup()

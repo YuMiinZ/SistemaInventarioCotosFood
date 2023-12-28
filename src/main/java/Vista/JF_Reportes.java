@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import java.awt.Font;
 
 
 /**
@@ -80,7 +81,7 @@ public class JF_Reportes extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 28));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
@@ -137,7 +138,7 @@ public class JF_Reportes extends javax.swing.JFrame {
             .addGap(0, 122, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 64)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Consumo Empleados");
 
@@ -184,7 +185,7 @@ public class JF_Reportes extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

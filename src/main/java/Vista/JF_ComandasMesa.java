@@ -6,10 +6,8 @@ package Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
-import Vista.Clases.TablaPersonalizada;
-import Vista.Clases.TablaSpinnerPersonalizada;
+import java.awt.Font;
 /**
  *
  * @author TomasPC
@@ -32,7 +30,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         eventComponents();
 
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
      private void customComponents() {
         menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
@@ -77,11 +75,14 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setMaximumSize(new java.awt.Dimension(1747, 1291));
+        jPanel4.setMaximumSize(new java.awt.Dimension(2160, 1440));
+        jPanel4.setMinimumSize(new java.awt.Dimension(1747, 1291));
+        jPanel4.setPreferredSize(new java.awt.Dimension(2160, 1440));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
@@ -101,15 +102,15 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1869, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -163,7 +164,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
             .addGap(0, 122, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Monto total: ");
 
@@ -180,7 +181,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(0, 72, 121));
         jLabel3.setText("Mesa: ");
 
@@ -188,7 +189,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 2160, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -202,7 +203,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 1488, Short.MAX_VALUE)
+                                .addGap(0, 1426, Short.MAX_VALUE)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -224,7 +225,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
