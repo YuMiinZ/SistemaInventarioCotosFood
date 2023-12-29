@@ -159,6 +159,7 @@ Vista\JF_Menu$ButtonEditor.class
 Vista\JF_ModificarEmpleado.class
 Vista\JF_RegistrarProductoMenu$8.class
 Vista\JF_CompraProveedor$1.class
+Vista\JF_ComandasEmpleado$7.class
 Vista\JF_VerComandaMesa$3.class
 Vista\JF_ModificarEmpleado$2.class
 Vista\JF_NuevaComandaEmpleado$1.class
@@ -169,6 +170,7 @@ Vista\JF_ModificarEmpleado$11.class
 Vista\JF_CompraProveedor$2.class
 Vista\JF_RegistrarEmpleado$2.class
 Vista\JF_VerComandaMesa$2.class
+Vista\JF_ComandasEmpleado$8.class
 Vista\JF_ModificarEmpleado$3.class
 Vista\JF_ModificarProveedor$6.class
 Vista\JF_NuevaComandaEmpleado$2.class
