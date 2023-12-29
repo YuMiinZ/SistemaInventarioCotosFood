@@ -31,7 +31,7 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="450" y="160" width="300" height="220"/>
+          <AbsoluteConstraints x="450" y="160" width="580" height="370"/>
         </Constraint>
       </Constraints>
 
@@ -134,7 +134,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="109" y="143" width="225" height="59"/>
+                  <AbsoluteConstraints x="120" y="150" width="225" height="59"/>
                 </Constraint>
               </Constraints>
             </Component>

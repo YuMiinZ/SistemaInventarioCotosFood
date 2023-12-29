@@ -166,7 +166,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel3.setForeground(new java.awt.Color(0, 72, 121));
         jLabel3.setText("Comanda: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 146, 248, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 248, -1));
 
         jLabel4.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel4.setText("Número de Mesa");

@@ -138,7 +138,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 143, 225, 59));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 225, 59));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel2.setText("Empleado");
@@ -186,7 +186,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 300, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 580, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

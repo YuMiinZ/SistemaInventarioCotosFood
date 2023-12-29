@@ -203,7 +203,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(0, 72, 121));
         jLabel3.setText("Mesa: ");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 141, 248, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 248, -1));
 
         jScrollPane2.setViewportView(jPanel4);
 

@@ -104,7 +104,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         jLabel1.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Nueva Comanda");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 129, -1, 55));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, 55));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
