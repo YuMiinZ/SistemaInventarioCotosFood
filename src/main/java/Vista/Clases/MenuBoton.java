@@ -132,7 +132,6 @@ public final class MenuBoton extends JPopupMenu{
         this.add(empleadoSubMenu);
         this.add(reportesSubMenu);
         this.setPreferredSize(new Dimension(x, y));
-        
         programarMenu();
         agregarFocusListener();
     }
@@ -163,7 +162,7 @@ public final class MenuBoton extends JPopupMenu{
     }
     
     public void mostrarMenu() {
-        this.show(dad, 7, 84);
+        this.show(dad, 11, 152);
         this.setVisible(true); // Cierra el menú si está visible
         menuAbierto = true;
     }
