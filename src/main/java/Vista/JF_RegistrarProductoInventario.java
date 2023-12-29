@@ -29,7 +29,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         eventComponents();
 
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
 
@@ -70,18 +70,20 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1747, 1291));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(2160, 1440));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 470, -1));
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 470, 38));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -92,19 +94,22 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 780, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 950, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Registrar Producto Inventario");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
-        jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
         btnMenu.setBorderPainted(false);
         btnMenu.setContentAreaFilled(false);
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
         lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
         lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,10 +121,10 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(1602, Short.MAX_VALUE))
+                .addContainerGap(2111, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,44 +133,47 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                     .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setMaximumSize(new java.awt.Dimension(71, 78));
+        btnRegresar.setMinimumSize(new java.awt.Dimension(72, 7));
+        btnRegresar.setPreferredSize(new java.awt.Dimension(72, 7));
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
         lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 470, -1));
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 670, 470, -1));
 
         lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblCantidad.setText("Cantidad");
-        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 660, 510, -1));
+        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 830, 510, -1));
 
         lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblCantMinima.setText("Cantidad Mínima");
-        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 180, 470, -1));
+        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 350, 470, -1));
 
         txtCantMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 470, 38));
+        jPanel1.add(txtCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 400, 470, 38));
 
         lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblDiaCompra.setText("Día de Compra");
-        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 470, -1));
+        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 510, 470, -1));
 
         lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, 470, -1));
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 670, 470, -1));
 
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
         cmboxEstado.setSelectedIndex(-1);
@@ -174,7 +182,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 470, 40));
+        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 720, 470, 40));
 
         txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -182,14 +190,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 txtUnidadMedidaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 710, 470, 38));
+        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 880, 470, 38));
 
         lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblUnidadMedida.setText("Unidad de Medida");
-        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 660, 510, -1));
+        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 830, 510, -1));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 470, 40));
+        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 720, 470, 40));
 
         cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,26));
         cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +205,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 470, 40));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 470, 40));
 
         cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
         cmboxDiaCompra.setSelectedIndex(-1);
@@ -206,21 +214,21 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxDiaCompraActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 470, 40));
+        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 560, 470, 40));
 
         spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 470, 40));
+        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 880, 470, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

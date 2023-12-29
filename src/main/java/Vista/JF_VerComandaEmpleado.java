@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
+import java.awt.Font;
 
 /**
  *
@@ -82,7 +83,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 28));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
@@ -126,7 +127,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel2.setText("Empleado");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -137,19 +138,19 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel6.setText("Notas");
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
 
-        jLabel7.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel7.setText("Platillos");
 
         jTextField2.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField2.setMinimumSize(new java.awt.Dimension(661, 290));
 
-        jLabel8.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel8.setText("Bebidas");
 
         jTextField4.setMaximumSize(new java.awt.Dimension(661, 290));
@@ -220,7 +221,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                         .addGap(45, 45, 45))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
