@@ -7,6 +7,7 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
+import java.awt.Font;
 
 
 /**
@@ -81,6 +82,9 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel1.setMinimumSize(new java.awt.Dimension(2160, 1440));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setDefaultCapable(false);
@@ -92,13 +96,13 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 64)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Nueva Comanda");
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
-        jLabel3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 28));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cotos Food");
 
@@ -132,10 +136,10 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", 0, 36));
         jLabel2.setText("Número de Mesa");
 
-        jLabel4.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel4.setFont(new Font("Montserrat", 0, 36));
         jLabel4.setText("Platillos");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -146,7 +150,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel5.setFont(new Font("Montserrat", 0, 36));
         jLabel5.setText("Bebidas");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -157,7 +161,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel6.setFont(new Font("Montserrat", 0, 36));
         jLabel6.setText("Notas");
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
@@ -200,7 +204,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 788, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
@@ -231,7 +235,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,11 +248,11 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2160, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1440, Short.MAX_VALUE)
         );
 
         pack();

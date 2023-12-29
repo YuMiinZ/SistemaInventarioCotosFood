@@ -113,7 +113,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jButton3" pref="181" max="32767" attributes="0"/>
+                          <Component id="jButton3" pref="221" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -161,8 +161,8 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Monospaced" size="40" style="0"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 28)" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -200,8 +200,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="36" style="0"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 36)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Empleado"/>
           </Properties>
@@ -227,8 +227,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="36" style="0"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 36)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Notas"/>
           </Properties>
@@ -245,8 +245,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="36" style="0"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 36)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Platillos"/>
           </Properties>
@@ -263,8 +263,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="36" style="0"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 36)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Bebidas"/>
           </Properties>

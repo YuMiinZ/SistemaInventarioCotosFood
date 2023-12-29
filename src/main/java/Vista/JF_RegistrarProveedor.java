@@ -56,18 +56,20 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1747, 1291));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblTelefono.setText("Telefono");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, 470, -1));
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 520, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 360, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 410, 470, 38));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -78,19 +80,21 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 600, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 670, 199, 50));
 
-        lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
+        lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Registrar Proveedor");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
-        jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
+        jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
         btnMenu.setBorderPainted(false);
         btnMenu.setContentAreaFilled(false);
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
         lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
         lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,10 +106,10 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(1602, Short.MAX_VALUE))
+                .addContainerGap(2111, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,11 +118,11 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
                     .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
 
         txtTelefono.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -126,23 +130,26 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 470, 38));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 570, 470, 38));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setMaximumSize(new java.awt.Dimension(71, 78));
+        btnRegresar.setMinimumSize(new java.awt.Dimension(72, 7));
+        btnRegresar.setPreferredSize(new java.awt.Dimension(72, 7));
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

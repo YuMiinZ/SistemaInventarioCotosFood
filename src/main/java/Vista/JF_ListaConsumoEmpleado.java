@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
+import java.awt.Font;
 
 /**
  *
@@ -29,7 +30,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         eventComponents();
 
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
@@ -72,11 +73,13 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setMaximumSize(new java.awt.Dimension(1747, 1291));
+        jPanel4.setMaximumSize(new java.awt.Dimension(2160, 1440));
+        jPanel4.setMinimumSize(new java.awt.Dimension(1747, 1291));
+        jPanel4.setPreferredSize(new java.awt.Dimension(2160, 1440));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cotos Food");
 
@@ -96,7 +99,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -104,7 +107,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -133,7 +136,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             .addGap(0, 122, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 64)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Consumo Empleados");
 
@@ -162,7 +165,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel2)
-                        .addContainerGap(1453, Short.MAX_VALUE))
+                        .addContainerGap(1924, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +184,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

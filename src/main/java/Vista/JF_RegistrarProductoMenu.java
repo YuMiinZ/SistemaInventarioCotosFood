@@ -72,15 +72,17 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1747, 1291));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 470, -1));
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +90,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 470, 38));
 
         btnAgregarIngredientes.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregarIngredientes.setFont(new Font ("Montserrat", Font.BOLD,14));
@@ -99,15 +101,17 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
                 btnAgregarIngredientesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 470, 190, 30));
+        jPanel1.add(btnAgregarIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 630, 190, 30));
 
-        lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
+        lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Registrar Producto al Menú");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
-        jPanel2.setMinimumSize(new java.awt.Dimension(1747, 105));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
         btnMenu.setBorderPainted(false);
         btnMenu.setContentAreaFilled(false);
@@ -123,10 +127,10 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(1602, Short.MAX_VALUE))
+                .addContainerGap(2111, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,33 +139,36 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
                     .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setMaximumSize(new java.awt.Dimension(71, 78));
+        btnRegresar.setMinimumSize(new java.awt.Dimension(72, 7));
+        btnRegresar.setPreferredSize(new java.awt.Dimension(72, 7));
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 40));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
         lblCostoElaboracion.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblCostoElaboracion.setText("Costo Elaboración");
-        jPanel1.add(lblCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 470, -1));
+        jPanel1.add(lblCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 670, 470, -1));
 
         lblIngredientes.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblIngredientes.setText("Ingredientes");
-        jPanel1.add(lblIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 210, 470, -1));
+        jPanel1.add(lblIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 370, 470, -1));
 
         lblEstado.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 530, 470, -1));
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 690, 470, -1));
 
         cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,26));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
@@ -171,13 +178,13 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
                 cmboxEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 580, 470, 40));
+        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 740, 470, 40));
 
         spnCostoElaboracion.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 470, 40));
+        jPanel1.add(spnCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 720, 470, 40));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 470, 40));
+        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 560, 470, 40));
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,10 +200,9 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableIngredientes);
         if (tableIngredientes.getColumnModel().getColumnCount() > 0) {
             tableIngredientes.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(cmboxIngredientes));
-            tableIngredientes.getColumnModel().getColumn(1).setCellEditor(null);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 470, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 420, 470, 210));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -207,18 +213,18 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 670, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 830, 199, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
