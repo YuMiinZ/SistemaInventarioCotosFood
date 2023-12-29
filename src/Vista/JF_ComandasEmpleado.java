@@ -25,6 +25,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
      * Creates new form JF_Comanda
      */
     public JF_ComandasEmpleado(String Name) {
+        //
         initComponents();
         this.name = Name;
         jLabel2.setText(Name);
