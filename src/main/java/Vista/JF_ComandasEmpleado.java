@@ -9,10 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import Vista.Clases.TablaSpinnerPersonalizada;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.JScrollPane;
 
 /**
  *

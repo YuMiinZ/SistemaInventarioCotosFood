@@ -20,8 +20,6 @@ public class ConexionBD {
     public MongoClient crearConexion() {
         try (MongoClient client = MongoClients.create("mongodb+srv://admin:CotosFoodAdmin@cluster0.9icd7ew.mongodb.net/?retryWrites=true&w=majority")) {
             MongoDatabase db = client.getDatabase("SistemaInventarioCotosFood");
-            //MongoCollection col = db.getCollection("Proveedor");
-            JOptionPane.showMessageDialog(null, "Conexión Exitosa " + db.getName());
             return client;
         } catch (MongoException e) {
             JOptionPane.showMessageDialog(null, "Error en la conexión a MongoDB, error: " + e.toString());
