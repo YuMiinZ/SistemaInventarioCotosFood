@@ -16,14 +16,27 @@ import javax.swing.JOptionPane;
  * @author yumii
  */
 public class ConexionBD {
+    private MongoClient cliente;
+    private String url = "mongodb+srv://admin:CotosFoodAdmin@cluster0.9icd7ew.mongodb.net/?retryWrites=true&w=majority";
+    
     
     public MongoClient crearConexion() {
-        try (MongoClient client = MongoClients.create("mongodb+srv://admin:CotosFoodAdmin@cluster0.9icd7ew.mongodb.net/?retryWrites=true&w=majority")) {
-            MongoDatabase db = client.getDatabase("SistemaInventarioCotosFood");
-            return client;
-        } catch (MongoException e) {
-            JOptionPane.showMessageDialog(null, "Error en la conexión a MongoDB, error: " + e.toString());
+        try {
+            System.out.println("MongoDB" + cliente);
+            cliente = MongoClients.create(url);
+            System.out.println("Conexión exitosa a MongoDB");
+            return cliente;
+        } catch (Exception e) {
+            System.out.println("Error al conectar a la base de datos MongoDB: " + e.getMessage());
             return null;
+        }
+    }
+    
+    public void cerrarConexion(MongoClient client){
+        if (client != null) {
+            client.close();
+            cliente.close();
+            System.out.println("MongoDB" + cliente);
         }
     }
     

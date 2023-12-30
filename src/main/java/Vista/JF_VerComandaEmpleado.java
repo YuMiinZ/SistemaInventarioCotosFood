@@ -32,8 +32,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         
     }
         private void customComponents(){
-            menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-            menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+            menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+            menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
             
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(jScrollPane1, BorderLayout.CENTER);
@@ -129,6 +129,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 143, 71, 78));

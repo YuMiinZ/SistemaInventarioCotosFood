@@ -26,8 +26,8 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         eventComponents();
     }
         private void customComponents(){
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
 
 }
 
@@ -118,6 +118,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 146, 71, 78));

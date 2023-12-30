@@ -9,7 +9,14 @@ import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author TomasPC
@@ -27,8 +34,15 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
     }
     private void customComponents(){
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
+        
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        
+        jTable1.getColumn("Editar").setCellEditor(new JF_ListaCuentas.ButtonEditor(new JCheckBox()));
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -36,6 +50,65 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         pack();
         //TablaPersonalizada.setTableProperties(jTable1, true);
     }
+    
+    private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Editar");
+
+        model.addRow(new Object[]{"Dato 1", "Editar"});
+        model.addRow(new Object[]{"Dato 2", "Editar"});
+        model.addRow(new Object[]{"Dato 3", "Editar"});
+
+        return model;
+    }
+    
+    // Clase para definir la acción al hacer clic en el botón de la celda
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton("Editar");
+            button.setOpaque(true);
+
+            button.addActionListener(e -> {
+                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
+                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
+                }*/
+                JOptionPane.showMessageDialog(
+                null,
+                "Fila seleccionada: " + jTable1.convertRowIndexToModel(jTable1.getEditingRow()));
+                abrirVentana(jTable1.getEditingRow());
+                
+            });
+            button.setFocusPainted(false);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+        
+        @Override
+        public Object getCellEditorValue() {
+            return button.getText();
+        }
+    }
+    
+    private void abrirVentana(int dato){
+        try {
+            JF_ComandasMesa ventana = new JF_ComandasMesa("");
+            ventana.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
+    }
+    
     private void eventComponents() {
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -119,6 +192,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, -1));
 
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -183,16 +257,15 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(470, 470, 470)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();

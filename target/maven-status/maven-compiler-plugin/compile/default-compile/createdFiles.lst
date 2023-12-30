@@ -8,6 +8,7 @@ Vista\JF_RegistrarProductoInventario$1.class
 Vista\JF_ComandasEmpleado$3.class
 Vista\JF_Principal$1.class
 Vista\JF_ModificarEmpleado$9.class
+Vista\JF_ComandasMesa$ButtonEditor.class
 Vista\JF_NuevaComanda$3.class
 Vista\JF_Menu.class
 Vista\JF_Notificaciones$5.class
@@ -16,6 +17,7 @@ Vista\JF_ModificarProductoInventario$3.class
 Vista\JF_NuevaComandaEmpleado$5.class
 Vista\JF_Inventario$1.class
 Vista\JF_ModificarProveedor$5.class
+Modelo\Proveedor.class
 Vista\JF_RegistrarProveedor$2.class
 Vista\JF_ModificarProductoMenu$6.class
 Vista\JF_CompraProveedor.class
@@ -60,6 +62,7 @@ Vista\JF_RegistrarProductoInventario$5.class
 Vista\JF_VerComandaEmpleado$3.class
 Vista\JF_ComandasMesa$3.class
 Vista\JF_Reportes$2.class
+Modelo\ConsultasProveedor.class
 Vista\Clases\ButtonRenderer.class
 Vista\JF_ComandasMesa$6.class
 Vista\JF_RegistrarProductoInventario$2.class
@@ -91,7 +94,7 @@ Vista\JF_ComandasEmpleado$6.class
 Vista\JF_VerComandaMesa$4.class
 Vista\JF_RegistrarProveedor$5.class
 Vista\JF_Notificaciones.class
-Modelo\pruebaconexion.class
+Vista\JF_ListaCuentas$ButtonEditor.class
 Vista\JF_ComandasMesa$5.class
 Vista\JF_ModificarProductoInventario$6.class
 Modelo\ConexionBD.class
@@ -149,6 +152,7 @@ Vista\JF_Menu$3.class
 Vista\JF_ModificarProveedor$4.class
 Vista\JF_ModificarEmpleado$5.class
 Vista\JF_NuevaComanda.class
+Modelo\pruebas.class
 Vista\JF_ListaConsumoEmpleado$3.class
 Vista\JF_NuevaComandaEmpleado$4.class
 Vista\JF_NuevaComanda$7.class
