@@ -152,6 +152,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.setMaximumSize(new java.awt.Dimension(71, 78));
         btnRegresar.setMinimumSize(new java.awt.Dimension(72, 7));
         btnRegresar.setPreferredSize(new java.awt.Dimension(72, 7));
@@ -277,8 +278,8 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void customComponents(){
-        menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         DefaultTableModel model = llenarTabla();
         TablaPersonalizada.setTableProperties(tableIngredientes, model, false);

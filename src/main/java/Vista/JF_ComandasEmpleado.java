@@ -34,8 +34,8 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
     }
     private void customComponents(){
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         DefaultTableModel model = new DefaultTableModel();
         jTable1.setModel(model);
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
@@ -84,7 +84,6 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
-        setPreferredSize(new java.awt.Dimension(860, 1480));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setAlignmentX(0.0F);
@@ -97,6 +96,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
         jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -218,14 +218,15 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(1470, 1470, 1470)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1964, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(1070, 1070, 1070)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

@@ -31,8 +31,8 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     private void customComponents(){
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         //TablaPersonalizada.setTableProperties(jTable1, true);
         
@@ -75,7 +75,6 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
-        setPreferredSize(new java.awt.Dimension(860, 1480));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setMaximumSize(new java.awt.Dimension(2160, 1440));
@@ -126,6 +125,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
 
         jButton2.setToolTipText("");
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton2.addActionListener(new java.awt.event.ActionListener() {

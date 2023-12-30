@@ -226,21 +226,17 @@ public final class MenuBoton extends JPopupMenu{
         
         else if (nombreMenu.equals("Reporte de ventas")) {
             abrirVentana(JF_Reportes.class, nombreMenu);
-            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de costo de mercadería más vendida")) {
             abrirVentana(JF_Reportes.class, nombreMenu);
-            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de productos estancados")) {
             abrirVentana(JF_Reportes.class, nombreMenu);
-            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } else if (nombreMenu.equals("Reporte de cantidad de productos mínimos")) {
             abrirVentana(JF_Reportes.class, nombreMenu);
-            JOptionPane.showMessageDialog(this, "Seleccionaste: " + nombreMenu);
         } 
         cerrarMenu();
     }
     public void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
+        ImageIcon image = new ImageIcon(getClass().getResource(imagePath));
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
         button.setIcon(icon);
         button.repaint();

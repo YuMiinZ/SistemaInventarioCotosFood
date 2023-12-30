@@ -32,8 +32,8 @@ public class JF_Reportes extends javax.swing.JFrame {
         eventComponents();
     }
     private void customComponents(){
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         DefaultTableModel model = new DefaultTableModel();
         jTable1.setModel(model);
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
@@ -128,6 +128,7 @@ public class JF_Reportes extends javax.swing.JFrame {
 
         jButton2.setToolTipText("");
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
