@@ -24,8 +24,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
      */
     public JF_Notificaciones() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
         eventComponents();        
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,6 +40,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -62,7 +62,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Notificaciones");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -93,12 +93,11 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -156,17 +155,23 @@ public class JF_Notificaciones extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 1070, 460));
 
+        jScrollPane2.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(380, 380, 380)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(150, 150, 150)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,6 +190,11 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
         tableNotificacion.getColumn("Eliminar").setCellEditor(new JF_Notificaciones.ButtonEditor(new JCheckBox()));
+        
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
+        
+        pack();
     }
     
     private DefaultTableModel llenarTabla() {
@@ -208,7 +218,6 @@ public class JF_Notificaciones extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
         
@@ -314,6 +323,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tableNotificacion;

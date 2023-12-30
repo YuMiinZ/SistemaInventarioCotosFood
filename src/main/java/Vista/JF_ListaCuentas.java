@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import Vista.Clases.TablaSpinnerPersonalizada;
+import java.awt.BorderLayout;
 import java.awt.Font;
 /**
  *
@@ -21,8 +21,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
      */
     public JF_ListaCuentas() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
         eventComponents();
 
@@ -31,6 +30,10 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
+        
+        pack();
         //TablaPersonalizada.setTableProperties(jTable1, true);
     }
     private void eventComponents() {
@@ -42,7 +45,6 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
     }
@@ -55,6 +57,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,11 +70,13 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1747, 1291));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setMaximumSize(new java.awt.Dimension(2160, 1440));
         jPanel4.setMinimumSize(new java.awt.Dimension(1747, 1291));
         jPanel4.setPreferredSize(new java.awt.Dimension(2160, 1440));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
 
@@ -95,9 +100,9 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1807, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +110,13 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
+
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, -1));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setDefaultCapable(false);
@@ -117,6 +126,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 131, 71, 78));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -129,6 +139,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1778, 243, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(57, 145, 151));
 
@@ -143,9 +154,12 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
             .addGap(0, 122, Short.MAX_VALUE)
         );
 
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 316, 1951, -1));
+
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Cuentas");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,52 +174,25 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 1671, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(102, 102, 102))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
-        );
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 444, 1951, 777));
+
+        jScrollPane2.setViewportView(jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,6 +389,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

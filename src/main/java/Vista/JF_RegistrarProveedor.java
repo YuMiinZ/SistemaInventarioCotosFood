@@ -21,8 +21,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
      */
     public JF_RegistrarProveedor() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        menu.cerrarMenu();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
         eventComponents();
 
@@ -40,6 +39,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lblTelefono = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -85,7 +85,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
         lblTitulo.setText("Registrar Proveedor");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -114,12 +114,11 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -145,15 +144,20 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
 
         pack();
@@ -174,6 +178,11 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "src/main/resources/Imagenes/IconoRegresar.png");
+        
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jScrollPane1, BorderLayout.CENTER);
+        
+        pack();
 
 }
 
@@ -187,7 +196,6 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-                menu.menuAbierto = !menu.menuAbierto; // Cambia el estado del menú
             }
         });
         
@@ -245,6 +253,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;
