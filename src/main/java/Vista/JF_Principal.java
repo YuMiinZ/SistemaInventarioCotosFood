@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 /**
  *
  * @author yumii
@@ -22,9 +23,9 @@ public class JF_Principal extends javax.swing.JFrame {
      */
     public JF_Principal() {
         initComponents();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
-        eventComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);     
+        eventComponents();     
     }
 
     /**
@@ -114,8 +115,8 @@ public class JF_Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void customComponents(){
-        setImageLabel(lblFondo, "src/main/resources/Imagenes/Fondo4.jpeg");
-        setButtonIcon(btnMenu, "src/main/resources/Imagenes/IconoMenu.png");
+        setImageLabel(lblFondo, "/Imagenes/Fondo4.jpeg");
+        menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
@@ -175,15 +176,8 @@ public class JF_Principal extends javax.swing.JFrame {
         lblFondo.setVisible(mostrar);
     }
     
-    private void setButtonIcon(JButton button, String imagePath){
-        ImageIcon image = new ImageIcon(imagePath);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-        button.setIcon(icon);
-        button.repaint();
-    }
-    
     private void setImageLabel(JLabel lblName, String imagePath) {
-        ImageIcon image = new ImageIcon(imagePath);
+        ImageIcon image = new ImageIcon(getClass().getResource(imagePath));
         Image scaledImage = image.getImage().getScaledInstance(lblName.getWidth(), lblName.getHeight(), Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         lblName.setIcon(scaledIcon);

@@ -7,8 +7,16 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author TomasPC
@@ -33,14 +41,81 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
      private void customComponents() {
-        menu.setButtonIcon(jButton1, "src/main/resources/Imagenes/IconoMenu.png");
-        menu.setButtonIcon(jButton2, "src/main/resources/Imagenes/IconoRegresar.png");
+        menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
+        menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
+        
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla();
+        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        
+        jTable1.getColumn("Editar").setCellEditor(new JF_ComandasMesa.ButtonEditor(new JCheckBox()));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
         pack();
      }
+     //INICIO DE COSAS DE TABLA 
+     private DefaultTableModel llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+        model.addColumn("Editar");
+
+        model.addRow(new Object[]{"Arroz", "300 gramos", "Ver Más"});
+        model.addRow(new Object[]{"Frijoles", "300 gramos", "Ver Más"});
+        model.addRow(new Object[]{"Leche", "3 cajas", "Ver Más"});
+
+        return model;
+    }
+     
+     // Clase para definir la acción al hacer clic en el botón de la celda
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton("Editar");
+            button.setOpaque(true);
+
+            button.addActionListener(e -> {
+                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
+                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
+                }*/
+                JOptionPane.showMessageDialog(
+                null,
+                "Fila seleccionada: " + jTable1.convertRowIndexToModel(jTable1.getEditingRow()));
+                abrirVentana(jTable1.getEditingRow());
+            });
+            button.setFocusPainted(false);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+        
+        @Override
+        public Object getCellEditorValue() {
+            return button.getText();
+        }
+    }
+    
+    private void abrirVentana(int dato){
+        try {
+            JF_VerComandaMesa ventanaModificarProducto = new JF_VerComandaMesa();
+            ventanaModificarProducto.setVisible(true);
+            this.dispose(); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
+        }
+    }
+    
+    //TERMINA COSAS DE LA TABLA
+    
     private void eventComponents() {
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -130,6 +205,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jButton2.setAutoscrolls(true);
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
