@@ -102,9 +102,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="btnMenu" min="-2" pref="55" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblCotosFood" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="2108" max="32767" attributes="0"/>
+                          <EmptySpace pref="2118" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
