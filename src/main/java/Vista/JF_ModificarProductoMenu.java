@@ -209,7 +209,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 490, 470, 210));
 
-        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
+        btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
         btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");

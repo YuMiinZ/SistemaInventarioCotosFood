@@ -86,7 +86,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 690, 470, 38));
 
-        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
+        btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
         btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
