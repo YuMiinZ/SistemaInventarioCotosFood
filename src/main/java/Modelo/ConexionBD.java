@@ -35,8 +35,6 @@ public class ConexionBD {
     public void cerrarConexion(MongoClient client){
         if (client != null) {
             client.close();
-            cliente.close();
-            System.out.println("MongoDB" + cliente);
         }
     }
     

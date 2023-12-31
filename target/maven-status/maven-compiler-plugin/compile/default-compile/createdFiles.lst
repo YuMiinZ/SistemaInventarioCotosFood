@@ -46,6 +46,7 @@ Vista\JF_NuevaComandaEmpleado$6.class
 Vista\JF_NuevaComanda$4.class
 Vista\JF_ListaConsumoEmpleado.class
 Vista\JF_Notificaciones$ButtonEditor.class
+Vista\Clases\ManejadorComponentes.class
 Vista\JF_ModificarEmpleado$8.class
 Vista\JF_NuevaComanda$1.class
 Vista\JF_RegistrarProductoMenu$5.class
@@ -111,7 +112,6 @@ Vista\JF_ListaCuentas$3.class
 Vista\JF_RegistrarEmpleado$7.class
 Vista\JF_ModificarProveedor$2.class
 Vista\JF_Inventario$4.class
-Controlador\Controlador.class
 Vista\JF_ComandasEmpleado$1.class
 Vista\JF_ModificarProductoMenu$9.class
 Vista\JF_Reportes$3.class
@@ -136,7 +136,6 @@ Vista\JF_Notificaciones$3.class
 Vista\Clases\TablaSpinnerPersonalizada.class
 Vista\JF_NuevaComanda$5.class
 Vista\JF_Principal.class
-Vista\JF_RegistrarProveedor$6.class
 Vista\JF_Menu$2.class
 Vista\JF_CompraDia.class
 Vista\JF_CompraProveedor$6.class
@@ -152,6 +151,7 @@ Vista\JF_Menu$3.class
 Vista\JF_ModificarProveedor$4.class
 Vista\JF_ModificarEmpleado$5.class
 Vista\JF_NuevaComanda.class
+Controlador\ControladorProveedor.class
 Modelo\pruebas.class
 Vista\JF_ListaConsumoEmpleado$3.class
 Vista\JF_NuevaComandaEmpleado$4.class

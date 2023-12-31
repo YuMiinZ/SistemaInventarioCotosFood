@@ -60,13 +60,13 @@ public final class MenuBoton extends JPopupMenu{
 
         JPanel spacePanel = new JPanel();
         spacePanel.setPreferredSize(new Dimension(0, 16));
-        spacePanel.setBackground(new Color(57, 145, 151));
+        spacePanel.setBackground(new Color(152, 194, 70));
         menu.add(spacePanel);
     }
 
     private void applyStyles(JMenuItem menuItem) {
-        menuItem.setForeground(Color.WHITE);
-        menuItem.setBackground(new Color(57, 145, 151));
+        menuItem.setForeground(new Color(25, 25, 25));
+        menuItem.setBackground(new Color(152, 194, 70));
         menuItem.setOpaque(true);
     }
     
@@ -162,7 +162,7 @@ public final class MenuBoton extends JPopupMenu{
     }
     
     public void mostrarMenu() {
-        this.show(dad, 11, 152);
+        this.show(dad, 11, 153);
         this.setVisible(true); // Cierra el menú si está visible
         menuAbierto = true;
     }

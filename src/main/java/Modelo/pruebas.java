@@ -4,6 +4,8 @@
  */
 package Modelo;
 
+import java.util.List;
+
 
 /**
  *
@@ -11,7 +13,18 @@ package Modelo;
  */
 public class pruebas {
     public static void main(String[] args) {
-        ConsultasProveedor consultas = new ConsultasProveedor(); // Crear una instancia de ConsultasBD
-        consultas.consultarProveedores();
+        Proveedor consultas = new Proveedor(); // Crear una instancia de ConsultasBD
+        
+        
+        //consultas.registrarProveedor("Martín", "11115555");
+        //consultas.consultarProveedores();
+        List<Proveedor> proveedores = consultas.getListaProveedores(); // Obtener la lista
+        
+        for (Proveedor proveedor : proveedores) {
+            System.out.println("ID: " + proveedor.getId());
+            System.out.println("Nombre: " + proveedor.getNombre());
+            System.out.println("Teléfono: " + proveedor.getTelefono());
+            System.out.println("-----------------------------");
+        }
     }
 }
