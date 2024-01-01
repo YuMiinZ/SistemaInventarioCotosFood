@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  */
 public class JF_RegistrarProveedor extends javax.swing.JFrame {
     private MenuBoton menu;
-    private ManejadorComponentes manejadorlbl = new ManejadorComponentes();
+    private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
 
     /**
      * Creates new form JF_Principal
@@ -183,9 +183,9 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        ControladorProveedor controlador = new ControladorProveedor(manejadorlbl);
-        if (controlador.validarDatos(txtNombre.getText(), txtTelefono.getText(), this)) {
-            JOptionPane.showMessageDialog(null, "Registro Exitoso");
+        ControladorProveedor controlador = new ControladorProveedor(manejadorComponentes);
+        if (controlador.registrarProveedor(txtNombre.getText(), txtTelefono.getText())) {
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -201,12 +201,12 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
-        manejadorlbl.agregarLabel(lblErrorNombre);
-        manejadorlbl.agregarLabel(lblErrorTelefono);
-        manejadorlbl.ocultarLabels();
+        manejadorComponentes.agregarLabel(lblErrorNombre);
+        manejadorComponentes.agregarLabel(lblErrorTelefono);
+        manejadorComponentes.ocultarLabels();
         
-        manejadorlbl.agregarText(txtNombre);
-        manejadorlbl.agregarText(txtTelefono);
+        manejadorComponentes.agregarText(txtNombre);
+        manejadorComponentes.agregarText(txtTelefono);
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
@@ -277,7 +277,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCotosFood;
-    public javax.swing.JLabel lblErrorNombre;
+    private javax.swing.JLabel lblErrorNombre;
     public javax.swing.JLabel lblErrorTelefono;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;

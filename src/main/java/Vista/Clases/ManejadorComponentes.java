@@ -6,6 +6,7 @@ package Vista.Clases;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -16,6 +17,7 @@ import javax.swing.JTextField;
 public class ManejadorComponentes {
     private List<JLabel> listaLabels;
     private List<JTextField> listaTextos;
+    private List<JComboBox> listaCmbox;
 
     public ManejadorComponentes() {
         listaLabels = new ArrayList<>();
@@ -35,6 +37,11 @@ public class ManejadorComponentes {
             label.setVisible(false);
         }
     }
+    public void ocultarLabel(int index) {
+        if (index >= 0 && index < listaLabels.size()) {
+            listaLabels.get(index).setVisible(false);
+        }
+    }
     
     public void mostrarLabels() {
         for (JLabel lbl : listaLabels) {
@@ -42,7 +49,13 @@ public class ManejadorComponentes {
         }
     }
     
-    public void limpiarCampos(){
+    public void mostrarLabel(int index) {
+        if (index >= 0 && index < listaLabels.size()) {
+            listaLabels.get(index).setVisible(true);
+        }
+    }
+    
+    public void limpiarCamposTexto(){
         ocultarLabels();
         
         for (JTextField txt : listaTextos) {
@@ -50,4 +63,13 @@ public class ManejadorComponentes {
         }
     }
     
+    public void asignarComboBox(JComboBox cmbox){
+        listaCmbox.add(cmbox);
+    }
+    
+    public void limpiarCmbox(){        
+        for (JComboBox cmbox : listaCmbox) {
+            cmbox.setSelectedIndex(-1);
+        }
+    }
 }

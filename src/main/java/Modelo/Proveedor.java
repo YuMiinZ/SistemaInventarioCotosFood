@@ -20,7 +20,6 @@ import org.bson.types.ObjectId;
 public class Proveedor {
     private ObjectId id;
     private String nombre, telefono;
-    private List<Proveedor> listaProveedores;
     
     public Proveedor() {
     }
@@ -60,7 +59,7 @@ public class Proveedor {
         this.telefono = telefono;
     }
     
-    public boolean registrarProveedor (String nombre, String telefono){
+    public void registrarProveedor (String nombre, String telefono){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
         
@@ -71,20 +70,41 @@ public class Proveedor {
                                 .append("Telefono", telefono);
 
         coleccion.insertOne(proveedor);
-        System.out.println("Proveedor insertado correctamente");
         
         conexion.cerrarConexion(cliente);
-        return true;
+    }
+    
+    public void modificarProveedor(ObjectId id, String nombre, String telefono){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Proveedor");
+
+        Document filtro = new Document("_id", id);
+        Document datosActualizar = new Document("Nombre", nombre).append("Telefono", telefono);
+        Document updateDocumento = new Document("$set", datosActualizar);
+
+        coleccion.updateOne(filtro, updateDocumento);
+
+        conexion.cerrarConexion(cliente);
+    }
+    
+    public void eliminarProveedor(ObjectId id){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Proveedor");
+
+        Document filtro = new Document("_id", id);
+        coleccion.deleteOne(filtro);
+
+        conexion.cerrarConexion(cliente);
     }
     
     public List<Proveedor> getListaProveedores() {
-        if(listaProveedores == null){
-            setListaProveedores();
-        }
-        return listaProveedores;
-    }
-    
-    public void setListaProveedores() {
+        List<Proveedor> listaProveedores;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
 
@@ -104,27 +124,7 @@ public class Proveedor {
         }
 
         conexion.cerrarConexion(cliente);
+        return listaProveedores;
     }
     
-    public void agregarProveedorALista(Proveedor proveedor) {
-        listaProveedores.add(proveedor);
-    }
-    
-    
-    //PRUEBASSS
-    public void consultarProveedores() {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
-        
-        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
-        MongoCollection<Document> coleccion = db.getCollection("Proveedor");
-
-        FindIterable<Document> iterable = coleccion.find();
-        for (Document documento : iterable) {
-            System.out.println(documento);
-        }
-        
-        conexion.cerrarConexion(cliente);
-    }
-      
 }
