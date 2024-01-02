@@ -7,7 +7,9 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
+import java.awt.BorderLayout;
 import java.awt.Font;
+import javax.swing.JFrame;
 
 /**
  *
@@ -21,13 +23,18 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
      */
     public JF_VerComandaMesa() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);     
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        //TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         customComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         eventComponents();
     }
-        private void customComponents(){
+    private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
+        
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jScrollPane1, BorderLayout.CENTER);
 
 }
 
@@ -181,17 +188,11 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(364, 364, 364)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
         );
 
         pack();

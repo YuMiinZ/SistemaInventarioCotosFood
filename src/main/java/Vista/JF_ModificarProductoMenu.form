@@ -148,7 +148,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="79" green="48" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registrar Producto al Men&#xfa;"/>
+                <Property name="text" type="java.lang.String" value="Modificar Producto al Men&#xfa;"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
