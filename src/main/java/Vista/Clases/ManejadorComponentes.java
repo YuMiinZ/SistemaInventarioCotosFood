@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -18,10 +21,13 @@ public class ManejadorComponentes {
     private List<JLabel> listaLabels;
     private List<JTextField> listaTextos;
     private List<JComboBox> listaCmbox;
+    private List<JSpinner> listaSpinner;
 
     public ManejadorComponentes() {
         listaLabels = new ArrayList<>();
         listaTextos = new ArrayList<>();
+        listaCmbox = new ArrayList<>();
+        listaSpinner = new ArrayList<>();
     }
 
     public void agregarLabel(JLabel lbl) {
@@ -63,13 +69,23 @@ public class ManejadorComponentes {
         }
     }
     
-    public void asignarComboBox(JComboBox cmbox){
+    public void agregarComboBox(JComboBox cmbox){
         listaCmbox.add(cmbox);
     }
     
     public void limpiarCmbox(){        
         for (JComboBox cmbox : listaCmbox) {
             cmbox.setSelectedIndex(-1);
+        }
+    }
+    
+    public void agregarSpinner(JSpinner spn){
+        listaSpinner.add(spn);
+    }
+    
+    public void limpiarSpinner(){        
+        for (JSpinner spn : listaSpinner) {
+            spn.setValue(0);
         }
     }
 }

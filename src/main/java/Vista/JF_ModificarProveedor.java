@@ -176,6 +176,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblNombre.setText("Nombre");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 470, -1));
 
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,12));
         jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 470, 40));
 
         lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
@@ -206,12 +207,18 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        if(cmboxProveedor.getSelectedIndex()!= -1 ){
-            index = cmboxProveedor.getSelectedIndex();
-            controlador.eliminarProveedor(listaProveedores.get(index).getId());
-            listaProveedores.remove(index);
-            cargarOpciones(-1);
-            JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito");
+        index = cmboxProveedor.getSelectedIndex();
+        if(index!= -1 ){
+            int selectedOption = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el proveedor?", 
+                                                                   null, JOptionPane.YES_NO_OPTION); 
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                controlador.eliminarProveedor(listaProveedores.get(index).getId());
+                listaProveedores.remove(index);
+                cmboxProveedor.removeAllItems();
+                cargarOpciones(-1);
+                JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito");
+            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo.", null, JOptionPane.ERROR_MESSAGE);
         }
@@ -229,13 +236,17 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         index = cmboxProveedor.getSelectedIndex();
-        if(controlador.modificarProveedor(listaProveedores.get(index).getId(), 
-                                                txtNombre.getText(), txtTelefono.getText())){
-            actualizarOpciones();
-            cargarOpciones(index);
-            JOptionPane.showMessageDialog(null, "Modificación exitosa");
+        if (index == -1 ){
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones.", 
+                                          null, JOptionPane.ERROR_MESSAGE);
+        } else {
+            if(controlador.modificarProveedor(listaProveedores.get(index).getId(), 
+                                            txtNombre.getText(), txtTelefono.getText())){
+                    actualizarOpciones();
+                    cargarOpciones(index);
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa");
+            }      
         }
-        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void cargarDatosProveedor(java.awt.event.ActionEvent evt){

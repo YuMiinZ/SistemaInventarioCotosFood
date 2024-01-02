@@ -19,8 +19,8 @@ import org.bson.types.ObjectId;
  */
 public class ControladorProveedor {
 
-    Proveedor consultas = new Proveedor();
-    ManejadorComponentes manejador;
+    private final Proveedor consultas = new Proveedor();
+    private final ManejadorComponentes manejador;
         
 
     public ControladorProveedor (ManejadorComponentes manejador){ 
@@ -72,6 +72,5 @@ public class ControladorProveedor {
     
     public void eliminarProveedor(ObjectId id){
         consultas.eliminarProveedor(id);
-        //obtenerListaProveedores();
     }
 }

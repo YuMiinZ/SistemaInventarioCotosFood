@@ -4,10 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleado;
+import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author yumii
@@ -15,6 +21,7 @@ import java.awt.event.ActionListener;
 public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     
     private MenuBoton menu;
+    private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
 
     /**
      * Creates new form JF_Principal
@@ -52,7 +59,6 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
         lblVacaciones = new javax.swing.JLabel();
-        txtVacaciones = new javax.swing.JTextField();
         lblFechaCarnetAlimentos2 = new javax.swing.JLabel();
         txtFechaCarnetAlimentos = new javax.swing.JTextField();
         lblFechaCarnetAlimentos = new javax.swing.JLabel();
@@ -62,6 +68,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         lblFechaIngreso = new javax.swing.JLabel();
         txtFechaIngreso = new javax.swing.JTextField();
         cmboxTipoSangre = new javax.swing.JComboBox<>();
+        lblErrorNombre = new javax.swing.JLabel();
+        lblErrorVacaciones = new javax.swing.JLabel();
+        lblErrorFechaIngreso = new javax.swing.JLabel();
+        lblErrorFechaCarnetAlimentos = new javax.swing.JLabel();
+        lblErrorAlergias = new javax.swing.JLabel();
+        lblErrorTipoSangre = new javax.swing.JLabel();
+        spnVacaciones = new javax.swing.JSpinner();
+        lblErrorTelefono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -161,14 +175,6 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         lblVacaciones.setText("Vacaciones");
         jPanel1.add(lblVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 720, 470, -1));
 
-        txtVacaciones.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtVacaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVacacionesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 470, 38));
-
         lblFechaCarnetAlimentos2.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblFechaCarnetAlimentos2.setText("carnet de manipulación");
         jPanel1.add(lblFechaCarnetAlimentos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 920, 590, -1));
@@ -218,6 +224,37 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(cmboxTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 610, 470, 40));
 
+        lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorNombre.setText("El nombre no puede estar vacío");
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 460, -1));
+
+        lblErrorVacaciones.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorVacaciones.setText("La cantidad de vacaciones que posee el empleado debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 810, 540, -1));
+
+        lblErrorFechaIngreso.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFechaIngreso.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel1.add(lblErrorFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 810, 460, -1));
+
+        lblErrorFechaCarnetAlimentos.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFechaCarnetAlimentos.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel1.add(lblErrorFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 1010, 460, -1));
+
+        lblErrorAlergias.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorAlergias.setText("El campo de alergias no puede estar vacía");
+        jPanel1.add(lblErrorAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 490, 460, -1));
+
+        lblErrorTipoSangre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTipoSangre.setText("Debe de seleccionar el tipo de sangre");
+        jPanel1.add(lblErrorTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 650, 460, -1));
+
+        spnVacaciones.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 470, 40));
+
+        lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTelefono.setText("El número telefónico debe ser de 8 números");
+        jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 650, 460, -1));
+
         jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,16 +262,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(420, 420, 420)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1857, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,6 +277,16 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        ControladorEmpleado controlador = new ControladorEmpleado(manejadorComponentes);
+        try {
+            if(controlador.registrarEmpleado(txtNombre.getText(), txtTelefono.getText(), (int) spnVacaciones.getValue(), txtFechaCarnetAlimentos.getText(),
+                    txtAlergias.getText(), cmboxTipoSangre.getSelectedItem(), txtFechaIngreso.getText())){
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
+            }
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(JF_RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -250,11 +295,8 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void txtVacacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVacacionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVacacionesActionPerformed
 
     private void txtFechaCarnetAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCarnetAlimentosActionPerformed
         // TODO add your handling code here:
@@ -275,6 +317,27 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
         pack();
+
+        manejadorComponentes.agregarLabel(lblErrorNombre);
+        manejadorComponentes.agregarLabel(lblErrorTelefono);
+        manejadorComponentes.agregarLabel(lblErrorVacaciones);
+        manejadorComponentes.agregarLabel(lblErrorFechaCarnetAlimentos);
+        manejadorComponentes.agregarLabel(lblErrorAlergias);
+        manejadorComponentes.agregarLabel(lblErrorTipoSangre);
+        manejadorComponentes.agregarLabel(lblErrorFechaIngreso);
+        
+
+
+        manejadorComponentes.agregarText(txtNombre);
+        manejadorComponentes.agregarText(txtTelefono);  
+        manejadorComponentes.agregarText(txtFechaCarnetAlimentos);
+        manejadorComponentes.agregarText(txtAlergias);
+        manejadorComponentes.agregarText(txtFechaIngreso);
+        
+        manejadorComponentes.ocultarLabels();
+        manejadorComponentes.agregarComboBox(cmboxTipoSangre);
+        
+        manejadorComponentes.agregarSpinner(spnVacaciones);
 }
 
     
@@ -287,13 +350,6 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-            }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -352,6 +408,13 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlergias;
     private javax.swing.JLabel lblCotosFood;
+    private javax.swing.JLabel lblErrorAlergias;
+    private javax.swing.JLabel lblErrorFechaCarnetAlimentos;
+    private javax.swing.JLabel lblErrorFechaIngreso;
+    private javax.swing.JLabel lblErrorNombre;
+    private javax.swing.JLabel lblErrorTelefono;
+    private javax.swing.JLabel lblErrorTipoSangre;
+    private javax.swing.JLabel lblErrorVacaciones;
     private javax.swing.JLabel lblFechaCarnetAlimentos;
     private javax.swing.JLabel lblFechaCarnetAlimentos2;
     private javax.swing.JLabel lblFechaIngreso;
@@ -360,11 +423,11 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lblTipoSangre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVacaciones;
+    private javax.swing.JSpinner spnVacaciones;
     private javax.swing.JTextField txtAlergias;
     private javax.swing.JTextField txtFechaCarnetAlimentos;
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtVacaciones;
     // End of variables declaration//GEN-END:variables
 }

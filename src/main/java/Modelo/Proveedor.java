@@ -21,8 +21,7 @@ public class Proveedor {
     private ObjectId id;
     private String nombre, telefono;
     
-    public Proveedor() {
-    }
+    public Proveedor() {}
 
     public Proveedor(String nombre, String telefono) {
         this.nombre = nombre;
