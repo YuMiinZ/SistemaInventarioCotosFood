@@ -6,6 +6,8 @@ package Vista;
 
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -181,11 +183,15 @@ public class JF_Inventario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,10 +211,10 @@ public class JF_Inventario extends javax.swing.JFrame {
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla();
+        DefaultTableModel model = llenarTabla3columnas("Editar producto inventario", "Editar");
         TablaPersonalizada.setTableProperties(tableInventario, model, true);
         
-        tableInventario.getColumn("Editar").setCellEditor(new JF_Inventario.ButtonEditor(new JCheckBox()));
+        tableInventario.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableInventario, "Editar producto inventario", this)); // Hay que cambiarlo por el valor de la columna
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -217,18 +223,7 @@ public class JF_Inventario extends javax.swing.JFrame {
 
     }
     
-    private DefaultTableModel llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
-        model.addColumn("Columna 2");
-        model.addColumn("Editar");
 
-        model.addRow(new Object[]{"Arroz", "300 gramos", "Editar"});
-        model.addRow(new Object[]{"Frijoles", "300 gramos", "Editar"});
-        model.addRow(new Object[]{"Leche", "3 cajas", "Editar"});
-
-        return model;
-    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
@@ -263,51 +258,6 @@ public class JF_Inventario extends javax.swing.JFrame {
         }
     }
     
-
-    // Clase para definir la acción al hacer clic en el botón de la celda
-    class ButtonEditor extends DefaultCellEditor {
-        protected JButton button;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton("Editar");
-            button.setOpaque(true);
-
-            button.addActionListener(e -> {
-                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
-                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
-                }*/
-                JOptionPane.showMessageDialog(
-                null,
-                "Fila seleccionada: " + tableInventario.convertRowIndexToModel(tableInventario.getEditingRow()));
-                abrirVentana(tableInventario.getEditingRow());
-            });
-            button.setFocusPainted(false);
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            return button;
-        }
-        
-        @Override
-        public Object getCellEditorValue() {
-            return button.getText();
-        }
-    }
-    
-    private void abrirVentana(int dato){
-        try {
-            JF_ModificarProductoInventario ventanaModificarProducto = new JF_ModificarProductoInventario(dato);
-            ventanaModificarProducto.setVisible(true);
-            this.dispose(); 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
-        }
-    }
 
     
     /**

@@ -9,8 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -36,15 +39,16 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        DefaultTableModel model = new DefaultTableModel();
-        jTable1.setModel(model);
+        //DefaultTableModel model = new DefaultTableModel();
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla3columnas("Ver Comanda empleado","Ver mas");
+        TablaPersonalizada.setTableProperties(jTable1, model, true);
         
+        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda empleado", this));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
         pack();
-        //TablaPersonalizada.setTableProperties(jTable1, true);
         
     }
     private void eventComponents() {
@@ -59,6 +63,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,17 +221,15 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1964, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 65, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2095, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,7 +300,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ComandasEmpleado("Juan").setVisible(true);
+                new JF_ComandasEmpleado(args[0]).setVisible(true);
             }
         });
     }

@@ -6,6 +6,8 @@ package Vista;
 
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -213,28 +215,17 @@ public class JF_Menu extends javax.swing.JFrame {
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla();
+        DefaultTableModel model = llenarTabla2columnas("Editar producto Menu", "Editar");
         TablaPersonalizada.setTableProperties(tableMenu, model, true);
         
-        tableMenu.getColumn("Editar").setCellEditor(new JF_Menu.ButtonEditor(new JCheckBox()));
+        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, "Editar producto Menu", this));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
         pack();
     }
-    
-    private DefaultTableModel llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
-        model.addColumn("Editar");
 
-        model.addRow(new Object[]{"Dato 1", "Editar"});
-        model.addRow(new Object[]{"Dato 2", "Editar"});
-        model.addRow(new Object[]{"Dato 3", "Editar"});
-
-        return model;
-    }
 
     
     private void eventComponents() {
@@ -272,50 +263,6 @@ public class JF_Menu extends javax.swing.JFrame {
     }
 
     // Clase para definir la acción al hacer clic en el botón de la celda
-    class ButtonEditor extends DefaultCellEditor {
-        protected JButton button;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton("Editar");
-            button.setOpaque(true);
-
-            button.addActionListener(e -> {
-                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
-                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
-                }*/
-                JOptionPane.showMessageDialog(
-                null,
-                "Fila seleccionada: " + tableMenu.convertRowIndexToModel(tableMenu.getEditingRow()));
-                abrirVentana(tableMenu.getEditingRow());
-                
-            });
-            button.setFocusPainted(false);
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            return button;
-        }
-        
-        @Override
-        public Object getCellEditorValue() {
-            return button.getText();
-        }
-    }
-    
-    private void abrirVentana(int dato){
-        try {
-            JF_ModificarProductoMenu ventanaModificarProducto = new JF_ModificarProductoMenu(dato);
-            ventanaModificarProducto.setVisible(true);
-            this.dispose(); 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Maneja cualquier excepción que pueda ocurrir al crear la ventana
-        }
-    }
     
     /**
      * @param args the command line arguments

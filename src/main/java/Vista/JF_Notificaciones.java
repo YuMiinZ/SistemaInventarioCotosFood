@@ -6,6 +6,8 @@ package Vista;
 
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -163,14 +165,15 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,27 +188,15 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla();
+        DefaultTableModel model = llenarTabla2columnas("Notificaciones", "Eliminar");
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
-        tableNotificacion.getColumn("Eliminar").setCellEditor(new JF_Notificaciones.ButtonEditor(new JCheckBox()));
+        tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, "Notificaciones", this));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
         pack();
-    }
-    
-    private DefaultTableModel llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
-        model.addColumn("Eliminar");
-
-        model.addRow(new Object[]{"Vencimiento próximo carné de manipulación de alimentos Juan Mora el 24-12-2023", "Eliminar"});
-        model.addRow(new Object[]{"Dato 2", "Eliminar"});
-        model.addRow(new Object[]{"Dato 3", "Eliminar"});
-
-        return model;
     }
     
     private void eventComponents() {
@@ -230,37 +221,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
     
 
     // Clase para definir la acción al hacer clic en el botón de la celda
-    class ButtonEditor extends DefaultCellEditor {
-        protected JButton button;
 
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton("Eliminar");
-            button.setOpaque(true);
-
-            button.addActionListener(e -> {
-                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
-                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
-                }*/
-                JOptionPane.showMessageDialog(
-                null,
-                "Fila seleccionada: " + tableNotificacion.convertRowIndexToModel(tableNotificacion.getEditingRow()));
-            });
-            button.setFocusPainted(false);
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            return button;
-        }
-        
-        @Override
-        public Object getCellEditorValue() {
-            return button.getText();
-        }
-    }
 
     
     /**

@@ -187,7 +187,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 950, 580));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1780, 910));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
