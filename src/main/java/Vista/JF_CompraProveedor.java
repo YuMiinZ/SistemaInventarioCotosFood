@@ -6,6 +6,7 @@ package Vista;
 
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -201,7 +202,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
 
 
        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-       DefaultTableModel model = llenarTabla();
+       DefaultTableModel model = llenarTabla2columnas("CompraProveedor", "₡300");
        TablaPersonalizada.setTableProperties(tableCompraProveedor, model, false);
        
        getContentPane().setLayout(new BorderLayout());
@@ -209,18 +210,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         
         pack();
     }
-    
-    private DefaultTableModel llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
-        model.addColumn("Columna 2");
 
-        model.addRow(new Object[]{"Pollo", "₡300"});
-        model.addRow(new Object[]{"Frijoles", "₡300"});
-        model.addRow(new Object[]{"Leche", "₡95598"});
-
-        return model;
-    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {

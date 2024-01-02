@@ -110,7 +110,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
-        lblTitulo.setText("Registrar Producto al Menú");
+        lblTitulo.setText("Modificar Producto al Menú");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(57, 145, 151));

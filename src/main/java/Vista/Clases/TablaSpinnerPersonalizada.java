@@ -59,7 +59,31 @@ public class TablaSpinnerPersonalizada {
             return spinner;
         }
     }
+    // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
+    public static DefaultTableModel llenarTabla2columnas(String nombreMenu, String Text) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn(Text);
 
+        model.addRow(new Object[]{"Vencimiento próximo carné de manipulación de alimentos Juan Mora el 24-12-2023", Text});
+        model.addRow(new Object[]{"Dato 2", Text});
+        model.addRow(new Object[]{"Dato 3", Text});
+
+        return model;
+    }
+    
+     public static DefaultTableModel llenarTabla3columnas(String nombreMenu, String Text) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+        model.addColumn(Text);
+
+        model.addRow(new Object[]{"Arroz", "300 gramos", Text});
+        model.addRow(new Object[]{"Frijoles", "300 gramos", Text});
+        model.addRow(new Object[]{"Leche", "3 cajas", Text});
+
+        return model;
+    }
     public static void setCellBorders(JTable table) {
         table.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
     }
@@ -73,4 +97,39 @@ public class TablaSpinnerPersonalizada {
         }
         
     }
+    public static class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad) {
+            super(checkBox);
+            button = new JButton(Text);
+            button.setOpaque(true);
+
+            button.addActionListener(e -> {
+                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
+                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
+                }*/
+                MenuBoton opcion = new MenuBoton(0, 0, dad);
+                opcion.abrirVentanas(NombreTabla, tabla.convertRowIndexToModel(tabla.getEditingRow()));
+                /*JOptionPane.showMessageDialog(
+                null,
+                "Fila seleccionada: " + tabla.convertRowIndexToModel(tabla.getEditingRow()));*/
+            });
+            button.setFocusPainted(false);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+        
+        @Override
+        public Object getCellEditorValue() {
+            return button.getText();
+        }
+        
+    }
 }
+    

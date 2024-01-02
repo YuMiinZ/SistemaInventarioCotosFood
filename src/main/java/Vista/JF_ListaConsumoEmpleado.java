@@ -8,8 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
+import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import javax.swing.JCheckBox;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,9 +37,13 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        //TablaPersonalizada.setTableProperties(jTable1, true);
         
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = llenarTabla2columnas("Comandas empleado", "Ver mas");
+        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        
+        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Comandas empleado", this));
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -50,6 +58,13 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
+            }
+            
+        });
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -106,7 +121,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1813, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +156,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1951, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +181,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1951, 983));
