@@ -67,7 +67,6 @@ Vista\JF_RegistrarProductoInventario$2.class
 Vista\JF_ComandasEmpleado$4.class
 Vista\JF_Notificaciones$1.class
 Vista\JF_VerComandaMesa$6.class
-CotosFood_SistemaInventario.class
 Vista\JF_VerComandaEmpleado$2.class
 Controlador\ControladorEmpleado.class
 Vista\JF_RegistrarProductoMenu$4.class
@@ -119,6 +118,7 @@ Vista\JF_Menu$1.class
 Vista\JF_NuevaComanda$6.class
 Vista\JF_CompraDia$3.class
 Vista\JF_RegistrarEmpleado$6.class
+Modelo\ProductoInventario.class
 Vista\JF_ComandasEmpleado$5.class
 Vista\JF_ModificarEmpleado$6.class
 Vista\JF_RegistrarEmpleado.class

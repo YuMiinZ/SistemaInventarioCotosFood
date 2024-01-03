@@ -1,6 +1,7 @@
 package Vista.Clases;
 
 
+import Modelo.ProductoInventario;
 import Vista.JF_ComandasEmpleado;
 import Vista.JF_ComandasMesa;
 import Vista.JF_CompraDia;
@@ -199,7 +200,7 @@ public final class MenuBoton extends JPopupMenu{
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance((String) dato.toString());
             }
             else if (ventanaClass.equals(JF_ModificarProductoInventario.class) || ventanaClass.equals(JF_ModificarProductoMenu.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(int.class).newInstance((int) dato);
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoInventario.class).newInstance((ProductoInventario) dato);
             }
             else{
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor().newInstance();
