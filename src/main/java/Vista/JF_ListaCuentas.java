@@ -38,7 +38,8 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         DefaultTableModel model = llenarTabla2columnas("Comandas mesa", "Editar");
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
-        jTable1.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", jTable1, "Comandas mesa", this));
+        jTable1.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", jTable1, 
+                "Comandas mesa", this, null));
 
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);

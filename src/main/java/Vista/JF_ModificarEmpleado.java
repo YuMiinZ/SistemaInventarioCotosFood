@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ControladorEmpleado;
 import Modelo.Empleado;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,8 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     private final ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
     private final ControladorEmpleado controlador = new ControladorEmpleado(manejadorComponentes);
     private java.util.List<Empleado> listaEmpleados;
-    
+    private FuncionesGenerales funciones = new FuncionesGenerales();
+
     /**
      * Creates new form JF_Principal
      */
@@ -430,19 +432,21 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         cargarOpciones(-1);
     }
     
+    private void agregarOpciones(){
+        for (Empleado emp : listaEmpleados) {
+            cmboxEmpleado.addItem(emp.getNombre()); 
+        }
+    }
+    
     private void cargarOpciones(int index){
         cmboxEmpleado.removeAllItems();
         if(index == -1){
             listaEmpleados = controlador.obtenerListaEmpleados(); 
-            for (Empleado emp : listaEmpleados) {
-                cmboxEmpleado.addItem(emp.getNombre()); 
-            }
+            agregarOpciones();
             manejadorComponentes.limpiarCamposTexto();
             cmboxEmpleado.setSelectedIndex(-1);
         } else {
-            for (Empleado emp : listaEmpleados) {
-                cmboxEmpleado.addItem(emp.getNombre()); 
-            }
+            agregarOpciones();
             cmboxEmpleado.setSelectedIndex(index);
         }
     }
@@ -491,12 +495,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
             }
             
             String tipoSangreSeleccionado = listaEmpleados.get(selectedIndex).getTipoSangre();
-            for (int i = 0; i < cmboxTipoSangre.getItemCount(); i++) {
-                if (cmboxTipoSangre.getItemAt(i).equals(tipoSangreSeleccionado)) {
-                    cmboxTipoSangre.setSelectedIndex(i);
-                    break;
-                }
-            }
+            funciones.seleccionarEnComboBox(cmboxTipoSangre, tipoSangreSeleccionado);
         }
     }
     

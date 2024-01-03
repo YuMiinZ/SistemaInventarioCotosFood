@@ -191,7 +191,8 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         DefaultTableModel model = llenarTabla2columnas("Notificaciones", "Eliminar");
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
-        tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, "Notificaciones", this));
+        tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, 
+                "Notificaciones", this, null));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);

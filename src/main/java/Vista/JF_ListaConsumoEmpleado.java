@@ -42,7 +42,8 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         DefaultTableModel model = llenarTabla2columnas("Comandas empleado", "Ver mas");
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Comandas empleado", this));
+        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, 
+                "Comandas empleado", this, null));
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);

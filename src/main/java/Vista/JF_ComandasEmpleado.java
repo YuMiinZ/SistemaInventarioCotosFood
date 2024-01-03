@@ -41,10 +41,10 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         //DefaultTableModel model = new DefaultTableModel();
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas("Ver Comanda empleado","Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda empleado", this));
+        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda empleado", this, null));
         
         
         getContentPane().setLayout(new BorderLayout());

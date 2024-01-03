@@ -42,10 +42,11 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas("Ver Comanda mesa","Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda mesa", this));
+        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, 
+                "Ver Comanda mesa", this, null));
 
         
         getContentPane().setLayout(new BorderLayout());

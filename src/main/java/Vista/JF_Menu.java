@@ -218,7 +218,8 @@ public class JF_Menu extends javax.swing.JFrame {
         DefaultTableModel model = llenarTabla2columnas("Editar producto Menu", "Editar");
         TablaPersonalizada.setTableProperties(tableMenu, model, true);
         
-        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, "Editar producto Menu", this));
+        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, 
+                "Editar producto Menu", this, null));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);

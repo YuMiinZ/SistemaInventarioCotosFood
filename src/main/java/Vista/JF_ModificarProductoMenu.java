@@ -70,6 +70,8 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         tableIngredientes = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        cmboxTipoProducto = new javax.swing.JComboBox<>();
+        lblTipoProducto = new javax.swing.JLabel();
 
         cmboxIngredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {null, "Arroz", "Frijoles", "Tomate", "Lechuga" }));
 
@@ -110,7 +112,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
-        lblTitulo.setText("Registrar Producto al Menú");
+        lblTitulo.setText("Modificar Producto al Menú");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
@@ -231,6 +233,20 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 900, 199, 50));
 
+        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
+        cmboxTipoProducto.setSelectedIndex(-1);
+        cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxTipoProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmboxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 1000, 470, 40));
+
+        lblTipoProducto.setFont(new Font ("Montserrat", Font.BOLD,34));
+        lblTipoProducto.setText("Tipo Producto");
+        jPanel1.add(lblTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 950, 470, -1));
+
         jScrollPane2.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,16 +254,16 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(550, 550, 550)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1947, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -276,6 +292,10 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void cmboxTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmboxTipoProductoActionPerformed
 
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
@@ -426,6 +446,7 @@ private DefaultTableModel llenarTabla() {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmboxEstado;
     private javax.swing.JComboBox<String> cmboxIngredientes;
+    private javax.swing.JComboBox<String> cmboxTipoProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -436,6 +457,7 @@ private DefaultTableModel llenarTabla() {
     private javax.swing.JLabel lblIngredientes;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblTipoProducto;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JSpinner spnCostoElaboracion;
     private javax.swing.JSpinner spnPrecio;

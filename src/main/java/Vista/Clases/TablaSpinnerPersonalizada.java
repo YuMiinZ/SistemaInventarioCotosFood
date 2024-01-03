@@ -19,7 +19,7 @@ public class TablaSpinnerPersonalizada {
 
         public SpinnerEditor() {
             super(new JTextField());
-            spinner = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+            spinner = new JSpinner(new SpinnerNumberModel(0.0d, null, null, 1.0d));
             ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setHorizontalAlignment(JTextField.RIGHT);
             editorComponent = spinner;
             delegate = new DefaultCellEditor.EditorDelegate() {
@@ -47,7 +47,7 @@ public class TablaSpinnerPersonalizada {
 
         public SpinnerRenderer() {
             super();
-            spinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+            spinner.setModel(new SpinnerNumberModel(0.0d, null, null, 1.0d));
             spinner.setBorder(null);
             spinner.setFocusable(false);
             spinner.setOpaque(true);
@@ -72,15 +72,15 @@ public class TablaSpinnerPersonalizada {
         return model;
     }
     
-     public static DefaultTableModel llenarTabla3columnas(String nombreMenu, String Text) {
+     public static DefaultTableModel llenarTabla3columnas(java.util.List<String[]> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn("Columna 2");
         model.addColumn(Text);
 
-        model.addRow(new Object[]{"Arroz", "300 gramos", Text});
-        model.addRow(new Object[]{"Frijoles", "300 gramos", Text});
-        model.addRow(new Object[]{"Leche", "3 cajas", Text});
+        for (String[] dato : datos) {
+            model.addRow(new Object[]{dato[0], dato[1], Text});
+        }
 
         return model;
     }
@@ -100,7 +100,7 @@ public class TablaSpinnerPersonalizada {
     public static class ButtonEditor extends DefaultCellEditor {
         protected JButton button;
 
-        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad) {
+        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad, java.util.List<Object> lista) {
             super(checkBox);
             button = new JButton(Text);
             button.setOpaque(true);
@@ -112,7 +112,7 @@ public class TablaSpinnerPersonalizada {
                     ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
                 }*/
                 MenuBoton opcion = new MenuBoton(0, 0, dad);
-                opcion.abrirVentanas(NombreTabla, tabla.convertRowIndexToModel(tabla.getEditingRow()));
+                opcion.abrirVentanas(NombreTabla, lista.get(tabla.convertRowIndexToModel(tabla.getEditingRow())));
                 /*JOptionPane.showMessageDialog(
                 null,
                 "Fila seleccionada: " + tabla.convertRowIndexToModel(tabla.getEditingRow()));*/

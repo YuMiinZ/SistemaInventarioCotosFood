@@ -4,10 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoInventario;
+import Controlador.ControladorProveedor;
+import Modelo.Proveedor;
+import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 /**
  *
  * @author yumii
@@ -15,7 +21,10 @@ import java.awt.event.ActionListener;
 public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     
     private MenuBoton menu;
+    private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
+    private final ControladorProveedor controladorProveedor = new ControladorProveedor(manejadorComponentes);
 
+    private java.util.List<Proveedor> listaProveedores;
 
     /**
      * Creates new form JF_Principal
@@ -54,7 +63,6 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         lblPrecio = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
         lblCantMinima = new javax.swing.JLabel();
-        txtCantMinima = new javax.swing.JTextField();
         lblDiaCompra = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         cmboxEstado = new javax.swing.JComboBox<>();
@@ -64,6 +72,15 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         cmboxProveedor = new javax.swing.JComboBox<>();
         cmboxDiaCompra = new javax.swing.JComboBox<>();
         spnCantidad = new javax.swing.JSpinner();
+        lblErrorCantidadMinima = new javax.swing.JLabel();
+        lblErrorNombre = new javax.swing.JLabel();
+        lblErrorProveedor = new javax.swing.JLabel();
+        lblErrorPrecio = new javax.swing.JLabel();
+        lblErrorCantidad = new javax.swing.JLabel();
+        lblErrorEstado = new javax.swing.JLabel();
+        lblErrorDiaCompra = new javax.swing.JLabel();
+        lblErrorUnidadMedida = new javax.swing.JLabel();
+        spnCantidadMinima = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -163,9 +180,6 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         lblCantMinima.setText("Cantidad Mínima");
         jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 350, 470, -1));
 
-        txtCantMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 400, 470, 38));
-
         lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblDiaCompra.setText("Día de Compra");
         jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 510, 470, -1));
@@ -174,6 +188,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         lblEstado.setText("Estado");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 670, 470, -1));
 
+        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,12));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
         cmboxEstado.setSelectedIndex(-1);
         cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +211,10 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 830, 510, -1));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 720, 470, 40));
 
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,12));
         cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmboxProveedorActionPerformed(evt);
@@ -206,6 +222,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         });
         jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 470, 40));
 
+        cmboxDiaCompra.setFont(new Font ("Montserrat", Font.PLAIN,12));
         cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
         cmboxDiaCompra.setSelectedIndex(-1);
         cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +235,41 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
         jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 880, 470, 40));
 
+        lblErrorCantidadMinima.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorCantidadMinima.setText("La cantidad mínima del producto debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 440, 460, -1));
+
+        lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorNombre.setText("El nombre no puede estar vacío");
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 460, -1));
+
+        lblErrorProveedor.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorProveedor.setText("Debe de seleccionar el proveedor");
+        jPanel1.add(lblErrorProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 460, -1));
+
+        lblErrorPrecio.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorPrecio.setText("El precio debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 760, 460, -1));
+
+        lblErrorCantidad.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorCantidad.setText("La cantidad debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 920, 460, -1));
+
+        lblErrorEstado.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorEstado.setText("Debe de seleccionar el estado del producto");
+        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 760, 460, -1));
+
+        lblErrorDiaCompra.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorDiaCompra.setText("Debe de seleccionar el día de compra programado para el producto");
+        jPanel1.add(lblErrorDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 600, 460, -1));
+
+        lblErrorUnidadMedida.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorUnidadMedida.setText("La unidad de medida no puede estar vacía");
+        jPanel1.add(lblErrorUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 920, 460, -1));
+
+        spnCantidadMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 400, 470, 40));
+
         jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,14 +278,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1942, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1034, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -242,10 +294,18 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        ControladorProductoInventario controlador = new ControladorProductoInventario(manejadorComponentes);
+        if (controlador.registrarProductoInventario(txtNombre.getText(), cmboxProveedor.getSelectedIndex(), (double) spnPrecio.getValue(), 
+                                                    (int) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
+                                                    cmboxDiaCompra.getSelectedItem(), cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), 
+                                                    listaProveedores)) {
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        regresar();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
@@ -269,10 +329,45 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
-        
         pack();
-}
 
+        manejadorComponentes.agregarLabel(lblErrorNombre);
+        manejadorComponentes.agregarLabel(lblErrorProveedor);
+        manejadorComponentes.agregarLabel(lblErrorPrecio);
+        manejadorComponentes.agregarLabel(lblErrorCantidad);
+        manejadorComponentes.agregarLabel(lblErrorCantidadMinima);
+        manejadorComponentes.agregarLabel(lblErrorDiaCompra);
+        manejadorComponentes.agregarLabel(lblErrorEstado);
+        manejadorComponentes.agregarLabel(lblErrorUnidadMedida);
+        manejadorComponentes.ocultarLabels();
+        
+        manejadorComponentes.agregarText(txtNombre);
+        manejadorComponentes.agregarText(txtUnidadMedida);
+        
+        manejadorComponentes.agregarComboBox(cmboxProveedor);
+        manejadorComponentes.agregarComboBox(cmboxDiaCompra);
+        manejadorComponentes.agregarComboBox(cmboxEstado);
+        
+        manejadorComponentes.agregarSpinner(spnPrecio);
+        manejadorComponentes.agregarSpinner(spnCantidad);
+        manejadorComponentes.agregarSpinner(spnCantidadMinima);
+        
+        cargarOpciones();
+    }
+    
+    private void agregarOpciones(){
+        cmboxProveedor.removeAllItems();
+        for (Proveedor proveedor : listaProveedores) {
+            cmboxProveedor.addItem(proveedor.getNombre()); 
+        }
+    }
+    
+    private void cargarOpciones(){
+        listaProveedores = controladorProveedor.obtenerListaProveedores(); 
+        agregarOpciones();
+        manejadorComponentes.limpiarCamposTexto();
+        cmboxProveedor.setSelectedIndex(-1);
+    }
     
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
@@ -285,8 +380,6 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 }
             }
         });
-        
-        btnRegresar.addActionListener(e -> { regresar();});
     }
     
     private void regresar(){
@@ -365,6 +458,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblDiaCompra;
+    private javax.swing.JLabel lblErrorCantidad;
+    private javax.swing.JLabel lblErrorCantidadMinima;
+    private javax.swing.JLabel lblErrorDiaCompra;
+    private javax.swing.JLabel lblErrorEstado;
+    private javax.swing.JLabel lblErrorNombre;
+    private javax.swing.JLabel lblErrorPrecio;
+    private javax.swing.JLabel lblErrorProveedor;
+    private javax.swing.JLabel lblErrorUnidadMedida;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
@@ -372,8 +473,8 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUnidadMedida;
     private javax.swing.JSpinner spnCantidad;
+    private javax.swing.JSpinner spnCantidadMinima;
     private javax.swing.JSpinner spnPrecio;
-    private javax.swing.JTextField txtCantMinima;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUnidadMedida;
     // End of variables declaration//GEN-END:variables
