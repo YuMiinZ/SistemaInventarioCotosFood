@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,15 +14,15 @@ import java.awt.event.ActionListener;
  * @author yumii
  */
 public class JF_ModificarProductoInventario extends javax.swing.JFrame {
-    private int dato;
+    private ProductoInventario dato;
     
     private MenuBoton menu;
 
-
     /**
      * Creates new form JF_Principal
+     * @param dato
      */
-    public JF_ModificarProductoInventario(int dato) {
+    public JF_ModificarProductoInventario(ProductoInventario dato) {
         this.dato = dato;
         initComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
@@ -380,7 +381,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProductoInventario(-1).setVisible(true);
+                new JF_ModificarProductoInventario(null).setVisible(true);
             }
         });
     }

@@ -279,19 +279,21 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         
 }
     
+    private void agregarOpciones(){
+        cmboxProveedor.removeAllItems();
+        for (Proveedor proveedor : listaProveedores) {
+            cmboxProveedor.addItem(proveedor.getNombre()); 
+        }
+    }
+    
     private void cargarOpciones(int index){
         if(index == -1){
             listaProveedores = controlador.obtenerListaProveedores(); 
-            for (Proveedor proveedor : listaProveedores) {
-                cmboxProveedor.addItem(proveedor.getNombre()); 
-            }
+            agregarOpciones();
             manejadorComponentes.limpiarCamposTexto();
             cmboxProveedor.setSelectedIndex(-1);
         } else {
-            cmboxProveedor.removeAllItems();
-            for (Proveedor proveedor : listaProveedores) {
-                cmboxProveedor.addItem(proveedor.getNombre()); 
-            }
+            agregarOpciones();
             cmboxProveedor.setSelectedIndex(index);
         }
     }

@@ -12,8 +12,13 @@
             <properties>
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+<<<<<<< HEAD
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>Vista.JF_Principal</exec.mainClass>
+=======
+                <exec.appArgs>s</exec.appArgs>
+                <exec.mainClass>Vista.JF_VerComandaMesa</exec.mainClass>
+>>>>>>> 590254104106f236eda1bad14ef2be81d8360180
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -29,8 +34,8 @@
             <properties>
                 <exec.vmArgs>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
-                <exec.appArgs></exec.appArgs>
-                <exec.mainClass>Vista.JF_Principal</exec.mainClass>
+                <exec.appArgs>s</exec.appArgs>
+                <exec.mainClass>Vista.JF_VerComandaMesa</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -47,9 +52,9 @@
             <properties>
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
-                <exec.mainClass>Vista.JF_Principal</exec.mainClass>
+                <exec.mainClass>Vista.JF_VerComandaMesa</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <exec.appArgs></exec.appArgs>
+                <exec.appArgs>s</exec.appArgs>
             </properties>
         </action>
     </actions>
