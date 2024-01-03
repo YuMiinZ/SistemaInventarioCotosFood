@@ -196,7 +196,7 @@ public final class MenuBoton extends JPopupMenu{
             if (ventanaClass.equals(JF_Reportes.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance(reporte);
             }
-            else if (ventanaClass.equals(JF_ComandasEmpleado.class) || ventanaClass.equals(JF_ComandasMesa.class)){
+            else if (ventanaClass.equals(JF_ComandasEmpleado.class) || ventanaClass.equals(JF_ComandasMesa.class) || ventanaClass.equals(JF_VerComandaEmpleado.class) || ventanaClass.equals(JF_VerComandaMesa.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance((String) dato.toString());
             }
             else if (ventanaClass.equals(JF_ModificarProductoInventario.class) || ventanaClass.equals(JF_ModificarProductoMenu.class)){

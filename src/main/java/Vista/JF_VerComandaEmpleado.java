@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -17,12 +18,15 @@ import java.awt.Font;
  */
 public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
+    private String name;
 
     /**
      * Creates new form ComandaEmpleado
+     * @param name
      */
-    public JF_VerComandaEmpleado() {
+    public JF_VerComandaEmpleado(String name) {
         initComponents();
+        this.name = name;
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
         eventComponents();
@@ -35,6 +39,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
             menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
             menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
             
+            jComboBox1.setModel(new DefaultComboBoxModel(new String[] {name}));
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(jScrollPane1, BorderLayout.CENTER);
 
@@ -132,19 +137,18 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 71, 78));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel2.setText("Empleado");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 329, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 655, 78));
 
         jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
@@ -180,7 +184,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel3.setText("Mesa: ");
+        jLabel3.setText("Comanda: ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
 
         jScrollPane1.setViewportView(jPanel1);
@@ -194,12 +198,10 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        new JF_ComandasEmpleado(name).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -235,7 +237,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaEmpleado().setVisible(true);
+                new JF_VerComandaEmpleado(args[0]).setVisible(true);
             }
         });
     }

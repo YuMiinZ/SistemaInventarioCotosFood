@@ -263,7 +263,11 @@
                         <Column editable="true" title="Title 1" type="java.lang.String"/>
                       </Table>
                     </Property>
+                    <Property name="requestFocusEnabled" type="boolean" value="false"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="JF_CompraDia_tableCompraDia"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

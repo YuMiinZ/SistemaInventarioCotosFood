@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
 /**
@@ -17,12 +18,15 @@ import javax.swing.JFrame;
  */
 public class JF_VerComandaMesa extends javax.swing.JFrame {
     private MenuBoton menu;
+    private String name;
 
     /**
      * Creates new form ComandaEmpleado
+     * @param name
      */
-    public JF_VerComandaMesa() {
+    public JF_VerComandaMesa(String name) {
         initComponents();
+        this.name = name;
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         //TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         customComponents();
@@ -32,7 +36,8 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        
+        jComboBox1.setModel(new DefaultComboBoxModel(new String[] {name}));
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
@@ -82,7 +87,6 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(2070, 1080));
-        setPreferredSize(new java.awt.Dimension(2070, 1080));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,11 +147,6 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
         jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 398, 655, 78));
 
         jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
@@ -188,7 +187,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 674, 642, 249));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 600, 642, 249));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -214,16 +213,14 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        new JF_ComandasMesa(name).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -263,7 +260,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaMesa().setVisible(true);
+                new JF_VerComandaMesa(args[0]).setVisible(true);
             }
         });
     }

@@ -166,6 +166,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableCompraDia.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(tableCompraDia);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 1070, 460));
@@ -204,7 +205,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
+
         pack();
     }
     
