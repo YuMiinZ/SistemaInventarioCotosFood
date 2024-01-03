@@ -35,7 +35,6 @@ Vista\JF_RegistrarEmpleado$5.class
 Vista\JF_ListaConsumoEmpleado$1.class
 Vista\JF_ComandasMesa$1.class
 Vista\JF_CompraDia$2.class
-Vista\JF_VerComandaEmpleado$5.class
 Vista\JF_ModificarProductoMenu$1.class
 Vista\JF_ListaConsumoEmpleado$2.class
 Vista\JF_ListaCuentas.class
@@ -44,7 +43,6 @@ Vista\JF_Principal$2.class
 Vista\JF_NuevaComandaEmpleado$6.class
 Vista\JF_NuevaComanda$4.class
 Vista\JF_ListaConsumoEmpleado.class
-Vista\JF_Notificaciones$ButtonEditor.class
 Vista\Clases\ManejadorComponentes.class
 Vista\JF_ModificarEmpleado$8.class
 Vista\JF_NuevaComanda$1.class
@@ -68,6 +66,7 @@ Vista\JF_ComandasMesa$6.class
 Vista\JF_RegistrarProductoInventario$2.class
 Vista\JF_ComandasEmpleado$4.class
 Vista\JF_Notificaciones$1.class
+Vista\JF_VerComandaMesa$6.class
 CotosFood_SistemaInventario.class
 Vista\JF_VerComandaEmpleado$2.class
 Controlador\ControladorEmpleado.class

@@ -45,8 +45,10 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
         jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda empleado", this));
+        
+        
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(jScrollPane1, BorderLayout.CENTER);
+        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
         pack();
         
@@ -99,6 +101,8 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,22 +126,23 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1823, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addContainerGap(2010, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel3)
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, 120));
 
         jButton2.setAutoscrolls(true);
         jButton2.setBorderPainted(false);
@@ -191,9 +196,10 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 323, 1954, -1));
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 131, 610, -1));
+        jLabel2.setText("Prueba");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 610, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -208,7 +214,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1954, 796));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1950, 810));
 
         jLabel1.setFont(new Font("Montserrat", 0, 40));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));

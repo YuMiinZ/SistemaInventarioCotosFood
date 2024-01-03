@@ -23,7 +23,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
      */
     public JF_VerComandaEmpleado() {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
         customComponents();
         eventComponents();
 
@@ -70,7 +70,6 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -80,6 +79,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -89,6 +89,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
         jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel1.setForeground(new java.awt.Color(25, 25, 25));
@@ -112,34 +114,25 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1438, Short.MAX_VALUE))
+                .addContainerGap(1947, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addContainerGap(37, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 143, 71, 78));
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 225, 59));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 71, 78));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel2.setText("Empleado");
@@ -152,7 +145,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 363, 655, 78));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 655, 78));
 
         jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel6.setText("Notas");
@@ -160,7 +153,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 363, 734, 222));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 380, 734, 222));
 
         jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel7.setText("Platillos");
@@ -168,7 +161,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jTextField2.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField2.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 606, 671, 173));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 671, 173));
 
         jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel8.setText("Bebidas");
@@ -176,18 +169,23 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
         jTextField4.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField4.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 874, 671, 173));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 900, 671, 173));
 
         jButton3.setBackground(new java.awt.Color(221, 59, 59));
         jButton3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Eliminar");
         jButton3.setMaximumSize(new java.awt.Dimension(71, 78));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1186, 874, 537, 221));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1186, 1044, 537, 61));
+
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel3.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel3.setText("Mesa: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1780, 910));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2070, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,10 +193,6 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -249,6 +243,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -257,7 +252,6 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
