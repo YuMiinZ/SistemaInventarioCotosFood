@@ -4,6 +4,9 @@
  */
 package Vista.Clases;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -25,6 +28,19 @@ public class FuncionesGenerales {
         }
     }
     
+    public boolean validarFecha(String fecha, int indice, ManejadorComponentes manejadorComponentes) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        formatoFecha.setLenient(false);
+        try {
+            Date fechaConvertida = formatoFecha.parse(fecha);
+             manejadorComponentes.ocultarLabel(indice);
+            return true;
+        } catch (ParseException e) {
+            manejadorComponentes.mostrarLabel(indice);
+            return false;
+        }
+    }
+    
     public boolean validarCampo(Object valor, int indice, ManejadorComponentes manejadorComponentes) {
         boolean esValido = true;
         if (valor == null || valor.toString().isEmpty()) {
@@ -35,6 +51,16 @@ public class FuncionesGenerales {
         }
         return esValido;
     }
+    
+    public boolean validarTelefono(String telefono,int indice, ManejadorComponentes manejadorComponentes) {
+    if (!telefono.matches("\\d{8}")) {
+        manejadorComponentes.mostrarLabel(indice);
+        return false;
+    } else {
+        manejadorComponentes.ocultarLabel(indice);
+        return true;
+    }
+}
     
     public boolean validarNumeroPositivo(double valor, int indice, ManejadorComponentes manejadorComponentes) {
         boolean esValido = true;

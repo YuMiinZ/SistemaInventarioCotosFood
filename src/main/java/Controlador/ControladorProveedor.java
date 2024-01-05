@@ -43,22 +43,12 @@ public class ControladorProveedor {
     
     
     public boolean validarDatos(String nombre, String telefono){
-        if (nombre.isEmpty() && !telefono.matches("\\d{8}")) {
-            manejador.mostrarLabels();
-            return false;
-        } else if (nombre.isEmpty()) {
-            manejador.mostrarLabel(0);
-            manejador.ocultarLabel(1);
-            return false;
-        } else if (!telefono.matches("\\d{8}")) {
-            manejador.mostrarLabel(1);
-            manejador.ocultarLabel(0);
-            return false;
-        } else {
-            manejador.ocultarLabels();
-            return true;
-        }
+        boolean datosValidos = true;
+
+        datosValidos &= funcionesGenerales.validarCampo(nombre, 0, manejador);
+        datosValidos &= funcionesGenerales.validarTelefono(telefono, 1, manejador);
         
+        return datosValidos;
     }
     
     public List<Proveedor> obtenerListaProveedores(){
