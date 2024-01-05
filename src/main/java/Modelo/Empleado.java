@@ -8,7 +8,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.bson.Document;
@@ -182,4 +186,35 @@ public class Empleado {
 
         conexion.cerrarConexion(cliente);
     }
+    
+    public List<String[]> getEmpleadosProximosAVencer() {
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Empleado");
+
+        FindIterable<Document> iterable = coleccion.find();
+        List<String[]> empleadosProximosAVencer = new ArrayList<>();
+
+        LocalDate hoy = LocalDate.now(); 
+
+        for (Document documento : iterable) {
+            String nombreEmpleado = documento.getString("Nombre");
+            LocalDate fechaVencimiento = documento.getDate("Fecha_Vencimiento_Carnet").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            long diffMeses = ChronoUnit.MONTHS.between(hoy, fechaVencimiento);
+
+            if (diffMeses <= 1) {
+                String[] empleado = new String[2];
+                empleado[0] = nombreEmpleado;
+                empleado[1] = fechaVencimiento.toString();
+                empleadosProximosAVencer.add(empleado);
+            }
+        }
+
+        conexion.cerrarConexion(cliente);
+        return empleadosProximosAVencer;
+    }
+
 }

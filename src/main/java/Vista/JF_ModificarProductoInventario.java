@@ -29,15 +29,17 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     private java.util.List<Proveedor> listaProveedores;
     private MenuBoton menu;
     private FuncionesGenerales funciones = new FuncionesGenerales();
+    private java.util.List<String[]> notificaciones;
 
     /**
      * Creates new form JF_Principal
      * @param dato
      */
-    public JF_ModificarProductoInventario(ProductoInventario dato) {
+    public JF_ModificarProductoInventario(ProductoInventario dato, java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         this.dato = dato;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
  
@@ -192,6 +194,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         lblEstado.setText("Estado");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 670, 470, -1));
 
+        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
         cmboxEstado.setSelectedIndex(-1);
         cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +220,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 730, 470, 40));
 
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmboxProveedorActionPerformed(evt);
@@ -225,6 +228,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         });
         jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 470, 40));
 
+        cmboxDiaCompra.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
         cmboxDiaCompra.setSelectedIndex(-1);
         cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +435,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     
     private void regresar(){
         try {
-            JF_Inventario ventana = new JF_Inventario();
+            JF_Inventario ventana = new JF_Inventario(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -501,7 +505,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProductoInventario(null).setVisible(true);
+                new JF_ModificarProductoInventario(null, null).setVisible(true);
             }
         });
     }

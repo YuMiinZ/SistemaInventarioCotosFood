@@ -4,26 +4,35 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoInventario;
+import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import static Vista.Clases.TablaSpinnerPersonalizada.crearColumnas;
+
 /**
  *
  * @author yumii
  */
 public class JF_CompraDia extends javax.swing.JFrame {
     private MenuBoton menu;
-
+    private List<String[]> notificaciones;
+    private final ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario();
+    private List<ProductoInventario> listaProductosInventario = controladorProductoInventario.obtenerListaProductosInventario();
 
     /**
      * Creates new form JF_Principal
      */
-    public JF_CompraDia() {
+    public JF_CompraDia(List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185 , this);     
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185 , this, notificaciones);     
         customComponents();
         eventComponents();
 
@@ -50,7 +59,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblFiltro = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmboxDia = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCompraDia = new javax.swing.JTable();
 
@@ -139,15 +148,15 @@ public class JF_CompraDia extends javax.swing.JFrame {
         lblFiltro.setText("Día");
         jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 70, 30));
 
-        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmboxDia.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxDia.setSelectedIndex(-1);
+        cmboxDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmboxDiaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 270, 30));
+        jPanel1.add(cmboxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 270, 30));
 
         tableCompraDia.setFont(new Font("Montserrat", Font.PLAIN, 20));
         tableCompraDia.setModel(new javax.swing.table.DefaultTableModel(
@@ -188,18 +197,43 @@ public class JF_CompraDia extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmboxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxDiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        String diaSeleccionado = cmboxDia.getSelectedItem().toString();
+        DefaultTableModel model = (DefaultTableModel) tableCompraDia.getModel();
 
+        model.setRowCount(0);
+
+        if (!diaSeleccionado.isEmpty()) {
+            List<String> lista = obtenerListaDatos(diaSeleccionado, listaProductosInventario);
+            for(String dato : lista){
+                model.addRow(new Object[]{dato});
+            }
+        }
+    }//GEN-LAST:event_cmboxDiaActionPerformed
+
+    private List<String> obtenerListaDatos(String dia, List<ProductoInventario> lista){
+        List<String> resultado = new ArrayList<>();;
+        
+        for(ProductoInventario datos : lista){
+            if(datos.getDiaCompra().equals(dia)){
+                resultado.add(datos.getNombre());
+            }
+        }
+            
+        return resultado;
+    }
+    
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
   
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla();
+        DefaultTableModel model = crearColumnas(1);
+
         TablaPersonalizada.setTableProperties(tableCompraDia, model, false);
         
         getContentPane().setLayout(new BorderLayout());
@@ -208,18 +242,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
         pack();
     }
     
-    private DefaultTableModel llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
 
-        model.addRow(new Object[]{"Pollo"});
-        model.addRow(new Object[]{"Frijoles"});
-        model.addRow(new Object[]{"Leche"});
-
-        return model;
-    }
-
-    
     private void eventComponents() {
         btnMenu.addActionListener(new ActionListener() {
             @Override
@@ -232,12 +255,6 @@ public class JF_CompraDia extends javax.swing.JFrame {
             }
         });
         
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
     }
     
     /**
@@ -301,7 +318,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_CompraDia().setVisible(true);
+                new JF_CompraDia(null).setVisible(true);
             }
         });
     }
@@ -312,7 +329,7 @@ public class JF_CompraDia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmboxDia;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

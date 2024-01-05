@@ -4,12 +4,14 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import Vista.Clases.MenuBoton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.List;
 /**
  *
  * @author yumii
@@ -20,12 +22,15 @@ public class JF_Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form JF_Principal
+     * @param listaVecimientoEmpleados
      */
-    public JF_Principal() {
+    public JF_Principal(List<String[]> notificaciones) {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();     
+        
+
     }
 
     /**
@@ -166,11 +171,16 @@ public class JF_Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JF_Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        Empleado consultas = new Empleado();
+        List<String[]> listaVecimientoEmpleados = consultas.getEmpleadosProximosAVencer();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Principal().setVisible(true);
+                new JF_Principal(listaVecimientoEmpleados).setVisible(true);
+                if (!listaVecimientoEmpleados.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Hay nuevas notificaciones, por favor revisar el apartado de notificaciones");
+                }
+
             }
         });
     }

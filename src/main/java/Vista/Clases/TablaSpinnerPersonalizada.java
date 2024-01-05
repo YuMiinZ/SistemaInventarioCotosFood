@@ -62,18 +62,15 @@ public class TablaSpinnerPersonalizada {
         }
     }
     
-    // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
-    public static DefaultTableModel llenarTabla1columnas(List<String> datos, String Text) {
+    public static DefaultTableModel crearColumnas(int cantidad){
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Columna 1");
-
-        for (String dato : datos) {
-            model.addRow(new Object[]{dato});
+        for (int i = 0; i < cantidad; i++) {
+             model.addColumn("Vacio");
         }
-
+        
         return model;
     }
-    
+ 
     // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
     public static DefaultTableModel llenarTabla2columnas(List<String> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
@@ -82,6 +79,19 @@ public class TablaSpinnerPersonalizada {
 
         for (String dato : datos) {
             model.addRow(new Object[]{dato, Text});
+        }
+
+        return model;
+    }
+    
+    // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
+    public static DefaultTableModel llenarTabla2columnas(List<String[]> datos) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+
+        for (String[] dato : datos) {
+            model.addRow(new Object[]{dato[0], dato[1]});
         }
 
         return model;
@@ -115,14 +125,30 @@ public class TablaSpinnerPersonalizada {
     public static class ButtonEditor extends DefaultCellEditor {
         protected JButton button;
 
-        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad, java.util.List<Object> lista) {
+        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad, java.util.List<Object> lista, 
+                            List<String[]> notificaciones) {
             super(checkBox);
             button = new JButton(Text);
             button.setOpaque(true);
 
             button.addActionListener(e -> {
-                MenuBoton opcion = new MenuBoton(0, 0, dad);
-                opcion.abrirVentanas(NombreTabla, lista.get(tabla.convertRowIndexToModel(tabla.getEditingRow())));
+                if(button.getText().equals("Eliminar")){
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", null, JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        int row = tabla.convertRowIndexToModel(tabla.getEditingRow());
+                        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                        model.removeRow(row);
+                        model.fireTableDataChanged();
+                        TableCellEditor editor = tabla.getCellEditor();
+                        if (editor != null) {
+                            editor.cancelCellEditing();
+                        }
+                    }
+                } else {
+                    MenuBoton opcion = new MenuBoton(0, 0, dad, notificaciones);
+                    opcion.abrirVentanas(NombreTabla, lista.get(tabla.convertRowIndexToModel(tabla.getEditingRow())), notificaciones);
+                }
+                
             });
             button.setFocusPainted(false);
         }

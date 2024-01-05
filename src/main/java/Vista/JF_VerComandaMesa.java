@@ -21,9 +21,9 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
     /**
      * Creates new form ComandaEmpleado
      */
-    public JF_VerComandaMesa() {
+    public JF_VerComandaMesa(java.util.List<String[]> notificaciones) {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         //TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         customComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -263,7 +263,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaMesa().setVisible(true);
+                new JF_VerComandaMesa(null).setVisible(true);
             }
         });
     }

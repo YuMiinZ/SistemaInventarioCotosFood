@@ -21,9 +21,9 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form ComandaEmpleado
      */
-    public JF_VerComandaEmpleado() {
+    public JF_VerComandaEmpleado(java.util.List<String[]> notificaciones) {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -231,7 +231,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaEmpleado().setVisible(true);
+                new JF_VerComandaEmpleado(null).setVisible(true);
             }
         });
     }

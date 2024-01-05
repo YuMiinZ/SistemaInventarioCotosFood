@@ -22,13 +22,15 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     
     private MenuBoton menu;
     private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
+    private java.util.List<String[]> notificaciones;
 
     /**
      * Creates new form JF_Principal
      */
-    public JF_RegistrarEmpleado() {
+    public JF_RegistrarEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -214,7 +216,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 770, 470, 38));
 
-        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
         cmboxTipoSangre.setSelectedIndex(-1);
         cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +297,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        menu.regresarVentanaPrincipal();
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtFechaCarnetAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCarnetAlimentosActionPerformed
@@ -391,7 +393,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_RegistrarEmpleado().setVisible(true);
+                new JF_RegistrarEmpleado(null).setVisible(true);
             }
         });
     }

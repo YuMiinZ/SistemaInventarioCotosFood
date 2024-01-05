@@ -18,13 +18,14 @@ import java.awt.event.ActionListener;
 public class JF_RegistrarProveedor extends javax.swing.JFrame {
     private MenuBoton menu;
     private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
-
+    private java.util.List<String[]> notificaciones; 
     /**
      * Creates new form JF_Principal
      */
-    public JF_RegistrarProveedor() {
+    public JF_RegistrarProveedor(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -194,7 +195,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        menu.regresarVentanaPrincipal();
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void customComponents(){
@@ -262,7 +263,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_RegistrarProveedor().setVisible(true);
+                new JF_RegistrarProveedor(null).setVisible(true);
             }
         });
     }

@@ -27,12 +27,15 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
     private final ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario();
     private java.util.List<ProductoInventario> listaProductosInventario;
+    private java.util.List<String[]> notificaciones;
+    
     /**
      * Creates new form JF_Principal
      */
-    public JF_RegistrarProductoMenu() {
+    public JF_RegistrarProductoMenu(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -50,7 +53,6 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
         cmboxIngredientes = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -81,8 +83,6 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         lblErrorEstado = new javax.swing.JLabel();
         lblErrorTipoProducto = new javax.swing.JLabel();
         lblErrorTablaIngredientes = new javax.swing.JLabel();
-
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
 
         cmboxIngredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {null, "Arroz", "Frijoles", "Tomate", "Lechuga" }));
 
@@ -190,7 +190,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         lblEstado.setText("Estado");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 660, 470, -1));
 
-        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
         cmboxEstado.setSelectedIndex(-1);
         cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -237,8 +237,9 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 830, 199, 50));
 
-        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
+        cmboxTipoProducto.setSelectedIndex(-1);
         cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmboxTipoProductoActionPerformed(evt);
@@ -388,16 +389,11 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
 
         DefaultComboBoxModel<String> comboModel = (DefaultComboBoxModel<String>) cmboxIngredientes.getModel();
 
-        /*for (int i = 0; i < comboModel.getSize(); i++) {
-            String item = comboModel.getElementAt(i);
-            model.addRow(new Object[]{item, 0}); // Asumiendo que la cantidad inicial es 0
-        }*/
-
         tableIngredientes.setModel(model);
         tableIngredientes.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(cmboxIngredientes)); // Editor para la columna del JComboBox
         tableIngredientes.getColumnModel().getColumn(1).setCellEditor(new SpinnerEditor()); // Editor para la columna de cantidad con JSpinner
         tableIngredientes.getColumnModel().getColumn(1).setCellRenderer(new SpinnerRenderer()); // Renderizador para la columna de cantidad con JSpinner
-        // Configuración de los bordes
+
         TablaSpinnerPersonalizada.setCellBorders(tableIngredientes);
         return model;
     }
@@ -421,7 +417,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     
     private void regresar(){
         try {
-            JF_Menu ventana = new JF_Menu();
+            JF_Menu ventana = new JF_Menu(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -475,7 +471,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_RegistrarProductoMenu().setVisible(true);
+                new JF_RegistrarProductoMenu(null).setVisible(true);
             }
         });
     }
@@ -495,7 +491,6 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblCostoElaboracion;
     private javax.swing.JLabel lblCotosFood;
     private javax.swing.JLabel lblErrorCostoElaboracion;

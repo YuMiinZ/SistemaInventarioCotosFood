@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,7 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author yumii
@@ -20,15 +23,20 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Notificaciones extends javax.swing.JFrame {
     
     private MenuBoton menu;
-
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_Notificaciones() {
+    public JF_Notificaciones(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();        
+        
+        for(String[] dato : notificaciones){
+            System.out.println("datos: " + dato[0] + " " + dato[1]);
+        }
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
@@ -155,6 +163,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         tableNotificacion.setColumnSelectionAllowed(true);
         tableNotificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tableNotificacion);
+        tableNotificacion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 1070, 460));
 
@@ -183,16 +192,27 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private List<String> concatenarDatos(List<String[]> listaNotificaciones){
+        java.util.List<String> resultados = new ArrayList<>();
+
+        for (String[] datos : listaNotificaciones) {
+            String info = "Vencimiento próximo carné de manipulación de alimentos " + datos[0] + " el " + datos[1];
+            resultados.add(info);
+        }
+
+        return resultados;
+    }
+    
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(null, "Eliminar");
+        DefaultTableModel model = llenarTabla2columnas(concatenarDatos(notificaciones), "Eliminar");
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
         tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, 
-                "Notificaciones", this, null));
+                "Editar producto Menu", this, null, notificaciones));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -215,7 +235,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         btnRegresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
+                menu.regresarVentanaPrincipal(notificaciones);
             }
         });
     }
@@ -270,7 +290,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Notificaciones().setVisible(true);
+                new JF_Notificaciones(null).setVisible(true);
             }
         });
     }

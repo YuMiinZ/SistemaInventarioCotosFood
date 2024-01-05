@@ -21,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;    
-
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Comanda
      */
-    public JF_ListaConsumoEmpleado() {
+    public JF_ListaConsumoEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -43,7 +44,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
         jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, 
-                "Comandas empleado", this, null));
+                "Comandas empleado", this, null, notificaciones));
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -65,7 +66,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
+                menu.regresarVentanaPrincipal(notificaciones);
             }
         });
     }
@@ -214,7 +215,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_Principal().setVisible(true);
+        new JF_Principal(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -279,7 +280,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ListaConsumoEmpleado().setVisible(true);
+                new JF_ListaConsumoEmpleado(null).setVisible(true);
             }
         });
     }

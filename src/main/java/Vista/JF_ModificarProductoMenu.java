@@ -34,15 +34,16 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private final ControladorProductoMenu controladorProductoMenu = new ControladorProductoMenu(manejadorComponentes);
     private java.util.List<ProductoInventario> listaProductosInventario;
     private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
-
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      * @param dato
      */
-    public JF_ModificarProductoMenu(ProductoMenu dato) {
+    public JF_ModificarProductoMenu(ProductoMenu dato, java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         this.dato = dato;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -185,7 +186,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         lblEstado.setText("Estado");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 780, 470, -1));
 
-        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
         cmboxEstado.setSelectedIndex(-1);
         cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +226,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         });
         jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 920, 199, 50));
 
-        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
         cmboxTipoProducto.setSelectedIndex(-1);
         cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -454,7 +455,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     
     private void regresar(){
         try {
-            JF_Menu ventana = new JF_Menu();
+            JF_Menu ventana = new JF_Menu(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -524,7 +525,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProductoMenu(null).setVisible(true);
+                new JF_ModificarProductoMenu(null, null).setVisible(true);
             }
         });
     }

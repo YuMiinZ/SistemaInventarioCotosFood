@@ -25,13 +25,14 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
     private final ControladorProveedor controlador = new ControladorProveedor(manejadorComponentes);
     private java.util.List<Proveedor> listaProveedores;
     private int index;
-
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_ModificarProveedor() {
+    public JF_ModificarProveedor(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -176,7 +177,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblNombre.setText("Nombre");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 470, -1));
 
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,14));
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
         jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 470, 40));
 
         lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
@@ -230,7 +231,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        menu.regresarVentanaPrincipal();
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -361,7 +362,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProveedor().setVisible(true);
+                new JF_ModificarProveedor(null).setVisible(true);
             }
         });
     }

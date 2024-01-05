@@ -74,7 +74,6 @@ Vista\JF_RegistrarProductoMenu$4.class
 Controlador\ControladorProductoInventario.class
 Vista\JF_NuevaComanda$2.class
 Vista\JF_RegistrarProveedor$3.class
-Vista\JF_Inventario$6.class
 Vista\JF_RegistrarProductoInventario$3.class
 Vista\Clases\FuncionesGenerales.class
 Vista\JF_RegistrarProductoMenu$3.class
@@ -137,7 +136,6 @@ Vista\JF_Principal.class
 Modelo\Empleado.class
 Vista\JF_Menu$2.class
 Vista\JF_CompraDia.class
-Vista\JF_CompraProveedor$6.class
 Vista\JF_ListaCuentas$2.class
 Vista\JF_ComandasEmpleado.class
 Vista\JF_ModificarProductoInventario$5.class
@@ -166,7 +164,6 @@ Vista\JF_NuevaComandaEmpleado$1.class
 Vista\JF_RegistrarProveedor.class
 Vista\JF_ListaConsumoEmpleado$5.class
 Vista\JF_ModificarProductoInventario$7.class
-Vista\JF_CompraDia$6.class
 Vista\JF_ModificarEmpleado$11.class
 Vista\JF_CompraProveedor$2.class
 Vista\JF_RegistrarEmpleado$2.class
@@ -185,7 +182,6 @@ Vista\JF_ModificarProductoInventario$8.class
 Modelo\ProductoMenu$Ingrediente.class
 Vista\JF_ModificarEmpleado$10.class
 Vista\JF_ModificarEmpleado$4.class
-Vista\JF_Menu$6.class
 Vista\JF_ModificarProveedor$7.class
 Vista\JF_CompraProveedor$3.class
 Vista\JF_VerComandaMesa$1.class
