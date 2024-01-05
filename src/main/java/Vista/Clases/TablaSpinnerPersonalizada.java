@@ -7,50 +7,52 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
+import java.util.List;
 
 /**
  *
  * @author yumii
  */
 public class TablaSpinnerPersonalizada {
+    
 
-    public static class SpinnerEditor extends DefaultCellEditor {
+    public static class SpinnerEditor extends AbstractCellEditor implements TableCellEditor {
         private final JSpinner spinner;
-
+        private int fila;
+        
         public SpinnerEditor() {
-            super(new JTextField());
-            spinner = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+            spinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 1.0));
             ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setHorizontalAlignment(JTextField.RIGHT);
-            editorComponent = spinner;
-            delegate = new DefaultCellEditor.EditorDelegate() {
-                @Override
-                public void setValue(Object value) {
-                    spinner.setValue(value);
+            spinner.addChangeListener(e -> {
+                if (fila >= 0) {
+                    fireEditingStopped(); // Detiene la edición de la celda
                 }
+            });
+        }
 
-                @Override
-                public Object getCellEditorValue() {
-                    return spinner.getValue();
-                }
-            };
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            fila = row;
+            spinner.setValue(value);
+            return spinner;
         }
 
         @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            spinner.setValue(value);
-            return editorComponent;
+        public Object getCellEditorValue() {
+            return spinner.getValue();
         }
     }
 
+    // Clase SpinnerRenderer
     public static class SpinnerRenderer extends DefaultTableCellRenderer {
-        private final JSpinner spinner = new JSpinner();
+        private final JSpinner spinner;
 
         public SpinnerRenderer() {
-            super();
-            spinner.setModel(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
+            spinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 1.0));
             spinner.setBorder(null);
             spinner.setFocusable(false);
             spinner.setOpaque(true);
+            ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setHorizontalAlignment(JTextField.RIGHT);
         }
 
         @Override
@@ -59,28 +61,51 @@ public class TablaSpinnerPersonalizada {
             return spinner;
         }
     }
+    
+    public static DefaultTableModel crearColumnas(int cantidad){
+        DefaultTableModel model = new DefaultTableModel();
+        for (int i = 0; i < cantidad; i++) {
+             model.addColumn("Vacio");
+        }
+        
+        return model;
+    }
+ 
     // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
-    public static DefaultTableModel llenarTabla2columnas(String nombreMenu, String Text) {
+    public static DefaultTableModel llenarTabla2columnas(List<String> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn(Text);
 
-        model.addRow(new Object[]{"Vencimiento próximo carné de manipulación de alimentos Juan Mora el 24-12-2023", Text});
-        model.addRow(new Object[]{"Dato 2", Text});
-        model.addRow(new Object[]{"Dato 3", Text});
+        for (String dato : datos) {
+            model.addRow(new Object[]{dato, Text});
+        }
 
         return model;
     }
     
-     public static DefaultTableModel llenarTabla3columnas(String nombreMenu, String Text) {
+    // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
+    public static DefaultTableModel llenarTabla2columnas(List<String[]> datos) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+        model.addColumn("Columna 2");
+
+        for (String[] dato : datos) {
+            model.addRow(new Object[]{dato[0], dato[1]});
+        }
+
+        return model;
+    }
+    
+     public static DefaultTableModel llenarTabla3columnas(List<String[]> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn("Columna 2");
         model.addColumn(Text);
 
-        model.addRow(new Object[]{"Arroz", "300 gramos", Text});
-        model.addRow(new Object[]{"Frijoles", "300 gramos", Text});
-        model.addRow(new Object[]{"Leche", "3 cajas", Text});
+        for (String[] dato : datos) {
+            model.addRow(new Object[]{dato[0], dato[1], Text});
+        }
 
         return model;
     }
@@ -100,22 +125,30 @@ public class TablaSpinnerPersonalizada {
     public static class ButtonEditor extends DefaultCellEditor {
         protected JButton button;
 
-        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad) {
+        public ButtonEditor(JCheckBox checkBox, String Text, JTable tabla, String NombreTabla, JFrame dad, java.util.List<Object> lista, 
+                            List<String[]> notificaciones) {
             super(checkBox);
             button = new JButton(Text);
             button.setOpaque(true);
 
             button.addActionListener(e -> {
-                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
-                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
-                }*/
-                MenuBoton opcion = new MenuBoton(0, 0, dad);
-                opcion.abrirVentanas(NombreTabla, tabla.convertRowIndexToModel(tabla.getEditingRow()));
-                /*JOptionPane.showMessageDialog(
-                null,
-                "Fila seleccionada: " + tabla.convertRowIndexToModel(tabla.getEditingRow()));*/
+                if(button.getText().equals("Eliminar")){
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", null, JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        int row = tabla.convertRowIndexToModel(tabla.getEditingRow());
+                        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                        model.removeRow(row);
+                        model.fireTableDataChanged();
+                        TableCellEditor editor = tabla.getCellEditor();
+                        if (editor != null) {
+                            editor.cancelCellEditing();
+                        }
+                    }
+                } else {
+                    MenuBoton opcion = new MenuBoton(0, 0, dad, notificaciones);
+                    opcion.abrirVentanas(NombreTabla, lista.get(tabla.convertRowIndexToModel(tabla.getEditingRow())), notificaciones);
+                }
+                
             });
             button.setFocusPainted(false);
         }

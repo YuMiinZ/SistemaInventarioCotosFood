@@ -20,12 +20,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaCuentas extends javax.swing.JFrame {
     private MenuBoton menu;  
+    private java.util.List<String[]> notificaciones;
     /**
-     * Creates new form JF_Comanda
+     * Creates new form JF_ListaCuentas
+     * @param notificaciones
      */
-    public JF_ListaCuentas() {
+    public JF_ListaCuentas(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -35,10 +38,11 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Comandas mesa", "Editar");
+        DefaultTableModel model = llenarTabla2columnas(null, "Editar");
         TablaPersonalizada.setTableProperties(Cuentas, model, true);
         
-        Cuentas.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", Cuentas, "Comandas mesa", this));
+        Cuentas.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", Cuentas, 
+                "Comandas mesa", this, null, notificaciones));
 
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
@@ -234,13 +238,13 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_Principal().setVisible(true);
+        new JF_Principal(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa("1").setVisible(true);
+        new JF_ComandasMesa("1", notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -401,7 +405,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ListaCuentas().setVisible(true);
+                new JF_ListaCuentas(null).setVisible(true);
             }
         });
     }

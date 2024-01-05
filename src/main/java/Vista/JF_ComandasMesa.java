@@ -21,16 +21,19 @@ import javax.swing.table.DefaultTableModel;
 public class JF_ComandasMesa extends javax.swing.JFrame {
     private MenuBoton menu;
     private String number;
+    private java.util.List<String[]> notificaciones;
 
     /**
-     * Creates new form JF_Comanda
+     * Creates new form JF_ComandasMesa
      * @param Number
+     * @param notificaciones
      */
-    public JF_ComandasMesa(String Number) {
+    public JF_ComandasMesa(String Number, java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
         this.number = Number;
         jLabel3.setText("Mesa: " + this.number);
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);     
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);     
         customComponents();
         eventComponents();
 
@@ -42,10 +45,11 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas("Ver Comanda mesa","Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
-        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda mesa", this));
+        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, 
+                "Ver Comanda mesa", this, null, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -265,13 +269,13 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComanda(this.number).setVisible(true);
+        new JF_NuevaComanda(this.number, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ListaCuentas().setVisible(true);
+        new JF_ListaCuentas(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -336,7 +340,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ComandasMesa(args[0]).setVisible(true);
+                new JF_ComandasMesa(args[0], null).setVisible(true);
             }
         });
     }

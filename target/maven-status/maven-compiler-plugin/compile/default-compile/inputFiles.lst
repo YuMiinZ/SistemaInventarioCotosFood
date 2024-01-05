@@ -1,6 +1,7 @@
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_Notificaciones.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\Clases\MenuBoton.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_ListaConsumoEmpleado.java
+C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\ProductoMenu.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_VerComandaEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_ModificarEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_RegistrarProductoMenu.java
@@ -16,13 +17,16 @@ C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\sr
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\ProductoInventario.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_ComandasEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_Principal.java
+C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorProductoMenu.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorProveedor.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_NuevaComandaEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\Consumo_Cliente.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\Reportes.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_RegistrarEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_VerComandaMesa.java
+C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\Clases\FuncionesGenerales.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_Inventario.java
+C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorProductoInventario.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\Clases\TablaSpinnerPersonalizada.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_ModificarProductoMenu.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\pruebaFunciones.java

@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Empleado;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +19,14 @@ import org.bson.types.ObjectId;
  */
 public class ControladorEmpleado {
     private final Empleado consultas = new Empleado();
-    private final ManejadorComponentes manejador;
-        
+    private ManejadorComponentes manejador;
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
+    public ControladorEmpleado() {
+    }
+        
+    
+    
     public ControladorEmpleado (ManejadorComponentes manejador){ 
         this.manejador = manejador; 
     }
@@ -44,70 +50,20 @@ public class ControladorEmpleado {
        return false;
     }
     
-    public boolean validarFecha(String fecha) {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        formatoFecha.setLenient(false);
-        try {
-            Date fechaConvertida = formatoFecha.parse(fecha);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-    
     public boolean validarDatos(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso){
         
         boolean datosValidos = true;
         
-        if (nombre.isEmpty()) {
-            manejador.mostrarLabel(0);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(0);
-        }
-
-        if (!telefono.matches("\\d{8}")) {
-            manejador.mostrarLabel(1);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(1);
-        }
-
-        if (vacaciones < 0) {
-            manejador.mostrarLabel(2);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(2);
-        }
         
-        if (!validarFecha(fechaVencimientoCarnet)) {
-            manejador.mostrarLabel(3);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(3);
-        }
+        datosValidos &= funcionesGenerales.validarCampo(nombre, 0, manejador);
+        datosValidos &= funcionesGenerales.validarTelefono(telefono, 1, manejador);
+        datosValidos &= funcionesGenerales.validarEnteroPositivo(vacaciones, 2, manejador);
+        datosValidos &= funcionesGenerales.validarFecha(fechaVencimientoCarnet, 3, manejador);
+        datosValidos &= funcionesGenerales.validarCampo(alergias, 4, manejador);
+        datosValidos &= funcionesGenerales.validarCampo(tipoSangre, 5, manejador);
+        datosValidos &= funcionesGenerales.validarFecha(fechaIngreso, 6, manejador);
         
-        if (alergias.isEmpty()) {
-            manejador.mostrarLabel(4);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(4);
-        }
-        
-        if (tipoSangre == null) {
-            manejador.mostrarLabel(5);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(5);
-        }
-        
-        if (!validarFecha(fechaIngreso)) {
-            manejador.mostrarLabel(6);
-            datosValidos = false;
-        } else {
-            manejador.ocultarLabel(6);
-        }
         
         return datosValidos;
     }

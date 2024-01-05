@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Proveedor;
+import Vista.Clases.FuncionesGenerales;
 import Vista.JF_RegistrarProveedor;
 import Vista.Clases.ManejadorComponentes;
 import java.util.List;
@@ -20,9 +21,12 @@ import org.bson.types.ObjectId;
 public class ControladorProveedor {
 
     private final Proveedor consultas = new Proveedor();
-    private final ManejadorComponentes manejador;
-        
+    private ManejadorComponentes manejador;
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
+    public ControladorProveedor() {
+    }
+        
     public ControladorProveedor (ManejadorComponentes manejador){ 
         this.manejador = manejador; 
     }
@@ -39,22 +43,12 @@ public class ControladorProveedor {
     
     
     public boolean validarDatos(String nombre, String telefono){
-        if (nombre.isEmpty() && !telefono.matches("\\d{8}")) {
-            manejador.mostrarLabels();
-            return false;
-        } else if (nombre.isEmpty()) {
-            manejador.mostrarLabel(0);
-            manejador.ocultarLabel(1);
-            return false;
-        } else if (!telefono.matches("\\d{8}")) {
-            manejador.mostrarLabel(1);
-            manejador.ocultarLabel(0);
-            return false;
-        } else {
-            manejador.ocultarLabels();
-            return true;
-        }
+        boolean datosValidos = true;
+
+        datosValidos &= funcionesGenerales.validarCampo(nombre, 0, manejador);
+        datosValidos &= funcionesGenerales.validarTelefono(telefono, 1, manejador);
         
+        return datosValidos;
     }
     
     public List<Proveedor> obtenerListaProveedores(){

@@ -65,7 +65,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new Font (&quot;Montserrat&quot;, Font.BOLD,36)" type="code"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telefono"/>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -290,7 +290,7 @@
             <Component class="javax.swing.JComboBox" name="cmboxProveedor">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new Font (&quot;Montserrat&quot;, Font.PLAIN,12)" type="code"/>
+                  <Connection code="new Font (&quot;Montserrat&quot;, Font.PLAIN,20)" type="code"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
@@ -19,15 +20,16 @@ import javax.swing.JFrame;
 public class JF_VerComandaMesa extends javax.swing.JFrame {
     private MenuBoton menu;
     private String name;
+    private List<String[]> notificaciones;
+
 
     /**
      * Creates new form ComandaEmpleado
-     * @param name
+     * @param notificaciones
      */
-    public JF_VerComandaMesa(String name) {
+    public JF_VerComandaMesa(java.util.List<String[]> notificaciones) {
         initComponents();
-        this.name = name;
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         //TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         customComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -219,7 +221,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa(name).setVisible(true);
+        new JF_ComandasMesa(name, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -260,7 +262,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaMesa(args[0]).setVisible(true);
+                new JF_VerComandaMesa(null).setVisible(true);
             }
         });
     }

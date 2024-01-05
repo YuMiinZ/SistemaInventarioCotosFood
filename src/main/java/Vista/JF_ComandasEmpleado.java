@@ -22,17 +22,19 @@ import javax.swing.JCheckBox;
 public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
     private String name;
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_ComandasEmpleado
      * @param Name
+     * @param notificaciones
      */
-    public JF_ComandasEmpleado(String Name) {
-        //
+    public JF_ComandasEmpleado(String Name,java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
         this.name = Name;
         jLabel2.setText(Name);
         jLabel2.setFont(new Font("Montserrat", 0, 40));
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -42,11 +44,10 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         //DefaultTableModel model = new DefaultTableModel();
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas("Ver Comanda empleado","Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
-        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this));
-                TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this, null, notificaciones));
 
         
         getContentPane().setLayout(new BorderLayout());
@@ -270,13 +271,13 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ListaConsumoEmpleado().setVisible(true);
+        new JF_ListaConsumoEmpleado(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComandaEmpleado(this.name).setVisible(true);
+        new JF_NuevaComandaEmpleado(this.name, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -326,7 +327,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new JF_ComandasEmpleado(args[0]).setVisible(true);
+                new JF_ComandasEmpleado(args[0], null).setVisible(true);
             }
         });
     }

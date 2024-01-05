@@ -21,15 +21,17 @@ import java.awt.Font;
 public class JF_Reportes extends javax.swing.JFrame {
     MenuBoton menu;
     String name;
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Reportes
      * @param Name
      */
-    public JF_Reportes(String Name) {
+    public JF_Reportes(String Name, java.util.List<String[]> notificaciones) {
         initComponents();
         this.name = Name;
+        this.notificaciones = notificaciones;
         jLabel2.setText(Name);
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
     }
@@ -38,9 +40,8 @@ public class JF_Reportes extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
 
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(this.name, "500");
+        DefaultTableModel model = llenarTabla2columnas(null, "500");
         TablaPersonalizada.setTableProperties(Reportes, model, false);
-
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -217,7 +218,7 @@ public class JF_Reportes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_Principal().setVisible(true);
+        new JF_Principal(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -252,7 +253,7 @@ public class JF_Reportes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Reportes(args[0]).setVisible(true);
+                new JF_Reportes(args[0], null).setVisible(true);
             }
 
         });

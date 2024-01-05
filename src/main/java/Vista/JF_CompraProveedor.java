@@ -4,26 +4,38 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoInventario;
+import Controlador.ControladorProveedor;
+import Modelo.ProductoInventario;
+import Modelo.Proveedor;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
+import static Vista.Clases.TablaSpinnerPersonalizada.crearColumnas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author yumii
  */
 public class JF_CompraProveedor extends javax.swing.JFrame {
     private MenuBoton menu;
-    
+    private List<String[]> notificaciones;
+    private final ControladorProveedor controladorProveedor = new ControladorProveedor();
+    private List<Proveedor> listaProveedores = controladorProveedor.obtenerListaProveedores();
+    private ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario();
+    private List<ProductoInventario> listaProductosInventario = controladorProductoInventario.obtenerListaProductosInventario();
+
     /**
      * Creates new form JF_Principal
      */
-    public JF_CompraProveedor() {
+    public JF_CompraProveedor(List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -50,7 +62,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblFiltro = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmboxProveedor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCompraProveedor = new javax.swing.JTable();
 
@@ -140,15 +152,15 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         lblFiltro.setText("Proveedor");
         jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 150, 30));
 
-        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxProveedor.setSelectedIndex(-1);
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmboxProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 270, 30));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 270, 30));
 
         tableCompraProveedor.setFont(new Font("Montserrat", Font.PLAIN, 20));
         tableCompraProveedor.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,25 +206,65 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tableCompraProveedor.getModel();
 
+        model.setRowCount(0);
+        if(cmboxProveedor.getSelectedItem() != null){
+            List<String[]> lista = obtenerListaDatos();
+            for(String[] dato : lista){
+                model.addRow(new Object[]{dato[0], dato[1]});
+            }
+        }
+    }//GEN-LAST:event_cmboxProveedorActionPerformed
+
+ 
+    
+     private List<String[]> obtenerListaDatos(){
+        List<String[]> resultado = new ArrayList<>();
+
+        for(ProductoInventario datos : listaProductosInventario){
+            if(listaProveedores.get(cmboxProveedor.getSelectedIndex()).getId().equals(datos.getIdProveedor())){
+                String[] producto = new String[2];
+                producto[0] = datos.getNombre();
+                producto[1] = "₡ "+String.valueOf(datos.getPrecio());
+                resultado.add(producto);
+            }
+        }
+
+        return resultado;
+    }
+    
  private void customComponents() {
     menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
     menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
 
 
        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-       DefaultTableModel model = llenarTabla2columnas("CompraProveedor", "₡300");
+       DefaultTableModel model = crearColumnas(2);
        TablaPersonalizada.setTableProperties(tableCompraProveedor, model, false);
        
        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
-        pack();
+       getContentPane().add(jScrollPane2, BorderLayout.CENTER);
+       pack();
+       
+       cargarOpciones();
+    }
+    
+    private void agregarOpciones(){
+        cmboxProveedor.removeAllItems();
+        for (Proveedor proveedor : listaProveedores) {
+            cmboxProveedor.addItem(proveedor.getNombre()); 
+        }
+    }
+ 
+    private void cargarOpciones(){
+        agregarOpciones();
+        cmboxProveedor.setSelectedIndex(-1);
     }
 
     
@@ -225,13 +277,6 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-            }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -329,14 +374,14 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_CompraProveedor().setVisible(true);
+                new JF_CompraProveedor(null).setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

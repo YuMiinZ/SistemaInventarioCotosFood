@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoMenu;
+import Modelo.ProductoMenu;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,13 +24,17 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Menu extends javax.swing.JFrame {
     
     private MenuBoton menu;
-
+    private ControladorProductoMenu controlador = new ControladorProductoMenu();
+    private java.util.List<ProductoMenu> listaProductosMenu;
+    java.util.List<Object> listaObjetos = new ArrayList<>();
+    java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_Menu() {
+    public JF_Menu(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -204,21 +211,28 @@ public class JF_Menu extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+         abrirVentanaAgregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
+        
+        listaProductosMenu = controlador.obtenerListaProductosMenu();
+        listaObjetos = controlador.obtenerListaObjetosProductosMenu(listaProductosMenu);
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Editar producto Menu", "Editar");
+        DefaultTableModel model = llenarTabla2columnas(controlador.obtenerDatosTabla(listaProductosMenu), "Editar");
         TablaPersonalizada.setTableProperties(tableMenu, model, true);
         
-        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, "Editar producto Menu", this));
+        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, 
+                "Editar producto Menu", this, listaObjetos, notificaciones));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -239,21 +253,12 @@ public class JF_Menu extends javax.swing.JFrame {
                 }
             }
         });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
-        
-        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
-        
+                
     }
     
     private void abrirVentanaAgregar(){
         try {
-            JF_RegistrarProductoMenu ventana = new JF_RegistrarProductoMenu();
+            JF_RegistrarProductoMenu ventana = new JF_RegistrarProductoMenu(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -309,7 +314,7 @@ public class JF_Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Menu().setVisible(true);
+                new JF_Menu(null).setVisible(true);
             }
         });
     }

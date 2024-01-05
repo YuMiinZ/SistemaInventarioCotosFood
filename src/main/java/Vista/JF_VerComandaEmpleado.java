@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -19,15 +20,16 @@ import javax.swing.DefaultComboBoxModel;
 public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
     private String name;
+    private List<String[]> notificaciones;
 
     /**
      * Creates new form ComandaEmpleado
-     * @param name
+     * @param notificaciones
      */
-    public JF_VerComandaEmpleado(String name) {
+    public JF_VerComandaEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        this.name = name;
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -35,7 +37,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
-        private void customComponents(){
+    
+    private void customComponents(){
             menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
             menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
             
@@ -44,8 +47,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
             getContentPane().add(jScrollPane1, BorderLayout.CENTER);
 
             pack();
-
-        }
+    }
 
     
     private void eventComponents() {
@@ -200,7 +202,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasEmpleado(name).setVisible(true);
+        new JF_ComandasEmpleado(name, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -237,7 +239,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaEmpleado(args[0]).setVisible(true);
+                new JF_VerComandaEmpleado(null).setVisible(true);
             }
         });
     }

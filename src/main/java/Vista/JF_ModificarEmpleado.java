@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ControladorEmpleado;
 import Modelo.Empleado;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,13 +30,15 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     private final ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
     private final ControladorEmpleado controlador = new ControladorEmpleado(manejadorComponentes);
     private java.util.List<Empleado> listaEmpleados;
-    
+    private FuncionesGenerales funciones = new FuncionesGenerales();
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_ModificarEmpleado() {
+    public JF_ModificarEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -224,7 +227,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 930, 470, 38));
 
-        cmboxEmpleado.setFont(new Font ("Montserrat", Font.PLAIN,12));
+        cmboxEmpleado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Juan Mora Rojas", "Nathalia Salazar", "Mario Murillo", "Emily Cascabel" }));
         cmboxEmpleado.setSelectedIndex(-1);
         cmboxEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +252,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         lblEmpleado.setText("Empleado");
         jPanel1.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 470, -1));
 
-        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
         cmboxTipoSangre.setSelectedIndex(-1);
         cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +330,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
             }
             
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo.", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -337,7 +340,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        menu.regresarVentanaPrincipal();
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtFechaCarnetAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCarnetAlimentosActionPerformed
@@ -356,7 +359,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
         index = cmboxEmpleado.getSelectedIndex();
         if (index == -1 ){
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones.", 
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones", 
                                           null, JOptionPane.ERROR_MESSAGE);
         } else {
             try {
@@ -430,19 +433,21 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         cargarOpciones(-1);
     }
     
+    private void agregarOpciones(){
+        for (Empleado emp : listaEmpleados) {
+            cmboxEmpleado.addItem(emp.getNombre()); 
+        }
+    }
+    
     private void cargarOpciones(int index){
         cmboxEmpleado.removeAllItems();
         if(index == -1){
             listaEmpleados = controlador.obtenerListaEmpleados(); 
-            for (Empleado emp : listaEmpleados) {
-                cmboxEmpleado.addItem(emp.getNombre()); 
-            }
+            agregarOpciones();
             manejadorComponentes.limpiarCamposTexto();
             cmboxEmpleado.setSelectedIndex(-1);
         } else {
-            for (Empleado emp : listaEmpleados) {
-                cmboxEmpleado.addItem(emp.getNombre()); 
-            }
+            agregarOpciones();
             cmboxEmpleado.setSelectedIndex(index);
         }
     }
@@ -491,12 +496,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
             }
             
             String tipoSangreSeleccionado = listaEmpleados.get(selectedIndex).getTipoSangre();
-            for (int i = 0; i < cmboxTipoSangre.getItemCount(); i++) {
-                if (cmboxTipoSangre.getItemAt(i).equals(tipoSangreSeleccionado)) {
-                    cmboxTipoSangre.setSelectedIndex(i);
-                    break;
-                }
-            }
+            funciones.seleccionarEnComboBox(cmboxTipoSangre, tipoSangreSeleccionado);
         }
     }
     
@@ -545,7 +545,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarEmpleado().setVisible(true);
+                new JF_ModificarEmpleado(null).setVisible(true);
             }
         });
     }
