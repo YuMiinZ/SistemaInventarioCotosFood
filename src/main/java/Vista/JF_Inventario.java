@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Inventario extends javax.swing.JFrame {
     private MenuBoton menu;    
     private ControladorProductoInventario controlador = new ControladorProductoInventario();
-    private java.util.List<ProductoInventario> listaProductosInventario;
+    private List<ProductoInventario> listaProductosInventario;
     private List<Object> listaObjetos = new ArrayList<>();
 
     /**
@@ -205,12 +205,13 @@ public class JF_Inventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        // TODO add your handling code here:
+         // TODO add your handling code here:
+        abrirVentanaAgregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void customComponents(){
@@ -246,16 +247,7 @@ public class JF_Inventario extends javax.swing.JFrame {
                     menu.mostrarMenu();
                 }
             }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
-        
-        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
+        });   
     }
     
     private void abrirVentanaAgregar(){

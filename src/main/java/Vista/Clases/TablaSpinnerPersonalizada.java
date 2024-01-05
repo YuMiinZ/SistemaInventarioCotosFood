@@ -61,6 +61,19 @@ public class TablaSpinnerPersonalizada {
             return spinner;
         }
     }
+    
+    // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
+    public static DefaultTableModel llenarTabla1columnas(List<String> datos, String Text) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Columna 1");
+
+        for (String dato : datos) {
+            model.addRow(new Object[]{dato});
+        }
+
+        return model;
+    }
+    
     // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
     public static DefaultTableModel llenarTabla2columnas(List<String> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
@@ -108,16 +121,8 @@ public class TablaSpinnerPersonalizada {
             button.setOpaque(true);
 
             button.addActionListener(e -> {
-                /*int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar esta fila?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    int row = tableCompraProveedor.convertRowIndexToModel(tableCompraProveedor.getEditingRow());
-                    ((DefaultTableModel) tableCompraProveedor.getModel()).removeRow(row);
-                }*/
                 MenuBoton opcion = new MenuBoton(0, 0, dad);
                 opcion.abrirVentanas(NombreTabla, lista.get(tabla.convertRowIndexToModel(tabla.getEditingRow())));
-                /*JOptionPane.showMessageDialog(
-                null,
-                "Fila seleccionada: " + tabla.convertRowIndexToModel(tabla.getEditingRow()));*/
             });
             button.setFocusPainted(false);
         }
