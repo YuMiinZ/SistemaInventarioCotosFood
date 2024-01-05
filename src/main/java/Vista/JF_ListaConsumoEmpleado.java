@@ -62,12 +62,6 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             }
             
         });
-        jButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
