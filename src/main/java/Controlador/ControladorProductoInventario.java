@@ -6,6 +6,7 @@ package Controlador;
 
 import Modelo.ProductoInventario;
 import Modelo.Proveedor;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.bson.types.ObjectId;
 public class ControladorProductoInventario {
     private final ProductoInventario consultas = new ProductoInventario();
     private ManejadorComponentes manejadorComponentes;
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
     public ControladorProductoInventario(){ 
     }
@@ -57,65 +59,18 @@ public class ControladorProductoInventario {
         
     }
     
-    public boolean validarDatos(String nombre, int proveedor, double precio, int cantidad, int cantMinima, Object diaCompra,
-                            Object estado, String unidadMedida) {
+    public boolean validarDatos(String nombre, int proveedor, double precio, int cantidad, int cantMinima,
+                            Object diaCompra, Object estado, String unidadMedida) {
         boolean datosValidos = true;
 
-        if (nombre.isEmpty()) {
-            manejadorComponentes.mostrarLabel(0);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(0);
-        }
-
-        if (proveedor == -1) {
-            manejadorComponentes.mostrarLabel(1);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(1);
-        }
-
-        if (precio < 0) {
-            manejadorComponentes.mostrarLabel(2);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(2);
-        }
-
-        if (cantidad < 0) {
-            manejadorComponentes.mostrarLabel(3);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(3);
-        }
-
-        if (cantMinima < 0) {
-            manejadorComponentes.mostrarLabel(4);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(4);
-        }
-
-        if (diaCompra == null) {
-            manejadorComponentes.mostrarLabel(5);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(5);
-        }
-
-        if (estado == null) {
-            manejadorComponentes.mostrarLabel(6);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(6);
-        }
-
-        if (unidadMedida.isEmpty()) {
-            manejadorComponentes.mostrarLabel(7);
-            datosValidos = false;
-        } else {
-            manejadorComponentes.ocultarLabel(7);
-        }
+        datosValidos &= funcionesGenerales.validarCampo(nombre, 0, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarEnteroPositivo(proveedor, 1, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarNumeroPositivo(precio, 2, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarEnteroPositivo(cantidad, 3, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarEnteroPositivo(cantMinima, 4, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarCampo(diaCompra, 5, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarCampo(estado, 6, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarCampo(unidadMedida, 7, manejadorComponentes);
 
         return datosValidos;
     }

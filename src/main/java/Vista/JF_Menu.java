@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoMenu;
+import Modelo.ProductoMenu;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Menu extends javax.swing.JFrame {
     
     private MenuBoton menu;
+    private ControladorProductoMenu controlador = new ControladorProductoMenu();
+    private java.util.List<ProductoMenu> listaProductosMenu;
+    java.util.List<Object> listaObjetos = new ArrayList<>();
 
     /**
      * Creates new form JF_Principal
@@ -214,12 +220,16 @@ public class JF_Menu extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
+        
+        listaProductosMenu = controlador.obtenerListaProductosMenu();
+        listaObjetos = controlador.obtenerListaObjetosProductosMenu(listaProductosMenu);
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Editar producto Menu", "Editar");
+        DefaultTableModel model = llenarTabla2columnas(controlador.obtenerDatosTabla(listaProductosMenu), "Editar");
         TablaPersonalizada.setTableProperties(tableMenu, model, true);
         
         tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, 
-                "Editar producto Menu", this, null));
+                "Editar producto Menu", this, listaObjetos));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);

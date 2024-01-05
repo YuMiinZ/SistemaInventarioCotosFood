@@ -26,7 +26,7 @@ public class JF_Inventario extends javax.swing.JFrame {
     private MenuBoton menu;    
     private ControladorProductoInventario controlador = new ControladorProductoInventario();
     private java.util.List<ProductoInventario> listaProductosInventario;
-    List<Object> listaObjetos = new ArrayList<>();
+    private List<Object> listaObjetos = new ArrayList<>();
 
     /**
      * Creates new form JF_Principal

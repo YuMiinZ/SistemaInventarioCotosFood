@@ -76,7 +76,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblTelefono.setText("Telefono");
+        lblTelefono.setText("Teléfono");
         jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 720, 470, -1));
 
         lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
@@ -176,7 +176,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblNombre.setText("Nombre");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 470, -1));
 
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,12));
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,14));
         jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 470, 40));
 
         lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
@@ -220,7 +220,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
             }
             
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo.", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -237,7 +237,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
         index = cmboxProveedor.getSelectedIndex();
         if (index == -1 ){
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones.", 
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones", 
                                           null, JOptionPane.ERROR_MESSAGE);
         } else {
             if(controlador.modificarProveedor(listaProveedores.get(index).getId(), 

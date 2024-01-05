@@ -37,7 +37,7 @@ public class JF_Reportes extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
 
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(this.name, "500");
+        DefaultTableModel model = llenarTabla2columnas(null, "500");
         TablaPersonalizada.setTableProperties(jTable1, model, false);
 
 

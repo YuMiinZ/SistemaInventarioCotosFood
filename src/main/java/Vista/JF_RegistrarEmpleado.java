@@ -214,7 +214,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 770, 470, 38));
 
-        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,14));
         cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
         cmboxTipoSangre.setSelectedIndex(-1);
         cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {

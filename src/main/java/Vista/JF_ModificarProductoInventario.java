@@ -24,7 +24,7 @@ import org.bson.types.ObjectId;
 public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     private ProductoInventario dato;
     private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
-    private final ControladorProveedor controladorProveedor = new ControladorProveedor(manejadorComponentes);
+    private final ControladorProveedor controladorProveedor = new ControladorProveedor();
     private final ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario(manejadorComponentes);
     private java.util.List<Proveedor> listaProveedores;
     private MenuBoton menu;
@@ -362,17 +362,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         manejadorComponentes.agregarLabel(lblErrorEstado);
         manejadorComponentes.agregarLabel(lblErrorUnidadMedida);
         manejadorComponentes.ocultarLabels();
-        
-        manejadorComponentes.agregarText(txtNombre);
-        manejadorComponentes.agregarText(txtUnidadMedida);
-        
-        manejadorComponentes.agregarComboBox(cmboxProveedor);
-        manejadorComponentes.agregarComboBox(cmboxDiaCompra);
-        manejadorComponentes.agregarComboBox(cmboxEstado);
-        
-        manejadorComponentes.agregarSpinner(spnPrecio);
-        manejadorComponentes.agregarSpinner(spnCantidad);
-        manejadorComponentes.agregarSpinner(spnCantidadMinima);
+
         
         cargarOpciones();
         cargarDatos();

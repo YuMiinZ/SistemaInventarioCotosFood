@@ -20,6 +20,7 @@ Modelo\Proveedor.class
 Vista\JF_RegistrarProveedor$2.class
 Vista\JF_ModificarProductoMenu$6.class
 Vista\JF_CompraProveedor.class
+Controlador\ControladorProductoMenu.class
 Vista\Clases\TablaSpinnerPersonalizada$SpinnerEditor.class
 Vista\JF_RegistrarEmpleado$4.class
 Vista\JF_Menu$4.class
@@ -89,7 +90,6 @@ Vista\JF_ComandasMesa$4.class
 Vista\Clases\MenuBoton$2.class
 Vista\JF_RegistrarProductoInventario$4.class
 Vista\JF_ModificarProductoInventario$2.class
-Vista\Clases\TablaSpinnerPersonalizada$SpinnerEditor$1.class
 Vista\JF_ComandasEmpleado$6.class
 Vista\JF_VerComandaMesa$4.class
 Vista\JF_RegistrarProveedor$5.class
@@ -182,6 +182,7 @@ Vista\Clases\MenuPersonalizado.class
 Vista\JF_RegistrarEmpleado$3.class
 Vista\JF_Inventario.class
 Vista\JF_ModificarProductoInventario$8.class
+Modelo\ProductoMenu$Ingrediente.class
 Vista\JF_ModificarEmpleado$10.class
 Vista\JF_ModificarEmpleado$4.class
 Vista\JF_Menu$6.class

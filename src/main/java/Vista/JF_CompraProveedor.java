@@ -206,7 +206,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
 
 
        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-       DefaultTableModel model = llenarTabla2columnas("CompraProveedor", "₡300");
+       DefaultTableModel model = llenarTabla2columnas(null, "₡300");
        TablaPersonalizada.setTableProperties(tableCompraProveedor, model, false);
        
        getContentPane().setLayout(new BorderLayout());

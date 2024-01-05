@@ -188,7 +188,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Notificaciones", "Eliminar");
+        DefaultTableModel model = llenarTabla2columnas(null, "Eliminar");
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
         tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, 

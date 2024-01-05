@@ -39,7 +39,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Comandas empleado", "Ver mas");
+        DefaultTableModel model = llenarTabla2columnas(null, "Ver mas");
         TablaPersonalizada.setTableProperties(jTable1, model, true);
         
         jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, 

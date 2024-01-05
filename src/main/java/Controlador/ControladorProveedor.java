@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Proveedor;
+import Vista.Clases.FuncionesGenerales;
 import Vista.JF_RegistrarProveedor;
 import Vista.Clases.ManejadorComponentes;
 import java.util.List;
@@ -20,9 +21,12 @@ import org.bson.types.ObjectId;
 public class ControladorProveedor {
 
     private final Proveedor consultas = new Proveedor();
-    private final ManejadorComponentes manejador;
-        
+    private ManejadorComponentes manejador;
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
+    public ControladorProveedor() {
+    }
+        
     public ControladorProveedor (ManejadorComponentes manejador){ 
         this.manejador = manejador; 
     }

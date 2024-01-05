@@ -295,11 +295,13 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         ControladorProductoInventario controlador = new ControladorProductoInventario(manejadorComponentes);
+        
         if (controlador.registrarProductoInventario(txtNombre.getText(), cmboxProveedor.getSelectedIndex(), (double) spnPrecio.getValue(), 
                                                     (int) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
                                                     cmboxDiaCompra.getSelectedItem(), cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), 
                                                     listaProveedores)) {
             JOptionPane.showMessageDialog(null, "Registro exitoso");
+            spnPrecio.setValue(0.0);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

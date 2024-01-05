@@ -7,50 +7,52 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
+import java.util.List;
 
 /**
  *
  * @author yumii
  */
 public class TablaSpinnerPersonalizada {
+    
 
-    public static class SpinnerEditor extends DefaultCellEditor {
+    public static class SpinnerEditor extends AbstractCellEditor implements TableCellEditor {
         private final JSpinner spinner;
-
+        private int fila;
+        
         public SpinnerEditor() {
-            super(new JTextField());
-            spinner = new JSpinner(new SpinnerNumberModel(0.0d, null, null, 1.0d));
+            spinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 1.0));
             ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setHorizontalAlignment(JTextField.RIGHT);
-            editorComponent = spinner;
-            delegate = new DefaultCellEditor.EditorDelegate() {
-                @Override
-                public void setValue(Object value) {
-                    spinner.setValue(value);
+            spinner.addChangeListener(e -> {
+                if (fila >= 0) {
+                    fireEditingStopped(); // Detiene la edición de la celda
                 }
+            });
+        }
 
-                @Override
-                public Object getCellEditorValue() {
-                    return spinner.getValue();
-                }
-            };
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            fila = row;
+            spinner.setValue(value);
+            return spinner;
         }
 
         @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            spinner.setValue(value);
-            return editorComponent;
+        public Object getCellEditorValue() {
+            return spinner.getValue();
         }
     }
 
+    // Clase SpinnerRenderer
     public static class SpinnerRenderer extends DefaultTableCellRenderer {
-        private final JSpinner spinner = new JSpinner();
+        private final JSpinner spinner;
 
         public SpinnerRenderer() {
-            super();
-            spinner.setModel(new SpinnerNumberModel(0.0d, null, null, 1.0d));
+            spinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, Double.MAX_VALUE, 1.0));
             spinner.setBorder(null);
             spinner.setFocusable(false);
             spinner.setOpaque(true);
+            ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setHorizontalAlignment(JTextField.RIGHT);
         }
 
         @Override
@@ -60,19 +62,19 @@ public class TablaSpinnerPersonalizada {
         }
     }
     // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
-    public static DefaultTableModel llenarTabla2columnas(String nombreMenu, String Text) {
+    public static DefaultTableModel llenarTabla2columnas(List<String> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn(Text);
 
-        model.addRow(new Object[]{"Vencimiento próximo carné de manipulación de alimentos Juan Mora el 24-12-2023", Text});
-        model.addRow(new Object[]{"Dato 2", Text});
-        model.addRow(new Object[]{"Dato 3", Text});
+        for (String dato : datos) {
+            model.addRow(new Object[]{dato, Text});
+        }
 
         return model;
     }
     
-     public static DefaultTableModel llenarTabla3columnas(java.util.List<String[]> datos, String Text) {
+     public static DefaultTableModel llenarTabla3columnas(List<String[]> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn("Columna 2");

@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Empleado;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +19,14 @@ import org.bson.types.ObjectId;
  */
 public class ControladorEmpleado {
     private final Empleado consultas = new Empleado();
-    private final ManejadorComponentes manejador;
-        
+    private ManejadorComponentes manejador;
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
+    public ControladorEmpleado() {
+    }
+        
+    
+    
     public ControladorEmpleado (ManejadorComponentes manejador){ 
         this.manejador = manejador; 
     }
