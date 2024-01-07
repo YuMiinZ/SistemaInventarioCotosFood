@@ -1,6 +1,8 @@
 package Vista.Clases;
 
 
+import Modelo.Empleado;
+import Modelo.Mesas;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
 import Vista.JF_ComandasEmpleado;
@@ -201,9 +203,14 @@ public final class MenuBoton extends JPopupMenu{
             if (ventanaClass.equals(JF_Reportes.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class, List.class).newInstance(reporte, notificaciones);
             }
-
-            else if (ventanaClass.equals(JF_ComandasEmpleado.class) || ventanaClass.equals(JF_ComandasMesa.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class, List.class).newInstance((String) dato.toString(), notificaciones);
+            else if (ventanaClass.equals(JF_ComandasMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Mesas.class, List.class).newInstance((Mesas) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_ComandasEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Empleado.class, List.class).newInstance((Empleado) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_ComandasEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Empleado.class, List.class).newInstance((Empleado) dato, notificaciones);
             }
             else if (ventanaClass.equals(JF_ModificarProductoInventario.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoInventario.class, List.class).newInstance((ProductoInventario) dato, notificaciones);
