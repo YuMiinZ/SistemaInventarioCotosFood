@@ -93,14 +93,14 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
 
         lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 470, -1));
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 470, 38));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -111,12 +111,12 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 950, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 820, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Registrar Producto Inventario");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -171,23 +171,23 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
 
         lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 670, 470, -1));
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 470, -1));
 
         lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblCantidad.setText("Cantidad");
-        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 830, 510, -1));
+        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 700, 510, -1));
 
         lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblCantMinima.setText("Cantidad Mínima");
-        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 350, 470, -1));
+        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 280, 470, -1));
 
         lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblDiaCompra.setText("Día de Compra");
-        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 510, 470, -1));
+        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 420, 470, -1));
 
         lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 670, 470, -1));
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 560, 470, -1));
 
         cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
@@ -197,7 +197,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 720, 470, 40));
+        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 600, 470, 40));
 
         txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -205,15 +205,15 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 txtUnidadMedidaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 880, 470, 38));
+        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 740, 470, 38));
 
         lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblUnidadMedida.setText("Unidad de Medida");
-        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 830, 510, -1));
+        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 700, 510, -1));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
         spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 720, 470, 40));
+        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 470, 40));
 
         cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -221,7 +221,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 470, 40));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 470, 40));
 
         cmboxDiaCompra.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
@@ -231,45 +231,45 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
                 cmboxDiaCompraActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 560, 470, 40));
+        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 460, 470, 40));
 
         spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 880, 470, 40));
+        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 740, 470, 40));
 
         lblErrorCantidadMinima.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorCantidadMinima.setText("La cantidad mínima del producto debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 440, 460, -1));
+        jPanel1.add(lblErrorCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 360, 460, -1));
 
         lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorNombre.setText("El nombre no puede estar vacío");
-        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 460, -1));
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 460, -1));
 
         lblErrorProveedor.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorProveedor.setText("Debe de seleccionar el proveedor");
-        jPanel1.add(lblErrorProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 460, -1));
+        jPanel1.add(lblErrorProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 460, -1));
 
         lblErrorPrecio.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorPrecio.setText("El precio debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 760, 460, -1));
+        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 460, -1));
 
         lblErrorCantidad.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorCantidad.setText("La cantidad debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 920, 460, -1));
+        jPanel1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 780, 460, -1));
 
         lblErrorEstado.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorEstado.setText("Debe de seleccionar el estado del producto");
-        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 760, 460, -1));
+        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 640, 460, -1));
 
         lblErrorDiaCompra.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorDiaCompra.setText("Debe de seleccionar el día de compra programado para el producto");
-        jPanel1.add(lblErrorDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 600, 460, -1));
+        jPanel1.add(lblErrorDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, 460, -1));
 
         lblErrorUnidadMedida.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorUnidadMedida.setText("La unidad de medida no puede estar vacía");
-        jPanel1.add(lblErrorUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 920, 460, -1));
+        jPanel1.add(lblErrorUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 780, 460, -1));
 
         spnCantidadMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 400, 470, 40));
+        jPanel1.add(spnCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 470, 40));
 
         jScrollPane1.setViewportView(jPanel1);
 
