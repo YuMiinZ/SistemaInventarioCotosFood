@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Controlador.ControladorConsumo;
+import Modelo.Consumo_Cliente;
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,26 +15,31 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author TomasPC
  */
 public class JF_ComandasMesa extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String number;
+    private Mesas mesa;
+    private List<Consumo_Cliente> cliente;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
 
     /**
-     * Creates new form JF_Comanda
-     * @param Number
+     * Creates new form JF_ComandasMesa
+     * @param mesa
+     * @param notificaciones
      */
-    public JF_ComandasMesa(String Number, java.util.List<String[]> notificaciones) {
+    public JF_ComandasMesa(Mesas mesa, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.number = Number;
-        jLabel3.setText("Mesa: " + this.number);
+        this.mesa = mesa;
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);     
         customComponents();
         eventComponents();
@@ -42,15 +50,19 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
      private void customComponents() {
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        
+        jLabel3.setText("Mesa: " + this.mesa.getNumeroMesa());
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
-        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        ControladorConsumo consumo = new ControladorConsumo();
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, 
-                "Ver Comanda mesa", this, null, notificaciones));
-
+        cliente = consumo.ConsultarCliente(this.mesa.getId());
+        listaObjetos = consumo.obtenerListaObjetosConsumoCliente(cliente);
         
+        
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaClientes(cliente),"Ver mas");
+        TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
+        
+        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, 
+                "Ver Comanda mesa", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -93,11 +105,11 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ComandasEmpleadoTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,7 +183,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1533, 1363, 525, 71));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 1220, 525, 71));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -186,6 +198,16 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         });
         jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1735, 250, -1, -1));
 
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel2.setForeground(new java.awt.Color(0, 72, 121));
+        jLabel2.setText("Monto total: ");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 1150, 525, -1));
+
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel3.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel3.setText("Mesa: ");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
+
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -196,35 +218,41 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 323, 1951, -1));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 1070, 60));
 
-        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 40));
-        jLabel2.setForeground(new java.awt.Color(0, 72, 121));
-        jLabel2.setText("Monto total: ");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 1300, 525, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ComandasEmpleadoTable.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        ComandasEmpleadoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Producto", "Editar"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1950, 810));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        ComandasEmpleadoTable.setAlignmentX(0.0F);
+        ComandasEmpleadoTable.setAlignmentY(0.0F);
+        ComandasEmpleadoTable.setColumnSelectionAllowed(true);
+        ComandasEmpleadoTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ComandasEmpleadoTable.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        ComandasEmpleadoTable.setMinimumSize(new java.awt.Dimension(30, 80));
+        ComandasEmpleadoTable.setPreferredSize(new java.awt.Dimension(150, 80));
+        jScrollPane1.setViewportView(ComandasEmpleadoTable);
 
-        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
-        jLabel3.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel3.setText("Mesa: ");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, 1070, 460));
 
         jScrollPane2.setViewportView(jPanel4);
 
@@ -254,7 +282,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComanda(this.number, notificaciones).setVisible(true);
+        new JF_NuevaComanda(this.mesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -325,13 +353,14 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ComandasMesa(args[0], null).setVisible(true);
+                new JF_ComandasMesa(null, null).setVisible(true);
             }
         });
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ComandasEmpleadoTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -344,6 +373,5 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

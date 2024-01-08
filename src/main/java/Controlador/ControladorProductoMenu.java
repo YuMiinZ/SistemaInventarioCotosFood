@@ -9,13 +9,9 @@ import Modelo.ProductoMenu;
 import Modelo.ProductoMenu.Ingrediente;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
 import org.bson.types.ObjectId;
 
 /**

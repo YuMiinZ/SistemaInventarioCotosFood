@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -17,23 +18,24 @@ import java.awt.Font;
  */
 public class JF_NuevaComanda extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String number;
+    private Mesas Mesa;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
      */
-    public JF_NuevaComanda(String number, java.util.List<String[]> notificaciones) {
+    public JF_NuevaComanda(Mesas Mesa, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
-        this.number = number;
-        jLabel7.setText(number);
+        this.Mesa = Mesa;
+        
         customComponents();
         eventComponents();
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
+        jLabel7.setText(""+this.Mesa.getNumeroMesa());
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
@@ -151,7 +153,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
 
         jLabel2.setFont(new Font("Montserrat", 0, 36));
         jLabel2.setText("Número de Mesa");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 284, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
 
         jLabel4.setFont(new Font("Montserrat", 0, 36));
         jLabel4.setText("Platillos");
@@ -164,7 +166,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 491, 308, 36));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, 308, 36));
 
         jLabel5.setFont(new Font("Montserrat", 0, 36));
         jLabel5.setText("Bebidas");
@@ -177,7 +179,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                 jComboBox3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 954, 308, 36));
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 980, 308, 36));
 
         jLabel6.setFont(new Font("Montserrat", 0, 36));
         jLabel6.setText("Notas");
@@ -185,7 +187,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1211, 318, 734, 222));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 350, 734, 222));
 
         jButton3.setBackground(new java.awt.Color(0, 72, 121));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -198,7 +200,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1584, 1223, 537, 181));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 1220, 537, 181));
 
         jLabel7.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 318, -1, -1));
@@ -209,16 +211,16 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -227,7 +229,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa(this.number, notificaciones).setVisible(true);
+        new JF_ComandasMesa(this.Mesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +280,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_NuevaComanda("1", null).setVisible(true);
+                new JF_NuevaComanda(null, null).setVisible(true);
             }
         });
     }

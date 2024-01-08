@@ -8,11 +8,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.bson.Document;
@@ -29,6 +29,17 @@ public class Empleado {
     private Date fecha_ingreso, fecha_vencimiento_carnet;
     
     public Empleado() {}
+    
+    public Empleado(ObjectId id, String nombre, String telefono, String alergias, String tipoSangre, int vacaciones, Date fecha_ingreso, Date fecha_vencimiento_carnet){
+        this.id = id;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.alergias = alergias;
+        this.tipoSangre = tipoSangre;
+        this.vacaciones = vacaciones;
+        this.fecha_ingreso = fecha_ingreso;
+        this.fecha_vencimiento_carnet = fecha_vencimiento_carnet;
+    }
 
     public ObjectId getId() {
         return id;
@@ -117,6 +128,18 @@ public class Empleado {
         conexion.cerrarConexion(cliente);
     }
     
+    public Empleado getEmpleado(ObjectId id){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Empleado");
+
+        Document doc = coleccion.find(eq("_id", id)).first();    
+        Empleado Empleado = new Empleado(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Telefono"), doc.getString("Alergias"), doc.getString("Tipo_de_Sangre"), doc.getInteger("Vacaciones"), doc.getDate("Fecha_de_Ingreso"), doc.getDate("Fecha_Vencimiento_Carnet"));
+        conexion.cerrarConexion(cliente);
+
+        return Empleado;
+    }
     
     public void modificarEmpleado(ObjectId id, String nombre, String telefono, String alergias, String tipoSangre, int vacaciones,
                               Date fechaIngreso, Date fechaVencimientoCarnet) {

@@ -4,11 +4,13 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -16,16 +18,16 @@ import java.awt.Font;
  */
 public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String name;
+    private Empleado empleadoE;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
      */
-    public JF_NuevaComandaEmpleado(String Name, java.util.List<String[]> notificaciones) {
+    public JF_NuevaComandaEmpleado(Empleado empleadoE, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.name = Name;
-        jLabel2.setText(Name);
+        this.empleadoE = empleadoE;
+        jLabel2.setText(empleadoE.getNombre());
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
@@ -161,7 +163,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 482, 308, 36));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 308, 36));
 
         jLabel5.setFont(new Font("Montserrat", 0, 36));
         jLabel5.setText("Bebidas");
@@ -174,7 +176,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jComboBox3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 954, 308, 36));
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 980, 308, 36));
 
         jLabel6.setFont(new Font("Montserrat", 0, 36));
         jLabel6.setText("Notas");
@@ -182,7 +184,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1349, 318, 734, 222));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 340, 734, 222));
 
         jButton3.setBackground(new java.awt.Color(0, 72, 121));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -195,11 +197,11 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1584, 1229, 537, 181));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 1150, 537, 181));
 
         jLabel7.setFont(new Font("Montserrat", 0, 36));
         jLabel7.setText("Empleado");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 294, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -209,14 +211,14 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2824, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -225,7 +227,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasEmpleado(this.name, notificaciones).setVisible(true);
+        new JF_ComandasEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +280,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_NuevaComandaEmpleado("Juan", null).setVisible(true);
+                new JF_NuevaComandaEmpleado(null, null).setVisible(true);
             }
         });
     }

@@ -9,6 +9,7 @@ import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -30,7 +31,27 @@ public class ControladorEmpleado {
     public ControladorEmpleado (ManejadorComponentes manejador){ 
         this.manejador = manejador; 
     }
-
+    
+    public Empleado obtenerEmpelado(ObjectId id){
+        return consultas.getEmpleado(id);
+    }
+    
+    public List<Object> obtenerListaObjetosEmpleado(List<Empleado> Empleados){
+        List<Object> listaObjetos = new ArrayList<>();        
+        for (Empleado empleado : Empleados) {
+            listaObjetos.add((Object) empleado);
+        }
+        return listaObjetos;
+    }
+    
+    public List<String> LlenarTabla(List<Empleado> Empleados){ 
+        List<String> MesaString = new ArrayList<>();
+        for (Empleado empleado : Empleados){
+            MesaString.add(empleado.getNombre());
+        }
+        return MesaString;
+    }
+    
     public boolean registrarEmpleado(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
         

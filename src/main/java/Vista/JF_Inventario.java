@@ -6,7 +6,6 @@ package Vista;
 
 import Controlador.ControladorProductoInventario;
 import Modelo.ProductoInventario;
-import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
