@@ -81,7 +81,7 @@ public class JF_Menu extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 720, 290, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 720, 290, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
@@ -185,7 +185,7 @@ public class JF_Menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableMenu);
         tableMenu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 1240, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1240, 300));
 
         jScrollPane2.setViewportView(jPanel1);
 
