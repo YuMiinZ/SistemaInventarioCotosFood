@@ -1,6 +1,8 @@
 package Vista.Clases;
 
 
+import Modelo.Consumo_Cliente;
+import Modelo.Consumo_Empleado;
 import Modelo.Empleado;
 import Modelo.Mesas;
 import Modelo.ProductoInventario;
@@ -217,6 +219,12 @@ public final class MenuBoton extends JPopupMenu{
             }
             else if (ventanaClass.equals(JF_ModificarProductoMenu.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoMenu.class, List.class).newInstance((ProductoMenu) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Cliente.class, List.class).newInstance((Consumo_Cliente) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Empleado.class, List.class).newInstance((Consumo_Empleado) dato, notificaciones);
             }
             else{
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(List.class).newInstance(notificaciones);
