@@ -78,14 +78,14 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblTelefono.setText("Teléfono");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 720, 470, -1));
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 470, -1));
 
         lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 470, -1));
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 470, 38));
 
         btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
         btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -96,7 +96,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 870, 199, 50));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 720, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
@@ -146,7 +146,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 780, 470, 38));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 640, 470, 38));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -171,22 +171,22 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 870, 199, 50));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 720, 199, 50));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 470, -1));
 
         cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 470, 40));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 470, 40));
 
         lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorTelefono.setText("El número telefónico debe ser de 8 números");
-        jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 820, 470, -1));
+        jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 680, 470, -1));
 
         lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorNombre.setText("El nombre no puede estar vacío");
-        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 650, 470, -1));
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 470, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 

@@ -34,9 +34,6 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         customComponents();
         eventComponents();        
         
-        for(String[] dato : notificaciones){
-            System.out.println("datos: " + dato[0] + " " + dato[1]);
-        }
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
@@ -72,7 +69,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Notificaciones");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -129,14 +126,14 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
+            .addGap(0, 1230, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
 
         tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableNotificacion.setModel(new javax.swing.table.DefaultTableModel(
@@ -165,7 +162,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableNotificacion);
         tableNotificacion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 380));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -174,15 +171,12 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
         );
 
         pack();
@@ -195,9 +189,11 @@ public class JF_Notificaciones extends javax.swing.JFrame {
     private List<String> concatenarDatos(List<String[]> listaNotificaciones){
         java.util.List<String> resultados = new ArrayList<>();
 
-        for (String[] datos : listaNotificaciones) {
-            String info = "Vencimiento próximo carné de manipulación de alimentos " + datos[0] + " el " + datos[1];
-            resultados.add(info);
+        if(listaNotificaciones != null ){
+            for (String[] datos : listaNotificaciones) {
+                String info = "Vencimiento próximo carné de manipulación de alimentos " + datos[0] + " el " + datos[1];
+                resultados.add(info);
+            }
         }
 
         return resultados;

@@ -70,17 +70,22 @@ public class TablaSpinnerPersonalizada {
         
         return model;
     }
+    
+    private static boolean validarDatos(Object datos) {
+        return datos != null;
+    }
  
     // Esta funcion se puede usar para llenar las tablas solo que debe de llamar al controlador 
     public static DefaultTableModel llenarTabla2columnas(List<String> datos, String Text) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn(Text);
-
-        for (String dato : datos) {
-            model.addRow(new Object[]{dato, Text});
+        
+        if(validarDatos(datos)){
+            for (String dato : datos) {
+                model.addRow(new Object[]{dato, Text});
+            }
         }
-
         return model;
     }
     
@@ -89,10 +94,13 @@ public class TablaSpinnerPersonalizada {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Columna 1");
         model.addColumn("Columna 2");
-
-        for (String[] dato : datos) {
-            model.addRow(new Object[]{dato[0], dato[1]});
+        
+        if(validarDatos(datos)){
+            for (String[] dato : datos) {
+                model.addRow(new Object[]{dato[0], dato[1]});
+            }
         }
+        
 
         return model;
     }
@@ -103,10 +111,11 @@ public class TablaSpinnerPersonalizada {
         model.addColumn("Columna 2");
         model.addColumn(Text);
 
-        for (String[] dato : datos) {
-            model.addRow(new Object[]{dato[0], dato[1], Text});
+        if(validarDatos(datos)){
+            for (String[] dato : datos) {
+                model.addRow(new Object[]{dato[0], dato[1], Text});
+            }
         }
-
         return model;
     }
     public static void setCellBorders(JTable table) {

@@ -116,7 +116,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 950, 199, 50));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 960, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
@@ -250,7 +250,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 950, 199, 50));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 960, 199, 50));
 
         lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorNombre.setText("El nombre no puede estar vacío");

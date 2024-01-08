@@ -64,34 +64,39 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         cmboxIngredientes = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        lblPrecio = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lblPrecio = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        btnAgregarIngredientes = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btnMenu1 = new javax.swing.JButton();
+        lblCotosFood1 = new javax.swing.JLabel();
+        btnRegresar1 = new javax.swing.JButton();
         lblCostoElaboracion = new javax.swing.JLabel();
         lblIngredientes = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         cmboxEstado = new javax.swing.JComboBox<>();
         spnCostoElaboracion = new javax.swing.JSpinner();
         spnPrecio = new javax.swing.JSpinner();
-        btnEliminar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableIngredientes = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         cmboxTipoProducto = new javax.swing.JComboBox<>();
         lblTipoProducto = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableIngredientes = new javax.swing.JTable();
-        btnAgregarIngredientes = new javax.swing.JButton();
-        lblErrorTipoProducto = new javax.swing.JLabel();
-        lblErrorCostoElaboracion = new javax.swing.JLabel();
-        lblErrorPrecio = new javax.swing.JLabel();
         lblErrorNombre = new javax.swing.JLabel();
-        lblErrorTablaIngredientes = new javax.swing.JLabel();
-        lblErrorEstado = new javax.swing.JLabel();
         lblNotaTablaIngredientes = new javax.swing.JLabel();
+        lblErrorPrecio = new javax.swing.JLabel();
+        lblErrorCostoElaboracion = new javax.swing.JLabel();
+        lblErrorEstado = new javax.swing.JLabel();
+        lblErrorTipoProducto = new javax.swing.JLabel();
+        lblErrorTablaIngredientes = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
+        lblTitulo = new javax.swing.JLabel();
 
         cmboxIngredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {null, "Arroz", "Frijoles", "Tomate", "Lechuga" }));
 
@@ -102,27 +107,6 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,34));
-        lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 630, 470, -1));
-
-        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,34));
-        lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 470, -1));
-
-        txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 470, 38));
-
-        lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
-        lblTitulo.setText("Modificar Producto al Menú");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -174,17 +158,100 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel3.setPreferredSize(new java.awt.Dimension(2160, 1440));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,34));
+        lblPrecio.setText("Precio");
+        jPanel3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 470, -1));
+
+        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,34));
+        lblNombre.setText("Nombre");
+        jPanel3.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 470, -1));
+
+        txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 470, 38));
+
+        btnAgregarIngredientes.setBackground(new java.awt.Color(0, 72, 121));
+        btnAgregarIngredientes.setFont(new Font ("Montserrat", Font.BOLD,18));
+        btnAgregarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarIngredientes.setText("Agregar Ingrediente");
+        btnAgregarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarIngredientesActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAgregarIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 260, 230, 40));
+
+        jPanel4.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel4.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel4.setPreferredSize(new java.awt.Dimension(2222, 125));
+
+        btnMenu1.setBorderPainted(false);
+        btnMenu1.setContentAreaFilled(false);
+        btnMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblCotosFood1.setFont(new Font("Montserrat", Font.BOLD, 40));
+        lblCotosFood1.setForeground(new java.awt.Color(25, 25, 25));
+        lblCotosFood1.setText("Cotos Food");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btnMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblCotosFood1)
+                .addContainerGap(2127, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblCotosFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
+
+        btnRegresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
+        btnRegresar1.setBorderPainted(false);
+        btnRegresar1.setContentAreaFilled(false);
+        btnRegresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar1.setMaximumSize(new java.awt.Dimension(71, 78));
+        btnRegresar1.setMinimumSize(new java.awt.Dimension(72, 7));
+        btnRegresar1.setPreferredSize(new java.awt.Dimension(72, 7));
+        btnRegresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresar1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
+
         lblCostoElaboracion.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblCostoElaboracion.setText("Costo Elaboración");
-        jPanel1.add(lblCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 790, 470, -1));
+        jPanel3.add(lblCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, 470, -1));
 
         lblIngredientes.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblIngredientes.setText("Ingredientes");
-        jPanel1.add(lblIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 440, 470, -1));
+        jPanel3.add(lblIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 260, 470, -1));
 
         lblEstado.setFont(new Font ("Montserrat", Font.BOLD,34));
         lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 780, 470, -1));
+        jPanel3.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 580, 470, -1));
 
         cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
@@ -194,51 +261,15 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
                 cmboxEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 830, 470, 40));
+        jPanel3.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 620, 470, 40));
 
         spnCostoElaboracion.setFont(new Font ("Montserrat", Font.PLAIN,26));
         spnCostoElaboracion.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        jPanel1.add(spnCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 840, 470, 40));
+        jPanel3.add(spnCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 470, 40));
 
         spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
         spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 470, 40));
-
-        btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
-        btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 920, 199, 50));
-
-        btnModificar.setBackground(new java.awt.Color(0, 72, 121));
-        btnModificar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 920, 199, 50));
-
-        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
-        cmboxTipoProducto.setSelectedIndex(-1);
-        cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxTipoProductoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 1000, 470, 40));
-
-        lblTipoProducto.setFont(new Font ("Montserrat", Font.BOLD,34));
-        lblTipoProducto.setText("Tipo Producto");
-        jPanel1.add(lblTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 950, 470, -1));
+        jPanel3.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 470, 40));
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,45 +284,77 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableIngredientes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 500, 470, 210));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 470, 210));
 
-        btnAgregarIngredientes.setBackground(new java.awt.Color(0, 72, 121));
-        btnAgregarIngredientes.setFont(new Font ("Montserrat", Font.BOLD,18));
-        btnAgregarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarIngredientes.setText("Agregar Ingrediente");
-        btnAgregarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setBackground(new java.awt.Color(0, 72, 121));
+        btnModificar.setFont(new Font ("Montserrat", Font.BOLD,30));
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Guardar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarIngredientesActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1570, 450, 230, 40));
+        jPanel3.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 700, 199, 50));
 
-        lblErrorTipoProducto.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorTipoProducto.setText("Debe de seleccionar el tipo del producto");
-        jPanel1.add(lblErrorTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 1040, 460, -1));
+        cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
+        cmboxTipoProducto.setSelectedIndex(-1);
+        cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxTipoProductoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmboxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 710, 470, 40));
 
-        lblErrorCostoElaboracion.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorCostoElaboracion.setText("El costo de elaboración debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, 460, -1));
-
-        lblErrorPrecio.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorPrecio.setText("El precio debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 720, 460, -1));
+        lblTipoProducto.setFont(new Font ("Montserrat", Font.BOLD,34));
+        lblTipoProducto.setText("Tipo Producto");
+        jPanel3.add(lblTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 670, 470, -1));
 
         lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorNombre.setText("El nombre no puede estar vacío");
-        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, 460, -1));
+        jPanel3.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 460, -1));
 
-        lblErrorTablaIngredientes.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorTablaIngredientes.setText("Debe de seleccionar al menos 1 ingrediente y su cantidad");
-        jPanel1.add(lblErrorTablaIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 730, 460, -1));
+        lblNotaTablaIngredientes.setText("Para eliminar un ingrediente, solo deje vacío el campo ingrediente o la cantidad en 0");
+        jPanel3.add(lblNotaTablaIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 530, -1));
+
+        lblErrorPrecio.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorPrecio.setText("El precio debe ser un número mayor o igual a 0");
+        jPanel3.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 460, -1));
+
+        lblErrorCostoElaboracion.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorCostoElaboracion.setText("El costo de elaboración debe ser un número mayor o igual a 0");
+        jPanel3.add(lblErrorCostoElaboracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 610, 460, -1));
 
         lblErrorEstado.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorEstado.setText("Debe de seleccionar el estado del producto");
-        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 870, 460, -1));
+        jPanel3.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 660, 460, -1));
 
-        lblNotaTablaIngredientes.setText("Para eliminar un ingrediente, solo deje vacío el campo ingrediente o la cantidad en 0");
-        jPanel1.add(lblNotaTablaIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 710, 530, -1));
+        lblErrorTipoProducto.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTipoProducto.setText("Debe de seleccionar el tipo del producto");
+        jPanel3.add(lblErrorTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 750, 460, -1));
+
+        lblErrorTablaIngredientes.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTablaIngredientes.setText("Debe de seleccionar al menos 1 ingrediente y su cantidad");
+        jPanel3.add(lblErrorTablaIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 530, 460, -1));
+
+        btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
+        btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 730, 199, 50));
+
+        lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
+        lblTitulo.setText("Modificar Producto al Menú");
+        jPanel3.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -335,9 +398,16 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void cmboxTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoProductoActionPerformed
+    private void btnAgregarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarIngredientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxTipoProductoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
+        model.addRow(new Object[]{"", 0});
+    }//GEN-LAST:event_btnAgregarIngredientesActionPerformed
+
+    private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
+        // TODO add your handling code here:
+        regresar();
+    }//GEN-LAST:event_btnRegresar1ActionPerformed
 
     private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
         // TODO add your handling code here:
@@ -345,18 +415,17 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        if(controladorProductoMenu.modificarProductoMenu(dato.getId(), txtNombre.getText(), (double) spnPrecio.getValue(), 
-                                                    (double) spnCostoElaboracion.getValue(), cmboxTipoProducto.getSelectedItem(), 
-                                                    tableIngredientes, cmboxEstado.getSelectedItem(), listaProductosInventario)){
-            JOptionPane.showMessageDialog(null, "Modificación exitosa");
+        ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
+        if (controlador.registrarProductoMenu(txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(),
+            cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
+            listaProductosInventario)) {
+        JOptionPane.showMessageDialog(null, "Registro exitoso");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnAgregarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarIngredientesActionPerformed
+    private void cmboxTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoProductoActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
-        model.addRow(new Object[]{"", 0});
-    }//GEN-LAST:event_btnAgregarIngredientesActionPerformed
+    }//GEN-LAST:event_cmboxTipoProductoActionPerformed
 
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
@@ -535,17 +604,22 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarIngredientes;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnMenu1;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnRegresar1;
     private javax.swing.JComboBox<String> cmboxEstado;
     private javax.swing.JComboBox<String> cmboxIngredientes;
     private javax.swing.JComboBox<String> cmboxTipoProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCostoElaboracion;
     private javax.swing.JLabel lblCotosFood;
+    private javax.swing.JLabel lblCotosFood1;
     private javax.swing.JLabel lblErrorCostoElaboracion;
     private javax.swing.JLabel lblErrorEstado;
     private javax.swing.JLabel lblErrorNombre;
