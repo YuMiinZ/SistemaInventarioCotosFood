@@ -45,7 +45,6 @@ Vista\JF_Principal$2.class
 Vista\JF_NuevaComandaEmpleado$6.class
 Vista\JF_NuevaComanda$4.class
 Vista\JF_ListaConsumoEmpleado.class
-Vista\Clases\ManejadorComponentes.class
 Vista\JF_ModificarEmpleado$8.class
 Vista\JF_NuevaComanda$1.class
 Vista\JF_RegistrarProductoMenu$5.class
@@ -144,10 +143,12 @@ Vista\JF_ModificarProductoInventario$5.class
 Vista\JF_VerComandaEmpleado.class
 Vista\JF_RegistrarProductoMenu$6.class
 Vista\JF_ModificarEmpleado$7.class
+Controlador\ControladorMesa.class
 Vista\JF_ModificarProductoMenu$8.class
 Vista\JF_Menu$3.class
 Vista\JF_ModificarProveedor$4.class
 Vista\JF_ModificarEmpleado$5.class
+Controlador\ControladorConsumo.class
 Modelo\ProductoMenu.class
 Vista\JF_NuevaComanda.class
 Controlador\ControladorProveedor.class

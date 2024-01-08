@@ -4,11 +4,13 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -16,16 +18,16 @@ import java.awt.Font;
  */
 public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String name;
+    private Empleado empleadoE;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
      */
-    public JF_NuevaComandaEmpleado(String Name, java.util.List<String[]> notificaciones) {
+    public JF_NuevaComandaEmpleado(Empleado empleadoE, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.name = Name;
-        jLabel2.setText(Name);
+        this.empleadoE = empleadoE;
+        jLabel2.setText(empleadoE.getNombre());
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
@@ -225,7 +227,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasEmpleado(this.name, notificaciones).setVisible(true);
+        new JF_ComandasEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +280,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_NuevaComandaEmpleado("Juan", null).setVisible(true);
+                new JF_NuevaComandaEmpleado(null, null).setVisible(true);
             }
         });
     }

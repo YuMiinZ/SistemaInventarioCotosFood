@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleado;
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,6 +14,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +25,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;    
+    private ControladorEmpleado Controlador = new ControladorEmpleado();
+    private java.util.List<Empleado> empleados;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_ListaConsumoEmpleado
@@ -41,11 +48,14 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(null, "Ver mas");
+        empleados = Controlador.obtenerListaEmpleados();
+        listaObjetos = Controlador.obtenerListaObjetosEmpleado(empleados);
+        
+        DefaultTableModel model = llenarTabla2columnas(Controlador.LlenarTabla(empleados), "Ver mas");
         TablaPersonalizada.setTableProperties(ConsumoEmpleado, model, true);
         
         ConsumoEmpleado.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ConsumoEmpleado, 
-                "Comandas empleado", this, null, notificaciones));
+                "Comandas empleado", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         

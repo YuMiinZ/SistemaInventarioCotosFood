@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Controlador.ControladorConsumo;
+import Modelo.Consumo_Cliente;
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,27 +15,31 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author TomasPC
  */
 public class JF_ComandasMesa extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String number;
+    private Mesas mesa;
+    private List<Consumo_Cliente> cliente;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
 
     /**
      * Creates new form JF_ComandasMesa
-     * @param Number
+     * @param mesa
      * @param notificaciones
      */
-    public JF_ComandasMesa(String Number, java.util.List<String[]> notificaciones) {
+    public JF_ComandasMesa(Mesas mesa, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.number = Number;
-        jLabel3.setText("Mesa: " + this.number);
+        this.mesa = mesa;
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);     
         customComponents();
         eventComponents();
@@ -43,13 +50,19 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
      private void customComponents() {
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        
+        jLabel3.setText("Mesa: " + this.mesa.getNumeroMesa());
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
+        ControladorConsumo consumo = new ControladorConsumo();
+        
+        cliente = consumo.ConsultarCliente(this.mesa.getId());
+        listaObjetos = consumo.obtenerListaObjetosConsumoCliente(cliente);
+        
+        
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaClientes(cliente),"Ver mas");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
         ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, 
-                "Ver Comanda mesa", this, null, notificaciones));
+                "Ver Comanda mesa", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -269,7 +282,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComanda(this.number, notificaciones).setVisible(true);
+        new JF_NuevaComanda(this.mesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -340,7 +353,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ComandasMesa(args[0], null).setVisible(true);
+                new JF_ComandasMesa(null, null).setVisible(true);
             }
         });
     }

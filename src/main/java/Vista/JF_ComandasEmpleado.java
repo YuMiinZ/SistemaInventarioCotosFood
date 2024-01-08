@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Controlador.ControladorConsumo;
+import Modelo.Consumo_Empleado;
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +16,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 
 /**
@@ -21,18 +26,19 @@ import javax.swing.JCheckBox;
  */
 public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String name;
+    private Empleado empleadoE;
+    private List<Consumo_Empleado> empleado;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_ComandasEmpleado
-     * @param Name
      * @param notificaciones
      */
-    public JF_ComandasEmpleado(String Name,java.util.List<String[]> notificaciones) {
+    public JF_ComandasEmpleado(Empleado empleadoE,java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.name = Name;
-        jLabel2.setText(Name);
+        this.empleadoE = empleadoE;
+        jLabel2.setText(empleadoE.getNombre());
         jLabel2.setFont(new Font("Montserrat", 0, 40));
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
@@ -42,12 +48,17 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        //DefaultTableModel model = new DefaultTableModel();
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
+        ControladorConsumo consumo = new ControladorConsumo();
+
+        
+        empleado = consumo.ConsultarEmpleado(empleadoE.getId());
+        listaObjetos = consumo.obtenerListaObjetosConsumoEmpleado(empleado);
+        
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaEmpleado(empleado),"Ver mas");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
-        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this, null, notificaciones));
+        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this, listaObjetos, notificaciones));
 
         
         getContentPane().setLayout(new BorderLayout());
@@ -277,7 +288,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComandaEmpleado(this.name, notificaciones).setVisible(true);
+        new JF_NuevaComandaEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -327,7 +338,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new JF_ComandasEmpleado(args[0], null).setVisible(true);
+                new JF_ComandasEmpleado(null, null).setVisible(true);
             }
         });
     }

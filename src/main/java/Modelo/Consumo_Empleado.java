@@ -23,19 +23,38 @@ public class Consumo_Empleado {
     private ObjectId ID_Comanda;
     private ObjectId ID_Empleado;
     private String Estado;
+    private double MontoTotal;
     
-    public Consumo_Empleado(ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado){
+    
+    public Consumo_Empleado(){}
+    
+    public Consumo_Empleado(ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado, double MontoTotal){
         this.ID_Comanda = ID_Comanda;
         this.ID_Empleado = ID_Empleado;
         this.Estado = Estado;
+        this.MontoTotal = MontoTotal;
     }
     
-    public Consumo_Empleado(ObjectId id, ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado){
+    public Consumo_Empleado(ObjectId id, ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado, double MontoTotal){
         this.id = id;
         this.ID_Comanda = ID_Comanda;
         this.ID_Empleado = ID_Empleado;
         this.Estado = Estado;
+        this.MontoTotal = MontoTotal;
     }
+
+    public ObjectId getID_Comanda() {
+        return ID_Comanda;
+    }
+
+    public double getMontoTotal() {
+        return MontoTotal;
+    }
+
+    public ObjectId getID_Empleado() {
+        return ID_Empleado;
+    }
+    
     
     public void Nuevo_Consumo_Empleado(ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado){
         ConexionBD conexion = new ConexionBD();
@@ -62,7 +81,7 @@ public class Consumo_Empleado {
         FindIterable<Document> iterable = coleccion.find(eq("ID_Empleado", idEmpleado));
         
         for (Document documento: iterable){
-            Consumo_Empleado comanda = new Consumo_Empleado(documento.getObjectId("_id"), documento.getObjectId("ID_Comanda"),  documento.getObjectId("ID_Empleado"), documento.getString("Estado"));
+            Consumo_Empleado comanda = new Consumo_Empleado(documento.getObjectId("_id"), documento.getObjectId("ID_Comanda"),  documento.getObjectId("ID_Empleado"), documento.getString("Estado"), documento.getDouble("MontoTotal"));
             consumo.add(comanda);
         }
         

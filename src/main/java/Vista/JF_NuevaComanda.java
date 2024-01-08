@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -17,23 +18,24 @@ import java.awt.Font;
  */
 public class JF_NuevaComanda extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String number;
+    private Mesas Mesa;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
      */
-    public JF_NuevaComanda(String number, java.util.List<String[]> notificaciones) {
+    public JF_NuevaComanda(Mesas Mesa, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
-        this.number = number;
-        jLabel7.setText(number);
+        this.Mesa = Mesa;
+        
         customComponents();
         eventComponents();
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
+        jLabel7.setText(""+this.Mesa.getNumeroMesa());
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
@@ -227,7 +229,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa(this.number, notificaciones).setVisible(true);
+        new JF_ComandasMesa(this.Mesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +280,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_NuevaComanda("1", null).setVisible(true);
+                new JF_NuevaComanda(null, null).setVisible(true);
             }
         });
     }

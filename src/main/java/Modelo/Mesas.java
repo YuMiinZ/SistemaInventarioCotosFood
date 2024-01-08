@@ -8,6 +8,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -21,9 +22,19 @@ public class Mesas {
     private ObjectId id;
     private int NumeroMesa;
     
+    public Mesas() {}   
+    
     public Mesas(int Numero){
         this.NumeroMesa = Numero;
     }    
+
+    public int getNumeroMesa() {
+        return NumeroMesa;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
     
     public Mesas(ObjectId id, int Numero){
         this.id = id;
@@ -59,5 +70,19 @@ public class Mesas {
         }
         conexion.cerrarConexion(cliente);
         return Tmesas;
+    }
+    
+    public Mesas MesaEspecifica(ObjectId id){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Mesa");
+        
+        Document doc = coleccion.find(eq("_id", id)).first();
+        Mesas mesa = new Mesas(doc.getObjectId("_id"), doc.getInteger("Numero_Mesa"));
+        conexion.cerrarConexion(cliente);
+        
+        return mesa;
+        
     }
 }

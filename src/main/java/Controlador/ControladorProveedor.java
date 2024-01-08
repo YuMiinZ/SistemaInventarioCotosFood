@@ -6,12 +6,8 @@ package Controlador;
 
 import Modelo.Proveedor;
 import Vista.Clases.FuncionesGenerales;
-import Vista.JF_RegistrarProveedor;
 import Vista.Clases.ManejadorComponentes;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JFrame;
 import org.bson.types.ObjectId;
 
 /**

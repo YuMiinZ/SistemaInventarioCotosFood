@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorMesa;
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,6 +14,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -20,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaCuentas extends javax.swing.JFrame {
     private MenuBoton menu;  
+    private ControladorMesa mesa = new ControladorMesa();
+    private java.util.List<Mesas> mesas;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_ListaCuentas
@@ -38,11 +45,14 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(null, "Editar");
+        mesas = mesa.ConsultarMesas();        
+        listaObjetos = mesa.obtenerListaObjetosCuentas(mesas);
+
+        DefaultTableModel model = llenarTabla2columnas(mesa.LlenarTabla(mesas), "Editar");
         TablaPersonalizada.setTableProperties(Cuentas, model, true);
         
         Cuentas.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", Cuentas, 
-                "Comandas mesa", this, null, notificaciones));
+                "Comandas mesa", this, listaObjetos, notificaciones));
 
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
@@ -244,7 +254,9 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa("1", notificaciones).setVisible(true);
+        Mesas nuevaMesa = new Mesas(mesas.get(mesas.size()-1).getNumeroMesa()+1);
+        mesa.AgregarMesa(mesas.get(mesas.size()-1).getNumeroMesa()+1);
+        new JF_ComandasMesa(nuevaMesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
