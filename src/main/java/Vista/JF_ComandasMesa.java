@@ -65,16 +65,18 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                 "Ver Comanda mesa", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
+        rellenarTotal();
         pack();
      }
-     //INICIO DE COSAS DE TABLA 
-
+    
+    private void rellenarTotal(){
+        double result = 0;
+        for (Consumo_Cliente c: cliente){
+            result += c.getMonto();
+        }
+        jLabel2.setText("Monto Total: " + result);
+    }
      
-    
-    
-    //TERMINA COSAS DE LA TABLA
-    
     private void eventComponents() {
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -183,7 +185,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 1220, 525, 71));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 1230, 525, 71));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -196,12 +198,12 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1735, 250, -1, -1));
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 260, -1, -1));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Monto total: ");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 1150, 525, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 1160, 525, -1));
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
@@ -221,7 +223,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 1070, 60));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 1070, 60));
 
         ComandasEmpleadoTable.setFont(new Font ("Montserrat", Font.PLAIN,20));
         ComandasEmpleadoTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -252,7 +254,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         ComandasEmpleadoTable.setPreferredSize(new java.awt.Dimension(150, 80));
         jScrollPane1.setViewportView(ComandasEmpleadoTable);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, 1070, 460));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 1070, 460));
 
         jScrollPane2.setViewportView(jPanel4);
 

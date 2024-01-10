@@ -63,7 +63,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
+        rellenarTotal();
         pack();
         
     }
@@ -78,6 +78,14 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    private void rellenarTotal(){
+        double result = 0;
+        for (Consumo_Empleado c: empleado){
+            result += c.getMontoTotal();
+        }
+        jLabel1.setText("Monto Total: " + result);
     }
 
     /**
@@ -180,7 +188,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 1310, 525, 71));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 1210, 525, 71));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -193,7 +201,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1738, 250, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 240, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
@@ -208,7 +216,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 1070, 60));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
@@ -218,7 +226,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jLabel1.setFont(new Font("Montserrat", 0, 40));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Monto Total: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 1230, 525, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 1130, 525, -1));
 
         ComandasEmpleadoTable.setFont(new Font ("Montserrat", Font.PLAIN,20));
         ComandasEmpleadoTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -250,7 +258,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jScrollPane1.setViewportView(ComandasEmpleadoTable);
         ComandasEmpleadoTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 530, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 1070, 460));
 
         jScrollPane2.setViewportView(jPanel1);
 

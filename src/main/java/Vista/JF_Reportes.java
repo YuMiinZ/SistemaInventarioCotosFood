@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.ControladorReportes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +13,8 @@ import Vista.Clases.TablaPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,28 +22,30 @@ import java.awt.Font;
  * @author TomasPC
  */
 public class JF_Reportes extends javax.swing.JFrame {
-    MenuBoton menu;
-    String name;
+    private MenuBoton menu;
+    private ControladorReportes reportes = new ControladorReportes();
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Reportes
      * @param Name
+     * @param notificaciones
      */
     public JF_Reportes(String Name, java.util.List<String[]> notificaciones) {
         initComponents();
-        this.name = Name;
         this.notificaciones = notificaciones;
         jLabel2.setText(Name);
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
-        customComponents();
+        reportes.ReporteMinimos();
+        reportes.ReporteProductosEstancados();
+        customComponents(Name);
         eventComponents();
     }
-    private void customComponents(){
+    private void customComponents(String Name){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
 
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(null, "500");
+        DefaultTableModel model = llenarTabla2columnas(llamarReporte(Name));
         TablaPersonalizada.setTableProperties(Reportes, model, false);
 
         getContentPane().setLayout(new BorderLayout());
@@ -222,6 +227,17 @@ public class JF_Reportes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private List<String[]> llamarReporte(String Name){
+        List<String[]> datos = new ArrayList<>();
+        switch(Name){
+            case "Reporte de ventas" -> {break;}
+            case "Reporte de costo de mercadería más vendida" -> {break;}
+            case "Reporte de productos estancados" -> {datos = reportes.LlenarTablaMenu(reportes.ReporteProductosEstancados(), 0); break;}
+            case "Reporte de cantidad de productos mínimos" -> {datos = reportes.LlenarTablaProductos(reportes.ReporteMinimos()); break;}
+        }
+        return datos;
+    }
+    
     /**
      * @param args the command line arguments
      */

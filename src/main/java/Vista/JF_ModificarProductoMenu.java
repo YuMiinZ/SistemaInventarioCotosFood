@@ -298,13 +298,8 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         jPanel3.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 700, 199, 50));
 
         cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
+        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platillo", "Bebida" }));
         cmboxTipoProducto.setSelectedIndex(-1);
-        cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxTipoProductoActionPerformed(evt);
-            }
-        });
         jPanel3.add(cmboxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 710, 470, 40));
 
         lblTipoProducto.setFont(new Font ("Montserrat", Font.BOLD,34));
@@ -422,10 +417,6 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Registro exitoso");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void cmboxTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxTipoProductoActionPerformed
 
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");

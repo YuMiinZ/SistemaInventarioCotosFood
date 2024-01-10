@@ -8,10 +8,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.Filters;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -76,7 +77,8 @@ public class Consumo_Cliente {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
-        FindIterable<Document> iterable = coleccion.find(eq("ID_Mesa", idMesa));
+        Bson filter = Filters.and(Filters.eq("ID_Mesa", idMesa), Filters.eq("Estado", "Sin Pagar"));
+        FindIterable<Document> iterable = coleccion.find(filter);
         
         for (Document documento: iterable){
             Consumo_Cliente comanda = new Consumo_Cliente(documento.getObjectId("_id"), documento.getObjectId("ID_Comanda"),  documento.getObjectId("ID_Mesa"), documento.getString("Estado"), documento.getDouble("MontoTotal"));

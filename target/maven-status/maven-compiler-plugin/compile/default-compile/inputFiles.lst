@@ -22,7 +22,6 @@ C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\sr
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorProveedor.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_NuevaComandaEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\Consumo_Cliente.java
-C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\Reportes.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_RegistrarEmpleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_VerComandaMesa.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\Clases\FuncionesGenerales.java
@@ -41,6 +40,7 @@ C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\sr
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\Clases\ManejadorComponentes.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\Empleado.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Vista\JF_NuevaComanda.java
+C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorReportes.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorMesa.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Controlador\ControladorConsumo.java
 C:\Users\TomasPC\Desktop\Todo\Universidad\Proyecto\SistemaInventarioCotosFood\src\main\java\Modelo\ConexionBD.java

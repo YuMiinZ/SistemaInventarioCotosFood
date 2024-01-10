@@ -238,7 +238,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 700, 199, 50));
 
         cmboxTipoProducto.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Bebida" }));
+        cmboxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platillo", "Bebida" }));
         cmboxTipoProducto.setSelectedIndex(-1);
         cmboxTipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

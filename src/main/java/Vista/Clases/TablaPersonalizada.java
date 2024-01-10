@@ -50,10 +50,10 @@ public class TablaPersonalizada {
         if( columnName != null){
             table.getColumn(columnName).setCellRenderer(new ButtonRenderer());
         }
-        
-
-
-
         table.setRowHeight(table.getRowHeight() + 30);
+    }
+    
+    public static String getMonto(JTable table){
+        return table.getValueAt(0, 1).toString();
     }
 }

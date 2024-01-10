@@ -4,12 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorComanda;
+import Controlador.ControladorProductoMenu;
 import Modelo.Empleado;
+import Modelo.ProductoMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -19,9 +23,15 @@ import org.bson.types.ObjectId;
 public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
     private Empleado empleadoE;
+    private ControladorComanda comanda = new ControladorComanda();
+    private ControladorProductoMenu productos = new ControladorProductoMenu();
+    private List<ProductoMenu> Platillos;
+    private List<ProductoMenu> Bebidas;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
+     * @param empleadoE
+     * @param notificaciones
      */
     public JF_NuevaComandaEmpleado(Empleado empleadoE, java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
@@ -39,8 +49,24 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
         pack();
-
-}
+    }
+    
+    private void agregarPlatillosyBebidas(){
+        //cmboxIngredientes.removeAllItems();
+        //cmboxIngredientes.addItem(null); 
+        for (ProductoMenu producto : Platillos) {
+            //cmboxIngredientes.addItem(producto.getNombre()); 
+        }
+        for (ProductoMenu producto : Bebidas) {
+            //cmboxIngredientes.addItem(producto.getNombre()); 
+        }
+    }
+    
+    private void cargarOpcionesPlatillosyBebidas(){
+        Platillos = productos.Platillos();
+        Bebidas = productos.Bebidas();
+        agregarPlatillosyBebidas();
+    }
 
     
     private void eventComponents() {
@@ -73,13 +99,15 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablePlatilllos = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablePlatilllos1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -100,7 +128,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 129, 71, 78));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 71, 78));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new Font("Montserrat", Font.BOLD, 64));
@@ -118,11 +146,6 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         jButton1.setContentAreaFilled(false);
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,20 +154,20 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1817, Short.MAX_VALUE))
+                .addContainerGap(1829, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel3)
-                .addContainerGap(36, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel3)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, -1));
@@ -156,35 +179,17 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         jLabel4.setText("Platillos");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 454, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setToolTipText("");
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 308, 36));
-
         jLabel5.setFont(new Font("Montserrat", 0, 36));
         jLabel5.setText("Bebidas");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 926, -1, -1));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setToolTipText("");
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 980, 308, 36));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 800, -1, -1));
 
         jLabel6.setFont(new Font("Montserrat", 0, 36));
         jLabel6.setText("Notas");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1349, 284, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 290, -1, -1));
 
         jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
         jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 340, 734, 222));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 734, 222));
 
         jButton3.setBackground(new java.awt.Color(0, 72, 121));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -197,11 +202,41 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 1150, 537, 181));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1287, 961, 400, 100));
 
         jLabel7.setFont(new Font("Montserrat", 0, 36));
         jLabel7.setText("Empleado");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
+
+        tablePlatilllos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Bebidas", "Cantidad"
+            }
+        ));
+        jScrollPane2.setViewportView(tablePlatilllos);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 870, 470, 210));
+
+        tablePlatilllos1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Platillos", "Cantidad"
+            }
+        ));
+        jScrollPane3.setViewportView(tablePlatilllos1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 470, 210));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -230,18 +265,6 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         new JF_ComandasEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -289,8 +312,6 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -301,6 +322,10 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablePlatilllos;
+    private javax.swing.JTable tablePlatilllos1;
     // End of variables declaration//GEN-END:variables
 }

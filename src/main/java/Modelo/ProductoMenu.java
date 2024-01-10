@@ -4,12 +4,14 @@
  */
 package Modelo;
 
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -24,7 +26,16 @@ public class ProductoMenu {
     double precio, costoElaboracion;
     List<Ingrediente> listaIngredientes;
 
-    public ProductoMenu() {
+    public ProductoMenu() {}
+    
+    public ProductoMenu(ObjectId id, String nombre, String estado, String tipoProducto, double precio, double costoElaboracion,List<Ingrediente> listaIngredientes){
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.tipoProducto = tipoProducto;
+        this.precio = precio;
+        this.costoElaboracion = costoElaboracion;
+        this.listaIngredientes = listaIngredientes;
     }
 
     public ObjectId getId() {
@@ -89,6 +100,11 @@ public class ProductoMenu {
         private ObjectId idProductoInventario;
 
         public Ingrediente() {
+        }
+        
+        public Ingrediente(double cantidad, ObjectId idProductoInventario){
+            this.cantidad = cantidad;
+            this.idProductoInventario = idProductoInventario;
         }
 
         public double getCantidad() {
@@ -199,31 +215,167 @@ public class ProductoMenu {
         FindIterable<Document> productos = coleccion.find();
 
         for (Document documento : productos) {
-            ProductoMenu producto = new ProductoMenu();
-
-            producto.setId(documento.getObjectId("_id"));
-            producto.setNombre(documento.getString("Nombre"));
-            producto.setEstado(documento.getString("Estado"));
-            producto.setTipoProducto(documento.getString("Tipo_Producto"));
-            producto.setPrecio(documento.getDouble("Precio"));
-            producto.setCostoElaboracion(documento.getDouble("Costo_de_Elaboracion"));
-
+            
             List<Document> listaIngredientesDocumento = (List<Document>) documento.get("Ingredientes");
             List<Ingrediente> listaIngredientes = new ArrayList<>();
 
             for (Document ingredienteDocumento : listaIngredientesDocumento) {
-                Ingrediente ingrediente = new Ingrediente();
-                ingrediente.setCantidad(ingredienteDocumento.getDouble("Cantidad"));
-                ingrediente.setIdProductoInventario(ingredienteDocumento.getObjectId("idProductoInventario"));
+                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
                 listaIngredientes.add(ingrediente);
             }
-
-            producto.setListaIngredientes(listaIngredientes);
+            ProductoMenu producto = new ProductoMenu(documento.getObjectId("_id"),documento.getString("Nombre"),documento.getString("Estado"), documento.getString("Tipo_Producto"), documento.getDouble("Precio"),documento.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             listaProductos.add(producto);
         }
 
         conexion.cerrarConexion(cliente);
-
         return listaProductos;
+    }
+    
+    public List<ProductoMenu> ProductosenMenu(List<String> productos){
+        ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
+        
+        FindIterable<Document> Menu = coleccion.find(new Document("Nombre", new Document("$in", productos)));
+        
+        for (Document doc: Menu){
+             List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
+            List<Ingrediente> listaIngredientes = new ArrayList<>();
+
+            for (Document ingredienteDocumento : listaIngredientesDocumento) {
+                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                listaIngredientes.add(ingrediente);
+            }
+            ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
+            ProductosComanda.add(producto);
+        }
+        
+        return ProductosComanda;
+    }
+    
+    public List<ProductoMenu> ProductosEstancados(List<String> productos){
+        ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
+        
+        FindIterable<Document> Menu = coleccion.find(new Document("Nombre", new Document("$nin", productos)));
+        
+        for (Document doc: Menu){
+             List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
+            List<Ingrediente> listaIngredientes = new ArrayList<>();
+
+            for (Document ingredienteDocumento : listaIngredientesDocumento) {
+                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                listaIngredientes.add(ingrediente);
+            }
+            ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
+            ProductosComanda.add(producto);
+        }
+        
+        return ProductosComanda;
+    }
+    
+    public ProductoMenu getProducto(String nombre){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
+        
+        Document doc = coleccion.find(eq("Nombre", nombre)).first();
+
+            
+        List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
+        List<Ingrediente> listaIngredientes = new ArrayList<>();
+
+        for (Document ingredienteDocumento : listaIngredientesDocumento) {
+            Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+            listaIngredientes.add(ingrediente);
+        }
+        ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
+        
+        return producto;
+    }
+    
+    
+    public List<ProductoMenu> Platillos(){
+        ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
+        
+        FindIterable<Document> Menu = coleccion.find(eq("Tipo_Producto", "Platillo"));
+        for (Document doc: Menu){
+            List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
+            List<Ingrediente> listaIngredientes = new ArrayList<>();
+
+            for (Document ingredienteDocumento : listaIngredientesDocumento) {
+                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                listaIngredientes.add(ingrediente);
+            }
+            ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
+            ProductosComanda.add(producto);
+        }
+        return ProductosComanda;
+    }
+    
+    public List<ProductoMenu> Bebidas(){
+        ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
+        
+        FindIterable<Document> Menu = coleccion.find(eq("Tipo_Producto", "Bebidas"));
+        for (Document doc: Menu){
+            List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
+            List<Ingrediente> listaIngredientes = new ArrayList<>();
+
+            for (Document ingredienteDocumento : listaIngredientesDocumento) {
+                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                listaIngredientes.add(ingrediente);
+            }
+            ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
+            ProductosComanda.add(producto);
+        }
+        return ProductosComanda;
+    }
+    
+    public List<ProductoMenu> ReporteProductosEstancados(){
+        List<ProductoMenu> productos = new ArrayList<>();
+        List<String> temporal = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        List<Document> coleccion = new ArrayList<>();
+        MongoCollection<Document> ProductoComanda = db.getCollection("Comanda");
+
+
+        
+        AggregateIterable<Document> Menu = ProductoComanda.aggregate(Arrays.asList(new Document("$lookup", 
+                                                        new Document("from", "Consumo_Cliente").append("localField", "_id").append("foreignField", "ID_Comanda").append("as","comandaInfo")),
+                                                        new Document("$unwind", "$comandaInfo")));
+
+        
+        Menu.into(coleccion);
+        for (Document doc: coleccion){
+            for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
+                temporal.add(nombres);
+            }
+        }
+        
+        productos = ProductosEstancados(temporal);
+        
+        return productos;
     }
 }

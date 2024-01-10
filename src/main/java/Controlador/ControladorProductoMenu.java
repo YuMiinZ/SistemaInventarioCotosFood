@@ -126,6 +126,19 @@ public class ControladorProductoMenu {
         return listaIngredientes;
     }
     
+    public List<ProductoMenu> ProductosenMenu(List<String> productos){
+        return consultas.ProductosenMenu(productos);
+    }
+    
+    public List<ProductoMenu> Platillos(){
+        return consultas.Platillos();
+    }
+    
+    public List<ProductoMenu> Bebidas(){
+        return consultas.Bebidas();
+    }
+    
+    
     public boolean validarDatos(String nombre, double precio, double costoElaboracion, Object tipoProducto, JTable tableIngredientes, Object estado){
         boolean datosValidos = true;
 

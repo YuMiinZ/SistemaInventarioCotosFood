@@ -10,7 +10,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -189,6 +188,18 @@ public class ProductoInventario {
 
         conexion.cerrarConexion(cliente);
         return listaProductos;
+    }
+    
+    public List<ProductoInventario> ReporteMinimo(){
+        List<ProductoInventario> listaMinimos = new ArrayList<>();
+        List<ProductoInventario> listaProductos = getListaProductosInventario();
+        
+        for (ProductoInventario producto: listaProductos){
+            if (producto.getCantidad() <= producto.getCantidadMinima()){
+                listaMinimos.add(producto);
+            }
+        }
+        return listaMinimos;
     }
     
     public List<String[]> obtenerInfoTabla(List<ProductoInventario> listaProductos) {
