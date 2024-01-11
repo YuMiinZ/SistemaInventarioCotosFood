@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -50,6 +51,10 @@ public class Comanda {
     public Double getMonto() {
         return Monto;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
     
     public Comanda BuscarComanda(ObjectId id){
         ConexionBD conexion = new ConexionBD();
@@ -63,17 +68,32 @@ public class Comanda {
 
         return comanda;
     }
+    
+    public Comanda UltimaComanda(){
+        List<Comanda> Comandas = new ArrayList<>();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
-    // TODO: Agregar Monto
-    public void RegistrarComanda(List<String> Platillos_Bebida, String Notes){
+        FindIterable<Document> documento = coleccion.find();
+        for (Document doc : documento){
+            Comanda comanda = new Comanda(doc.getObjectId("_id"), doc.getList("ListaProductosConsumo", String.class), doc.getString("Notas"), doc.getDouble("Monto"));
+            Comandas.add(comanda);
+        }
+        return Comandas.get(Comandas.size()-1);
+    }
+
+    public void RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
-        Document Comanda = new Document("ID_Platillos_Bebida", Platillos_Bebida)
-                            .append("Notas", Notes);
+        Document Comanda = new Document("ListaProductosConsumo", Platillos_Bebida)
+                            .append("Notas", Notes)
+                            .append("Monto", Monto);
 
         coleccion.insertOne(Comanda);
         conexion.cerrarConexion(cliente);

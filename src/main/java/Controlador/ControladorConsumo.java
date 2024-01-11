@@ -29,6 +29,13 @@ public class ControladorConsumo {
         return cliente.ConsumoClienteEspecifico(NumMesa);
     }
     
+    public void CrearCliente(ObjectId comanda, ObjectId mesa, double monto){
+        cliente.NuevaCompra(comanda, mesa, monto);
+    }
+    
+    public void CrearEmpleado(ObjectId comanda, ObjectId mesa, double monto){
+        Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto);
+    }
     
     public List<Object> obtenerListaObjetosConsumoCliente( List<Consumo_Cliente> listaConsumo){
         List<Object> listaObjetos = new ArrayList<>();        

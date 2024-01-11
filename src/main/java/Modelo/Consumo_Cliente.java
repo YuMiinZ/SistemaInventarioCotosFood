@@ -55,7 +55,7 @@ public class Consumo_Cliente {
         return monto;
     }
     
-    public void NuevaCompra(ObjectId ID_Comanda, ObjectId ID_Mesa){
+    public void NuevaCompra(ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
 
@@ -63,7 +63,9 @@ public class Consumo_Cliente {
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
 
         Document Consumo_Cliente = new Document("ID_Comanda", ID_Comanda)
-                            .append("ID_Mesa", ID_Mesa);
+                            .append("ID_Mesa", ID_Mesa)
+                            .append("Estado", "Sin Pagar")
+                            .append("MontoTotal", Monto);
 
         coleccion.insertOne(Consumo_Cliente);
         conexion.cerrarConexion(cliente);

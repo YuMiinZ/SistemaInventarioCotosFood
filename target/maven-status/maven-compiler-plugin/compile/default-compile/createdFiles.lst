@@ -14,6 +14,7 @@ Vista\JF_Menu.class
 Vista\JF_Notificaciones$5.class
 Vista\Clases\MenuBoton$1.class
 Vista\JF_ModificarProductoInventario$3.class
+Vista\JF_NuevaComandaEmpleado$5.class
 Vista\JF_Inventario$1.class
 Vista\JF_ModificarProveedor$5.class
 Modelo\Proveedor.class
@@ -42,6 +43,7 @@ Vista\JF_ListaConsumoEmpleado$2.class
 Vista\JF_ListaCuentas.class
 Vista\JF_RegistrarProductoInventario$7.class
 Vista\JF_Principal$2.class
+Vista\JF_NuevaComandaEmpleado$6.class
 Vista\JF_NuevaComanda$4.class
 Vista\JF_ListaConsumoEmpleado.class
 Controlador\ControladorReportes.class
@@ -119,6 +121,7 @@ Vista\JF_ModificarProductoMenu$2.class
 Vista\JF_CompraProveedor$5.class
 Vista\JF_ModificarProductoMenu.class
 Vista\JF_Menu$1.class
+Vista\JF_NuevaComanda$6.class
 Vista\JF_CompraDia$3.class
 Vista\JF_RegistrarEmpleado$6.class
 Modelo\ProductoInventario.class

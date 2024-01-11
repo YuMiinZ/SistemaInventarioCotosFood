@@ -31,8 +31,12 @@ public class ControladorComanda {
         return comanda.BuscarComanda(id);
     }
     
-    public void AgreagarComanda(ArrayList<String> Platillos_Bebida, String Notes){
-        comanda.RegistrarComanda(Platillos_Bebida, Notes);
+    public Comanda UltimaComanda(){
+        return comanda.UltimaComanda();
+    }
+    
+    public void AgreagarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
+        comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes);
     }
     
     public void EliminarComanda(ObjectId id){

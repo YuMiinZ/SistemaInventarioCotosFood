@@ -5,16 +5,23 @@
 package Vista;
 
 import Controlador.ControladorComanda;
+import Controlador.ControladorConsumo;
 import Controlador.ControladorProductoMenu;
 import Modelo.Empleado;
 import Modelo.ProductoMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
+import Vista.Clases.TablaPersonalizada;
+import Vista.Clases.TablaSpinnerPersonalizada;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
-import org.bson.types.ObjectId;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,8 +32,10 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private Empleado empleadoE;
     private ControladorComanda comanda = new ControladorComanda();
     private ControladorProductoMenu productos = new ControladorProductoMenu();
-    private List<ProductoMenu> Platillos;
-    private List<ProductoMenu> Bebidas;
+    private ControladorConsumo Empleado = new ControladorConsumo();
+    private ControladorProductoMenu Menu = new ControladorProductoMenu(); 
+    private List<ProductoMenu> Platillo;
+    private List<ProductoMenu> Bebida;
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form NuevaComanda
@@ -48,24 +57,47 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
+        
+        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+        DefaultTableModel model = obtenerModelo(tablePlatilllos, Platillos);
+        DefaultTableModel model2 = obtenerModelo(tableBebidas, Bebidas);
+        TablaPersonalizada.setTableProperties(tablePlatilllos, model, false);
+        TablaPersonalizada.setTableProperties(tableBebidas, model2, false);
+        
+        
         pack();
+        cargarOpcionesMenu();
     }
     
-    private void agregarPlatillosyBebidas(){
-        //cmboxIngredientes.removeAllItems();
-        //cmboxIngredientes.addItem(null); 
-        for (ProductoMenu producto : Platillos) {
-            //cmboxIngredientes.addItem(producto.getNombre()); 
-        }
-        for (ProductoMenu producto : Bebidas) {
-            //cmboxIngredientes.addItem(producto.getNombre()); 
+    private DefaultTableModel obtenerModelo(JTable table, JComboBox<String> combo) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Ingrediente");
+        model.addColumn("Cantidad");
+
+
+        table.setModel(model);
+        table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(combo)); // Editor para la columna del JComboBox
+        table.getColumnModel().getColumn(1).setCellEditor(new TablaSpinnerPersonalizada.SpinnerEditor()); // Editor para la columna de cantidad con JSpinner
+        table.getColumnModel().getColumn(1).setCellRenderer(new TablaSpinnerPersonalizada.SpinnerRenderer()); // Renderizador para la columna de cantidad con JSpinner
+
+        TablaSpinnerPersonalizada.setCellBorders(table);
+        return model;
+    }
+    
+    
+    private void agregarOpciones(JComboBox<String> opcion, List<ProductoMenu> productos){
+        opcion.removeAllItems();
+        opcion.addItem(null);
+        for (ProductoMenu producto : productos){
+            opcion.addItem(producto.getNombre());
         }
     }
     
-    private void cargarOpcionesPlatillosyBebidas(){
-        Platillos = productos.Platillos();
-        Bebidas = productos.Bebidas();
-        agregarPlatillosyBebidas();
+    private void cargarOpcionesMenu(){
+        Platillo = Menu.Platillos();
+        Bebida = Menu.Bebidas();
+        agregarOpciones(Platillos, Platillo);
+        agregarOpciones(Bebidas, Bebida);
     }
 
     
@@ -90,6 +122,8 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Platillos = new javax.swing.JComboBox<>();
+        Bebidas = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -105,9 +139,15 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablePlatilllos = new javax.swing.JTable();
+        tableBebidas = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablePlatilllos1 = new javax.swing.JTable();
+        tablePlatilllos = new javax.swing.JTable();
+        btnAgregarPlatillo = new javax.swing.JButton();
+        btnAgregarBebida = new javax.swing.JButton();
+
+        Platillos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        Bebidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -208,7 +248,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         jLabel7.setText("Empleado");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
 
-        tablePlatilllos.setModel(new javax.swing.table.DefaultTableModel(
+        tableBebidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -219,11 +259,11 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 "Bebidas", "Cantidad"
             }
         ));
-        jScrollPane2.setViewportView(tablePlatilllos);
+        jScrollPane2.setViewportView(tableBebidas);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 870, 470, 210));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 840, 470, 210));
 
-        tablePlatilllos1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePlatilllos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -234,9 +274,31 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 "Platillos", "Cantidad"
             }
         ));
-        jScrollPane3.setViewportView(tablePlatilllos1);
+        jScrollPane3.setViewportView(tablePlatilllos);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 470, 210));
+
+        btnAgregarPlatillo.setBackground(new java.awt.Color(0, 72, 121));
+        btnAgregarPlatillo.setFont(new Font ("Montserrat", Font.BOLD,18));
+        btnAgregarPlatillo.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarPlatillo.setText("Agregar Platillo");
+        btnAgregarPlatillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPlatilloActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 230, 40));
+
+        btnAgregarBebida.setBackground(new java.awt.Color(0, 72, 121));
+        btnAgregarBebida.setFont(new Font ("Montserrat", Font.BOLD,18));
+        btnAgregarBebida.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarBebida.setText("Agregar Bebida");
+        btnAgregarBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarBebidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarBebida, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 800, 230, 40));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -268,7 +330,43 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        ArrayList<String> Productos = new ArrayList<>();
+        ProductoMenu producto;
+        double MontoTotal = 0;
+        //DefaultTableModel model = (DefaultTableModel) tablePlatilllos.getModel();
+        //DefaultTableModel model2 = (DefaultTableModel) tableBebidas.getModel();
+        for (int i = 0; i < tablePlatilllos.getRowCount(); i++){
+            producto = Menu.ObtenerProductoNombre(tablePlatilllos.getModel().getValueAt(i, 0).toString());
+            for (int j = 0; j < Double.parseDouble(tablePlatilllos.getModel().getValueAt(i, 1).toString()); j++){
+                Productos.add(producto.getNombre());
+                MontoTotal += producto.getPrecio();
+            }
+        }
+        
+        for (int i = 0; i < tableBebidas.getRowCount(); i++){
+            producto = Menu.ObtenerProductoNombre(tableBebidas.getModel().getValueAt(i, 0).toString());
+            for (int j = 0; j < Double.parseDouble(tableBebidas.getModel().getValueAt(i, 1).toString()); j++){
+                Productos.add(producto.getNombre());
+                MontoTotal += producto.getPrecio();
+            }
+        }
+        
+        comanda.AgreagarComanda(MontoTotal, Productos, jTextField1.getText());
+        Empleado.CrearEmpleado(comanda.UltimaComanda().getId(), empleadoE.getId(), MontoTotal);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPlatilloActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tablePlatilllos.getModel();
+        model.addRow(new Object[]{"", 0});
+    }//GEN-LAST:event_btnAgregarPlatilloActionPerformed
+
+    private void btnAgregarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarBebidaActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tableBebidas.getModel();
+        model.addRow(new Object[]{"", 0});
+    }//GEN-LAST:event_btnAgregarBebidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +407,10 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Bebidas;
+    private javax.swing.JComboBox<String> Platillos;
+    private javax.swing.JButton btnAgregarBebida;
+    private javax.swing.JButton btnAgregarPlatillo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -325,7 +427,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableBebidas;
     private javax.swing.JTable tablePlatilllos;
-    private javax.swing.JTable tablePlatilllos1;
     // End of variables declaration//GEN-END:variables
 }

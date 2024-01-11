@@ -131,11 +131,15 @@ public class ControladorProductoMenu {
     }
     
     public List<ProductoMenu> Platillos(){
-        return consultas.Platillos();
+        return consultas.PlatillosyBebidas("Platillo");
     }
     
     public List<ProductoMenu> Bebidas(){
-        return consultas.Bebidas();
+        return consultas.PlatillosyBebidas("Bebida");
+    }
+    
+    public ProductoMenu ObtenerProductoNombre(String nombre){
+        return consultas.ObtenerProductoporNombre(nombre);
     }
     
     

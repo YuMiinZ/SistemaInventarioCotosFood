@@ -9,7 +9,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -58,7 +57,7 @@ public class Consumo_Empleado {
     }
     
     
-    public void Nuevo_Consumo_Empleado(ObjectId ID_Comanda, ObjectId ID_Empleado, String Estado){
+    public void Nuevo_Consumo_Empleado(ObjectId ID_Comanda, ObjectId ID_Empleado, double Monto){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
 
@@ -66,8 +65,9 @@ public class Consumo_Empleado {
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Empleado");
 
         Document Consumo_Empleado = new Document("ID_Empleado", ID_Empleado)
-                            .append("Estado", Estado)
-                            .append("ID_Comanda", ID_Comanda);
+                            .append("Estado", "Sin Pagar")
+                            .append("ID_Comanda", ID_Comanda)
+                            .append("MontoTotal", Monto);
 
         coleccion.insertOne(Consumo_Empleado);
         conexion.cerrarConexion(cliente);
