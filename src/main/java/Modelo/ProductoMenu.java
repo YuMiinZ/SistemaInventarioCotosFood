@@ -12,7 +12,10 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -344,9 +347,8 @@ public class ProductoMenu {
         }
         return ProductosComanda;
     }    
-    public List<ProductoMenu> ReporteProductosEstancados(){
-        List<ProductoMenu> productos = new ArrayList<>();
-        List<String> temporal = new ArrayList<>();
+    
+    private List<Document> ProductosEnComandas(){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
 
@@ -358,6 +360,13 @@ public class ProductoMenu {
                                                         new Document("from", "Consumo_Cliente").append("localField", "_id").append("foreignField", "ID_Comanda").append("as","comandaInfo")),
                                                         new Document("$unwind", "$comandaInfo")));
         Menu.into(coleccion);
+        return coleccion;
+    }
+    
+    public List<ProductoMenu> ReporteProductosEstancados(){
+        List<ProductoMenu> productos;
+        List<String> temporal = new ArrayList<>();
+        List<Document> coleccion = ProductosEnComandas();
         for (Document doc: coleccion){
             for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
                 temporal.add(nombres);
@@ -365,6 +374,33 @@ public class ProductoMenu {
         }
         
         productos = ProductosEstancados(temporal);
+        return productos;
+    }
+    
+    private List<String> ProductoMasRepetido(List<String> productos){
+        //List<String> temporal = new ArrayList<>();
+        Map<String, Integer> frequencyMap = new HashMap<>();
+
+        for (String element : productos) {
+            frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
+        }
+
+        // Step 2: Implement a custom comparator
+        Collections.sort(productos, (o1, o2) -> frequencyMap.get(o2) - frequencyMap.get(o1));
+
+        return productos;
+    }
+    
+    public List<ProductoMenu> ReporteCostoProductosMasVendidos(){
+        List<ProductoMenu> productos;
+        List<String> temporal = new ArrayList<>();
+        List<Document> coleccion = ProductosEnComandas();
+        for (Document doc: coleccion){
+            for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
+                temporal.add(nombres);
+            }
+        }
+        productos = ProductosenMenu(ProductoMasRepetido(temporal));
         return productos;
     }
 }

@@ -61,7 +61,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaClientes(cliente),"Ver mas");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
-        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, 
+        ComandasEmpleadoTable.getColumn("Ver más").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver más", ComandasEmpleadoTable, 
                 "Ver Comanda mesa", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);

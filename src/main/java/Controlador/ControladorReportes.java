@@ -8,6 +8,7 @@ import Modelo.Consumo_Cliente;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,9 +31,17 @@ public class ControladorReportes {
         return producto.ReporteProductosEstancados();
     }
     
+    public List<Consumo_Cliente> ReporteVentas(Date fechaI, Date fechaF){
+        return consumo.ReporteVentas(fechaI, fechaF);
+    }
+    
+    public List<ProductoMenu> ReporteCostoMasVendidos(){
+        return producto.ReporteCostoProductosMasVendidos();
+    }
+    
     public List<String[]> LlenarTablaMenu(List<ProductoMenu> menu, int opcion){
         //System.out.println(menu.isEmpty());
-        List<String[]> producto = new ArrayList<>();
+        List<String[]> productos = new ArrayList<>();
         for (ProductoMenu lista : menu){
             String[] info = new String[2];
             info[0] = lista.getNombre();
@@ -41,17 +50,17 @@ public class ControladorReportes {
                 case 1 -> info[1] = ""+lista.getCostoElaboracion();
                 default -> {break;}
             }
-            producto.add(info);
+            productos.add(info);
         }
-        return producto;
+        return productos;
     }
     
-    public List<String[]> LlenarTablaProductos(List<ProductoInventario> productos){ 
+    public List<String[]> LlenarTablaProductos(List<ProductoInventario> inventario){ 
         List<String[]> minimos = new ArrayList<>();
-        for (ProductoInventario producto : productos){
+        for (ProductoInventario productos : inventario){
             String[] info = new String[2];
-            info[0] = producto.getNombre();
-            info[1] = ""+producto.getCantidad();
+            info[0] = productos.getNombre();
+            info[1] = ""+productos.getCantidad();
             minimos.add(info);
         }
         return minimos;

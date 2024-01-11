@@ -7,6 +7,7 @@ package Controlador;
 import Modelo.Consumo_Cliente;
 import Modelo.Consumo_Empleado;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -29,8 +30,8 @@ public class ControladorConsumo {
         return cliente.ConsumoClienteEspecifico(NumMesa);
     }
     
-    public void CrearCliente(ObjectId comanda, ObjectId mesa, double monto){
-        cliente.NuevaCompra(comanda, mesa, monto);
+    public void CrearCliente(ObjectId comanda, ObjectId mesa, double monto, Date fecha){
+        cliente.NuevaCompra(comanda, mesa, monto, fecha);
     }
     
     public void CrearEmpleado(ObjectId comanda, ObjectId mesa, double monto){
@@ -57,12 +58,11 @@ public class ControladorConsumo {
         return Empleado.ConsumoEmpleadoEspecifico(NumEmpleado);
     }
     
-    
     public List<String[]> LlenarTablaClientes(List<Consumo_Cliente> clientes){ 
         List<String[]> consumo = new ArrayList<>();
         for (Consumo_Cliente lista : clientes){
             String[] info = new String[2];
-            info[0] = ""+clientes.indexOf(lista)+1;
+            info[0] = ""+(clientes.indexOf(lista)+1);
             info[1] = ""+lista.getMonto();
             consumo.add(info);
         }
@@ -73,7 +73,7 @@ public class ControladorConsumo {
         List<String[]> consumo = new ArrayList<>();
         for (Consumo_Empleado lista : empleados){
             String[] info = new String[2];
-            info[0] = ""+empleados.indexOf(lista)+1;
+            info[0] = ""+(empleados.indexOf(lista)+1);
             info[1] = ""+lista.getMontoTotal();
             consumo.add(info);
         }

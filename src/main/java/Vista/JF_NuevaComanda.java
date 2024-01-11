@@ -16,7 +16,10 @@ import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -349,7 +352,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         }
         
         Comanda.AgreagarComanda(MontoTotal, Productos, jTextField1.getText());
-        Cliente.CrearCliente(Comanda.UltimaComanda().getId(), Mesa.getId(), MontoTotal);
+        Cliente.CrearCliente(Comanda.UltimaComanda().getId(), Mesa.getId(), MontoTotal, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnAgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPlatilloActionPerformed
