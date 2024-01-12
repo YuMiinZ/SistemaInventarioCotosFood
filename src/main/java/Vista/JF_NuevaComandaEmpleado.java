@@ -364,7 +364,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
             }
         }
 
-        comanda.AgreagarComanda(MontoTotal, Productos, jTextField1.getText());
+        comanda.AgregarComanda(MontoTotal, Productos, jTextField1.getText());
         Empleado.CrearEmpleado(comanda.UltimaComanda().getId(), empleadoE.getId(), MontoTotal);
 
     }//GEN-LAST:event_jButton3ActionPerformed

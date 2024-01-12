@@ -35,7 +35,7 @@ public class ControladorComanda {
         return comanda.UltimaComanda();
     }
     
-    public void AgreagarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
+    public void AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
         comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes);
     }
     

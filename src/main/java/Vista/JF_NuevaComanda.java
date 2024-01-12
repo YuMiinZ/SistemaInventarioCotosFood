@@ -351,7 +351,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
             }
         }
         
-        Comanda.AgreagarComanda(MontoTotal, Productos, jTextField1.getText());
+        Comanda.AgregarComanda(MontoTotal, Productos, jTextField1.getText());
         Cliente.CrearCliente(Comanda.UltimaComanda().getId(), Mesa.getId(), MontoTotal, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
     }//GEN-LAST:event_jButton3ActionPerformed
 
