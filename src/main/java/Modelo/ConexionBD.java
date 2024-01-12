@@ -6,6 +6,7 @@ package Modelo;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +25,8 @@ public class ConexionBD {
             cliente = MongoClients.create(uri);
             return cliente;
         } catch (Exception e) {
-            System.out.println("Error al conectar a la base de datos MongoDB: " + e.getMessage());
+            //System.out.println("Error al conectar a la base de datos MongoDB: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se ha podido crear la conexión con la base de datos.", null, JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
