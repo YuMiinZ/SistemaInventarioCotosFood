@@ -194,7 +194,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jLabel1.setFont(new Font("Montserrat", 0, 40));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Monto Total: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 700, 400, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 700, 860, -1));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new Font ("Montserrat", Font.BOLD,30));

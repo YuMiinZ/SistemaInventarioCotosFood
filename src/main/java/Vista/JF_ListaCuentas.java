@@ -160,7 +160,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel2.setText("Cuentas");
+        jLabel2.setText("Mesas");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));

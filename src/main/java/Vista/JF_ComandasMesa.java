@@ -190,7 +190,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jLabel2.setFont(new Font("Montserrat", 0, 40));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Monto Total: ");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 400, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 850, -1));
 
         jButton3.setBackground(new java.awt.Color(0, 72, 121));
         jButton3.setFont(new Font ("Montserrat", Font.BOLD,30));
