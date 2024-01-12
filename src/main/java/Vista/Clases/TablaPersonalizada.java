@@ -50,10 +50,8 @@ public class TablaPersonalizada {
         if( columnName != null){
             table.getColumn(columnName).setCellRenderer(new ButtonRenderer());
         }
-        
-
-
-
         table.setRowHeight(table.getRowHeight() + 30);
     }
+    
+
 }

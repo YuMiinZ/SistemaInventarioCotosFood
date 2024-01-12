@@ -1,6 +1,10 @@
 package Vista.Clases;
 
 
+import Modelo.Consumo_Cliente;
+import Modelo.Consumo_Empleado;
+import Modelo.Empleado;
+import Modelo.Mesas;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
 import Vista.JF_ComandasEmpleado;
@@ -201,14 +205,23 @@ public final class MenuBoton extends JPopupMenu{
             if (ventanaClass.equals(JF_Reportes.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class, List.class).newInstance(reporte, notificaciones);
             }
-            else if (ventanaClass.equals(JF_ComandasEmpleado.class) || ventanaClass.equals(JF_ComandasMesa.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class, List.class).newInstance((String) dato.toString(), notificaciones);
+            else if (ventanaClass.equals(JF_ComandasMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Mesas.class, List.class).newInstance((Mesas) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_ComandasEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Empleado.class, List.class).newInstance((Empleado) dato, notificaciones);
             }
             else if (ventanaClass.equals(JF_ModificarProductoInventario.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoInventario.class, List.class).newInstance((ProductoInventario) dato, notificaciones);
             }
             else if (ventanaClass.equals(JF_ModificarProductoMenu.class)){
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoMenu.class, List.class).newInstance((ProductoMenu) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Cliente.class, List.class).newInstance((Consumo_Cliente) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Empleado.class, List.class).newInstance((Consumo_Empleado) dato, notificaciones);
             }
             else{
                 ventana = (JFrame) ventanaClass.getDeclaredConstructor(List.class).newInstance(notificaciones);

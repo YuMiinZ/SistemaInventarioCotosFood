@@ -9,13 +9,9 @@ import Modelo.ProductoMenu;
 import Modelo.ProductoMenu.Ingrediente;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
 import org.bson.types.ObjectId;
 
 /**
@@ -129,6 +125,23 @@ public class ControladorProductoMenu {
         
         return listaIngredientes;
     }
+    
+    public List<ProductoMenu> ProductosenMenu(List<String> productos){
+        return consultas.ProductosenMenu(productos);
+    }
+    
+    public List<ProductoMenu> Platillos(){
+        return consultas.PlatillosyBebidas("Platillo");
+    }
+    
+    public List<ProductoMenu> Bebidas(){
+        return consultas.PlatillosyBebidas("Bebida");
+    }
+    
+    public ProductoMenu ObtenerProductoNombre(String nombre){
+        return consultas.ObtenerProductoporNombre(nombre);
+    }
+    
     
     public boolean validarDatos(String nombre, double precio, double costoElaboracion, Object tipoProducto, JTable tableIngredientes, Object estado){
         boolean datosValidos = true;

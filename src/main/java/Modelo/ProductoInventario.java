@@ -9,10 +9,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -22,10 +23,21 @@ import org.bson.types.ObjectId;
 public class ProductoInventario {
     private ObjectId id, idProveedor;
     private String nombre, estado, unidad_medida, diaCompra;
-    private double precio;
-    private int cantidad, cantidadMinima;
+    private double precio, cantidad;
+    private int cantidadMinima;
 
-    public ProductoInventario() {
+    public ProductoInventario() {}
+    
+    public ProductoInventario(ObjectId id, ObjectId idProveedor, String nombre, String estado, String unidad_medida, String diaCompra, double precio, double cantidad, int cantidadMinima){
+        this.id = id;
+        this.cantidad = cantidad;
+        this.cantidadMinima = cantidadMinima;
+        this.diaCompra = diaCompra;
+        this.estado = estado;
+        this.idProveedor = idProveedor;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.unidad_medida = unidad_medida;
     }
 
     public ObjectId getId() {
@@ -76,11 +88,11 @@ public class ProductoInventario {
         this.precio = precio;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -100,7 +112,7 @@ public class ProductoInventario {
         this.diaCompra = diaCompra;
     }
     
-    public void registrarProductoInventario(String nombre, double precio, ObjectId idProveedor, String estado, int cantidad, String unidadMedida,
+    public void registrarProductoInventario(String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, String unidadMedida,
                                             String diaCompra, int cantidadMinima) {
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
@@ -122,7 +134,7 @@ public class ProductoInventario {
         conexion.cerrarConexion(cliente);
     }
     
-    public void modificarProductoInventario(ObjectId id, String nombre, double precio, ObjectId idProveedor, String estado, int cantidad, 
+    public void modificarProductoInventario(ObjectId id, String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, 
                                             String unidadMedida, String diaCompra, int cantidadMinima) {
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
@@ -159,6 +171,23 @@ public class ProductoInventario {
         conexion.cerrarConexion(cliente);
     }
     
+    public ProductoInventario getProductoInventario(ObjectId id){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
+
+        Bson filter = Filters.and(Filters.eq("_id", id));
+        Document productoDoc = coleccion.find(filter).first();
+        
+        ProductoInventario producto = new ProductoInventario(productoDoc.getObjectId("_id"), productoDoc.getObjectId("ID_Proveedor"), productoDoc.getString("Nombre"),productoDoc.getString("Estado"), productoDoc.getString("Unidad_Medida"), 
+                productoDoc.getString("Dia_Compra"), productoDoc.getDouble("Precio"), productoDoc.getDouble("Cantidad"),productoDoc.getInteger("Cantidad_Minima"));
+        
+        conexion.cerrarConexion(cliente);
+        return producto;
+    }
+    
     public List<ProductoInventario> getListaProductosInventario() {
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
@@ -173,22 +202,26 @@ public class ProductoInventario {
         while (cursor.hasNext()) {
             Document productoDoc = cursor.next();
 
-            ProductoInventario producto = new ProductoInventario();
-            producto.setId(productoDoc.getObjectId("_id"));
-            producto.setNombre(productoDoc.getString("Nombre"));
-            producto.setPrecio(productoDoc.getDouble("Precio"));
-            producto.setIdProveedor(productoDoc.getObjectId("ID_Proveedor"));
-            producto.setEstado(productoDoc.getString("Estado"));
-            producto.setCantidad(productoDoc.getInteger("Cantidad"));
-            producto.setUnidad_Medida(productoDoc.getString("Unidad_Medida"));
-            producto.setDiaCompra(productoDoc.getString("Dia_Compra"));
-            producto.setCantidadMinima(productoDoc.getInteger("Cantidad_Minima"));
+            ProductoInventario producto = new ProductoInventario(productoDoc.getObjectId("_id"), productoDoc.getObjectId("ID_Proveedor"), productoDoc.getString("Nombre"),productoDoc.getString("Estado"), productoDoc.getString("Unidad_Medida"),
+                    productoDoc.getString("Dia_Compra"), productoDoc.getDouble("Precio"), productoDoc.getDouble("Cantidad"),productoDoc.getInteger("Cantidad_Minima"));
 
             listaProductos.add(producto);
         }
 
         conexion.cerrarConexion(cliente);
         return listaProductos;
+    }
+    
+    public List<ProductoInventario> ReporteMinimo(){
+        List<ProductoInventario> listaMinimos = new ArrayList<>();
+        List<ProductoInventario> listaProductos = getListaProductosInventario();
+        
+        for (ProductoInventario producto: listaProductos){
+            if (producto.getCantidad() <= producto.getCantidadMinima()){
+                listaMinimos.add(producto);
+            }
+        }
+        return listaMinimos;
     }
     
     public List<String[]> obtenerInfoTabla(List<ProductoInventario> listaProductos) {

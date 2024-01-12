@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorMesa;
+import Modelo.Mesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,6 +14,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -20,9 +24,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaCuentas extends javax.swing.JFrame {
     private MenuBoton menu;  
+    private ControladorMesa mesa = new ControladorMesa();
+    private java.util.List<Mesas> mesas;
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
-     * Creates new form JF_Comanda
+     * Creates new form JF_ListaCuentas
+     * @param notificaciones
      */
     public JF_ListaCuentas(java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
@@ -37,11 +45,14 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(null, "Editar");
-        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        mesas = mesa.ConsultarMesas();        
+        listaObjetos = mesa.obtenerListaObjetosCuentas(mesas);
+
+        DefaultTableModel model = llenarTabla2columnas(mesa.LlenarTabla(mesas), "Editar");
+        TablaPersonalizada.setTableProperties(Cuentas, model, true);
         
-        jTable1.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", jTable1, 
-                "Comandas mesa", this, null, notificaciones));
+        Cuentas.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", Cuentas, 
+                "Comandas mesa", this, listaObjetos, notificaciones));
 
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
@@ -82,10 +93,10 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Cuentas = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -158,7 +169,44 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         });
         jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1778, 243, -1, -1));
 
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
+        jLabel2.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel2.setText("Cuentas");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+
+        Cuentas.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        Cuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
+            },
+            new String [] {
+                "Producto", "Editar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        Cuentas.setAlignmentX(0.0F);
+        Cuentas.setAlignmentY(0.0F);
+        Cuentas.setColumnSelectionAllowed(true);
+        Cuentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Cuentas.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        Cuentas.setMinimumSize(new java.awt.Dimension(30, 80));
+        Cuentas.setPreferredSize(new java.awt.Dimension(150, 80));
+        jScrollPane1.setViewportView(Cuentas);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
+
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -168,30 +216,10 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 316, 1951, -1));
-
-        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
-        jLabel2.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel2.setText("Cuentas");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 444, 1951, 777));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
 
         jScrollPane2.setViewportView(jPanel4);
 
@@ -201,13 +229,13 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -226,7 +254,9 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_ComandasMesa("1", notificaciones).setVisible(true);
+        Mesas nuevaMesa = new Mesas(mesas.get(mesas.size()-1).getNumeroMesa()+1);
+        mesa.AgregarMesa(mesas.get(mesas.size()-1).getNumeroMesa()+1);
+        new JF_ComandasMesa(nuevaMesa, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -396,6 +426,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Cuentas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -406,6 +437,5 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

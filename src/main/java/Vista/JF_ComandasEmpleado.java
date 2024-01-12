@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Controlador.ControladorConsumo;
+import Modelo.Consumo_Empleado;
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +16,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla3columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 
 /**
@@ -21,16 +26,20 @@ import javax.swing.JCheckBox;
  */
 public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
-    private String name;
+    private Empleado empleadoE;
+    private List<Consumo_Empleado> empleado;
+    private ControladorConsumo consumo = new ControladorConsumo();
+    private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
-     * Creates new form JF_Comanda
+     * Creates new form JF_ComandasEmpleado
+     * @param notificaciones
      */
-    public JF_ComandasEmpleado(String Name,java.util.List<String[]> notificaciones) {
+    public JF_ComandasEmpleado(Empleado empleadoE,java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
         initComponents();
-        this.name = Name;
-        jLabel2.setText(Name);
+        this.empleadoE = empleadoE;
+        jLabel2.setText(empleadoE.getNombre());
         jLabel2.setFont(new Font("Montserrat", 0, 40));
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
@@ -40,17 +49,22 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        //DefaultTableModel model = new DefaultTableModel();
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas(null,"Ver mas");
-        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        ControladorConsumo consumo = new ControladorConsumo();
+
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Ver Comanda empleado", this, null, notificaciones));
+        empleado = consumo.ConsultarEmpleado(empleadoE.getId());
+        listaObjetos = consumo.obtenerListaObjetosConsumoEmpleado(empleado);
         
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaEmpleado(empleado),"Ver mas");
+        TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
+        
+        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this, listaObjetos, notificaciones));
+
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
+        rellenarTotal();
         pack();
         
     }
@@ -65,6 +79,14 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    private void rellenarTotal(){
+        double result = 0;
+        for (Consumo_Empleado c: empleado){
+            result += c.getMontoTotal();
+        }
+        jLabel1.setText("Monto Total: " + result);
     }
 
     /**
@@ -86,9 +108,9 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ComandasEmpleadoTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -109,11 +131,6 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
@@ -167,7 +184,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1536, 1363, 525, 71));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 1210, 525, 71));
 
         jButton4.setBackground(new java.awt.Color(0, 72, 121));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
@@ -180,7 +197,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1738, 250, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 240, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
@@ -192,35 +209,52 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 323, 1954, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 1070, 60));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Prueba");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 610, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1950, 810));
-
         jLabel1.setFont(new Font("Montserrat", 0, 40));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Monto Total: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1536, 1316, 525, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 1130, 525, -1));
+
+        ComandasEmpleadoTable.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        ComandasEmpleadoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
+            },
+            new String [] {
+                "Producto", "Editar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        ComandasEmpleadoTable.setAlignmentX(0.0F);
+        ComandasEmpleadoTable.setAlignmentY(0.0F);
+        ComandasEmpleadoTable.setColumnSelectionAllowed(true);
+        ComandasEmpleadoTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ComandasEmpleadoTable.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        ComandasEmpleadoTable.setMinimumSize(new java.awt.Dimension(30, 80));
+        ComandasEmpleadoTable.setPreferredSize(new java.awt.Dimension(150, 80));
+        jScrollPane1.setViewportView(ComandasEmpleadoTable);
+        ComandasEmpleadoTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 1070, 460));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -229,25 +263,24 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 65, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2095, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 247, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2129, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        consumo.Pagar(empleadoE.getId(), "Consumo_Empleado");
+        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -258,7 +291,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new JF_NuevaComandaEmpleado(this.name, notificaciones).setVisible(true);
+        new JF_NuevaComandaEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -306,13 +339,15 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new JF_ComandasEmpleado(args[0], null).setVisible(true);
+                new JF_ComandasEmpleado(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ComandasEmpleadoTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -325,6 +360,5 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

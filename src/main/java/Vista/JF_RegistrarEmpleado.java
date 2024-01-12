@@ -26,6 +26,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     /**
      * Creates new form JF_Principal
+     * @param notificaciones
      */
     public JF_RegistrarEmpleado(java.util.List<String[]> notificaciones) {
         this.notificaciones = notificaciones;
