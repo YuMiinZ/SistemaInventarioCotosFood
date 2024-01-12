@@ -30,6 +30,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
     private List<Consumo_Cliente> cliente;
     private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
+    private ControladorConsumo consumo = new ControladorConsumo();
 
     /**
      * Creates new form JF_ComandasMesa
@@ -52,13 +53,12 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         jLabel3.setText("Mesa: " + this.mesa.getNumeroMesa());
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        ControladorConsumo consumo = new ControladorConsumo();
         
         cliente = consumo.ConsultarCliente(this.mesa.getId());
         listaObjetos = consumo.obtenerListaObjetosConsumoCliente(cliente);
         
         
-        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaClientes(cliente),"Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaClientes(cliente),"Ver más");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
         ComandasEmpleadoTable.getColumn("Ver más").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver más", ComandasEmpleadoTable, 
@@ -132,11 +132,6 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -274,12 +269,11 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        consumo.Pagar(mesa.getId(), "Consumo_Cliente");
+        new JF_ComandasMesa(mesa, notificaciones).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

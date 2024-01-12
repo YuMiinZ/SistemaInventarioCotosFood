@@ -28,6 +28,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
     private Empleado empleadoE;
     private List<Consumo_Empleado> empleado;
+    private ControladorConsumo consumo = new ControladorConsumo();
     private List<Object> listaObjetos = new ArrayList<>();
     private java.util.List<String[]> notificaciones;
     /**
@@ -130,11 +131,6 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
@@ -280,12 +276,11 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        consumo.Pagar(empleadoE.getId(), "Consumo_Empleado");
+        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

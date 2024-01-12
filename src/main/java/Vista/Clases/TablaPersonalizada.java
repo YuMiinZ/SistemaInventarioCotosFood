@@ -53,7 +53,5 @@ public class TablaPersonalizada {
         table.setRowHeight(table.getRowHeight() + 30);
     }
     
-    public static String getMonto(JTable table){
-        return table.getValueAt(0, 1).toString();
-    }
+
 }

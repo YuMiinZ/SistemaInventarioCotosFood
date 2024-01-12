@@ -29,6 +29,8 @@ public class Consumo_Cliente {
     private String Estado;
     private double monto;
     private Date fecha;
+    private ProductoMenu producto = new ProductoMenu();
+    private ProductoInventario ingrediente = new ProductoInventario();
     
     public Consumo_Cliente(){}
 
@@ -60,6 +62,18 @@ public class Consumo_Cliente {
     public double getMonto() {
         return monto;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
     
     public void NuevaCompra(ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha){
         ConexionBD conexion = new ConexionBD();
@@ -73,11 +87,57 @@ public class Consumo_Cliente {
                             .append("Estado", "Sin Pagar")
                             .append("MontoTotal", Monto)
                             .append("Fecha", fecha);
-
         coleccion.insertOne(Consumo_Cliente);
         conexion.cerrarConexion(cliente);
     }
     
+    public void ModificarConsumo(ObjectId id, ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha, String Texto){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
+        
+        
+        Document filtro = new Document("_id", id);
+        Document Consumo_Cliente = new Document("ID_Comanda", ID_Comanda)
+                            .append("ID_Mesa", ID_Mesa)
+                            .append("Estado", Texto)
+                            .append("MontoTotal", Monto)
+                            .append("Fecha", fecha);
+
+        
+        Document updateDocumento = new Document("$set", Consumo_Cliente);
+        coleccion.updateOne(filtro, updateDocumento);
+        conexion.cerrarConexion(cliente);
+    }
+    
+    public void eliminar(ObjectId idMesa, ObjectId idComanda){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
+
+        Bson filter = Filters.and(Filters.eq("ID_Mesa", idMesa), Filters.eq("ID_Comanda", idComanda));
+        coleccion.deleteOne(filter);
+
+        conexion.cerrarConexion(cliente);
+    }
+    public Consumo_Cliente ConsumoCliente(ObjectId idConsumo){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
+        Bson filter = Filters.and(Filters.eq("_id", idConsumo));
+        Document documento = coleccion.find(filter).first();
+        Consumo_Cliente comanda = new Consumo_Cliente(documento.getObjectId("_id"), documento.getObjectId("ID_Comanda"),  documento.getObjectId("ID_Mesa"), documento.getString("Estado"), documento.getDouble("MontoTotal"), documento.getDate("Fecha"));
+
+        
+        conexion.cerrarConexion(cliente);
+        return comanda;
+    }
     
     public List<Consumo_Cliente> ConsumoClienteEspecifico(ObjectId idMesa){
         List<Consumo_Cliente> consumo = new ArrayList();
@@ -96,6 +156,7 @@ public class Consumo_Cliente {
         conexion.cerrarConexion(cliente);
         return consumo;
     }
+    
     public List<Consumo_Cliente> ReporteVentas(Date fechaI, Date fechaF){
         List<Consumo_Cliente> consumo = new ArrayList();
         ConexionBD conexion = new ConexionBD();
@@ -114,5 +175,49 @@ public class Consumo_Cliente {
         }
         conexion.cerrarConexion(cliente);
         return consumo;
+    }
+    
+    public void Pagar(ObjectId cuenta, String opcion){
+        String Id = null;
+        switch (opcion){
+            case "Consumo_Cliente" -> Id = "ID_Mesa";
+            case "Consumo_Empleado" -> Id = "ID_Empleado";
+        }
+        ProductoMenu platillos; 
+        ProductoInventario IngredienteP;
+        Consumo_Empleado empleado;
+        Consumo_Cliente consumo;
+
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+
+        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
+        MongoCollection<Document> coleccion = db.getCollection(opcion);
+        AggregateIterable<Document> iterable = coleccion.aggregate(Arrays.asList(new Document("$match",
+                                                                                 new Document(Id, cuenta)),                   // Aqui va el id de la mesa o del empleado
+                                                                                 new Document("$lookup", 
+                                                                                 new Document("from", "Comanda").append("localField", "ID_Comanda").append("foreignField", "_id").append("as","comandaInfo")),
+                                                                                 new Document("$unwind", "$comandaInfo"), new Document("$project", new Document("ListaProductosConsumo", "$comandaInfo.ListaProductosConsumo"))));
+        for (Document doc: iterable){
+            System.out.println(doc.toString());
+            Object productos = doc.get("ListaProductosConsumo");
+            List<Object> listaProductosConsumo = (List<Object>) productos;
+            
+            for (Object nombres : listaProductosConsumo ){
+                platillos = producto.ObtenerProductoporNombre(nombres.toString());
+                
+                for (ProductoMenu.Ingrediente ingredientes : platillos.listaIngredientes){
+                    IngredienteP = ingrediente.getProductoInventario(ingredientes.getIdProductoInventario());
+                    ingrediente.modificarProductoInventario(IngredienteP.getId(), IngredienteP.getNombre(), IngredienteP.getPrecio(), IngredienteP.getIdProveedor(), IngredienteP.getEstado(), 
+                            (IngredienteP.getCantidad() - ingredientes.getCantidad()), IngredienteP.getUnidad_Medida(), IngredienteP.getDiaCompra(), IngredienteP.getCantidadMinima());
+                }
+            }
+            
+            switch (opcion){
+                case "Consumo_Cliente" -> {consumo = new Consumo_Cliente().ConsumoCliente(doc.getObjectId("_id")); ModificarConsumo(consumo.getId(), consumo.getID_Comanda(), cuenta, consumo.getMonto(), consumo.getFecha(), "Pagado"); System.out.println("Modificado"); break;}
+                case "Consumo_Empleado" -> {empleado = new Consumo_Empleado().ConsumoEspecifico(doc.getObjectId("_id")); empleado.ModificarConsumoEmpelado(empleado.getID_Comanda(), empleado.getID_Empleado(), empleado.getMontoTotal(), "Pagado");}
+            }
+        }
+        conexion.cerrarConexion(cliente); 
     }
 }

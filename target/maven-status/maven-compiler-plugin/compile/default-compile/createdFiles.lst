@@ -29,7 +29,6 @@ Vista\JF_ComandasMesa.class
 Vista\Clases\TablaSpinnerPersonalizada$ButtonEditor.class
 Vista\JF_ListaCuentas$1.class
 Vista\JF_Inventario$2.class
-Vista\JF_ComandasMesa$7.class
 Vista\JF_ModificarProductoInventario$4.class
 Vista\JF_RegistrarProductoInventario$6.class
 Vista\JF_Notificaciones$4.class
@@ -165,7 +164,6 @@ Vista\JF_RegistrarProductoInventario$8.class
 Vista\JF_ModificarEmpleado.class
 Vista\JF_RegistrarProductoMenu$8.class
 Vista\JF_CompraProveedor$1.class
-Vista\JF_ComandasEmpleado$7.class
 Vista\JF_VerComandaMesa$3.class
 Vista\JF_ModificarEmpleado$2.class
 Vista\JF_NuevaComandaEmpleado$1.class

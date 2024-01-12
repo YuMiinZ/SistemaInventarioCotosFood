@@ -249,31 +249,15 @@ public class ProductoMenu {
             listaIngredientes.add(ingrediente);
         }
         ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
-   
+       conexion.cerrarConexion(cliente);
         return producto;
     }
+    
     public List<ProductoMenu> ProductosenMenu(List<String> productos){
         ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
-
-        MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
-        MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
-        
-        FindIterable<Document> Menu = coleccion.find(new Document("Nombre", new Document("$in", productos)));
-        
-        for (Document doc: Menu){
-             List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
-            List<Ingrediente> listaIngredientes = new ArrayList<>();
-
-            for (Document ingredienteDocumento : listaIngredientesDocumento) {
-                Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
-                listaIngredientes.add(ingrediente);
-            }
-            ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
-            ProductosComanda.add(producto);
+        for (String doc: productos){
+            ProductosComanda.add(ObtenerProductoporNombre(doc));
         }
-        
         return ProductosComanda;
     }
     
@@ -298,7 +282,7 @@ public class ProductoMenu {
             ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             ProductosComanda.add(producto);
         }
-        
+        conexion.cerrarConexion(cliente);
         return ProductosComanda;
     }
     
@@ -320,7 +304,7 @@ public class ProductoMenu {
             listaIngredientes.add(ingrediente);
         }
         ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
-        
+        conexion.cerrarConexion(cliente);
         return producto;
     }
     
@@ -345,6 +329,7 @@ public class ProductoMenu {
             ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             ProductosComanda.add(producto);
         }
+        conexion.cerrarConexion(cliente);
         return ProductosComanda;
     }    
     
@@ -360,6 +345,7 @@ public class ProductoMenu {
                                                         new Document("from", "Consumo_Cliente").append("localField", "_id").append("foreignField", "ID_Comanda").append("as","comandaInfo")),
                                                         new Document("$unwind", "$comandaInfo")));
         Menu.into(coleccion);
+        conexion.cerrarConexion(cliente);
         return coleccion;
     }
     
@@ -403,4 +389,5 @@ public class ProductoMenu {
         productos = ProductosenMenu(ProductoMasRepetido(temporal));
         return productos;
     }
+    
 }

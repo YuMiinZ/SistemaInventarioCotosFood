@@ -38,6 +38,18 @@ public class ControladorConsumo {
         Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto);
     }
     
+    public void ElminarCuentaCliente(ObjectId idMesa, ObjectId idComanda){
+        cliente.eliminar(idMesa, idComanda);
+    }
+    
+    public void ElminarCuentaEmpleado(ObjectId idEmpleado, ObjectId idComanda){
+        Empleado.eliminar(idEmpleado, idComanda);
+    }
+    
+    public void Pagar(ObjectId cuenta, String opcion){
+        cliente.Pagar(cuenta, opcion);
+    }
+    
     public List<Object> obtenerListaObjetosConsumoCliente( List<Consumo_Cliente> listaConsumo){
         List<Object> listaObjetos = new ArrayList<>();        
         for (Consumo_Cliente Consumo : listaConsumo) {

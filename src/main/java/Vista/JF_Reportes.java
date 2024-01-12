@@ -24,6 +24,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -296,13 +298,18 @@ public class JF_Reportes extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         List<Consumo_Cliente> consumo = null;
         List<String[]> datos = null;
-        try {
+        if (!txtFechaInicio.getText().isEmpty() && !txtFechaFinal.getText().isEmpty()){
             if (funcionesGenerales.validarFecha(txtFechaInicio.getText(), 0, manejadorComponentes) && funcionesGenerales.validarFecha(txtFechaFinal.getText(), 1, manejadorComponentes)){
-            consumo = reportes.ReporteVentas(dateFormat.parse(txtFechaInicio.getText()), dateFormat.parse(txtFechaFinal.getText()));}
-        } catch (ParseException ex) {
+                try {
+                    consumo = reportes.ReporteVentas(dateFormat.parse(txtFechaInicio.getText()), dateFormat.parse(txtFechaFinal.getText()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(JF_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else{
             consumo = reportes.ReporteVentas(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         }
-        
         
         datos = cliente.LlenarTablaClientes(consumo);
         DefaultTableModel model = llenarTabla2columnas(datos);

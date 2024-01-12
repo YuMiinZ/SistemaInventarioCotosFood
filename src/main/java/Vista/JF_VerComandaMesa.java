@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.ControladorComanda;
+import Controlador.ControladorConsumo;
 import Controlador.ControladorMesa;
 import Modelo.Consumo_Cliente;
 import Modelo.Mesas;
@@ -26,6 +27,7 @@ import javax.swing.JTextField;
 public class JF_VerComandaMesa extends javax.swing.JFrame {
     private MenuBoton menu;
     private Consumo_Cliente Consumo;
+    private ControladorConsumo controlador = new ControladorConsumo();
     private ControladorComanda Comanda;
     private ControladorMesa mesa = new ControladorMesa();
     private Mesas mesaE;
@@ -231,6 +233,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        controlador.ElminarCuentaCliente(mesaE.getId(), Consumo.getID_Comanda());
         Comanda.EliminarComanda(Consumo.getID_Comanda());
     }//GEN-LAST:event_jButton3ActionPerformed
 

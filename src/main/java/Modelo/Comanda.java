@@ -64,8 +64,8 @@ public class Comanda {
 
         Document doc = coleccion.find(eq("_id", id)).first();    
         Comanda comanda = new Comanda(doc.getObjectId("_id"), doc.getList("ListaProductosConsumo", String.class), doc.getString("Notas"), doc.getDouble("Monto"));
+        
         conexion.cerrarConexion(cliente);
-
         return comanda;
     }
     
@@ -81,6 +81,8 @@ public class Comanda {
             Comanda comanda = new Comanda(doc.getObjectId("_id"), doc.getList("ListaProductosConsumo", String.class), doc.getString("Notas"), doc.getDouble("Monto"));
             Comandas.add(comanda);
         }
+        
+        conexion.cerrarConexion(cliente);
         return Comandas.get(Comandas.size()-1);
     }
 
