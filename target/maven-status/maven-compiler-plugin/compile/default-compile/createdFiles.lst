@@ -3,7 +3,6 @@ Vista\JF_CompraDia$1.class
 Vista\Clases\TablaPersonalizada.class
 Vista\JF_VerComandaEmpleado$4.class
 Vista\JF_ModificarProductoInventario$9.class
-oontrolador\ControladorComanda.class
 Vista\JF_ComandasMesa$2.class
 Vista\JF_RegistrarProductoInventario$1.class
 Vista\JF_ComandasEmpleado$3.class
@@ -21,9 +20,7 @@ Vista\JF_RegistrarProveedor$2.class
 Vista\JF_ModificarProductoMenu$6.class
 Vista\JF_CompraProveedor.class
 Controlador\ControladorProductoMenu.class
-oontrolador\ControladorConsumo.class
 Vista\Clases\TablaSpinnerPersonalizada$SpinnerEditor.class
-oontrolador\ControladorMesa.class
 Vista\JF_RegistrarEmpleado$4.class
 Vista\JF_Menu$4.class
 Vista\JF_ComandasMesa.class
@@ -88,7 +85,6 @@ Vista\JF_RegistrarProductoInventario.class
 Vista\JF_ComandasMesa$4.class
 Vista\Clases\MenuBoton$2.class
 Vista\JF_RegistrarProductoInventario$4.class
-oontrolador\ControladorProductoInventario.class
 Vista\JF_ModificarProductoInventario$2.class
 Vista\JF_VerComandaMesa$4.class
 Vista\JF_RegistrarProveedor$5.class
@@ -117,7 +113,6 @@ Vista\JF_Reportes$3.class
 Vista\JF_ModificarProductoMenu$2.class
 Vista\JF_ModificarProductoMenu.class
 Vista\JF_Menu$1.class
-oontrolador\ControladorProductoMenu.class
 Vista\JF_NuevaComanda$6.class
 Vista\JF_CompraDia$3.class
 Vista\JF_RegistrarEmpleado$6.class
@@ -162,7 +157,6 @@ Vista\JF_CompraProveedor$1.class
 Vista\JF_VerComandaMesa$3.class
 Vista\JF_ModificarEmpleado$2.class
 Vista\JF_NuevaComandaEmpleado$1.class
-oontrolador\ControladorProveedor.class
 Vista\JF_RegistrarProveedor.class
 Vista\JF_ModificarProductoInventario$7.class
 Vista\JF_ModificarEmpleado$11.class
@@ -186,5 +180,4 @@ Vista\JF_ModificarProveedor$7.class
 Vista\JF_CompraProveedor$3.class
 Vista\JF_VerComandaMesa$1.class
 Vista\JF_NuevaComandaEmpleado$3.class
-oontrolador\ControladorEmpleado.class
 Vista\JF_ListaCuentas$5.class
