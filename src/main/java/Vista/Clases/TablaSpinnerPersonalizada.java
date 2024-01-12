@@ -86,6 +86,7 @@ public class TablaSpinnerPersonalizada {
                 model.addRow(new Object[]{dato, Text});
             }
         }
+        
         return model;
     }
     

@@ -112,8 +112,6 @@ public class JF_Reportes extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Reportes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         FechaInicio = new javax.swing.JLabel();
         FechaFinal = new javax.swing.JLabel();
@@ -123,6 +121,8 @@ public class JF_Reportes extends javax.swing.JFrame {
         lblErrorFechaF = new javax.swing.JLabel();
         lblErrorFecha = new javax.swing.JLabel();
         MontoTotal = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Reportes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -181,39 +181,7 @@ public class JF_Reportes extends javax.swing.JFrame {
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(25, 25, 25));
         jLabel2.setText("Consumo Empleados");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
-
-        Reportes.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        Reportes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Rice and Beans", "Editar"},
-                {"Chifrijo", "Editar"},
-                {"Coca Cola", "Editar"},
-                {"Pescado Empanizado", "Editar"}
-            },
-            new String [] {
-                "Producto", "Editar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        Reportes.setAlignmentX(0.0F);
-        Reportes.setAlignmentY(0.0F);
-        Reportes.setColumnSelectionAllowed(true);
-        Reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Reportes.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        Reportes.setMinimumSize(new java.awt.Dimension(30, 80));
-        Reportes.setPreferredSize(new java.awt.Dimension(150, 80));
-        jScrollPane1.setViewportView(Reportes);
-        Reportes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
@@ -229,7 +197,7 @@ public class JF_Reportes extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 1230, 60));
 
         FechaInicio.setFont(new Font("Montserrat", Font.BOLD, 24));
         FechaInicio.setText("Fecha Inicio:");
@@ -267,6 +235,19 @@ public class JF_Reportes extends javax.swing.JFrame {
         MontoTotal.setFont(new Font("Montserrat", Font.BOLD, 24));
         MontoTotal.setText("Total:");
         jPanel4.add(MontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 930, -1, -1));
+
+        Reportes.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        Reportes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Columna1", "Columna2"
+            }
+        ));
+        jScrollPane1.setViewportView(Reportes);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 1230, 450));
 
         jScrollPane2.setViewportView(jPanel4);
 

@@ -80,7 +80,7 @@ public class JF_Inventario extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 700, 290, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 730, 290, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
@@ -159,30 +159,15 @@ public class JF_Inventario extends javax.swing.JFrame {
         tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Ingrediente", "Cantidad", ""
+                "Ingrediente", "Cantidad", "Editar"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableInventario.setColumnSelectionAllowed(true);
-        tableInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tableInventario.setMinimumSize(new java.awt.Dimension(30, 80));
-        tableInventario.setPreferredSize(new java.awt.Dimension(150, 80));
+        ));
         jScrollPane1.setViewportView(tableInventario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 280));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 320));
 
         jScrollPane2.setViewportView(jPanel1);
 

@@ -56,37 +56,37 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        lblProveedor = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        lblErrorNombre = new javax.swing.JLabel();
+        lblProveedor = new javax.swing.JLabel();
+        cmboxProveedor = new javax.swing.JComboBox<>();
+        lblErrorProveedor = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
+        spnPrecio = new javax.swing.JSpinner();
+        lblErrorPrecio = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
-        lblCantMinima = new javax.swing.JLabel();
-        lblDiaCompra = new javax.swing.JLabel();
-        lblEstado = new javax.swing.JLabel();
-        cmboxEstado = new javax.swing.JComboBox<>();
+        spnCantidad = new javax.swing.JSpinner();
+        lblErrorCantidad = new javax.swing.JLabel();
+        lblErrorUnidadMedida = new javax.swing.JLabel();
         txtUnidadMedida = new javax.swing.JTextField();
         lblUnidadMedida = new javax.swing.JLabel();
-        spnPrecio = new javax.swing.JSpinner();
-        cmboxProveedor = new javax.swing.JComboBox<>();
-        cmboxDiaCompra = new javax.swing.JComboBox<>();
-        spnCantidad = new javax.swing.JSpinner();
-        btnModificar = new javax.swing.JButton();
-        lblErrorNombre = new javax.swing.JLabel();
-        lblErrorProveedor = new javax.swing.JLabel();
-        lblErrorPrecio = new javax.swing.JLabel();
-        lblErrorCantidad = new javax.swing.JLabel();
-        lblErrorCantidadMinima = new javax.swing.JLabel();
-        lblErrorDiaCompra = new javax.swing.JLabel();
         lblErrorEstado = new javax.swing.JLabel();
-        lblErrorUnidadMedida = new javax.swing.JLabel();
+        cmboxEstado = new javax.swing.JComboBox<>();
+        lblEstado = new javax.swing.JLabel();
+        lblErrorDiaCompra = new javax.swing.JLabel();
+        cmboxDiaCompra = new javax.swing.JComboBox<>();
+        lblDiaCompra = new javax.swing.JLabel();
+        lblErrorCantidadMinima = new javax.swing.JLabel();
         spnCantidadMinima = new javax.swing.JSpinner();
+        lblCantMinima = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(2160, 1440));
@@ -95,17 +95,6 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 470, -1));
-
-        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 470, -1));
-
-        txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 470, 38));
 
         btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
         btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -116,12 +105,12 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 960, 199, 50));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 820, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Modificar Producto Inventario");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -172,74 +161,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
-
-        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblPrecio.setText("Precio");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 680, 470, -1));
-
-        lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblCantidad.setText("Cantidad");
-        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 840, 510, -1));
-
-        lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblCantMinima.setText("Cantidad Mínima");
-        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 350, 470, -1));
-
-        lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblDiaCompra.setText("Día de Compra");
-        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 510, 470, -1));
-
-        lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblEstado.setText("Estado");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 670, 470, -1));
-
-        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
-        cmboxEstado.setSelectedIndex(-1);
-        cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxEstadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 720, 470, 40));
-
-        txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnidadMedidaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 880, 470, 38));
-
-        lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblUnidadMedida.setText("Unidad de Medida");
-        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 830, 510, -1));
-
-        spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 730, 470, 40));
-
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxProveedorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 470, 40));
-
-        cmboxDiaCompra.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        cmboxDiaCompra.setSelectedIndex(-1);
-        cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxDiaCompraActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 560, 470, 40));
-
-        spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 890, 470, 40));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 71, 78));
 
         btnModificar.setBackground(new java.awt.Color(0, 72, 121));
         btnModificar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -250,42 +172,120 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 960, 199, 50));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 820, 199, 50));
+
+        lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblNombre.setText("Nombre");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 470, -1));
+
+        txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 470, 38));
 
         lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorNombre.setText("El nombre no puede estar vacío");
-        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 460, -1));
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 460, -1));
+
+        lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblProveedor.setText("Proveedor");
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 470, -1));
+
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxProveedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 470, 40));
 
         lblErrorProveedor.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorProveedor.setText("Debe de seleccionar el proveedor");
-        jPanel1.add(lblErrorProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, 460, -1));
+        jPanel1.add(lblErrorProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 460, -1));
+
+        lblPrecio.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblPrecio.setText("Precio");
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 470, -1));
+
+        spnPrecio.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        spnPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        jPanel1.add(spnPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 470, 40));
 
         lblErrorPrecio.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorPrecio.setText("El precio debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 770, 460, -1));
+        jPanel1.add(lblErrorPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 460, -1));
+
+        lblCantidad.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblCantidad.setText("Cantidad");
+        jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 700, 510, -1));
+
+        spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 740, 470, 40));
 
         lblErrorCantidad.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorCantidad.setText("La cantidad debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 930, 460, -1));
-
-        lblErrorCantidadMinima.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorCantidadMinima.setText("La cantidad mínima del producto debe ser un número mayor o igual a 0");
-        jPanel1.add(lblErrorCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 440, 460, -1));
-
-        lblErrorDiaCompra.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorDiaCompra.setText("Debe de seleccionar el día de compra programado para el producto");
-        jPanel1.add(lblErrorDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 600, 460, -1));
-
-        lblErrorEstado.setForeground(new java.awt.Color(194, 8, 8));
-        lblErrorEstado.setText("Debe de seleccionar el estado del producto");
-        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 760, 460, -1));
+        jPanel1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 780, 460, -1));
 
         lblErrorUnidadMedida.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorUnidadMedida.setText("La unidad de medida no puede estar vacía");
-        jPanel1.add(lblErrorUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 920, 460, -1));
+        jPanel1.add(lblErrorUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 780, 460, -1));
+
+        txtUnidadMedida.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        txtUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnidadMedidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 740, 470, 38));
+
+        lblUnidadMedida.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblUnidadMedida.setText("Unidad de Medida");
+        jPanel1.add(lblUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 700, 510, -1));
+
+        lblErrorEstado.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorEstado.setText("Debe de seleccionar el estado del producto");
+        jPanel1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 640, 460, -1));
+
+        cmboxEstado.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congelado", "Producción" }));
+        cmboxEstado.setSelectedIndex(-1);
+        cmboxEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxEstadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 600, 470, 40));
+
+        lblEstado.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblEstado.setText("Estado");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 560, 470, -1));
+
+        lblErrorDiaCompra.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorDiaCompra.setText("Debe de seleccionar el día de compra programado para el producto");
+        jPanel1.add(lblErrorDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, 460, -1));
+
+        cmboxDiaCompra.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxDiaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxDiaCompra.setSelectedIndex(-1);
+        cmboxDiaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxDiaCompraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 460, 470, 40));
+
+        lblDiaCompra.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblDiaCompra.setText("Día de Compra");
+        jPanel1.add(lblDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 420, 470, -1));
+
+        lblErrorCantidadMinima.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorCantidadMinima.setText("La cantidad mínima del producto debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 360, 460, -1));
 
         spnCantidadMinima.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(spnCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 400, 470, 40));
+        jPanel1.add(spnCantidadMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 470, 40));
+
+        lblCantMinima.setFont(new Font ("Montserrat", Font.BOLD,36));
+        lblCantMinima.setText("Cantidad Mínima");
+        jPanel1.add(lblCantMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 280, 470, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -323,22 +323,6 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         regresar();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxEstadoActionPerformed
-
-    private void txtUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadMedidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnidadMedidaActionPerformed
-
-    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxProveedorActionPerformed
-
-    private void cmboxDiaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxDiaCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmboxDiaCompraActionPerformed
-
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if(controladorProductoInventario.modificarProductoInventario(dato.getId(), txtNombre.getText(), cmboxProveedor.getSelectedIndex(), 
@@ -348,6 +332,22 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Modificación exitosa");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmboxProveedorActionPerformed
+
+    private void txtUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadMedidaActionPerformed
+
+    private void cmboxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmboxEstadoActionPerformed
+
+    private void cmboxDiaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxDiaCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmboxDiaCompraActionPerformed
 
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");

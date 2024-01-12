@@ -25,14 +25,15 @@ import javax.swing.JCheckBox;
  * @author TomasPC
  */
 public class JF_ComandasEmpleado extends javax.swing.JFrame {
-    private MenuBoton menu;
-    private Empleado empleadoE;
+    private final MenuBoton menu;
+    private final Empleado empleadoE;
     private List<Consumo_Empleado> empleado;
-    private ControladorConsumo consumo = new ControladorConsumo();
+    private final ControladorConsumo consumo = new ControladorConsumo();
     private List<Object> listaObjetos = new ArrayList<>();
-    private java.util.List<String[]> notificaciones;
+    private final java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_ComandasEmpleado
+     * @param empleadoE
      * @param notificaciones
      */
     public JF_ComandasEmpleado(Empleado empleadoE,java.util.List<String[]> notificaciones) {
@@ -56,10 +57,10 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         empleado = consumo.ConsultarEmpleado(empleadoE.getId());
         listaObjetos = consumo.obtenerListaObjetosConsumoEmpleado(empleado);
         
-        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaEmpleado(empleado),"Ver mas");
+        DefaultTableModel model = llenarTabla3columnas(consumo.LlenarTablaEmpleado(empleado),"Ver más");
         TablaPersonalizada.setTableProperties(ComandasEmpleadoTable, model, true);
         
-        ComandasEmpleadoTable.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ComandasEmpleadoTable, "Ver Comanda empleado", this, listaObjetos, notificaciones));
+        ComandasEmpleadoTable.getColumn("Ver más").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver más", ComandasEmpleadoTable, "Ver Comanda empleado", this, listaObjetos, notificaciones));
 
         
         getContentPane().setLayout(new BorderLayout());
@@ -69,14 +70,11 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         
     }
     private void eventComponents() {
-        jButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (menu.menuAbierto) {
-                    menu.cerrarMenu();
-                } else {
-                    menu.mostrarMenu();
-                }
+        jButton1.addActionListener((ActionEvent e) -> {
+            if (menu.menuAbierto) {
+                menu.cerrarMenu();
+            } else {
+                menu.mostrarMenu();
             }
         });
     }
@@ -104,11 +102,11 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ComandasEmpleadoTable = new javax.swing.JTable();
 
@@ -171,33 +169,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 131, 71, 78));
-
-        jButton3.setBackground(new java.awt.Color(0, 72, 121));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Pagar");
-        jButton3.setMaximumSize(new java.awt.Dimension(525, 71));
-        jButton3.setMinimumSize(new java.awt.Dimension(525, 71));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 1210, 525, 71));
-
-        jButton4.setBackground(new java.awt.Color(0, 72, 121));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Nueva Comanda");
-        jButton4.setMaximumSize(new java.awt.Dimension(525, 71));
-        jButton4.setMinimumSize(new java.awt.Dimension(525, 71));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 240, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 71, 78));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
@@ -212,49 +184,52 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 1230, 60));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(0, 72, 121));
         jLabel2.setText("Prueba");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 610, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 610, -1));
 
         jLabel1.setFont(new Font("Montserrat", 0, 40));
         jLabel1.setForeground(new java.awt.Color(0, 72, 121));
         jLabel1.setText("Monto Total: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 1130, 525, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 700, 400, -1));
+
+        jButton4.setBackground(new java.awt.Color(0, 72, 121));
+        jButton4.setFont(new Font ("Montserrat", Font.BOLD,30));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Nueva Comanda");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 700, 290, 50));
+
+        jButton3.setBackground(new java.awt.Color(0, 72, 121));
+        jButton3.setFont(new Font ("Montserrat", Font.BOLD,30));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Pagar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 760, 290, 50));
 
         ComandasEmpleadoTable.setFont(new Font ("Montserrat", Font.PLAIN,20));
         ComandasEmpleadoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Rice and Beans", "Editar"},
-                {"Chifrijo", "Editar"},
-                {"Coca Cola", "Editar"},
-                {"Pescado Empanizado", "Editar"}
+
             },
             new String [] {
-                "Producto", "Editar"
+                "Title 1", "Ver más"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        ComandasEmpleadoTable.setAlignmentX(0.0F);
-        ComandasEmpleadoTable.setAlignmentY(0.0F);
-        ComandasEmpleadoTable.setColumnSelectionAllowed(true);
-        ComandasEmpleadoTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        ComandasEmpleadoTable.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        ComandasEmpleadoTable.setMinimumSize(new java.awt.Dimension(30, 80));
-        ComandasEmpleadoTable.setPreferredSize(new java.awt.Dimension(150, 80));
+        ));
         jScrollPane1.setViewportView(ComandasEmpleadoTable);
-        ComandasEmpleadoTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 1230, 330));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -276,13 +251,6 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        consumo.Pagar(empleadoE.getId(), "Consumo_Empleado");
-        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         new JF_ListaConsumoEmpleado(notificaciones).setVisible(true);
@@ -293,7 +261,15 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
         new JF_NuevaComandaEmpleado(this.empleadoE, notificaciones).setVisible(true);
         this.dispose();
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        consumo.Pagar(empleadoE.getId(), "Consumo_Empleado");
+        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,11 +314,8 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new JF_ComandasEmpleado(null, null).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JF_ComandasEmpleado(null, null).setVisible(true);
         });
     }
 
