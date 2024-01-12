@@ -4,26 +4,38 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoInventario;
+import Controlador.ControladorProveedor;
+import Modelo.ProductoInventario;
+import Modelo.Proveedor;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
-import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
+import static Vista.Clases.TablaSpinnerPersonalizada.crearColumnas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author yumii
  */
 public class JF_CompraProveedor extends javax.swing.JFrame {
     private MenuBoton menu;
-    
+    private List<String[]> notificaciones;
+    private final ControladorProveedor controladorProveedor = new ControladorProveedor();
+    private List<Proveedor> listaProveedores = controladorProveedor.obtenerListaProveedores();
+    private ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario();
+    private List<ProductoInventario> listaProductosInventario = controladorProductoInventario.obtenerListaProductosInventario();
+
     /**
      * Creates new form JF_Principal
      */
-    public JF_CompraProveedor() {
+    public JF_CompraProveedor(List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -50,7 +62,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblFiltro = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmboxProveedor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCompraProveedor = new javax.swing.JTable();
 
@@ -64,11 +76,11 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Compra por Proveedor");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 860, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
@@ -78,7 +90,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
         lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -86,20 +98,23 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2117, Short.MAX_VALUE))
+                .addContainerGap(2133, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 21, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -118,7 +133,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -137,15 +152,15 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         lblFiltro.setText("Proveedor");
         jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 150, 30));
 
-        jComboBox1.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxProveedor.setSelectedIndex(-1);
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmboxProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 270, 30));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 270, 30));
 
         tableCompraProveedor.setFont(new Font("Montserrat", Font.PLAIN, 20));
         tableCompraProveedor.setModel(new javax.swing.table.DefaultTableModel(
@@ -175,13 +190,14 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -190,25 +206,65 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmboxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tableCompraProveedor.getModel();
 
+        model.setRowCount(0);
+        if(cmboxProveedor.getSelectedItem() != null){
+            List<String[]> lista = obtenerListaDatos();
+            for(String[] dato : lista){
+                model.addRow(new Object[]{dato[0], dato[1]});
+            }
+        }
+    }//GEN-LAST:event_cmboxProveedorActionPerformed
+
+ 
+    
+     private List<String[]> obtenerListaDatos(){
+        List<String[]> resultado = new ArrayList<>();
+
+        for(ProductoInventario datos : listaProductosInventario){
+            if(listaProveedores.get(cmboxProveedor.getSelectedIndex()).getId().equals(datos.getIdProveedor())){
+                String[] producto = new String[2];
+                producto[0] = datos.getNombre();
+                producto[1] = "₡ "+String.valueOf(datos.getPrecio());
+                resultado.add(producto);
+            }
+        }
+
+        return resultado;
+    }
+    
  private void customComponents() {
     menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
     menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
 
 
        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-       DefaultTableModel model = llenarTabla2columnas("CompraProveedor", "₡300");
+       DefaultTableModel model = crearColumnas(2);
        TablaPersonalizada.setTableProperties(tableCompraProveedor, model, false);
        
        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
-        pack();
+       getContentPane().add(jScrollPane2, BorderLayout.CENTER);
+       pack();
+       
+       cargarOpciones();
+    }
+    
+    private void agregarOpciones(){
+        cmboxProveedor.removeAllItems();
+        for (Proveedor proveedor : listaProveedores) {
+            cmboxProveedor.addItem(proveedor.getNombre()); 
+        }
+    }
+ 
+    private void cargarOpciones(){
+        agregarOpciones();
+        cmboxProveedor.setSelectedIndex(-1);
     }
 
     
@@ -221,13 +277,6 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-            }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -325,14 +374,14 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_CompraProveedor().setVisible(true);
+                new JF_CompraProveedor(null).setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

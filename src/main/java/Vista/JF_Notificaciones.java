@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,7 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author yumii
@@ -20,15 +23,17 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Notificaciones extends javax.swing.JFrame {
     
     private MenuBoton menu;
-
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_Notificaciones() {
+    public JF_Notificaciones(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();        
+        
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
@@ -62,11 +67,11 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new Font("Montserrat", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Notificaciones");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setName(""); // NOI18N
@@ -77,8 +82,8 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
-        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -87,19 +92,19 @@ public class JF_Notificaciones extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2111, Short.MAX_VALUE))
+                .addContainerGap(2127, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -115,20 +120,20 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
+            .addGap(0, 1230, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
 
         tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableNotificacion.setModel(new javax.swing.table.DefaultTableModel(
@@ -155,8 +160,9 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         tableNotificacion.setColumnSelectionAllowed(true);
         tableNotificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tableNotificacion);
+        tableNotificacion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 380));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -165,15 +171,12 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
         );
 
         pack();
@@ -183,15 +186,29 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private List<String> concatenarDatos(List<String[]> listaNotificaciones){
+        java.util.List<String> resultados = new ArrayList<>();
+
+        if(listaNotificaciones != null ){
+            for (String[] datos : listaNotificaciones) {
+                String info = "Vencimiento próximo carné de manipulación de alimentos " + datos[0] + " el " + datos[1];
+                resultados.add(info);
+            }
+        }
+
+        return resultados;
+    }
+    
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Notificaciones", "Eliminar");
+        DefaultTableModel model = llenarTabla2columnas(concatenarDatos(notificaciones), "Eliminar");
         TablaPersonalizada.setTableProperties(tableNotificacion, model, true);
         
-        tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, "Notificaciones", this));
+        tableNotificacion.getColumn("Eliminar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Eliminar", tableNotificacion, 
+                "Editar producto Menu", this, null, notificaciones));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -214,7 +231,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         btnRegresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
+                menu.regresarVentanaPrincipal(notificaciones);
             }
         });
     }
@@ -269,7 +286,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Notificaciones().setVisible(true);
+                new JF_Notificaciones(null).setVisible(true);
             }
         });
     }

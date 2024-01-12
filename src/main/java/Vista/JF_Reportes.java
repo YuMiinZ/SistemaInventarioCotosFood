@@ -4,6 +4,11 @@
  */
 package Vista;
 
+import Controlador.ControladorConsumo;
+import Controlador.ControladorReportes;
+import Modelo.Consumo_Cliente;
+import Vista.Clases.FuncionesGenerales;
+import Vista.Clases.ManejadorComponentes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +17,15 @@ import Vista.Clases.TablaPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -19,31 +33,45 @@ import java.awt.Font;
  * @author TomasPC
  */
 public class JF_Reportes extends javax.swing.JFrame {
-    MenuBoton menu;
-    String name;
+    private MenuBoton menu;
+    private ControladorReportes reportes = new ControladorReportes();
+    private ControladorConsumo cliente = new ControladorConsumo();
+    private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
+    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
+    private java.util.List<String[]> notificaciones;
     /**
-     * Creates new form Reportes
+     * Creates new form JF_Reportes
+     * @param Name
+     * @param notificaciones
      */
-    public JF_Reportes(String Name) {
+    public JF_Reportes(String Name, java.util.List<String[]> notificaciones) {
         initComponents();
-        this.name = Name;
+        lblErrorFecha.setVisible(false);
+        lblErrorFechaF.setVisible(false);
+        this.notificaciones = notificaciones;
         jLabel2.setText(Name);
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
-        customComponents();
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
+        reportes.ReporteMinimos();
+        reportes.ReporteProductosEstancados();
+        customComponents(Name);
         eventComponents();
     }
-    private void customComponents(){
+    private void customComponents(String Name){
+        hideshowLabelsbuttons(false);
+        
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
 
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas(this.name, "500");
-        TablaPersonalizada.setTableProperties(jTable1, model, false);
-
+        DefaultTableModel model = llenarTabla2columnas(llamarReporte(Name));
+        TablaPersonalizada.setTableProperties(Reportes, model, false);
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
-        
+        manejadorComponentes.agregarLabel(lblErrorFecha);
+        manejadorComponentes.agregarLabel(lblErrorFechaF);
+        manejadorComponentes.agregarText(txtFechaFinal);
+        manejadorComponentes.agregarText(txtFechaFinal);
         pack();
         
     }
@@ -58,6 +86,15 @@ public class JF_Reportes extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    private void hideshowLabelsbuttons(boolean opcion){
+        FechaInicio.setVisible(opcion);
+        FechaFinal.setVisible(opcion);
+        txtFechaFinal.setVisible(opcion);
+        txtFechaInicio.setVisible(opcion);
+        Buscar.setVisible(opcion);
+        MontoTotal.setVisible(opcion);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,10 +111,18 @@ public class JF_Reportes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Reportes = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        FechaInicio = new javax.swing.JLabel();
+        FechaFinal = new javax.swing.JLabel();
+        Buscar = new javax.swing.JButton();
+        txtFechaFinal = new javax.swing.JTextField();
+        txtFechaInicio = new javax.swing.JTextField();
+        lblErrorFechaF = new javax.swing.JLabel();
+        lblErrorFecha = new javax.swing.JLabel();
+        MontoTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -88,20 +133,15 @@ public class JF_Reportes extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(775, 484));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
 
-        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 28));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel1.setForeground(new java.awt.Color(25, 25, 25));
         jLabel1.setText("Cotos Food");
 
         jButton1.setContentAreaFilled(false);
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,21 +149,19 @@ public class JF_Reportes extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1404, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel1)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1747, -1));
@@ -140,7 +178,45 @@ public class JF_Reportes extends javax.swing.JFrame {
         });
         jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 131, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
+        jLabel2.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel2.setText("Consumo Empleados");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+
+        Reportes.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        Reportes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
+            },
+            new String [] {
+                "Producto", "Editar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        Reportes.setAlignmentX(0.0F);
+        Reportes.setAlignmentY(0.0F);
+        Reportes.setColumnSelectionAllowed(true);
+        Reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Reportes.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        Reportes.setMinimumSize(new java.awt.Dimension(30, 80));
+        Reportes.setPreferredSize(new java.awt.Dimension(150, 80));
+        jScrollPane1.setViewportView(Reportes);
+        Reportes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
+
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,30 +226,47 @@ public class JF_Reportes extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 323, 1544, -1));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
 
-        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
-        jLabel2.setForeground(new java.awt.Color(0, 72, 121));
-        jLabel2.setText("Consumo Empleados");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+        FechaInicio.setFont(new Font("Montserrat", Font.BOLD, 24));
+        FechaInicio.setText("Fecha Inicio:");
+        jPanel4.add(FechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 930, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
+        FechaFinal.setFont(new Font("Montserrat", Font.BOLD, 24));
+        FechaFinal.setText("Fecha Final:");
+        jPanel4.add(FechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 930, -1, -1));
+
+        Buscar.setBackground(new java.awt.Color(0, 72, 121));
+        Buscar.setFont(new Font("Montserrat", Font.BOLD, 24));
+        Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jPanel4.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 910, 199, 50));
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 451, 1544, 834));
+        txtFechaFinal.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel4.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 920, 210, 40));
+
+        txtFechaInicio.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel4.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 920, 210, 40));
+
+        lblErrorFechaF.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFechaF.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel4.add(lblErrorFechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 960, 290, 30));
+
+        lblErrorFecha.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFecha.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel4.add(lblErrorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 960, 290, 30));
+
+        MontoTotal.setFont(new Font("Montserrat", Font.BOLD, 24));
+        MontoTotal.setText("Total:");
+        jPanel4.add(MontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 930, -1, -1));
 
         jScrollPane2.setViewportView(jPanel4);
 
@@ -181,29 +274,68 @@ public class JF_Reportes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1669, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1832, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_Principal().setVisible(true);
+        new JF_Principal(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        List<Consumo_Cliente> consumo = null;
+        List<String[]> datos = null;
+        if (!txtFechaInicio.getText().isEmpty() && !txtFechaFinal.getText().isEmpty()){
+            if (funcionesGenerales.validarFecha(txtFechaInicio.getText(), 0, manejadorComponentes) && funcionesGenerales.validarFecha(txtFechaFinal.getText(), 1, manejadorComponentes)){
+                try {
+                    consumo = reportes.ReporteVentas(dateFormat.parse(txtFechaInicio.getText()), dateFormat.parse(txtFechaFinal.getText()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(JF_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else{
+            consumo = reportes.ReporteVentas(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        }
+        
+        datos = cliente.LlenarTablaClientes(consumo);
+        DefaultTableModel model = llenarTabla2columnas(datos);
+        MontoTotal.setText("Monto Total: "+ rellenarTotal(consumo));
+        TablaPersonalizada.setTableProperties(Reportes, model, false);
+        
+    }//GEN-LAST:event_BuscarActionPerformed
+    private double rellenarTotal(List<Consumo_Cliente> clientes){
+        double result = 0;
+        for (Consumo_Cliente c: clientes){
+            result += c.getMonto();
+        }
+        return result;
+    }
+    private List<String[]> llamarReporte(String Name){
+        List<String[]> datos = new ArrayList<>();
+        switch(Name){
+            case "Reporte de ventas" -> {hideshowLabelsbuttons(true);break;}
+            case "Reporte de costo de mercadería más vendida" -> {datos = reportes.LlenarTablaMenu(reportes.ReporteCostoMasVendidos(), 1); break;}
+            case "Reporte de productos estancados" -> {datos = reportes.LlenarTablaMenu(reportes.ReporteProductosEstancados(), 0); break;}
+            case "Reporte de cantidad de productos mínimos" -> {datos = reportes.LlenarTablaProductos(reportes.ReporteMinimos()); break;}
+            default -> {break;}
+        }
+        return datos;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -235,13 +367,18 @@ public class JF_Reportes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Reportes(args[0]).setVisible(true);
+                new JF_Reportes(args[0], null).setVisible(true);
             }
 
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Buscar;
+    private javax.swing.JLabel FechaFinal;
+    private javax.swing.JLabel FechaInicio;
+    private javax.swing.JLabel MontoTotal;
+    private javax.swing.JTable Reportes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -251,6 +388,9 @@ public class JF_Reportes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblErrorFecha;
+    private javax.swing.JLabel lblErrorFechaF;
+    private javax.swing.JTextField txtFechaFinal;
+    private javax.swing.JTextField txtFechaInicio;
     // End of variables declaration//GEN-END:variables
 }

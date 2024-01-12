@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoMenu;
+import Modelo.ProductoMenu;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,13 +24,17 @@ import javax.swing.table.DefaultTableModel;
 public class JF_Menu extends javax.swing.JFrame {
     
     private MenuBoton menu;
-
+    private ControladorProductoMenu controlador = new ControladorProductoMenu();
+    private java.util.List<ProductoMenu> listaProductosMenu;
+    java.util.List<Object> listaObjetos = new ArrayList<>();
+    java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_Menu() {
+    public JF_Menu(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -74,14 +81,14 @@ public class JF_Menu extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 820, 290, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 720, 290, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Menú");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
@@ -91,8 +98,8 @@ public class JF_Menu extends javax.swing.JFrame {
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
-        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -101,19 +108,19 @@ public class JF_Menu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2112, Short.MAX_VALUE))
+                .addContainerGap(2128, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -132,7 +139,7 @@ public class JF_Menu extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -146,7 +153,7 @@ public class JF_Menu extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
 
         tableMenu.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableMenu.setModel(new javax.swing.table.DefaultTableModel(
@@ -178,7 +185,7 @@ public class JF_Menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableMenu);
         tableMenu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1240, 300));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -187,16 +194,16 @@ public class JF_Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(450, 450, 450)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1016, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,21 +211,28 @@ public class JF_Menu extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+         abrirVentanaAgregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
+        
+        listaProductosMenu = controlador.obtenerListaProductosMenu();
+        listaObjetos = controlador.obtenerListaObjetosProductosMenu(listaProductosMenu);
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Editar producto Menu", "Editar");
+        DefaultTableModel model = llenarTabla2columnas(controlador.obtenerDatosTabla(listaProductosMenu), "Editar");
         TablaPersonalizada.setTableProperties(tableMenu, model, true);
         
-        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, "Editar producto Menu", this));
+        tableMenu.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableMenu, 
+                "Editar producto Menu", this, listaObjetos, notificaciones));
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -239,21 +253,12 @@ public class JF_Menu extends javax.swing.JFrame {
                 }
             }
         });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
-        
-        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
-        
+                
     }
     
     private void abrirVentanaAgregar(){
         try {
-            JF_RegistrarProductoMenu ventana = new JF_RegistrarProductoMenu();
+            JF_RegistrarProductoMenu ventana = new JF_RegistrarProductoMenu(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -309,7 +314,7 @@ public class JF_Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Menu().setVisible(true);
+                new JF_Menu(null).setVisible(true);
             }
         });
     }

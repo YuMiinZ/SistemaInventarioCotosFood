@@ -1,6 +1,12 @@
 package Vista.Clases;
 
 
+import Modelo.Consumo_Cliente;
+import Modelo.Consumo_Empleado;
+import Modelo.Empleado;
+import Modelo.Mesas;
+import Modelo.ProductoInventario;
+import Modelo.ProductoMenu;
 import Vista.JF_ComandasEmpleado;
 import Vista.JF_ComandasMesa;
 import Vista.JF_CompraDia;
@@ -28,6 +34,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,14 +54,17 @@ import javax.swing.JPopupMenu;
  * @author TomasPC
  */
 public final class MenuBoton extends JPopupMenu{
-    private final JMenuItem[] inventarioItems;
-    private final JMenuItem[] empleadoItems;
-    private final JMenuItem[] reportesItems;
-    private final JMenuItem notificacionesMenu;
-    private final JMenuItem consumoClienteMenu;
-    private final JMenuItem menuMenu;
+    private  JMenuItem[] inventarioItems;
+    private  JMenuItem[] empleadoItems;
+    private  JMenuItem[] reportesItems;
+    private  JMenuItem notificacionesMenu;
+    private  JMenuItem consumoClienteMenu;
+    private  JMenuItem menuMenu;
     public boolean menuAbierto = false;
     private JFrame dad;
+
+    public MenuBoton() {
+    }
     
     
     private void addMenuItemWithSeparator(JMenu menu, JMenuItem menuItem) {
@@ -63,13 +73,13 @@ public final class MenuBoton extends JPopupMenu{
 
         JPanel spacePanel = new JPanel();
         spacePanel.setPreferredSize(new Dimension(0, 16));
-        spacePanel.setBackground(new Color(57, 145, 151));
+        spacePanel.setBackground(new Color(152, 194, 70));
         menu.add(spacePanel);
     }
 
     private void applyStyles(JMenuItem menuItem) {
-        menuItem.setForeground(Color.WHITE);
-        menuItem.setBackground(new Color(57, 145, 151));
+        menuItem.setForeground(new Color(25, 25, 25));
+        menuItem.setBackground(new Color(152, 194, 70));
         menuItem.setOpaque(true);
     }
     
@@ -90,7 +100,7 @@ public final class MenuBoton extends JPopupMenu{
 
         return subMenu;
     }
-    public MenuBoton(int x, int y, JFrame dad){
+    public MenuBoton(int x, int y, JFrame dad, List<String[]> notificaciones){
         this.dad = dad;
         inventarioItems = new JMenuItem[]{
             createMenuItem("Lista de inventario"),
@@ -135,7 +145,7 @@ public final class MenuBoton extends JPopupMenu{
         this.add(empleadoSubMenu);
         this.add(reportesSubMenu);
         this.setPreferredSize(new Dimension(x, y));
-        programarMenu();
+        programarMenu(notificaciones);
         agregarFocusListener();
     }
     
@@ -165,44 +175,56 @@ public final class MenuBoton extends JPopupMenu{
     }
     
     public void mostrarMenu() {
-        this.show(dad, 11, 152);
+        this.show(dad, 11, 153);
         this.setVisible(true); // Cierra el menú si está visible
         menuAbierto = true;
     }
     
-    private void programarMenu(){
+    private void programarMenu(List<String[]> notificaciones){
         for (JMenuItem item : inventarioItems) {
-            item.addActionListener(e -> abrirVentanas(item.getText(), ""));
+            item.addActionListener(e -> abrirVentanas(item.getText(), "", notificaciones));
         }
 
         for (JMenuItem item : empleadoItems) {
-            item.addActionListener(e -> abrirVentanas(item.getText(), ""));
+            item.addActionListener(e -> abrirVentanas(item.getText(), "", notificaciones));
         }
 
         for (JMenuItem item : reportesItems) {
-            item.addActionListener(e -> abrirVentanas(item.getText(), ""));
+            item.addActionListener(e -> abrirVentanas(item.getText(), "", notificaciones));
         }
         
-        notificacionesMenu.addActionListener(e -> abrirVentana(JF_Notificaciones.class, "", 0 ));
-        consumoClienteMenu.addActionListener(e -> abrirVentana(JF_ListaCuentas.class, "", 0));
-        menuMenu.addActionListener(e -> abrirVentana(JF_Menu.class, "", 0));
+        notificacionesMenu.addActionListener(e -> abrirVentana(JF_Notificaciones.class, "", 0, notificaciones));
+        consumoClienteMenu.addActionListener(e -> abrirVentana(JF_ListaCuentas.class, "", 0, notificaciones));
+        menuMenu.addActionListener(e -> abrirVentana(JF_Menu.class, "", 0, notificaciones));
     }
     
-    private void abrirVentana(Class<?> ventanaClass, String reporte, Object dato) {
+    private void abrirVentana(Class<?> ventanaClass, String reporte, Object dato, List<String[]> notificaciones) {
         try {
             JFrame ventana;
             System.out.println(ventanaClass.toString());
             if (ventanaClass.equals(JF_Reportes.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance(reporte);
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class, List.class).newInstance(reporte, notificaciones);
             }
-            else if (ventanaClass.equals(JF_ComandasEmpleado.class) || ventanaClass.equals(JF_ComandasMesa.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(String.class).newInstance((String) dato.toString());
+            else if (ventanaClass.equals(JF_ComandasMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Mesas.class, List.class).newInstance((Mesas) dato, notificaciones);
             }
-            else if (ventanaClass.equals(JF_ModificarProductoInventario.class) || ventanaClass.equals(JF_ModificarProductoMenu.class)){
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor(int.class).newInstance((int) dato);
+            else if (ventanaClass.equals(JF_ComandasEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Empleado.class, List.class).newInstance((Empleado) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_ModificarProductoInventario.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoInventario.class, List.class).newInstance((ProductoInventario) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_ModificarProductoMenu.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(ProductoMenu.class, List.class).newInstance((ProductoMenu) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaMesa.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Cliente.class, List.class).newInstance((Consumo_Cliente) dato, notificaciones);
+            }
+            else if (ventanaClass.equals(JF_VerComandaEmpleado.class)){
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(Consumo_Empleado.class, List.class).newInstance((Consumo_Empleado) dato, notificaciones);
             }
             else{
-                ventana = (JFrame) ventanaClass.getDeclaredConstructor().newInstance();
+                ventana = (JFrame) ventanaClass.getDeclaredConstructor(List.class).newInstance(notificaciones);
             }
             ventana.setVisible(true);
             dad.dispose(); 
@@ -213,26 +235,26 @@ public final class MenuBoton extends JPopupMenu{
         }
     }
     
-    public void abrirVentanas(String nombreMenu, Object dato) {
+    public void abrirVentanas(String nombreMenu, Object dato, List<String[]> notificaciones) {
         switch (nombreMenu) {
-            case "Lista de inventario" -> abrirVentana(JF_Inventario.class, nombreMenu, dato);
-            case "Compra por día" -> abrirVentana(JF_CompraDia.class, nombreMenu, dato);
-            case "Compra por proveedor" -> abrirVentana(JF_CompraProveedor.class, nombreMenu, dato);
-            case "Registrar proveedor" -> abrirVentana(JF_RegistrarProveedor.class, nombreMenu, dato);
-            case "Editar proveedor" -> abrirVentana(JF_ModificarProveedor.class, nombreMenu, dato);
-            case "Registrar empleado" -> abrirVentana(JF_RegistrarEmpleado.class, nombreMenu, dato);
-            case "Editar empleado" -> abrirVentana(JF_ModificarEmpleado.class, nombreMenu, dato);
-            case "Consumo empleado" -> abrirVentana(JF_ListaConsumoEmpleado.class, nombreMenu, dato);
-            case "Reporte de ventas" -> abrirVentana(JF_Reportes.class, nombreMenu, dato);
-            case "Reporte de costo de mercadería más vendida" -> abrirVentana(JF_Reportes.class, nombreMenu, dato);
-            case "Reporte de productos estancados" -> abrirVentana(JF_Reportes.class, nombreMenu, dato);
-            case "Reporte de cantidad de productos mínimos" -> abrirVentana(JF_Reportes.class, nombreMenu, dato);
-            case "Comandas empleado" -> abrirVentana(JF_ComandasEmpleado.class, nombreMenu, dato);
-            case "Comandas mesa" -> abrirVentana(JF_ComandasMesa.class, nombreMenu, dato);            
-            case "Ver Comanda empleado" -> abrirVentana(JF_VerComandaEmpleado.class, nombreMenu, dato);
-            case "Ver Comanda mesa" -> abrirVentana(JF_VerComandaMesa.class, nombreMenu, dato);
-            case "Editar producto inventario" -> abrirVentana(JF_ModificarProductoInventario.class, nombreMenu, dato);
-            case "Editar producto Menu" -> abrirVentana(JF_ModificarProductoMenu.class, nombreMenu, dato);
+            case "Lista de inventario" -> abrirVentana(JF_Inventario.class, nombreMenu, dato, notificaciones);
+            case "Compra por día" -> abrirVentana(JF_CompraDia.class, nombreMenu, dato, notificaciones);
+            case "Compra por proveedor" -> abrirVentana(JF_CompraProveedor.class, nombreMenu, dato, notificaciones);
+            case "Registrar proveedor" -> abrirVentana(JF_RegistrarProveedor.class, nombreMenu, dato, notificaciones);
+            case "Editar proveedor" -> abrirVentana(JF_ModificarProveedor.class, nombreMenu, dato, notificaciones);
+            case "Registrar empleado" -> abrirVentana(JF_RegistrarEmpleado.class, nombreMenu, dato, notificaciones);
+            case "Editar empleado" -> abrirVentana(JF_ModificarEmpleado.class, nombreMenu, dato, notificaciones);
+            case "Consumo empleado" -> abrirVentana(JF_ListaConsumoEmpleado.class, nombreMenu, dato, notificaciones);
+            case "Reporte de ventas" -> abrirVentana(JF_Reportes.class, nombreMenu, dato, notificaciones);
+            case "Reporte de costo de mercadería más vendida" -> abrirVentana(JF_Reportes.class, nombreMenu, dato, notificaciones);
+            case "Reporte de productos estancados" -> abrirVentana(JF_Reportes.class, nombreMenu, dato, notificaciones);
+            case "Reporte de cantidad de productos mínimos" -> abrirVentana(JF_Reportes.class, nombreMenu, dato, notificaciones);
+            case "Comandas empleado" -> abrirVentana(JF_ComandasEmpleado.class, nombreMenu, dato, notificaciones);
+            case "Comandas mesa" -> abrirVentana(JF_ComandasMesa.class, nombreMenu, dato, notificaciones);            
+            case "Ver Comanda empleado" -> abrirVentana(JF_VerComandaEmpleado.class, nombreMenu, dato, notificaciones);
+            case "Ver Comanda mesa" -> abrirVentana(JF_VerComandaMesa.class, nombreMenu, dato, notificaciones);
+            case "Editar producto inventario" -> abrirVentana(JF_ModificarProductoInventario.class, nombreMenu, dato, notificaciones);
+            case "Editar producto Menu" -> abrirVentana(JF_ModificarProductoMenu.class, nombreMenu, dato, notificaciones);
             default -> {
             }
         }
@@ -246,7 +268,7 @@ public final class MenuBoton extends JPopupMenu{
     }
 
     
-    public void regresarVentanaPrincipal(){
-        abrirVentana(JF_Principal.class, "", "");
+    public void regresarVentanaPrincipal(List<String[]> notificaciones){
+        abrirVentana(JF_Principal.class, "", "", notificaciones);
     }
 }

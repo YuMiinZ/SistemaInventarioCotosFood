@@ -4,10 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleado;
+import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author yumii
@@ -15,13 +21,17 @@ import java.awt.event.ActionListener;
 public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     
     private MenuBoton menu;
+    private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
+    private java.util.List<String[]> notificaciones;
 
     /**
      * Creates new form JF_Principal
+     * @param notificaciones
      */
-    public JF_RegistrarEmpleado() {
+    public JF_RegistrarEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -52,8 +62,6 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
         lblVacaciones = new javax.swing.JLabel();
-        txtVacaciones = new javax.swing.JTextField();
-        lblFechaCarnetAlimentos2 = new javax.swing.JLabel();
         txtFechaCarnetAlimentos = new javax.swing.JTextField();
         lblFechaCarnetAlimentos = new javax.swing.JLabel();
         lblAlergias = new javax.swing.JLabel();
@@ -62,6 +70,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         lblFechaIngreso = new javax.swing.JLabel();
         txtFechaIngreso = new javax.swing.JTextField();
         cmboxTipoSangre = new javax.swing.JComboBox<>();
+        lblErrorNombre = new javax.swing.JLabel();
+        lblErrorVacaciones = new javax.swing.JLabel();
+        lblErrorFechaIngreso = new javax.swing.JLabel();
+        lblErrorFechaCarnetAlimentos = new javax.swing.JLabel();
+        lblErrorAlergias = new javax.swing.JLabel();
+        lblErrorTipoSangre = new javax.swing.JLabel();
+        spnVacaciones = new javax.swing.JSpinner();
+        lblErrorTelefono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -73,14 +89,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblTelefono.setText("Teléfono");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, 470, -1));
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 470, -1));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 470, 38));
 
         btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
         btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
@@ -91,14 +107,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 880, 199, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 660, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Registrar Empleado");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
@@ -108,8 +124,8 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
-        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -118,19 +134,19 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2111, Short.MAX_VALUE))
+                .addContainerGap(2127, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -141,7 +157,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 610, 470, 38));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 470, 38));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -159,19 +175,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
         lblVacaciones.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblVacaciones.setText("Vacaciones");
-        jPanel1.add(lblVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 720, 470, -1));
-
-        txtVacaciones.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        txtVacaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVacacionesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 470, 38));
-
-        lblFechaCarnetAlimentos2.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblFechaCarnetAlimentos2.setText("carnet de manipulación");
-        jPanel1.add(lblFechaCarnetAlimentos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 920, 590, -1));
+        jPanel1.add(lblVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 470, -1));
 
         txtFechaCarnetAlimentos.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtFechaCarnetAlimentos.addActionListener(new java.awt.event.ActionListener() {
@@ -179,26 +183,26 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 txtFechaCarnetAlimentosActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 970, 470, 38));
+        jPanel1.add(txtFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 730, 470, 38));
 
         lblFechaCarnetAlimentos.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblFechaCarnetAlimentos.setText("Fecha de vencimiento de");
-        jPanel1.add(lblFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 880, 610, -1));
+        lblFechaCarnetAlimentos.setText("Fecha Vencimiento Carnet");
+        jPanel1.add(lblFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 690, 610, -1));
 
         lblAlergias.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblAlergias.setText("Alergias");
-        jPanel1.add(lblAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 400, 470, -1));
+        jPanel1.add(lblAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 260, 470, -1));
 
         txtAlergias.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 450, 470, 38));
+        jPanel1.add(txtAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 470, 38));
 
         lblTipoSangre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblTipoSangre.setText("Tipo de Sangre");
-        jPanel1.add(lblTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 560, 470, -1));
+        jPanel1.add(lblTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 400, 470, -1));
 
         lblFechaIngreso.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblFechaIngreso.setText("Fecha de Ingreso");
-        jPanel1.add(lblFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 720, 470, -1));
+        jPanel1.add(lblFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, 470, -1));
 
         txtFechaIngreso.setFont(new Font ("Montserrat", Font.PLAIN,26));
         txtFechaIngreso.addActionListener(new java.awt.event.ActionListener() {
@@ -206,9 +210,9 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 txtFechaIngresoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 770, 470, 38));
+        jPanel1.add(txtFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 580, 470, 38));
 
-        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        cmboxTipoSangre.setFont(new Font ("Montserrat", Font.PLAIN,20));
         cmboxTipoSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+" }));
         cmboxTipoSangre.setSelectedIndex(-1);
         cmboxTipoSangre.addActionListener(new java.awt.event.ActionListener() {
@@ -216,7 +220,38 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 cmboxTipoSangreActionPerformed(evt);
             }
         });
-        jPanel1.add(cmboxTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 610, 470, 40));
+        jPanel1.add(cmboxTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 440, 470, 40));
+
+        lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorNombre.setText("El nombre no puede estar vacío");
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 460, -1));
+
+        lblErrorVacaciones.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorVacaciones.setText("La cantidad de vacaciones que posee el empleado debe ser un número mayor o igual a 0");
+        jPanel1.add(lblErrorVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 630, 540, -1));
+
+        lblErrorFechaIngreso.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFechaIngreso.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel1.add(lblErrorFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 620, 460, -1));
+
+        lblErrorFechaCarnetAlimentos.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorFechaCarnetAlimentos.setText("La fecha debe de seguir el formato dd/mm/aaaa");
+        jPanel1.add(lblErrorFechaCarnetAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 770, 460, -1));
+
+        lblErrorAlergias.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorAlergias.setText("El campo de alergias no puede estar vacía");
+        jPanel1.add(lblErrorAlergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 340, 460, -1));
+
+        lblErrorTipoSangre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTipoSangre.setText("Debe de seleccionar el tipo de sangre");
+        jPanel1.add(lblErrorTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 480, 460, -1));
+
+        spnVacaciones.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        jPanel1.add(spnVacaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 590, 470, 40));
+
+        lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTelefono.setText("El número telefónico debe ser de 8 números");
+        jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 460, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -225,16 +260,14 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(420, 420, 420)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1857, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,6 +275,16 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        ControladorEmpleado controlador = new ControladorEmpleado(manejadorComponentes);
+        try {
+            if(controlador.registrarEmpleado(txtNombre.getText(), txtTelefono.getText(), (int) spnVacaciones.getValue(), txtFechaCarnetAlimentos.getText(),
+                    txtAlergias.getText(), cmboxTipoSangre.getSelectedItem(), txtFechaIngreso.getText())){
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
+            }
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(JF_RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -250,11 +293,8 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void txtVacacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVacacionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVacacionesActionPerformed
 
     private void txtFechaCarnetAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCarnetAlimentosActionPerformed
         // TODO add your handling code here:
@@ -275,6 +315,27 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
         pack();
+
+        manejadorComponentes.agregarLabel(lblErrorNombre);
+        manejadorComponentes.agregarLabel(lblErrorTelefono);
+        manejadorComponentes.agregarLabel(lblErrorVacaciones);
+        manejadorComponentes.agregarLabel(lblErrorFechaCarnetAlimentos);
+        manejadorComponentes.agregarLabel(lblErrorAlergias);
+        manejadorComponentes.agregarLabel(lblErrorTipoSangre);
+        manejadorComponentes.agregarLabel(lblErrorFechaIngreso);
+        
+
+
+        manejadorComponentes.agregarText(txtNombre);
+        manejadorComponentes.agregarText(txtTelefono);  
+        manejadorComponentes.agregarText(txtFechaCarnetAlimentos);
+        manejadorComponentes.agregarText(txtAlergias);
+        manejadorComponentes.agregarText(txtFechaIngreso);
+        
+        manejadorComponentes.ocultarLabels();
+        manejadorComponentes.agregarComboBox(cmboxTipoSangre);
+        
+        manejadorComponentes.agregarSpinner(spnVacaciones);
 }
 
     
@@ -287,13 +348,6 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
                 } else {
                     menu.mostrarMenu();
                 }
-            }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
             }
         });
     }
@@ -335,7 +389,7 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_RegistrarEmpleado().setVisible(true);
+                new JF_RegistrarEmpleado(null).setVisible(true);
             }
         });
     }
@@ -352,19 +406,25 @@ public class JF_RegistrarEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlergias;
     private javax.swing.JLabel lblCotosFood;
+    private javax.swing.JLabel lblErrorAlergias;
+    private javax.swing.JLabel lblErrorFechaCarnetAlimentos;
+    private javax.swing.JLabel lblErrorFechaIngreso;
+    private javax.swing.JLabel lblErrorNombre;
+    private javax.swing.JLabel lblErrorTelefono;
+    private javax.swing.JLabel lblErrorTipoSangre;
+    private javax.swing.JLabel lblErrorVacaciones;
     private javax.swing.JLabel lblFechaCarnetAlimentos;
-    private javax.swing.JLabel lblFechaCarnetAlimentos2;
     private javax.swing.JLabel lblFechaIngreso;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTipoSangre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVacaciones;
+    private javax.swing.JSpinner spnVacaciones;
     private javax.swing.JTextField txtAlergias;
     private javax.swing.JTextField txtFechaCarnetAlimentos;
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtVacaciones;
     // End of variables declaration//GEN-END:variables
 }

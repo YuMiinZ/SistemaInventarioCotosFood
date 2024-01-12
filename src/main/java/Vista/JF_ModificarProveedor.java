@@ -4,24 +4,35 @@
  */
 package Vista;
 
+import Controlador.ControladorProveedor;
+import Modelo.Proveedor;
+import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 /**
  *
  * @author yumii
  */
 public class JF_ModificarProveedor extends javax.swing.JFrame {
     
-    private MenuBoton menu;
-
+    private final MenuBoton menu;
+    private final ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
+    private final ControladorProveedor controlador = new ControladorProveedor(manejadorComponentes);
+    private java.util.List<Proveedor> listaProveedores;
+    private int index;
+    private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_ModificarProveedor() {
+    public JF_ModificarProveedor(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -51,9 +62,11 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         lblCotosFood = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         cmboxProveedor = new javax.swing.JComboBox<>();
+        lblErrorTelefono = new javax.swing.JLabel();
+        lblErrorNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -64,17 +77,17 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTelefono.setFont(new Font ("Montserrat", Font.BOLD,36));
-        lblTelefono.setText("Telefono");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 720, 470, -1));
+        lblTelefono.setText("Teléfono");
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 470, -1));
 
         lblProveedor.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblProveedor.setText("Proveedor");
-        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 470, -1));
+        jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 470, -1));
 
         txtNombre.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, 470, 38));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 470, 38));
 
-        btnEliminar.setBackground(new java.awt.Color(221, 59, 59));
+        btnEliminar.setBackground(new java.awt.Color(218, 46, 44));
         btnEliminar.setFont(new Font ("Montserrat", Font.BOLD,30));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
@@ -83,14 +96,14 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 870, 199, 50));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 720, 199, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
-        lblTitulo.setText("Registrar Proveedor");
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
+        lblTitulo.setText("Modificar Proveedor");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
@@ -100,8 +113,8 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
-        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 28));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -110,19 +123,19 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2111, Short.MAX_VALUE))
+                .addContainerGap(2127, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -133,7 +146,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 780, 470, 38));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 640, 470, 38));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoRegresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -149,24 +162,31 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
-        btnAgregar.setBackground(new java.awt.Color(0, 72, 121));
-        btnAgregar.setFont(new Font ("Montserrat", Font.BOLD,30));
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setBackground(new java.awt.Color(0, 72, 121));
+        btnModificar.setFont(new Font ("Montserrat", Font.BOLD,30));
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Guardar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 870, 199, 50));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 720, 199, 50));
 
         lblNombre.setFont(new Font ("Montserrat", Font.BOLD,36));
         lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 470, -1));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 470, -1));
 
-        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedor 1", "Proveedor 2", "Proveedor 3" }));
-        cmboxProveedor.setSelectedIndex(-1);
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 470, 40));
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 470, 40));
+
+        lblErrorTelefono.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorTelefono.setText("El número telefónico debe ser de 8 números");
+        jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 680, 470, -1));
+
+        lblErrorNombre.setForeground(new java.awt.Color(194, 8, 8));
+        lblErrorNombre.setText("El nombre no puede estar vacío");
+        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 470, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -174,17 +194,13 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(450, 450, 450)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(479, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -192,6 +208,21 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        index = cmboxProveedor.getSelectedIndex();
+        if(index!= -1 ){
+            int selectedOption = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el proveedor?", 
+                                                                   null, JOptionPane.YES_NO_OPTION); 
+            if (selectedOption == JOptionPane.YES_OPTION) {
+                controlador.eliminarProveedor(listaProveedores.get(index).getId());
+                listaProveedores.remove(index);
+                cmboxProveedor.removeAllItems();
+                cargarOpciones(-1);
+                JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito");
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder eliminarlo", null, JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -200,21 +231,83 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        index = cmboxProveedor.getSelectedIndex();
+        if (index == -1 ){
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para poder realizar las modificaciones", 
+                                          null, JOptionPane.ERROR_MESSAGE);
+        } else {
+            if(controlador.modificarProveedor(listaProveedores.get(index).getId(), 
+                                            txtNombre.getText(), txtTelefono.getText())){
+                    actualizarOpciones();
+                    cargarOpciones(index);
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa");
+            }      
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void cargarDatosProveedor(java.awt.event.ActionEvent evt){
+        
+        int selectedIndex = cmboxProveedor.getSelectedIndex();
+        if (selectedIndex != -1) {
+            txtNombre.setText(listaProveedores.get(selectedIndex).getNombre());
+            txtTelefono.setText(listaProveedores.get(selectedIndex).getTelefono());
+        }
+       
+    }
+    
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
+        
+        manejadorComponentes.agregarLabel(lblErrorNombre);
+        manejadorComponentes.agregarLabel(lblErrorTelefono);
+        manejadorComponentes.ocultarLabels();
+        
+        manejadorComponentes.agregarText(txtNombre);
+        manejadorComponentes.agregarText(txtTelefono);
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         
         pack();
+        
+        cargarOpciones(-1);
+        
 }
+    
+    private void agregarOpciones(){
+        cmboxProveedor.removeAllItems();
+        for (Proveedor proveedor : listaProveedores) {
+            cmboxProveedor.addItem(proveedor.getNombre()); 
+        }
+    }
+    
+    private void cargarOpciones(int index){
+        if(index == -1){
+            listaProveedores = controlador.obtenerListaProveedores(); 
+            agregarOpciones();
+            manejadorComponentes.limpiarCamposTexto();
+            cmboxProveedor.setSelectedIndex(-1);
+        } else {
+            agregarOpciones();
+            cmboxProveedor.setSelectedIndex(index);
+        }
+    }
+    
+    private void actualizarOpciones(){
+        for (Proveedor proveedor : listaProveedores) {
+            if (proveedor.getId().equals(listaProveedores.get(cmboxProveedor.getSelectedIndex()).getId())) {
+                proveedor.setNombre(txtNombre.getText());
+                proveedor.setTelefono(txtTelefono.getText());
+                break;
+            }
+        }        
+    }
 
     
     private void eventComponents() {
@@ -229,10 +322,9 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
             }
         });
         
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarDatosProveedor(evt);
             }
         });
     }
@@ -270,7 +362,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ModificarProveedor().setVisible(true);
+                new JF_ModificarProveedor(null).setVisible(true);
             }
         });
     }
@@ -279,15 +371,17 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmboxProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCotosFood;
+    private javax.swing.JLabel lblErrorNombre;
+    private javax.swing.JLabel lblErrorTelefono;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblTelefono;

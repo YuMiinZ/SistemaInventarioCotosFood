@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorProductoInventario;
+import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -12,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -19,14 +23,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_Inventario extends javax.swing.JFrame {
     private MenuBoton menu;    
-
-
+    private ControladorProductoInventario controlador = new ControladorProductoInventario();
+    private List<ProductoInventario> listaProductosInventario;
+    private List<Object> listaObjetos = new ArrayList<>();
+    private List<String[]> notificaciones;
     /**
      * Creates new form JF_Principal
      */
-    public JF_Inventario() {
+    public JF_Inventario(List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
         //this.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
@@ -73,14 +80,14 @@ public class JF_Inventario extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 870, 290, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 700, 290, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
-        lblTitulo.setForeground(new java.awt.Color(0, 72, 121));
+        lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Inventario");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
@@ -91,7 +98,7 @@ public class JF_Inventario extends javax.swing.JFrame {
         btnMenu.setMaximumSize(new java.awt.Dimension(71, 78));
 
         lblCotosFood.setFont(new Font("Montserrat", Font.BOLD, 40));
-        lblCotosFood.setForeground(new java.awt.Color(255, 255, 255));
+        lblCotosFood.setForeground(new java.awt.Color(25, 25, 25));
         lblCotosFood.setText("Cotos Food");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -99,20 +106,23 @@ public class JF_Inventario extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblCotosFood)
-                .addContainerGap(2117, Short.MAX_VALUE))
+                .addContainerGap(2133, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblCotosFood, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
@@ -131,20 +141,20 @@ public class JF_Inventario extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
+            .addGap(0, 1230, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 1070, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
 
         tableInventario.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableInventario.setModel(new javax.swing.table.DefaultTableModel(
@@ -172,7 +182,7 @@ public class JF_Inventario extends javax.swing.JFrame {
         tableInventario.setPreferredSize(new java.awt.Dimension(150, 80));
         jScrollPane1.setViewportView(tableInventario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 1070, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 280));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -181,13 +191,13 @@ public class JF_Inventario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1722, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -195,23 +205,28 @@ public class JF_Inventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        // TODO add your handling code here:
+         // TODO add your handling code here:
+        abrirVentanaAgregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        menu.regresarVentanaPrincipal(notificaciones);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void customComponents(){
         menu.setButtonIcon(btnMenu, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(btnRegresar, "/Imagenes/IconoRegresar.png");
         
+        listaProductosInventario = controlador.obtenerListaProductosInventario();
+        listaObjetos = controlador.obtenerListaObjetosProductosInventario(listaProductosInventario);
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla3columnas("Editar producto inventario", "Editar");
+        DefaultTableModel model = llenarTabla3columnas(controlador.obtenerDatosTabla(listaProductosInventario), "Editar");
         TablaPersonalizada.setTableProperties(tableInventario, model, true);
         
-        tableInventario.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableInventario, "Editar producto inventario", this)); // Hay que cambiarlo por el valor de la columna
+        tableInventario.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", tableInventario, 
+                "Editar producto inventario", this, listaObjetos, notificaciones)); // Hay que cambiarlo por el valor de la columna
         
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -232,21 +247,12 @@ public class JF_Inventario extends javax.swing.JFrame {
                     menu.mostrarMenu();
                 }
             }
-        });
-        
-        btnRegresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
-        
-        btnAgregar.addActionListener(e -> { abrirVentanaAgregar();});
+        });   
     }
     
     private void abrirVentanaAgregar(){
         try {
-            JF_RegistrarProductoInventario ventana = new JF_RegistrarProductoInventario();
+            JF_RegistrarProductoInventario ventana = new JF_RegistrarProductoInventario(notificaciones);
             ventana.setVisible(true);
             this.dispose(); 
         } catch (Exception ex) {
@@ -294,7 +300,7 @@ public class JF_Inventario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_Inventario().setVisible(true);
+                new JF_Inventario(null).setVisible(true);
             }
         });
     }

@@ -27,7 +27,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane2" min="-2" pref="1637" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="1722" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -35,7 +35,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane2" min="-2" pref="530" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="992" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -82,7 +82,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="410" y="870" width="290" height="50"/>
+                  <AbsoluteConstraints x="180" y="700" width="290" height="50"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -92,20 +92,20 @@
                   <Connection code="new Font(&quot;HeadlandOne&quot;, Font.BOLD, 64)" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="79" green="48" red="0" type="rgb"/>
+                  <Color blue="19" green="19" red="19" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Inventario"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="180" y="170" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="180" y="140" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="97" green="91" red="39" type="rgb"/>
+                  <Color blue="46" green="c2" red="98" type="rgb"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[2147483647, 2147483647]"/>
@@ -127,23 +127,28 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="btnMenu" min="-2" pref="71" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btnMenu" min="-2" pref="55" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblCotosFood" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="2117" max="32767" attributes="0"/>
+                          <EmptySpace pref="2133" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace pref="25" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblCotosFood" min="-2" pref="79" max="-2" attributes="0"/>
-                              <Component id="btnMenu" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblCotosFood" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btnMenu" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -167,7 +172,7 @@
                       <Connection code="new Font(&quot;Montserrat&quot;, Font.BOLD, 40)" type="code"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="19" green="19" red="19" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cotos Food"/>
                   </Properties>
@@ -206,19 +211,19 @@
             <Container class="javax.swing.JPanel" name="jPanel3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="97" green="91" red="39" type="rgb"/>
+                  <Color blue="46" green="c2" red="98" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="410" y="310" width="1070" height="60"/>
+                  <AbsoluteConstraints x="180" y="310" width="1230" height="60"/>
                 </Constraint>
               </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1070" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1230" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -234,7 +239,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="410" y="390" width="1070" height="460"/>
+                  <AbsoluteConstraints x="180" y="390" width="1230" height="280"/>
                 </Constraint>
               </Constraints>
 

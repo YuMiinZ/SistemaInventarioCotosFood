@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleado;
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -12,6 +14,8 @@ import Vista.Clases.TablaSpinnerPersonalizada;
 import static Vista.Clases.TablaSpinnerPersonalizada.llenarTabla2columnas;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,13 +25,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;    
-
+    private ControladorEmpleado Controlador = new ControladorEmpleado();
+    private java.util.List<Empleado> empleados;
+    private List<Object> listaObjetos = new ArrayList<>();
+    private java.util.List<String[]> notificaciones;
     /**
-     * Creates new form JF_Comanda
+     * Creates new form JF_ListaConsumoEmpleado
+     * @param notificaciones
      */
-    public JF_ListaConsumoEmpleado() {
+    public JF_ListaConsumoEmpleado(java.util.List<String[]> notificaciones) {
+        this.notificaciones = notificaciones;
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this);
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
 
@@ -39,11 +48,14 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        DefaultTableModel model = llenarTabla2columnas("Comandas empleado", "Ver mas");
-        TablaPersonalizada.setTableProperties(jTable1, model, true);
+        empleados = Controlador.obtenerListaEmpleados();
+        listaObjetos = Controlador.obtenerListaObjetosEmpleado(empleados);
         
-        jTable1.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", jTable1, "Comandas empleado", this));
-
+        DefaultTableModel model = llenarTabla2columnas(Controlador.LlenarTabla(empleados), "Ver mas");
+        TablaPersonalizada.setTableProperties(ConsumoEmpleado, model, true);
+        
+        ConsumoEmpleado.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ConsumoEmpleado, 
+                "Comandas empleado", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -61,12 +73,6 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             }
             
         });
-        jButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menu.regresarVentanaPrincipal();
-            }
-        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,10 +89,10 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ConsumoEmpleado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -97,10 +103,10 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
 
         jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(25, 25, 25));
         jLabel1.setText("Cotos Food");
 
         jButton1.setContentAreaFilled(false);
@@ -117,23 +123,23 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(1813, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(52, 52, 52))))
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, 120));
@@ -150,41 +156,57 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         });
         jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 131, 71, 78));
 
-        jPanel3.setBackground(new java.awt.Color(57, 145, 151));
+        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
+        jLabel2.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel2.setText("Consumo Empleados");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1951, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 323, 1951, -1));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
 
-        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
-        jLabel2.setForeground(new java.awt.Color(0, 72, 121));
-        jLabel2.setText("Consumo Empleados");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ConsumoEmpleado.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        ConsumoEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"Rice and Beans", "Editar"},
+                {"Chifrijo", "Editar"},
+                {"Coca Cola", "Editar"},
+                {"Pescado Empanizado", "Editar"}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Producto", "Editar"
             }
-        ));
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 451, 1951, 983));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        ConsumoEmpleado.setAlignmentX(0.0F);
+        ConsumoEmpleado.setAlignmentY(0.0F);
+        ConsumoEmpleado.setColumnSelectionAllowed(true);
+        ConsumoEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ConsumoEmpleado.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        ConsumoEmpleado.setMinimumSize(new java.awt.Dimension(30, 80));
+        ConsumoEmpleado.setPreferredSize(new java.awt.Dimension(150, 80));
+        jScrollPane1.setViewportView(ConsumoEmpleado);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
 
         jScrollPane2.setViewportView(jPanel4);
 
@@ -193,14 +215,15 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(480, 480, 480)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 2717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,7 +235,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new JF_Principal().setVisible(true);
+        new JF_Principal(notificaciones).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -277,12 +300,13 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_ListaConsumoEmpleado().setVisible(true);
+                new JF_ListaConsumoEmpleado(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ConsumoEmpleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -292,6 +316,5 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

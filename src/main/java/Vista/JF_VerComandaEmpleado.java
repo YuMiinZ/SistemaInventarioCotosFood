@@ -4,12 +4,21 @@
  */
 package Vista;
 
+import Controlador.ControladorComanda;
+import Controlador.ControladorConsumo;
+import Controlador.ControladorEmpleado;
+import Modelo.Consumo_Empleado;
+import Modelo.Empleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import Vista.Clases.MenuBoton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,30 +26,49 @@ import java.awt.Font;
  */
 public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private MenuBoton menu;
+    private Empleado empleadoE;
+    private Consumo_Empleado Consumo;
+    private ControladorComanda Comanda;
+    private ControladorEmpleado Empleado = new ControladorEmpleado();
+    private ControladorConsumo controlador = new ControladorConsumo();
+    private List<String[]> notificaciones;
+    private ArrayList<JTextField> textos = new ArrayList<>();
+
 
     /**
      * Creates new form ComandaEmpleado
+     * @param Consumo
+     * @param notificaciones
      */
-    public JF_VerComandaEmpleado() {
+    public JF_VerComandaEmpleado(Consumo_Empleado Consumo, java.util.List<String[]> notificaciones) {
         initComponents();
-        menu = new MenuBoton(300, getContentPane().getHeight() - 97, this);
-        customComponents();
+        this.notificaciones = notificaciones;
+        textos.add(Platillos);
+        textos.add(Bebidas);
+        textos.add(Notas);
+        this.Consumo = Consumo;
+        empleadoE = Empleado.obtenerEmpelado(Consumo.getID_Empleado());
+        Comanda = new ControladorComanda(Consumo.getID_Comanda());
+        menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         eventComponents();
+        customComponents();
 
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
-        private void customComponents(){
+    
+    private void customComponents(){
             menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
             menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
             
+            jComboBox1.setModel(new DefaultComboBoxModel(new String[] {empleadoE.getNombre()}));
+            Comanda.rellenarInfo(textos);
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(jScrollPane1, BorderLayout.CENTER);
 
             pack();
-
-        }
+    }
 
     
     private void eventComponents() {
@@ -70,38 +98,37 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Notas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        Platillos = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        Bebidas = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2160, 1440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(57, 145, 151));
+        jPanel2.setBackground(new java.awt.Color(152, 194, 70));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setPreferredSize(new java.awt.Dimension(2222, 125));
 
-        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 28));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel1.setForeground(new java.awt.Color(25, 25, 25));
         jLabel1.setText("Cotos Food");
 
         jButton1.setContentAreaFilled(false);
         jButton1.setDefaultCapable(false);
         jButton1.setMaximumSize(new java.awt.Dimension(71, 78));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,100 +136,101 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1444, Short.MAX_VALUE))
+                .addContainerGap(1947, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel1)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setDefaultCapable(false);
         jButton2.setMaximumSize(new java.awt.Dimension(71, 78));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 143, 71, 78));
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 225, 59));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 71, 78));
 
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel2.setText("Empleado");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 329, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 363, 655, 78));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 655, 78));
 
         jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel6.setText("Notas");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 329, -1, -1));
 
-        jTextField1.setMaximumSize(new java.awt.Dimension(661, 290));
-        jTextField1.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 363, 734, 222));
+        Notas.setMaximumSize(new java.awt.Dimension(661, 290));
+        Notas.setMinimumSize(new java.awt.Dimension(661, 290));
+        Notas.setName("Notas"); // NOI18N
+        jPanel1.add(Notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 380, 734, 222));
 
         jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel7.setText("Platillos");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 572, -1, -1));
 
-        jTextField2.setMaximumSize(new java.awt.Dimension(661, 290));
-        jTextField2.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 606, 671, 173));
+        Platillos.setMaximumSize(new java.awt.Dimension(661, 290));
+        Platillos.setMinimumSize(new java.awt.Dimension(661, 290));
+        Platillos.setName("Platillos"); // NOI18N
+        jPanel1.add(Platillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 671, 173));
 
         jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
         jLabel8.setText("Bebidas");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 852, -1, -1));
 
-        jTextField4.setMaximumSize(new java.awt.Dimension(661, 290));
-        jTextField4.setMinimumSize(new java.awt.Dimension(661, 290));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 874, 671, 173));
+        Bebidas.setMaximumSize(new java.awt.Dimension(661, 290));
+        Bebidas.setMinimumSize(new java.awt.Dimension(661, 290));
+        Bebidas.setName("Bebidas"); // NOI18N
+        jPanel1.add(Bebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 900, 671, 173));
 
         jButton3.setBackground(new java.awt.Color(221, 59, 59));
         jButton3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Eliminar");
         jButton3.setMaximumSize(new java.awt.Dimension(71, 78));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1186, 874, 537, 221));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1186, 1044, 537, 61));
+
+        jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
+        jLabel3.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel3.setText("Comanda: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1780, 910));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2070, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        controlador.ElminarCuentaEmpleado(empleadoE.getId(), Consumo.getID_Comanda());
+        Comanda.EliminarComanda(Consumo.getID_Comanda());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,27 +265,27 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JF_VerComandaEmpleado().setVisible(true);
+                new JF_VerComandaEmpleado(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Bebidas;
+    private javax.swing.JTextField Notas;
+    private javax.swing.JTextField Platillos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
