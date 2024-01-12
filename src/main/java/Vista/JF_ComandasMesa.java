@@ -49,7 +49,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
      private void customComponents() {
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-        jLabel3.setText("Mesa: " + this.mesa.getNumeroMesa());
+        jLabel3.setText("Mesa " + this.mesa.getNumeroMesa());
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         
         cliente = consumo.ConsultarCliente(this.mesa.getId());
@@ -169,7 +169,7 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel3.setText("Mesa: ");
+        jLabel3.setText("Mesa");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 290, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
