@@ -233,6 +233,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         jPanel1.add(cmboxDiaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 460, 470, 40));
 
         spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 740, 470, 40));
 
         lblErrorCantidadMinima.setForeground(new java.awt.Color(194, 8, 8));
@@ -297,11 +298,12 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         ControladorProductoInventario controlador = new ControladorProductoInventario(manejadorComponentes);
         
         if (controlador.registrarProductoInventario(txtNombre.getText(), cmboxProveedor.getSelectedIndex(), (double) spnPrecio.getValue(), 
-                                                    (int) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
+                                                    (double) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
                                                     cmboxDiaCompra.getSelectedItem(), cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), 
                                                     listaProveedores)) {
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             spnPrecio.setValue(0.0);
+            spnCantidad.setValue(0.0);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

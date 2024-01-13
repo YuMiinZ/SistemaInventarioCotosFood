@@ -218,6 +218,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         jPanel1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 700, 510, -1));
 
         spnCantidad.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 740, 470, 40));
 
         lblErrorCantidad.setForeground(new java.awt.Color(194, 8, 8));
@@ -309,7 +310,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        int selectedOption = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el empleado?", 
+        int selectedOption = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el producto?", 
                                                             null, JOptionPane.YES_NO_OPTION); 
         if (selectedOption == JOptionPane.YES_OPTION) {
             controladorProductoInventario.eliminarProductoInventario(dato.getId());
@@ -326,7 +327,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         if(controladorProductoInventario.modificarProductoInventario(dato.getId(), txtNombre.getText(), cmboxProveedor.getSelectedIndex(), 
-                                                                    (double) spnPrecio.getValue(), (int) spnCantidad.getValue(), 
+                                                                    (double) spnPrecio.getValue(), (double) spnCantidad.getValue(), 
                                                                     (int) spnCantidadMinima.getValue(), cmboxDiaCompra.getSelectedItem(), 
                                                                     cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), listaProveedores)){
             JOptionPane.showMessageDialog(null, "Modificación exitosa");

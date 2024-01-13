@@ -105,7 +105,7 @@ public class ControladorEmpleado {
         return empleados;
     }
     
-    public boolean modificarProveedor(ObjectId id, String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
+    public boolean modificarEmpleado(ObjectId id, String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
         if(validarDatos(nombre, telefono, vacaciones, fechaVencimientoCarnet, alergias, tipoSangre, fechaIngreso)){
            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
