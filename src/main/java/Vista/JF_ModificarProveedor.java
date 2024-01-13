@@ -35,7 +35,7 @@ public class JF_ModificarProveedor extends javax.swing.JFrame {
         eventComponents();
 
         
-       // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       this.setExtendedState(JF_ModificarProveedor.MAXIMIZED_BOTH);
         
     }
 

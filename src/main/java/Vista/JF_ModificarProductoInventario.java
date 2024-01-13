@@ -42,7 +42,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
- 
+        this.setExtendedState(JF_ModificarProductoInventario.MAXIMIZED_BOTH);
     }
 
     /**

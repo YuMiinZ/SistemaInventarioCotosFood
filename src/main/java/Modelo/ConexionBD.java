@@ -21,7 +21,6 @@ public class ConexionBD {
     
     public MongoClient crearConexion() {
         try {
-            System.out.println("MongoDB" + cliente);
             cliente = MongoClients.create(uri);
             return cliente;
         } catch (Exception e) {

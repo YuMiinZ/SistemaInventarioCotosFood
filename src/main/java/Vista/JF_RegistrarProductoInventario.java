@@ -36,7 +36,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         eventComponents();
 
         
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_RegistrarProductoInventario.MAXIMIZED_BOTH);
         
     }
 

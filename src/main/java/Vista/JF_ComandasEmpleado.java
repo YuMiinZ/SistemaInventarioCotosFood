@@ -45,6 +45,7 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
+        this.setExtendedState(JF_ComandasEmpleado.MAXIMIZED_BOTH);
 
     }
     private void customComponents(){

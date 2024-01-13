@@ -40,8 +40,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_ListaConsumoEmpleado.MAXIMIZED_BOTH);
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");

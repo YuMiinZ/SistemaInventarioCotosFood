@@ -52,6 +52,7 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         this.Mesa = Mesa;
         customComponents();
         eventComponents();
+        this.setExtendedState(JF_NuevaComanda.MAXIMIZED_BOTH);
     }
     
     
@@ -224,14 +225,12 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         jButton3.setFont(new Font ("Montserrat", Font.BOLD,30));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Agregar");
-        jButton3.setMaximumSize(new java.awt.Dimension(72, 23));
-        jButton3.setMinimumSize(new java.awt.Dimension(72, 23));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 820, 199, 50));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 550, 199, 50));
 
         tablePlatilllos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
