@@ -300,6 +300,8 @@ public class ProductoMenu {
     
     public List<ProductoMenu> PlatillosyBebidas(String tipo, MongoClient cliente){
         ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
+        boolean existencia = false;
+        ProductoInventario inventario = new ProductoInventario();
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -311,7 +313,16 @@ public class ProductoMenu {
 
             for (Document ingredienteDocumento : listaIngredientesDocumento) {
                 Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                
+                if (inventario.getProductoInventario(ingredienteDocumento.getObjectId("idProductoInventario"), cliente).getCantidad() < ingredienteDocumento.getDouble("Cantidad")){
+                    existencia = false;
+                    break;
+                }
                 listaIngredientes.add(ingrediente);
+                existencia = true;
+            }
+            if (!existencia){
+                break;
             }
             ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             ProductosComanda.add(producto);
