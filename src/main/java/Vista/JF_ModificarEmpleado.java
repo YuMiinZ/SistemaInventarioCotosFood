@@ -349,14 +349,22 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         ControladorEmpleado controlador = new ControladorEmpleado(manejadorComponentes);
-        try {
-            if(controlador.registrarEmpleado(txtNombre.getText(), txtTelefono.getText(), (int) spnVacaciones.getValue(), txtFechaCarnetAlimentos.getText(),
-                txtAlergias.getText(), cmboxTipoSangre.getSelectedItem(), txtFechaIngreso.getText())){
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
-        }
-
-        } catch (ParseException ex) {
-            Logger.getLogger(JF_RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        
+        index = cmboxEmpleado.getSelectedIndex();
+        if (index == -1 ){
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar un empleado para poder realizar las modificaciones", 
+                                          null, JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                if(controlador.modificarEmpleado(listaEmpleados.get(cmboxEmpleado.getSelectedIndex()).getId(),txtNombre.getText(), txtTelefono.getText(), (int) spnVacaciones.getValue(), txtFechaCarnetAlimentos.getText(),
+                        txtAlergias.getText(), cmboxTipoSangre.getSelectedItem(), txtFechaIngreso.getText())){
+                    actualizarOpciones();
+                    cargarOpciones(index);
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa");
+                }      
+            } catch (ParseException ex) {
+                Logger.getLogger(JF_ModificarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
