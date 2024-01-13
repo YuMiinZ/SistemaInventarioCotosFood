@@ -30,7 +30,7 @@ public class ControladorProductoInventario {
     
     
 
-    public boolean registrarProductoInventario(String nombre, int indexProveedor, double precio, int cantidad, int cantMinima, Object diaCompra,
+    public boolean registrarProductoInventario(String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
         
         if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
@@ -45,7 +45,7 @@ public class ControladorProductoInventario {
         return false;
     }
     
-    public boolean modificarProductoInventario(ObjectId id, String nombre, int indexProveedor, double precio, int cantidad, int cantMinima, 
+    public boolean modificarProductoInventario(ObjectId id, String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, 
                                                 Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
         
@@ -59,14 +59,14 @@ public class ControladorProductoInventario {
         
     }
     
-    public boolean validarDatos(String nombre, int proveedor, double precio, int cantidad, int cantMinima,
+    public boolean validarDatos(String nombre, int proveedor, double precio, double cantidad, int cantMinima,
                             Object diaCompra, Object estado, String unidadMedida) {
         boolean datosValidos = true;
 
         datosValidos &= funcionesGenerales.validarCampo(nombre, 0, manejadorComponentes);
         datosValidos &= funcionesGenerales.validarEnteroPositivo(proveedor, 1, manejadorComponentes);
         datosValidos &= funcionesGenerales.validarNumeroPositivo(precio, 2, manejadorComponentes);
-        datosValidos &= funcionesGenerales.validarEnteroPositivo(cantidad, 3, manejadorComponentes);
+        datosValidos &= funcionesGenerales.validarNumeroPositivo(cantidad, 3, manejadorComponentes);
         datosValidos &= funcionesGenerales.validarEnteroPositivo(cantMinima, 4, manejadorComponentes);
         datosValidos &= funcionesGenerales.validarCampo(diaCompra, 5, manejadorComponentes);
         datosValidos &= funcionesGenerales.validarCampo(estado, 6, manejadorComponentes);

@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -149,23 +150,24 @@ public class JF_Reportes extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(28, 28, 28)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1404, Short.MAX_VALUE))
+                .addContainerGap(1941, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1747, -1));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2290, 120));
+        jPanel2.getAccessibleContext().setAccessibleName("");
 
         jButton2.setToolTipText("");
         jButton2.setContentAreaFilled(false);
@@ -198,15 +200,15 @@ public class JF_Reportes extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 1230, 60));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 1230, 60));
 
         FechaInicio.setFont(new Font("Montserrat", Font.BOLD, 24));
-        FechaInicio.setText("Fecha Inicio:");
-        jPanel4.add(FechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 930, -1, -1));
+        FechaInicio.setText("Fecha Inicio");
+        jPanel4.add(FechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
 
         FechaFinal.setFont(new Font("Montserrat", Font.BOLD, 24));
-        FechaFinal.setText("Fecha Final:");
-        jPanel4.add(FechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 930, -1, -1));
+        FechaFinal.setText("Fecha Final");
+        jPanel4.add(FechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, -1, -1));
 
         Buscar.setBackground(new java.awt.Color(0, 72, 121));
         Buscar.setFont(new Font("Montserrat", Font.BOLD, 24));
@@ -217,25 +219,25 @@ public class JF_Reportes extends javax.swing.JFrame {
                 BuscarActionPerformed(evt);
             }
         });
-        jPanel4.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 910, 199, 50));
+        jPanel4.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 250, 199, 50));
 
         txtFechaFinal.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel4.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 920, 210, 40));
+        jPanel4.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 260, 40));
 
         txtFechaInicio.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        jPanel4.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 920, 210, 40));
+        jPanel4.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 260, 40));
 
         lblErrorFechaF.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorFechaF.setText("La fecha debe de seguir el formato dd/mm/aaaa");
-        jPanel4.add(lblErrorFechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 960, 290, 30));
+        jPanel4.add(lblErrorFechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 290, 30));
 
         lblErrorFecha.setForeground(new java.awt.Color(194, 8, 8));
         lblErrorFecha.setText("La fecha debe de seguir el formato dd/mm/aaaa");
-        jPanel4.add(lblErrorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 960, 290, 30));
+        jPanel4.add(lblErrorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 290, 30));
 
         MontoTotal.setFont(new Font("Montserrat", Font.BOLD, 24));
         MontoTotal.setText("Total:");
-        jPanel4.add(MontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 930, -1, -1));
+        jPanel4.add(MontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 810, 960, -1));
 
         Reportes.setFont(new Font ("Montserrat", Font.PLAIN,20));
         Reportes.setModel(new javax.swing.table.DefaultTableModel(
@@ -248,7 +250,7 @@ public class JF_Reportes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Reportes);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 1230, 450));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 1230, 400));
 
         jScrollPane2.setViewportView(jPanel4);
 
@@ -280,17 +282,31 @@ public class JF_Reportes extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         List<Consumo_Cliente> consumo = null;
         List<String[]> datos = null;
-        if (!txtFechaInicio.getText().isEmpty() && !txtFechaFinal.getText().isEmpty()){
-            if (funcionesGenerales.validarFecha(txtFechaInicio.getText(), 0, manejadorComponentes) && funcionesGenerales.validarFecha(txtFechaFinal.getText(), 1, manejadorComponentes)){
+        
+        if(!txtFechaInicio.getText().isEmpty() && txtFechaFinal.getText().isEmpty() ||
+           txtFechaInicio.getText().isEmpty() && !txtFechaFinal.getText().isEmpty()    ){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la fecha de inicio y fecha final", null, JOptionPane.ERROR_MESSAGE);
+        } else if (txtFechaInicio.getText().isEmpty() && txtFechaFinal.getText().isEmpty()){
+            manejadorComponentes.ocultarLabels();
+            consumo = reportes.ReporteVentas(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        } else {
+            funcionesGenerales.validarFecha(txtFechaInicio.getText(), 0, manejadorComponentes);
+            funcionesGenerales.validarFecha(txtFechaFinal.getText(), 1, manejadorComponentes);
+            
+            if (!lblErrorFecha.isVisible() && !lblErrorFechaF.isVisible()) {
                 try {
-                    consumo = reportes.ReporteVentas(dateFormat.parse(txtFechaInicio.getText()), dateFormat.parse(txtFechaFinal.getText()));
+                    Date fechaInicio = dateFormat.parse(txtFechaInicio.getText());
+                    Date fechaFinal = dateFormat.parse(txtFechaFinal.getText());
+
+                    if (fechaFinal.before(fechaInicio)) {
+                        JOptionPane.showMessageDialog(null, "La fecha final no puede ser menor que la fecha de inicio", null, JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        consumo = reportes.ReporteVentas(fechaInicio, fechaFinal);
+                    }
                 } catch (ParseException ex) {
                     Logger.getLogger(JF_Reportes.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
-        else{
-            consumo = reportes.ReporteVentas(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         }
         
         datos = cliente.LlenarTablaClientes(consumo);
@@ -300,6 +316,9 @@ public class JF_Reportes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarActionPerformed
     private double rellenarTotal(List<Consumo_Cliente> clientes){
+        if(clientes == null){
+            return 0;
+        }
         double result = 0;
         for (Consumo_Cliente c: clientes){
             result += c.getMonto();

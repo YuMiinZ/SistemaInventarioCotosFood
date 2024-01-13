@@ -72,12 +72,15 @@ public class ControladorConsumo {
     
     public List<String[]> LlenarTablaClientes(List<Consumo_Cliente> clientes){ 
         List<String[]> consumo = new ArrayList<>();
-        for (Consumo_Cliente lista : clientes){
-            String[] info = new String[2];
-            info[0] = ""+(clientes.indexOf(lista)+1);
-            info[1] = ""+lista.getMonto();
-            consumo.add(info);
+        if(clientes != null ){
+            for (Consumo_Cliente lista : clientes){
+                String[] info = new String[2];
+                info[0] = ""+(clientes.indexOf(lista)+1);
+                info[1] = ""+lista.getMonto();
+                consumo.add(info);
+            }
         }
+        
         return consumo;
     }
     
