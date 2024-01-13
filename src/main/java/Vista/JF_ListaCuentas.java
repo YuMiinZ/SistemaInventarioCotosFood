@@ -44,6 +44,9 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         
+
+
+        
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
         mesas = mesa.ConsultarMesas();        
         listaObjetos = mesa.obtenerListaObjetosCuentas(mesas);
@@ -54,8 +57,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         Cuentas.getColumn("Editar").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Editar", Cuentas, 
                 "Comandas mesa", this, listaObjetos, notificaciones));
 
-        
-        TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
         
@@ -92,11 +94,11 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Cuentas = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -140,10 +142,10 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, -1));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2160, 120));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -156,54 +158,10 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         });
         jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 131, 71, 78));
 
-        jButton4.setBackground(new java.awt.Color(0, 72, 121));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Nueva Cuenta");
-        jButton4.setMaximumSize(new java.awt.Dimension(525, 71));
-        jButton4.setMinimumSize(new java.awt.Dimension(525, 71));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1778, 243, -1, -1));
-
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel2.setText("Cuentas");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
-
-        Cuentas.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        Cuentas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Rice and Beans", "Editar"},
-                {"Chifrijo", "Editar"},
-                {"Coca Cola", "Editar"},
-                {"Pescado Empanizado", "Editar"}
-            },
-            new String [] {
-                "Producto", "Editar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        Cuentas.setAlignmentX(0.0F);
-        Cuentas.setAlignmentY(0.0F);
-        Cuentas.setColumnSelectionAllowed(true);
-        Cuentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Cuentas.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        Cuentas.setMinimumSize(new java.awt.Dimension(30, 80));
-        Cuentas.setPreferredSize(new java.awt.Dimension(150, 80));
-        jScrollPane1.setViewportView(Cuentas);
-
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
+        jLabel2.setText("Mesas");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
@@ -219,7 +177,31 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 1230, 60));
+
+        jButton4.setBackground(new java.awt.Color(0, 72, 121));
+        jButton4.setFont(new Font ("Montserrat", Font.BOLD,30));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Nueva Mesa");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 690, 290, 50));
+
+        Cuentas.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        Cuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Editar"
+            }
+        ));
+        jScrollPane1.setViewportView(Cuentas);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 1230, 270));
 
         jScrollPane2.setViewportView(jPanel4);
 

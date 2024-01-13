@@ -60,11 +60,11 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         btnMenu = new javax.swing.JButton();
         lblCotosFood = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         lblFiltro = new javax.swing.JLabel();
         cmboxProveedor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCompraProveedor = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1747, 1291));
@@ -78,7 +78,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
         lblTitulo.setText("Compra por Proveedor");
-        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 860, -1));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 860, -1));
 
         jPanel2.setBackground(new java.awt.Color(152, 194, 70));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -133,6 +133,33 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 71, 78));
 
+        lblFiltro.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        lblFiltro.setText("Proveedor");
+        jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 150, 30));
+
+        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
+        cmboxProveedor.setSelectedIndex(-1);
+        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboxProveedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 270, 30));
+
+        tableCompraProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
+        tableCompraProveedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Producto", "Title 2"
+            }
+        ));
+        jScrollPane1.setViewportView(tableCompraProveedor);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 1230, 450));
+
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -146,42 +173,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 1070, 60));
-
-        lblFiltro.setFont(new Font ("Montserrat", Font.PLAIN,26));
-        lblFiltro.setText("Proveedor");
-        jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 150, 30));
-
-        cmboxProveedor.setFont(new Font ("Montserrat", Font.PLAIN,20));
-        cmboxProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" }));
-        cmboxProveedor.setSelectedIndex(-1);
-        cmboxProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmboxProveedorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmboxProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 270, 30));
-
-        tableCompraProveedor.setFont(new Font("Montserrat", Font.PLAIN, 20));
-        tableCompraProveedor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Prueba"}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tableCompraProveedor);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 1070, 460));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 1230, 60));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -191,7 +183,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1531, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

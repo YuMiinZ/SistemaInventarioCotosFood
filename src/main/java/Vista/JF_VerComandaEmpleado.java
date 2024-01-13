@@ -17,8 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -32,7 +31,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private ControladorEmpleado Empleado = new ControladorEmpleado();
     private ControladorConsumo controlador = new ControladorConsumo();
     private List<String[]> notificaciones;
-    private ArrayList<JTextField> textos = new ArrayList<>();
+    private ArrayList<JTextArea> textos = new ArrayList<>();
 
 
     /**
@@ -61,8 +60,7 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private void customComponents(){
             menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
             menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
-            
-            jComboBox1.setModel(new DefaultComboBoxModel(new String[] {empleadoE.getNombre()}));
+            jLabel3.setText(jLabel3.getText() + " " + empleadoE.getNombre());
             Comanda.rellenarInfo(textos);
             getContentPane().setLayout(new BorderLayout());
             getContentPane().add(jScrollPane1, BorderLayout.CENTER);
@@ -98,16 +96,17 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        Notas = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        Platillos = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        Bebidas = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Bebidas = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Notas = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Platillos = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -164,42 +163,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 71, 78));
 
-        jLabel2.setFont(new Font("Montserrat", Font.BOLD, 36));
-        jLabel2.setText("Empleado");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 329, -1, -1));
-
-        jComboBox1.setToolTipText("");
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 655, 78));
-
-        jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
-        jLabel6.setText("Notas");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 329, -1, -1));
-
-        Notas.setMaximumSize(new java.awt.Dimension(661, 290));
-        Notas.setMinimumSize(new java.awt.Dimension(661, 290));
-        Notas.setName("Notas"); // NOI18N
-        jPanel1.add(Notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 380, 734, 222));
-
-        jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
-        jLabel7.setText("Platillos");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 572, -1, -1));
-
-        Platillos.setMaximumSize(new java.awt.Dimension(661, 290));
-        Platillos.setMinimumSize(new java.awt.Dimension(661, 290));
-        Platillos.setName("Platillos"); // NOI18N
-        jPanel1.add(Platillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 671, 173));
-
-        jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
-        jLabel8.setText("Bebidas");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 852, -1, -1));
-
-        Bebidas.setMaximumSize(new java.awt.Dimension(661, 290));
-        Bebidas.setMinimumSize(new java.awt.Dimension(661, 290));
-        Bebidas.setName("Bebidas"); // NOI18N
-        jPanel1.add(Bebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 900, 671, 173));
-
-        jButton3.setBackground(new java.awt.Color(221, 59, 59));
-        jButton3.setFont(new java.awt.Font("Monospaced", 0, 40)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(218, 46, 44));
+        jButton3.setFont(new Font ("Montserrat", Font.BOLD,30));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Eliminar");
         jButton3.setMaximumSize(new java.awt.Dimension(71, 78));
@@ -208,16 +173,55 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1186, 1044, 537, 61));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 770, 199, 50));
 
         jLabel3.setFont(new Font("Montserrat", Font.BOLD, 40));
         jLabel3.setForeground(new java.awt.Color(25, 25, 25));
-        jLabel3.setText("Comanda: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 290, -1));
+        jLabel3.setText("Comanda - Empleado");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 1650, -1));
+
+        jLabel7.setFont(new Font("Montserrat", Font.BOLD, 36));
+        jLabel7.setText("Platillos");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, -1, -1));
+
+        jLabel8.setFont(new Font("Montserrat", Font.BOLD, 36));
+        jLabel8.setText("Bebidas");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, -1, -1));
+
+        jLabel6.setFont(new Font("Montserrat", Font.BOLD, 36));
+        jLabel6.setText("Notas");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 260, -1, -1));
+
+        Bebidas.setColumns(20);
+        Bebidas.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        Bebidas.setRows(5);
+        Bebidas.setEnabled(false);
+        Bebidas.setName("Bebidas"); // NOI18N
+        jScrollPane2.setViewportView(Bebidas);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 470, 170));
+
+        Notas.setColumns(20);
+        Notas.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        Notas.setRows(5);
+        Notas.setEnabled(false);
+        Notas.setName("Notas"); // NOI18N
+        jScrollPane3.setViewportView(Notas);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 300, 470, 170));
+
+        Platillos.setColumns(20);
+        Platillos.setFont(new Font ("Montserrat", Font.PLAIN,26));
+        Platillos.setRows(5);
+        Platillos.setEnabled(false);
+        Platillos.setName("Platillos"); // NOI18N
+        jScrollPane4.setViewportView(Platillos);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 470, 170));
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2070, 1080));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2070, 1300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,15 +275,13 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Bebidas;
-    private javax.swing.JTextField Notas;
-    private javax.swing.JTextField Platillos;
+    private javax.swing.JTextArea Bebidas;
+    private javax.swing.JTextArea Notas;
+    private javax.swing.JTextArea Platillos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -287,5 +289,8 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

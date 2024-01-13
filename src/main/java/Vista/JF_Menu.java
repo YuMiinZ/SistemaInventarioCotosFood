@@ -81,7 +81,7 @@ public class JF_Menu extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 720, 290, 50));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 730, 290, 50));
 
         lblTitulo.setFont(new Font("HeadlandOne", Font.BOLD, 64));
         lblTitulo.setForeground(new java.awt.Color(25, 25, 25));
@@ -153,39 +153,20 @@ public class JF_Menu extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 1230, 60));
 
         tableMenu.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Rice and Beans", "Editar"},
-                {"Chifrijo", "Editar"},
-                {"Coca Cola", "Editar"},
-                {"Pescado Empanizado", "Editar"}
+
             },
             new String [] {
-                "Producto", "Editar"
+                "Title 1", "Ver más"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableMenu.setAlignmentX(0.0F);
-        tableMenu.setAlignmentY(0.0F);
-        tableMenu.setColumnSelectionAllowed(true);
-        tableMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tableMenu.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        tableMenu.setMinimumSize(new java.awt.Dimension(30, 80));
-        tableMenu.setPreferredSize(new java.awt.Dimension(150, 80));
+        ));
         jScrollPane1.setViewportView(tableMenu);
-        tableMenu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1240, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 1230, 330));
 
         jScrollPane2.setViewportView(jPanel1);
 

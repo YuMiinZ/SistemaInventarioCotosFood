@@ -4,7 +4,6 @@
  */
 package Vista;
 
-import Modelo.ProductoInventario;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
 import Vista.Clases.TablaSpinnerPersonalizada;
@@ -133,36 +132,20 @@ public class JF_Notificaciones extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 1230, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 1230, 60));
 
         tableNotificacion.setFont(new Font ("Montserrat", Font.PLAIN,20));
         tableNotificacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Notificaciones", ""
+                "Notificaciones", "Eliminar"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableNotificacion.setAlignmentX(0.0F);
-        tableNotificacion.setAlignmentY(0.0F);
-        tableNotificacion.setColumnSelectionAllowed(true);
-        tableNotificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ));
         jScrollPane1.setViewportView(tableNotificacion);
-        tableNotificacion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 1230, 380));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 1230, 450));
 
         jScrollPane2.setViewportView(jPanel1);
 

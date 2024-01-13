@@ -6,9 +6,8 @@ package Controlador;
 import Modelo.Comanda;
 import Modelo.ProductoMenu;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import org.bson.types.ObjectId;
 
 /**
@@ -36,7 +35,7 @@ public class ControladorComanda {
         return comanda.UltimaComanda();
     }
     
-    public void AgreagarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
+    public void AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
         comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes);
     }
     
@@ -44,10 +43,12 @@ public class ControladorComanda {
         comanda.eliminarComanda(id);
     }
     
-    public void rellenarInfo(ArrayList<JTextField> textos){
+    public void rellenarInfo(ArrayList<JTextArea> textos){
         List<ProductoMenu> productos = menu.ProductosenMenu(comanda.getPlatillos_Bebida());
         String[] contenido = Platillos_bebidas(productos);
-        for(JTextField campo: textos){
+        contenido[0] = contenido[0].replaceAll(", ", "\n");
+        contenido[1] = contenido[1].replaceAll(", ", "\n");
+        for(JTextArea campo: textos){
             switch(campo.getName()){
                 case "Platillos" -> campo.setText(contenido[0]); 
                 case "Bebidas" -> campo.setText(contenido[1]);                 

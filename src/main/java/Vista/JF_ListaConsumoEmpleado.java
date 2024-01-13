@@ -51,10 +51,10 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         empleados = Controlador.obtenerListaEmpleados();
         listaObjetos = Controlador.obtenerListaObjetosEmpleado(empleados);
         
-        DefaultTableModel model = llenarTabla2columnas(Controlador.LlenarTabla(empleados), "Ver mas");
+        DefaultTableModel model = llenarTabla2columnas(Controlador.LlenarTabla(empleados), "Ver más");
         TablaPersonalizada.setTableProperties(ConsumoEmpleado, model, true);
         
-        ConsumoEmpleado.getColumn("Ver mas").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver mas", ConsumoEmpleado, 
+        ConsumoEmpleado.getColumn("Ver más").setCellEditor(new TablaSpinnerPersonalizada.ButtonEditor(new JCheckBox(), "Ver más", ConsumoEmpleado, 
                 "Comandas empleado", this, listaObjetos, notificaciones));
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jScrollPane2, BorderLayout.CENTER);
@@ -159,7 +159,7 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
         jLabel2.setFont(new Font("Montserrat", Font.BOLD, 64));
         jLabel2.setForeground(new java.awt.Color(25, 25, 25));
         jLabel2.setText("Consumo Empleados");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(152, 194, 70));
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 122));
@@ -175,38 +175,20 @@ public class JF_ListaConsumoEmpleado extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 1070, 60));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 1230, 60));
 
         ConsumoEmpleado.setFont(new Font ("Montserrat", Font.PLAIN,20));
         ConsumoEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Rice and Beans", "Editar"},
-                {"Chifrijo", "Editar"},
-                {"Coca Cola", "Editar"},
-                {"Pescado Empanizado", "Editar"}
+
             },
             new String [] {
-                "Producto", "Editar"
+                "Title 1", "Ver más"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        ConsumoEmpleado.setAlignmentX(0.0F);
-        ConsumoEmpleado.setAlignmentY(0.0F);
-        ConsumoEmpleado.setColumnSelectionAllowed(true);
-        ConsumoEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        ConsumoEmpleado.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        ConsumoEmpleado.setMinimumSize(new java.awt.Dimension(30, 80));
-        ConsumoEmpleado.setPreferredSize(new java.awt.Dimension(150, 80));
+        ));
         jScrollPane1.setViewportView(ConsumoEmpleado);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 1070, 460));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 1230, 380));
 
         jScrollPane2.setViewportView(jPanel4);
 
