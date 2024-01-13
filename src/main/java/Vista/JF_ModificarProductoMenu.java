@@ -411,10 +411,10 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
-        if (controlador.registrarProductoMenu(txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(),
+        if (controlador.modificarProductoMenu(dato.getId(), txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(),
             cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
             listaProductosInventario)) {
-        JOptionPane.showMessageDialog(null, "Registro exitoso");
+        JOptionPane.showMessageDialog(null, "Modificación exitosa");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 

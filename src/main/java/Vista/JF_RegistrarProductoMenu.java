@@ -321,6 +321,8 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         if (controlador.registrarProductoMenu(txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(), 
                                                     cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
                                                     listaProductosInventario)) {
+            spnPrecio.setValue(0.0);
+            spnCostoElaboracion.setValue(0.0);
             JOptionPane.showMessageDialog(null, "Registro exitoso");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed

@@ -12,6 +12,7 @@ import Vista.Clases.ManejadorComponentes;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
 
 /**
@@ -80,7 +81,8 @@ public class ControladorProductoMenu {
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
-            tableIngredientes.removeAll();
+            DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
+            model.setRowCount(0);
             return true;
         }
         return false;
