@@ -4,10 +4,12 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.ProductoInventario;
 import Modelo.Proveedor;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -32,30 +34,37 @@ public class ControladorProductoInventario {
 
     public boolean registrarProductoInventario(String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
-        
+        boolean result = false;
         if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
-            consultas.registrarProductoInventario(nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            if (consultas.registrarProductoInventario(nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente)){
+                result = true;
+            }
+            conexion.cerrarConexion(cliente);
             
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
-            return true;
         }
-        return false;
+        return result;
     }
     
     public boolean modificarProductoInventario(ObjectId id, String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, 
                                                 Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
-        
+        boolean result = false;
          if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
-            consultas.modificarProductoInventario(id, nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima);
-            
-            return true;
+             ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            if (consultas.modificarProductoInventario(id, nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente)){
+                result = true;
+            }
+            conexion.cerrarConexion(cliente);
         }
-        return false;
+        return result;
         
     }
     
@@ -76,7 +85,11 @@ public class ControladorProductoInventario {
     }
     
     public List<ProductoInventario> obtenerListaProductosInventario(){
-        return consultas.getListaProductosInventario();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoInventario> productos = consultas.getListaProductosInventario(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     
@@ -102,7 +115,14 @@ public class ControladorProductoInventario {
         return resultados;
     }
     
-    public void eliminarProductoInventario(ObjectId id){
-        consultas.eliminarProductoInventario(id);
+    public boolean eliminarProductoInventario(ObjectId id){
+        boolean result = false;
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (consultas.eliminarProductoInventario(id, cliente)){
+            result = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return result;
     }
 }

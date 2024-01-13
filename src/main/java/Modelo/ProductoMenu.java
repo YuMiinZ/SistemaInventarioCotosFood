@@ -9,7 +9,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -127,10 +132,8 @@ public class ProductoMenu {
         }
     }
     
-    public void registrarProductoMenu(String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
-                                        List<Ingrediente> listaIngredientes) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean registrarProductoMenu(String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
+                                        List<Ingrediente> listaIngredientes, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood"); 
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -153,15 +156,13 @@ public class ProductoMenu {
             .append("Costo_de_Elaboracion", costoElaboracion)
             .append("Ingredientes", listaDocumentosIngredientes);
 
-        coleccion.insertOne(producto);
+        InsertOneResult result = coleccion.insertOne(producto);
+        return !result.toString().isEmpty();
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void modificarProductoMenu(ObjectId id, String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
-                                        List<Ingrediente> listaIngredientes) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean modificarProductoMenu(ObjectId id, String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
+                                        List<Ingrediente> listaIngredientes, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -188,27 +189,23 @@ public class ProductoMenu {
 
         Document updateDocumento = new Document("$set", datosActualizar);
 
-        coleccion.updateOne(filtro, updateDocumento);
+        UpdateResult result = coleccion.updateOne(filtro, updateDocumento);
+        return !result.toString().isEmpty();
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void eliminarProductoMenu(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean eliminarProductoMenu(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
 
-        conexion.cerrarConexion(cliente);
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
     
-    public List<ProductoMenu> getListaProductosMenu() {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public List<ProductoMenu> getListaProductosMenu(MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -230,12 +227,11 @@ public class ProductoMenu {
             listaProductos.add(producto);
         }
 
-        conexion.cerrarConexion(cliente);
         return listaProductos;
     }
-    public ProductoMenu ObtenerProductoporNombre(String nombre){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    
+    public ProductoMenu ObtenerProductoporNombre(String nombre, MongoClient cliente){
+
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
 
@@ -249,22 +245,19 @@ public class ProductoMenu {
             listaIngredientes.add(ingrediente);
         }
         ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
-       conexion.cerrarConexion(cliente);
         return producto;
     }
     
-    public List<ProductoMenu> ProductosenMenu(List<String> productos){
+    public List<ProductoMenu> ProductosenMenu(List<String> productos, MongoClient cliente){
         ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
         for (String doc: productos){
-            ProductosComanda.add(ObtenerProductoporNombre(doc));
+            ProductosComanda.add(ObtenerProductoporNombre(doc, cliente));
         }
         return ProductosComanda;
     }
     
-    public List<ProductoMenu> ProductosEstancados(List<String> productos){
+    public List<ProductoMenu> ProductosEstancados(List<String> productos, MongoClient cliente){
         ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -282,13 +275,10 @@ public class ProductoMenu {
             ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             ProductosComanda.add(producto);
         }
-        conexion.cerrarConexion(cliente);
         return ProductosComanda;
     }
     
-    public ProductoMenu getProducto(String nombre){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public ProductoMenu getProducto(String nombre, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
@@ -304,38 +294,43 @@ public class ProductoMenu {
             listaIngredientes.add(ingrediente);
         }
         ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
-        conexion.cerrarConexion(cliente);
         return producto;
     }
     
     
-    public List<ProductoMenu> PlatillosyBebidas(String tipo){
+    public List<ProductoMenu> PlatillosyBebidas(String tipo, MongoClient cliente){
         ArrayList<ProductoMenu> ProductosComanda = new ArrayList<>();
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+        boolean existencia = false;
+        ProductoInventario inventario = new ProductoInventario();
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
-        
-        FindIterable<Document> Menu = coleccion.find(eq("Tipo_Producto", tipo));
+        Bson filter = Filters.and(Filters.eq("Tipo_Producto", tipo), Filters.eq("Estado", "Disponible"));
+        FindIterable<Document> Menu = coleccion.find(filter);
         for (Document doc: Menu){
             List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
             List<Ingrediente> listaIngredientes = new ArrayList<>();
 
             for (Document ingredienteDocumento : listaIngredientesDocumento) {
                 Ingrediente ingrediente = new Ingrediente(ingredienteDocumento.getDouble("Cantidad"),ingredienteDocumento.getObjectId("idProductoInventario"));
+                
+                if (inventario.getProductoInventario(ingredienteDocumento.getObjectId("idProductoInventario"), cliente).getCantidad() < ingredienteDocumento.getDouble("Cantidad")){
+                    existencia = false;
+                    break;
+                }
                 listaIngredientes.add(ingrediente);
+                existencia = true;
+            }
+            if (!existencia){
+                break;
             }
             ProductoMenu producto = new ProductoMenu(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Estado"), doc.getString("Tipo_Producto"), doc.getDouble("Precio"),doc.getDouble("Costo_de_Elaboracion"), listaIngredientes);
             ProductosComanda.add(producto);
         }
-        conexion.cerrarConexion(cliente);
         return ProductosComanda;
     }    
     
-    private List<Document> ProductosEnComandas(){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    private List<Document> ProductosEnComandas(MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         List<Document> coleccion = new ArrayList<>();
@@ -345,48 +340,54 @@ public class ProductoMenu {
                                                         new Document("from", "Consumo_Cliente").append("localField", "_id").append("foreignField", "ID_Comanda").append("as","comandaInfo")),
                                                         new Document("$unwind", "$comandaInfo")));
         Menu.into(coleccion);
-        conexion.cerrarConexion(cliente);
         return coleccion;
     }
     
-    public List<ProductoMenu> ReporteProductosEstancados(){
+    public List<ProductoMenu> ReporteProductosEstancados(MongoClient cliente){
         List<ProductoMenu> productos;
         List<String> temporal = new ArrayList<>();
-        List<Document> coleccion = ProductosEnComandas();
+        List<Document> coleccion = ProductosEnComandas(cliente);
         for (Document doc: coleccion){
             for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
                 temporal.add(nombres);
             }
         }
+        productos = ProductosEstancados(temporal, cliente);
+        return productos;
+    }
+    
+private static List<String> ProductoMasRepetido(List<String> productos) {
+    Map<String, Integer> frequencyMap = new HashMap<>();
+    List<String> sortedProductos = new ArrayList<>();
+
+    for (String element : productos) {
+        frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
+
+        // If the element is not yet in the sorted list, add it
+        if (!sortedProductos.contains(element)) {
+            sortedProductos.add(element);
+        }
+    }
+
+    // Use a custom comparator to sort the sortedProductos list based on frequency
+    Collections.sort(sortedProductos, (o1, o2) -> frequencyMap.get(o2) - frequencyMap.get(o1));
+
+    return sortedProductos;
+}
+    
+    public List<ProductoMenu> ReporteCostoProductosMasVendidos(MongoClient cliente){
+        List<ProductoMenu> productos;
+        List<String> temporal = new ArrayList<>();
         
-        productos = ProductosEstancados(temporal);
-        return productos;
-    }
-    
-    private List<String> ProductoMasRepetido(List<String> productos){
-        //List<String> temporal = new ArrayList<>();
-        Map<String, Integer> frequencyMap = new HashMap<>();
-
-        for (String element : productos) {
-            frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
-        }
-
-        // Step 2: Implement a custom comparator
-        Collections.sort(productos, (o1, o2) -> frequencyMap.get(o2) - frequencyMap.get(o1));
-
-        return productos;
-    }
-    
-    public List<ProductoMenu> ReporteCostoProductosMasVendidos(){
-        List<ProductoMenu> productos;
-        List<String> temporal = new ArrayList<>();
-        List<Document> coleccion = ProductosEnComandas();
+        List<Document> coleccion = ProductosEnComandas(cliente);
         for (Document doc: coleccion){
             for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
                 temporal.add(nombres);
             }
         }
-        productos = ProductosenMenu(ProductoMasRepetido(temporal));
+        List<String> productosFiltrados = ProductoMasRepetido(temporal);
+        System.out.println(productosFiltrados.toString());
+        productos = ProductosenMenu(productosFiltrados, cliente);
         return productos;
     }
     

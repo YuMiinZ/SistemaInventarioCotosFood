@@ -4,8 +4,10 @@
  */
 package Vista;
 
+import Modelo.ConexionBD;
 import Modelo.Empleado;
 import Vista.Clases.MenuBoton;
+import com.mongodb.client.MongoClient;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -171,7 +173,10 @@ public class JF_Principal extends javax.swing.JFrame {
         }
         //</editor-fold>
         Empleado consultas = new Empleado();
-        List<String[]> listaVecimientoEmpleados = consultas.getEmpleadosProximosAVencer();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<String[]> listaVecimientoEmpleados = consultas.getEmpleadosProximosAVencer(cliente);
+        conexion.cerrarConexion(cliente);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

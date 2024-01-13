@@ -17,6 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -232,8 +233,15 @@ public class JF_VerComandaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        controlador.ElminarCuentaEmpleado(empleadoE.getId(), Consumo.getID_Comanda());
-        Comanda.EliminarComanda(Consumo.getID_Comanda());
+        if (controlador.ElminarCuentaEmpleado(empleadoE.getId(), Consumo.getID_Comanda())){
+            if (Comanda.EliminarComanda(Consumo.getID_Comanda())){
+                JOptionPane.showMessageDialog(null, "Se ha eliminado con éxito");
+                jButton2ActionPerformed(evt);
+            }
+        }        
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha podido eliminar");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

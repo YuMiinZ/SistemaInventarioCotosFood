@@ -38,7 +38,7 @@ public class JF_Reportes extends javax.swing.JFrame {
     private ControladorReportes reportes = new ControladorReportes();
     private ControladorConsumo cliente = new ControladorConsumo();
     private ManejadorComponentes manejadorComponentes = new ManejadorComponentes();
-    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
+    private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
     private java.util.List<String[]> notificaciones;
     /**
      * Creates new form JF_Reportes

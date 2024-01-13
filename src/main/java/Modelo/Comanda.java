@@ -9,6 +9,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -56,23 +58,19 @@ public class Comanda {
         return id;
     }
     
-    public Comanda BuscarComanda(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public Comanda BuscarComanda(ObjectId id, MongoClient cliente){
+        
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
         Document doc = coleccion.find(eq("_id", id)).first();    
         Comanda comanda = new Comanda(doc.getObjectId("_id"), doc.getList("ListaProductosConsumo", String.class), doc.getString("Notas"), doc.getDouble("Monto"));
         
-        conexion.cerrarConexion(cliente);
         return comanda;
     }
     
-    public Comanda UltimaComanda(){
+    public Comanda UltimaComanda(MongoClient cliente){
         List<Comanda> Comandas = new ArrayList<>();
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
@@ -82,13 +80,10 @@ public class Comanda {
             Comandas.add(comanda);
         }
         
-        conexion.cerrarConexion(cliente);
         return Comandas.get(Comandas.size()-1);
     }
 
-    public void RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
@@ -97,20 +92,16 @@ public class Comanda {
                             .append("Notas", Notes)
                             .append("Monto", Monto);
 
-        coleccion.insertOne(Comanda);
-        conexion.cerrarConexion(cliente);
+        InsertOneResult result = coleccion.insertOne(Comanda);
+        return !result.toString().isEmpty();
     }
 
-    public void eliminarComanda(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
-
+    public boolean eliminarComanda(ObjectId id,  MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
-
-        conexion.cerrarConexion(cliente);
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
 }
