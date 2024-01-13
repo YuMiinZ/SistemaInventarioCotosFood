@@ -34,37 +34,37 @@ public class ControladorProductoInventario {
 
     public boolean registrarProductoInventario(String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
-        
+        boolean result = false;
         if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
             ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
-            consultas.registrarProductoInventario(nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente);
+            if (consultas.registrarProductoInventario(nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente)){
+                result = true;
+            }
             conexion.cerrarConexion(cliente);
             
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
-            return true;
         }
-        return false;
+        return result;
     }
     
     public boolean modificarProductoInventario(ObjectId id, String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, 
                                                 Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
-        
+        boolean result = false;
          if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
              ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
-            consultas.modificarProductoInventario(id, nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente);
+            if (consultas.modificarProductoInventario(id, nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente)){
+                result = true;
+            }
             conexion.cerrarConexion(cliente);
-
-            
-            return true;
         }
-        return false;
+        return result;
         
     }
     
@@ -115,10 +115,14 @@ public class ControladorProductoInventario {
         return resultados;
     }
     
-    public void eliminarProductoInventario(ObjectId id){
+    public boolean eliminarProductoInventario(ObjectId id){
+        boolean result = false;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        consultas.eliminarProductoInventario(id, cliente);
+        if (consultas.eliminarProductoInventario(id, cliente)){
+            result = true;
+        }
         conexion.cerrarConexion(cliente);
+        return result;
     }
 }

@@ -59,6 +59,7 @@ public class ControladorEmpleado {
     
     public boolean registrarEmpleado(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
+        boolean result = false;
         
        if(validarDatos(nombre, telefono, vacaciones, fechaVencimientoCarnet, alergias, tipoSangre, fechaIngreso)){
            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -69,14 +70,15 @@ public class ControladorEmpleado {
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
            ConexionBD conexion = new ConexionBD();
            MongoClient cliente = conexion.crearConexion();
-           consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente);
+           if (consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente)){
+               result = true;
+           }
            conexion.cerrarConexion(cliente);
            manejador.limpiarCamposTexto();
            manejador.limpiarCmbox();
            manejador.limpiarSpinner();
-           return true;
        } 
-       return false;
+       return result;
     }
     
     public boolean validarDatos(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
@@ -107,6 +109,7 @@ public class ControladorEmpleado {
     
     public boolean modificarEmpleado(ObjectId id, String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
+        boolean result = false;
         if(validarDatos(nombre, telefono, vacaciones, fechaVencimientoCarnet, alergias, tipoSangre, fechaIngreso)){
            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
            Date fechaIngresoDate;
@@ -116,17 +119,22 @@ public class ControladorEmpleado {
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
            ConexionBD conexion = new ConexionBD();
            MongoClient cliente = conexion.crearConexion();
-           consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente);
+           if (consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente)){
+               result = true;
+           }
            conexion.cerrarConexion(cliente);
-           return true;
        } 
-       return false;
+       return result;
     }
     
-    public void eliminarEmpleado(ObjectId id){
+    public boolean eliminarEmpleado(ObjectId id){
+        boolean result = false;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        consultas.eliminarEmpleado(id, cliente);
+        if (consultas.eliminarEmpleado(id, cliente)){
+            result = true;
+        }
         conexion.cerrarConexion(cliente);
+        return result;
     }
 }

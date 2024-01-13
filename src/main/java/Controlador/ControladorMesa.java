@@ -28,11 +28,15 @@ public class ControladorMesa {
         return mesas;
     }
     
-    public void AgregarMesa(int num){
+    public boolean AgregarMesa(int num){       
+        boolean result = false;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        mesa.CrearMesa(num, cliente);
+        if (mesa.CrearMesa(num, cliente)){
+            result = true;
+        }
         conexion.cerrarConexion(cliente);
+        return result;
     }
     
     public Mesas BuscarMesa(ObjectId id){

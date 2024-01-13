@@ -33,26 +33,32 @@ public class ControladorProductoMenu {
         this.manejadorComponentes = manejador; 
     }
     
-    public void eliminarProductoMenu(ObjectId id){
+    public boolean eliminarProductoMenu(ObjectId id){
+        boolean result = false;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        consultas.eliminarProductoMenu(id, cliente);
+        if (consultas.eliminarProductoMenu(id, cliente)){
+            result = true;
+        }
         conexion.cerrarConexion(cliente);
+        return result;
     }
     
     public boolean modificarProductoMenu(ObjectId id, String nombre, double precio, double costoElaboracion, Object tipoProducto, 
                                         JTable tableIngredientes, Object estado, List<ProductoInventario> listaProductosInventario){
+        boolean result = false;
         
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
             ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
-            consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes, cliente);
+            if (consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes, cliente)){
+                result = true;
+            }
             conexion.cerrarConexion(cliente);
-            return true;
         }
         
-        return false;
+        return result;
     }
     
     public List<ProductoMenu> obtenerListaProductosMenu(){
@@ -85,21 +91,22 @@ public class ControladorProductoMenu {
 
     public boolean registrarProductoMenu(String nombre, double precio, double costoElaboracion, Object tipoProducto, JTable tableIngredientes, 
                                         Object estado, List<ProductoInventario> listaProductosInventario) {
-        
+        boolean result = false;
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
             ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
-            consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes, cliente);
+            if (consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes, cliente)){
+                result = true;
+            }
             conexion.cerrarConexion(cliente);
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
             DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
             model.setRowCount(0);
-            return true;
         }
-        return false;
+        return result;
     }
     
     public ObjectId obtenerIdProducto(List<ProductoInventario> listaProductosInventario, String nombreProducto) {

@@ -30,16 +30,16 @@ public class ControladorProveedor {
     }
     
     public boolean registrarProveedor(String nombre, String telefono){
+        boolean result = false;
         if(validarDatos(nombre, telefono)){
             manejador.limpiarCamposTexto();
             ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
             consultas.registrarProveedor(nombre, telefono, cliente);
             conexion.cerrarConexion(cliente);
-            return true;
-        } else {
-            return false;
+            result = true;
         }
+        return result;
     }
     
     
@@ -61,20 +61,24 @@ public class ControladorProveedor {
     }
     
     public boolean modificarProveedor(ObjectId id, String nombre, String telefono){
+        boolean result = false;
         if(validarDatos(nombre, telefono)){
             ConexionBD conexion = new ConexionBD();
             MongoClient cliente = conexion.crearConexion();
             consultas.modificarProveedor(id, nombre, telefono, cliente);
-            return true;
-        } else {
-            return false;
+            result = true;
         }
+        return result;
     }
     
-    public void eliminarProveedor(ObjectId id){
+    public boolean eliminarProveedor(ObjectId id){
+        boolean result = false;
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        consultas.eliminarProveedor(id, cliente);
+        if (consultas.eliminarProveedor(id, cliente)){
+            result = true;
+        }
         conexion.cerrarConexion(cliente);
+        return result;
     }
 }
