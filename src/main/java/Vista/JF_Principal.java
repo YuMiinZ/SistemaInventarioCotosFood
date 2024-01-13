@@ -29,7 +29,7 @@ public class JF_Principal extends javax.swing.JFrame {
         customComponents();
         eventComponents();     
         
-
+        this.setExtendedState(JF_Principal.MAXIMIZED_BOTH);
     }
 
     /**

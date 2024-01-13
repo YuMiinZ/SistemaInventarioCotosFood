@@ -55,6 +55,7 @@ public class JF_Reportes extends javax.swing.JFrame {
         reportes.ReporteProductosEstancados();
         customComponents(Name);
         eventComponents();
+        this.setExtendedState(JF_Reportes.MAXIMIZED_BOTH);
     }
     private void customComponents(String Name){
         hideshowLabelsbuttons(false);

@@ -43,7 +43,7 @@ public class JF_ModificarEmpleado extends javax.swing.JFrame {
         eventComponents();
 
         
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_ModificarEmpleado.MAXIMIZED_BOTH);
         
     }
 

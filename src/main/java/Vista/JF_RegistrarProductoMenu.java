@@ -40,7 +40,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         eventComponents();
 
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_RegistrarProductoMenu.MAXIMIZED_BOTH);
         
     }
 

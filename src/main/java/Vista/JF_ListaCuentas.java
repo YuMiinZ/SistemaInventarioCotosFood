@@ -38,7 +38,7 @@ public class JF_ListaCuentas extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
-
+        this.setExtendedState(JF_ListaCuentas.MAXIMIZED_BOTH);
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
