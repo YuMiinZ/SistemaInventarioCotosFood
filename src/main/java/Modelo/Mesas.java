@@ -9,6 +9,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.InsertOneResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -41,13 +42,14 @@ public class Mesas {
         this.NumeroMesa = Numero;
     }
     
-    public void CrearMesa(int Numero, MongoClient cliente){
+    public boolean CrearMesa(int Numero, MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Mesa");
         
         Document Mesa = new Document("Numero_Mesa", Numero);
         
-        coleccion.insertOne(Mesa);
+        InsertOneResult result = coleccion.insertOne(Mesa);
+        return !result.toString().isEmpty();
     }
     
     public List<Mesas> TodasMesas(MongoClient cliente){

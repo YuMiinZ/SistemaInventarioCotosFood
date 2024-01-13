@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -253,9 +254,15 @@ public class JF_ComandasMesa extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        consumo.Pagar(mesa.getId(), "Consumo_Cliente");
-        new JF_ComandasMesa(mesa, notificaciones).setVisible(true);
-        this.dispose();
+        if(consumo.Pagar(mesa.getId(), "Consumo_Cliente")){
+            JOptionPane.showMessageDialog(null, "Pago exitoso");
+            new JF_ComandasMesa(mesa, notificaciones).setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El pago ha sido un fracaso");
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

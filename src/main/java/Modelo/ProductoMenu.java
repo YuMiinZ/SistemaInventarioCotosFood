@@ -9,7 +9,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -127,7 +132,7 @@ public class ProductoMenu {
         }
     }
     
-    public void registrarProductoMenu(String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
+    public boolean registrarProductoMenu(String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
                                         List<Ingrediente> listaIngredientes, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood"); 
@@ -151,11 +156,12 @@ public class ProductoMenu {
             .append("Costo_de_Elaboracion", costoElaboracion)
             .append("Ingredientes", listaDocumentosIngredientes);
 
-        coleccion.insertOne(producto);
+        InsertOneResult result = coleccion.insertOne(producto);
+        return !result.toString().isEmpty();
 
     }
     
-    public void modificarProductoMenu(ObjectId id, String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
+    public boolean modificarProductoMenu(ObjectId id, String nombre, String estado, String tipoProducto, double precio, double costoElaboracion, 
                                         List<Ingrediente> listaIngredientes, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
@@ -183,18 +189,20 @@ public class ProductoMenu {
 
         Document updateDocumento = new Document("$set", datosActualizar);
 
-        coleccion.updateOne(filtro, updateDocumento);
+        UpdateResult result = coleccion.updateOne(filtro, updateDocumento);
+        return !result.toString().isEmpty();
 
     }
     
-    public void eliminarProductoMenu(ObjectId id, MongoClient cliente){
+    public boolean eliminarProductoMenu(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
 
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
     
     public List<ProductoMenu> getListaProductosMenu(MongoClient cliente) {
@@ -295,8 +303,8 @@ public class ProductoMenu {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Menu");
-        
-        FindIterable<Document> Menu = coleccion.find(eq("Tipo_Producto", tipo));
+        Bson filter = Filters.and(Filters.eq("Tipo_Producto", tipo), Filters.eq("Estado", "Disponible"));
+        FindIterable<Document> Menu = coleccion.find(filter);
         for (Document doc: Menu){
             List<Document> listaIngredientesDocumento = (List<Document>) doc.get("Ingredientes");
             List<Ingrediente> listaIngredientes = new ArrayList<>();
@@ -337,28 +345,38 @@ public class ProductoMenu {
         return productos;
     }
     
-    private List<String> ProductoMasRepetido(List<String> productos){
-        Map<String, Integer> frequencyMap = new HashMap<>();
+private static List<String> ProductoMasRepetido(List<String> productos) {
+    Map<String, Integer> frequencyMap = new HashMap<>();
+    List<String> sortedProductos = new ArrayList<>();
 
-        for (String element : productos) {
-            frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
+    for (String element : productos) {
+        frequencyMap.put(element, frequencyMap.getOrDefault(element, 0) + 1);
+
+        // If the element is not yet in the sorted list, add it
+        if (!sortedProductos.contains(element)) {
+            sortedProductos.add(element);
         }
-
-        Collections.sort(productos, (o1, o2) -> frequencyMap.get(o2) - frequencyMap.get(o1));
-
-        return productos;
     }
+
+    // Use a custom comparator to sort the sortedProductos list based on frequency
+    Collections.sort(sortedProductos, (o1, o2) -> frequencyMap.get(o2) - frequencyMap.get(o1));
+
+    return sortedProductos;
+}
     
     public List<ProductoMenu> ReporteCostoProductosMasVendidos(MongoClient cliente){
         List<ProductoMenu> productos;
         List<String> temporal = new ArrayList<>();
+        
         List<Document> coleccion = ProductosEnComandas(cliente);
         for (Document doc: coleccion){
             for (String nombres : doc.getList("ListaProductosConsumo", String.class)){
                 temporal.add(nombres);
             }
         }
-        productos = ProductosenMenu(ProductoMasRepetido(temporal), cliente);
+        List<String> productosFiltrados = ProductoMasRepetido(temporal);
+        System.out.println(productosFiltrados.toString());
+        productos = ProductosenMenu(productosFiltrados, cliente);
         return productos;
     }
     

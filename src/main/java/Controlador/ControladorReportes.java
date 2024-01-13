@@ -58,14 +58,13 @@ public class ControladorReportes {
     }
     
     public List<String[]> LlenarTablaMenu(List<ProductoMenu> menu, int opcion){
-        //System.out.println(menu.isEmpty());
         List<String[]> productos = new ArrayList<>();
         for (ProductoMenu lista : menu){
             String[] info = new String[2];
             info[0] = lista.getNombre();
             switch (opcion){
-                case 0 -> info[1] = ""+lista.getPrecio();
-                case 1 -> info[1] = ""+lista.getCostoElaboracion();
+                case 0 -> info[1] = "₡ "+lista.getPrecio();
+                case 1 -> info[1] = "₡ "+lista.getCostoElaboracion();
                 default -> {break;}
             }
             productos.add(info);

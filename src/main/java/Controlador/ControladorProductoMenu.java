@@ -24,7 +24,7 @@ import org.bson.types.ObjectId;
 public class ControladorProductoMenu {
     private ProductoMenu consultas = new ProductoMenu();
     private ManejadorComponentes manejadorComponentes;
-    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
+    private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
     public ControladorProductoMenu() {
     }

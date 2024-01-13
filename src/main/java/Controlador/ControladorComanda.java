@@ -18,6 +18,7 @@ import org.bson.types.ObjectId;
  */
 public class ControladorComanda {
     private Comanda comanda = new Comanda();
+    private boolean resultado = false;
     private ControladorProductoMenu menu = new ControladorProductoMenu();
     
     /**
@@ -48,19 +49,24 @@ public class ControladorComanda {
         return comandaE;
     }
     
-    public void AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
+    public boolean AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes, cliente);
+        if (comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes, cliente)){
+            resultado = true;
+        }
         conexion.cerrarConexion(cliente);
-        
+        return resultado;
     }
     
-    public void EliminarComanda(ObjectId id){
+    public boolean EliminarComanda(ObjectId id){
         ConexionBD conexion = new ConexionBD();
         MongoClient cliente = conexion.crearConexion();
-        comanda.eliminarComanda(id, cliente);
+        if ((comanda.eliminarComanda(id, cliente))){
+            resultado = true;
+        }
         conexion.cerrarConexion(cliente);
+        return resultado;
     }
     
     public void rellenarInfo(ArrayList<JTextArea> textos){

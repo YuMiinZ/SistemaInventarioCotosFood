@@ -20,6 +20,8 @@ import org.bson.types.ObjectId;
 public class ControladorConsumo {
     private Consumo_Cliente cliente = new Consumo_Cliente();
     private Consumo_Empleado Empleado = new Consumo_Empleado();
+    private boolean resultado = false;
+    
     
     public ControladorConsumo(){}
     
@@ -43,39 +45,55 @@ public class ControladorConsumo {
         conexion.cerrarConexion(clienteE);
         return empeleados;
     }
-    public void CrearCliente(ObjectId comanda, ObjectId mesa, double monto, Date fecha){
+    
+    public boolean CrearCliente(ObjectId comanda, ObjectId mesa, double monto, Date fecha){
         ConexionBD conexion = new ConexionBD();
         MongoClient clienteE = conexion.crearConexion();
-        cliente.NuevaCompra(comanda, mesa, monto, fecha, clienteE);
+        if (cliente.NuevaCompra(comanda, mesa, monto, fecha, clienteE)){
+            resultado = true;
+        }
         conexion.cerrarConexion(clienteE);
+        return resultado;
     }
     
-    public void CrearEmpleado(ObjectId comanda, ObjectId mesa, double monto){
+    public boolean CrearEmpleado(ObjectId comanda, ObjectId mesa, double monto){
         ConexionBD conexion = new ConexionBD();
         MongoClient clienteE = conexion.crearConexion();
-        Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto, clienteE);
+        if (Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto, clienteE)){
+            resultado = true;
+        }
         conexion.cerrarConexion(clienteE);
+        return resultado;
     }
     
-    public void ElminarCuentaCliente(ObjectId idMesa, ObjectId idComanda){
+    public boolean ElminarCuentaCliente(ObjectId idMesa, ObjectId idComanda){
         ConexionBD conexion = new ConexionBD();
         MongoClient clienteE = conexion.crearConexion();
-        cliente.eliminar(idMesa, idComanda, clienteE);
+        if (cliente.eliminar(idMesa, idComanda, clienteE)){
+            resultado = true;
+        }
         conexion.cerrarConexion(clienteE);
+        return resultado;
     }
     
-    public void ElminarCuentaEmpleado(ObjectId idEmpleado, ObjectId idComanda){
+    public boolean ElminarCuentaEmpleado(ObjectId idEmpleado, ObjectId idComanda){
         ConexionBD conexion = new ConexionBD();
         MongoClient clienteE = conexion.crearConexion();
-        Empleado.eliminar(idEmpleado, idComanda, clienteE);
+        if (Empleado.eliminar(idEmpleado, idComanda, clienteE)){
+            resultado = true;
+        }
         conexion.cerrarConexion(clienteE);
+        return resultado;
     }
     
-    public void Pagar(ObjectId cuenta, String opcion){
+    public boolean Pagar(ObjectId cuenta, String opcion){
         ConexionBD conexion = new ConexionBD();
         MongoClient clienteE = conexion.crearConexion();
-        cliente.Pagar(cuenta, opcion, clienteE);
+        if (cliente.Pagar(cuenta, opcion, clienteE)){
+            resultado = true;
+        }
         conexion.cerrarConexion(clienteE);
+        return resultado;
     }
     
     public List<Object> obtenerListaObjetosConsumoCliente( List<Consumo_Cliente> listaConsumo){

@@ -10,6 +10,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -75,7 +78,7 @@ public class Consumo_Cliente {
         return fecha;
     }
     
-    public void NuevaCompra(ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha, MongoClient cliente){
+    public boolean NuevaCompra(ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
@@ -85,10 +88,11 @@ public class Consumo_Cliente {
                             .append("Estado", "Sin Pagar")
                             .append("MontoTotal", Monto)
                             .append("Fecha", fecha);
-        coleccion.insertOne(Consumo_Cliente);
+        InsertOneResult result = coleccion.insertOne(Consumo_Cliente);
+        return !result.toString().isEmpty();
     }
     
-    public void ModificarConsumo(ObjectId id, ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha, String Texto, MongoClient cliente){
+    public boolean ModificarConsumo(ObjectId id, ObjectId ID_Comanda, ObjectId ID_Mesa, Double Monto, Date fecha, String Texto, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
@@ -103,15 +107,17 @@ public class Consumo_Cliente {
 
         
         Document updateDocumento = new Document("$set", Consumo_Cliente);
-        coleccion.updateOne(filtro, updateDocumento);
+        UpdateResult result = coleccion.updateOne(filtro, updateDocumento);
+        return !result.toString().isEmpty();
     }
     
-    public void eliminar(ObjectId idMesa, ObjectId idComanda, MongoClient cliente){
+    public boolean eliminar(ObjectId idMesa, ObjectId idComanda, MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Consumo_Cliente");
 
         Bson filter = Filters.and(Filters.eq("ID_Mesa", idMesa), Filters.eq("ID_Comanda", idComanda));
-        coleccion.deleteOne(filter);
+        DeleteResult result =  coleccion.deleteOne(filter);
+        return !result.toString().isEmpty();
     }
     public Consumo_Cliente ConsumoCliente(ObjectId idConsumo, MongoClient cliente){
 
@@ -157,7 +163,8 @@ public class Consumo_Cliente {
         return consumo;
     }
     
-    public void Pagar(ObjectId cuenta, String opcion, MongoClient cliente){
+    public boolean Pagar(ObjectId cuenta, String opcion, MongoClient cliente){
+        boolean result = false;
         String Id = null;
         switch (opcion){
             case "Consumo_Cliente" -> Id = "ID_Mesa";
@@ -191,10 +198,11 @@ public class Consumo_Cliente {
             }
             
             switch (opcion){
-                case "Consumo_Cliente" -> {consumo = new Consumo_Cliente().ConsumoCliente(doc.getObjectId("_id"), cliente); ModificarConsumo(consumo.getId(), consumo.getID_Comanda(), cuenta, consumo.getMonto(), consumo.getFecha(), "Pagado", cliente); break;}
-                case "Consumo_Empleado" -> {empleado = new Consumo_Empleado().ConsumoEspecifico(doc.getObjectId("_id"), cliente); empleado.ModificarConsumoEmpelado(empleado.getID_Comanda(), empleado.getID_Empleado(), empleado.getMontoTotal(), "Pagado", cliente);}
+                case "Consumo_Cliente" -> {consumo = new Consumo_Cliente().ConsumoCliente(doc.getObjectId("_id"), cliente); if(ModificarConsumo(consumo.getId(), consumo.getID_Comanda(), cuenta, consumo.getMonto(), consumo.getFecha(), "Pagado", cliente)){ result = true;}}
+                case "Consumo_Empleado" -> {empleado = new Consumo_Empleado().ConsumoEspecifico(doc.getObjectId("_id"), cliente); if (empleado.ModificarConsumoEmpelado(empleado.getID_Comanda(), empleado.getID_Empleado(), empleado.getMontoTotal(), "Pagado", cliente)){ result = true;}}
                 default -> {break;}
             }
         }
+        return result;
     }
 }

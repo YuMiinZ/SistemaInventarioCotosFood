@@ -8,7 +8,6 @@ import Controlador.ControladorConsumo;
 import Modelo.Consumo_Empleado;
 import Modelo.Empleado;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import Vista.Clases.MenuBoton;
 import Vista.Clases.TablaPersonalizada;
@@ -19,6 +18,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,8 +52,6 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
         menu.setButtonIcon(jButton2, "/Imagenes/IconoRegresar.png");
         TablaPersonalizada.setScrollPaneProperties(jScrollPane1);
-        ControladorConsumo consumo = new ControladorConsumo();
-
         
         empleado = consumo.ConsultarEmpleado(empleadoE.getId());
         listaObjetos = consumo.obtenerListaObjetosConsumoEmpleado(empleado);
@@ -267,9 +265,14 @@ public class JF_ComandasEmpleado extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        consumo.Pagar(empleadoE.getId(), "Consumo_Empleado");
-        new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
-        this.dispose();
+        if(consumo.Pagar(empleadoE.getId(), "Consumo_Empleado")){
+            JOptionPane.showMessageDialog(null, "Pago exitoso");
+            new JF_ComandasEmpleado(empleadoE, notificaciones).setVisible(true);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El pago ha sido un fracaso");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

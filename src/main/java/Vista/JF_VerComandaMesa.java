@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -238,8 +239,15 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        controlador.ElminarCuentaCliente(mesaE.getId(), Consumo.getID_Comanda());
-        Comanda.EliminarComanda(Consumo.getID_Comanda());
+        if (controlador.ElminarCuentaCliente(mesaE.getId(), Consumo.getID_Comanda())){
+            if (Comanda.EliminarComanda(Consumo.getID_Comanda())){
+                JOptionPane.showMessageDialog(null, "Se ha eliminado con éxito");
+                jButton2ActionPerformed(evt);
+            }
+        }        
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha podido eliminar");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

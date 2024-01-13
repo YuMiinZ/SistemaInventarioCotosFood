@@ -126,4 +126,21 @@ public class FuncionesGenerales {
 
         return !(!tablaNoVacia || !datosValidos);
     }
+    
+    public boolean validarTablaDatos(JTable tablaIngredientes){
+        boolean datosValidos = false;
+        int rowCount = tablaIngredientes.getRowCount();
+        
+        for (int i = 0; i < rowCount; i++) {
+            Object ingrediente = tablaIngredientes.getValueAt(i, 0);
+            Object cantidad = tablaIngredientes.getValueAt(i, 1);
+            if (!ingrediente.toString().isEmpty() && cantidad instanceof Double) {
+                if ((double) cantidad > 0.0) {
+                    datosValidos = true;
+                    break;
+                }
+            }
+        }
+        return datosValidos;
+    }
 }

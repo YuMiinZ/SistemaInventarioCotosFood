@@ -9,6 +9,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -81,7 +83,7 @@ public class Comanda {
         return Comandas.get(Comandas.size()-1);
     }
 
-    public void RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes, MongoClient cliente){
+    public boolean RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
@@ -90,14 +92,16 @@ public class Comanda {
                             .append("Notas", Notes)
                             .append("Monto", Monto);
 
-        coleccion.insertOne(Comanda);
+        InsertOneResult result = coleccion.insertOne(Comanda);
+        return !result.toString().isEmpty();
     }
 
-    public void eliminarComanda(ObjectId id,  MongoClient cliente){
+    public boolean eliminarComanda(ObjectId id,  MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
 }

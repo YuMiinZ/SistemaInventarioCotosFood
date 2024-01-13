@@ -9,6 +9,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -105,7 +108,7 @@ public class Empleado {
         this.fecha_vencimiento_carnet = fecha_vencimiento_carnet;
     }
     
-    public void registrarEmpleado(String nombre, String telefono, String alergias, String tipoSangre, int vacaciones, 
+    public boolean registrarEmpleado(String nombre, String telefono, String alergias, String tipoSangre, int vacaciones, 
                                   Date fechaIngreso, Date fechaVencimientoCarnet, MongoClient cliente){
 
         
@@ -120,7 +123,8 @@ public class Empleado {
                                 .append("Fecha_de_Ingreso", fechaIngreso)
                                 .append("Fecha_Vencimiento_Carnet", fechaVencimientoCarnet);
 
-        coleccion.insertOne(empleado);
+        InsertOneResult result = coleccion.insertOne(empleado);
+        return !result.toString().isEmpty();
     }
     
     public Empleado getEmpleado(ObjectId id, MongoClient cliente){
@@ -133,7 +137,7 @@ public class Empleado {
         return Empleado;
     }
     
-    public void modificarEmpleado(ObjectId id, String nombre, String telefono, String alergias, String tipoSangre, int vacaciones,
+    public boolean modificarEmpleado(ObjectId id, String nombre, String telefono, String alergias, String tipoSangre, int vacaciones,
                               Date fechaIngreso, Date fechaVencimientoCarnet, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
@@ -151,7 +155,8 @@ public class Empleado {
 
         Document updateDocumento = new Document("$set", datosActualizar);
 
-        coleccion.updateOne(filtro, updateDocumento);
+        UpdateResult result = coleccion.updateOne(filtro, updateDocumento);
+        return !result.toString().isEmpty();
     }
     
     public List<Empleado> getListaEmpleados(MongoClient cliente){
@@ -183,14 +188,14 @@ public class Empleado {
         return listaEmpleados;
     }
     
-    public void eliminarEmpleado(ObjectId id, MongoClient cliente){
+    public boolean eliminarEmpleado(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
-
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
     
     public List<String[]> getEmpleadosProximosAVencer(MongoClient cliente) {
