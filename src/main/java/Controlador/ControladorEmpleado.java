@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Empleado;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ public class ControladorEmpleado {
     private ManejadorComponentes manejador;
     FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
-    public ControladorEmpleado() {
-    }
+    public ControladorEmpleado() {}
         
     
     
@@ -33,7 +34,11 @@ public class ControladorEmpleado {
     }
     
     public Empleado obtenerEmpelado(ObjectId id){
-        return consultas.getEmpleado(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        Empleado empleado = consultas.getEmpleado(id, cliente);
+        conexion.cerrarConexion(cliente);
+        return empleado;
     }
     
     public List<Object> obtenerListaObjetosEmpleado(List<Empleado> Empleados){
@@ -54,6 +59,7 @@ public class ControladorEmpleado {
     
     public boolean registrarEmpleado(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
+        boolean result = false;
         
        if(validarDatos(nombre, telefono, vacaciones, fechaVencimientoCarnet, alergias, tipoSangre, fechaIngreso)){
            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -62,13 +68,17 @@ public class ControladorEmpleado {
 
            fechaIngresoDate = formatoFecha.parse(fechaIngreso);
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
-           consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate);
+           ConexionBD conexion = new ConexionBD();
+           MongoClient cliente = conexion.crearConexion();
+           if (consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente)){
+               result = true;
+           }
+           conexion.cerrarConexion(cliente);
            manejador.limpiarCamposTexto();
            manejador.limpiarCmbox();
            manejador.limpiarSpinner();
-           return true;
        } 
-       return false;
+       return result;
     }
     
     public boolean validarDatos(String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
@@ -90,11 +100,16 @@ public class ControladorEmpleado {
     }
     
     public List<Empleado> obtenerListaEmpleados(){
-        return consultas.getListaEmpleados();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<Empleado> empleados = consultas.getListaEmpleados(cliente);
+        conexion.cerrarConexion(cliente);
+        return empleados;
     }
     
     public boolean modificarEmpleado(ObjectId id, String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
                                   String fechaIngreso) throws ParseException{
+        boolean result = false;
         if(validarDatos(nombre, telefono, vacaciones, fechaVencimientoCarnet, alergias, tipoSangre, fechaIngreso)){
            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
            Date fechaIngresoDate;
@@ -102,13 +117,24 @@ public class ControladorEmpleado {
 
            fechaIngresoDate = formatoFecha.parse(fechaIngreso);
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
-           consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate);
-           return true;
+           ConexionBD conexion = new ConexionBD();
+           MongoClient cliente = conexion.crearConexion();
+           if (consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente)){
+               result = true;
+           }
+           conexion.cerrarConexion(cliente);
        } 
-       return false;
+       return result;
     }
     
-    public void eliminarEmpleado(ObjectId id){
-        consultas.eliminarEmpleado(id);
+    public boolean eliminarEmpleado(ObjectId id){
+        boolean result = false;
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (consultas.eliminarEmpleado(id, cliente)){
+            result = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return result;
     }
 }

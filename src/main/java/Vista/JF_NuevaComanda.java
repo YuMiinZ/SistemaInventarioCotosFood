@@ -9,6 +9,7 @@ import Controlador.ControladorConsumo;
 import Controlador.ControladorProductoMenu;
 import Modelo.Mesas;
 import Modelo.ProductoMenu;
+import Vista.Clases.FuncionesGenerales;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.Clases.MenuBoton;
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,6 +42,8 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
     private List<ProductoMenu> Platillo;
     private List<ProductoMenu> Bebida;
     private List<String[]> notificaciones;
+    private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
+
     /**
      * Creates new form NuevaComanda
      * @param Mesa
@@ -332,8 +336,30 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         ArrayList<String> Productos = new ArrayList<>();
         ProductoMenu producto;
         double MontoTotal = 0;
-        //DefaultTableModel model = (DefaultTableModel) tablePlatilllos.getModel();
-        //DefaultTableModel model2 = (DefaultTableModel) tableBebidas.getModel();
+        if (tablePlatilllos.getRowCount() > 0){
+            if (!funcionesGenerales.validarTablaDatos(tablePlatilllos)){
+                JOptionPane.showMessageDialog(null, "Inserte bien los datos en platillos");
+                return;
+            }
+        }
+        if (tableBebidas.getRowCount() > 0){
+            if (!funcionesGenerales.validarTablaDatos(tableBebidas)){
+                JOptionPane.showMessageDialog(null, "Inserte bien los datos en bebidas");
+                return;
+            }
+        }
+        if (tableBebidas.getRowCount() == 0 && tablePlatilllos.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Inserte datos");
+                return;
+        }
+        
+        for (int i = 0; i < tablePlatilllos.getRowCount(); i++){
+            producto = Menu.ObtenerProductoNombre(tablePlatilllos.getModel().getValueAt(i, 0).toString());
+            for (int j = 0; j < Double.parseDouble(tablePlatilllos.getModel().getValueAt(i, 1).toString()); j++){
+                Productos.add(producto.getNombre());
+                MontoTotal += producto.getPrecio();
+            }
+        }
         for (int i = 0; i < tablePlatilllos.getRowCount(); i++){
             producto = Menu.ObtenerProductoNombre(tablePlatilllos.getModel().getValueAt(i, 0).toString());
             for (int j = 0; j < Double.parseDouble(tablePlatilllos.getModel().getValueAt(i, 1).toString()); j++){
@@ -350,8 +376,15 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
             }
         }
         
-        Comanda.AgregarComanda(MontoTotal, Productos, jTextField1.getText());
-        Cliente.CrearCliente(Comanda.UltimaComanda().getId(), Mesa.getId(), MontoTotal, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        if (Comanda.AgregarComanda(MontoTotal, Productos, jTextField1.getText())){
+            if (Cliente.CrearCliente(Comanda.UltimaComanda().getId(), Mesa.getId(), MontoTotal, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()))){
+                JOptionPane.showMessageDialog(null, "Se ha agregado con éxito");
+                jButton2ActionPerformed(evt);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha podido agregar");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnAgregarPlatilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPlatilloActionPerformed

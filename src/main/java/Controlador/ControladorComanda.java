@@ -4,7 +4,9 @@
  */
 package Controlador;
 import Modelo.Comanda;
+import Modelo.ConexionBD;
 import Modelo.ProductoMenu;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextArea;
@@ -16,6 +18,7 @@ import org.bson.types.ObjectId;
  */
 public class ControladorComanda {
     private Comanda comanda = new Comanda();
+    private boolean resultado = false;
     private ControladorProductoMenu menu = new ControladorProductoMenu();
     
     /**
@@ -24,23 +27,46 @@ public class ControladorComanda {
     public ControladorComanda(){}
 
     public ControladorComanda(ObjectId id){
-       comanda = comanda.BuscarComanda(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+       comanda = comanda.BuscarComanda(id, cliente);
+       conexion.cerrarConexion(cliente);
     }
     
     public Comanda BuscarComanda(ObjectId id){
-        return comanda.BuscarComanda(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        Comanda comandaE = comanda.BuscarComanda(id, cliente);
+        conexion.cerrarConexion(cliente);
+        return comandaE;
     }
     
     public Comanda UltimaComanda(){
-        return comanda.UltimaComanda();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        Comanda comandaE = comanda.UltimaComanda(cliente);
+        conexion.cerrarConexion(cliente);
+        return comandaE;
     }
     
-    public void AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
-        comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes);
+    public boolean AgregarComanda(double Monto, ArrayList<String> Platillos_Bebida, String Notes){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (comanda.RegistrarComanda(Monto, Platillos_Bebida, Notes, cliente)){
+            resultado = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return resultado;
     }
     
-    public void EliminarComanda(ObjectId id){
-        comanda.eliminarComanda(id);
+    public boolean EliminarComanda(ObjectId id){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if ((comanda.eliminarComanda(id, cliente))){
+            resultado = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return resultado;
     }
     
     public void rellenarInfo(ArrayList<JTextArea> textos){

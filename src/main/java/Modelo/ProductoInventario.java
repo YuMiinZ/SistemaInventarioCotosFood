@@ -10,6 +10,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -112,10 +115,8 @@ public class ProductoInventario {
         this.diaCompra = diaCompra;
     }
     
-    public void registrarProductoInventario(String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, String unidadMedida,
-                                            String diaCompra, int cantidadMinima) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean registrarProductoInventario(String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, String unidadMedida,
+                                            String diaCompra, int cantidadMinima, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -129,15 +130,13 @@ public class ProductoInventario {
                 .append("Dia_Compra", diaCompra)
                 .append("Cantidad_Minima", cantidadMinima);
 
-        coleccion.insertOne(producto);
+        InsertOneResult result = coleccion.insertOne(producto);
+        return !result.toString().isEmpty();
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void modificarProductoInventario(ObjectId id, String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, 
-                                            String unidadMedida, String diaCompra, int cantidadMinima) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean modificarProductoInventario(ObjectId id, String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, 
+                                            String unidadMedida, String diaCompra, int cantidadMinima, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -153,27 +152,23 @@ public class ProductoInventario {
                 .append("Cantidad_Minima", cantidadMinima);
         Document updateDocumento = new Document("$set", datosActualizar);
 
-        coleccion.updateOne(filtro, updateDocumento);
+        
+        UpdateResult result = coleccion.updateOne(filtro, updateDocumento);
+        return !result.toString().isEmpty();
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void eliminarProductoInventario(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public boolean eliminarProductoInventario(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
 
         Document filtro = new Document("_id", id);
-        coleccion.deleteOne(filtro);
-
-        conexion.cerrarConexion(cliente);
+        DeleteResult result = coleccion.deleteOne(filtro);
+        return !result.toString().isEmpty();
     }
     
-    public ProductoInventario getProductoInventario(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public ProductoInventario getProductoInventario(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -184,13 +179,10 @@ public class ProductoInventario {
         ProductoInventario producto = new ProductoInventario(productoDoc.getObjectId("_id"), productoDoc.getObjectId("ID_Proveedor"), productoDoc.getString("Nombre"),productoDoc.getString("Estado"), productoDoc.getString("Unidad_Medida"), 
                 productoDoc.getString("Dia_Compra"), productoDoc.getDouble("Precio"), productoDoc.getDouble("Cantidad"),productoDoc.getInteger("Cantidad_Minima"));
         
-        conexion.cerrarConexion(cliente);
         return producto;
     }
     
-    public List<ProductoInventario> getListaProductosInventario() {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public List<ProductoInventario> getListaProductosInventario(MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -208,13 +200,12 @@ public class ProductoInventario {
             listaProductos.add(producto);
         }
 
-        conexion.cerrarConexion(cliente);
         return listaProductos;
     }
     
-    public List<ProductoInventario> ReporteMinimo(){
+    public List<ProductoInventario> ReporteMinimo(MongoClient cliente){
         List<ProductoInventario> listaMinimos = new ArrayList<>();
-        List<ProductoInventario> listaProductos = getListaProductosInventario();
+        List<ProductoInventario> listaProductos = getListaProductosInventario(cliente);
         
         for (ProductoInventario producto: listaProductos){
             if (producto.getCantidad() <= producto.getCantidadMinima()){

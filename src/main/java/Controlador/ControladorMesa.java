@@ -4,7 +4,9 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Mesas;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -19,15 +21,30 @@ public class ControladorMesa {
     public ControladorMesa(){}
     
     public List<Mesas> ConsultarMesas(){
-        return mesa.TodasMesas();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<Mesas> mesas = mesa.TodasMesas(cliente);
+        conexion.cerrarConexion(cliente);
+        return mesas;
     }
     
-    public void AgregarMesa(int num){
-        mesa.CrearMesa(num);
+    public boolean AgregarMesa(int num){       
+        boolean result = false;
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (mesa.CrearMesa(num, cliente)){
+            result = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return result;
     }
     
     public Mesas BuscarMesa(ObjectId id){
-        return mesa.MesaEspecifica(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        Mesas mesas = mesa.MesaEspecifica(id, cliente);
+        conexion.cerrarConexion(cliente);
+        return mesas;
     }
     
     public List<Object> obtenerListaObjetosCuentas( List<Mesas> Mesas){

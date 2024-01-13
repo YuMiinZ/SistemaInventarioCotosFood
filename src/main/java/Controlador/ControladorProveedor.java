@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Proveedor;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -28,13 +30,16 @@ public class ControladorProveedor {
     }
     
     public boolean registrarProveedor(String nombre, String telefono){
+        boolean result = false;
         if(validarDatos(nombre, telefono)){
             manejador.limpiarCamposTexto();
-            consultas.registrarProveedor(nombre, telefono);
-            return true;
-        } else {
-            return false;
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.registrarProveedor(nombre, telefono, cliente);
+            conexion.cerrarConexion(cliente);
+            result = true;
         }
+        return result;
     }
     
     
@@ -48,19 +53,32 @@ public class ControladorProveedor {
     }
     
     public List<Proveedor> obtenerListaProveedores(){
-        return consultas.getListaProveedores();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<Proveedor>  proveedor = consultas.getListaProveedores(cliente);
+        conexion.cerrarConexion(cliente);
+        return proveedor;
     }
     
     public boolean modificarProveedor(ObjectId id, String nombre, String telefono){
+        boolean result = false;
         if(validarDatos(nombre, telefono)){
-            consultas.modificarProveedor(id, nombre, telefono);
-            return true;
-        } else {
-            return false;
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.modificarProveedor(id, nombre, telefono, cliente);
+            result = true;
         }
+        return result;
     }
     
-    public void eliminarProveedor(ObjectId id){
-        consultas.eliminarProveedor(id);
+    public boolean eliminarProveedor(ObjectId id){
+        boolean result = false;
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (consultas.eliminarProveedor(id, cliente)){
+            result = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return result;
     }
 }

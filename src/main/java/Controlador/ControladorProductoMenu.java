@@ -4,11 +4,13 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
 import Modelo.ProductoMenu.Ingrediente;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -22,7 +24,7 @@ import org.bson.types.ObjectId;
 public class ControladorProductoMenu {
     private ProductoMenu consultas = new ProductoMenu();
     private ManejadorComponentes manejadorComponentes;
-    FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
+    private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
     public ControladorProductoMenu() {
     }
@@ -31,24 +33,40 @@ public class ControladorProductoMenu {
         this.manejadorComponentes = manejador; 
     }
     
-    public void eliminarProductoMenu(ObjectId id){
-        consultas.eliminarProductoMenu(id);
+    public boolean eliminarProductoMenu(ObjectId id){
+        boolean result = false;
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        if (consultas.eliminarProductoMenu(id, cliente)){
+            result = true;
+        }
+        conexion.cerrarConexion(cliente);
+        return result;
     }
     
     public boolean modificarProductoMenu(ObjectId id, String nombre, double precio, double costoElaboracion, Object tipoProducto, 
                                         JTable tableIngredientes, Object estado, List<ProductoInventario> listaProductosInventario){
+        boolean result = false;
         
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
-            consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes);
-            return true;
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            if (consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes, cliente)){
+                result = true;
+            }
+            conexion.cerrarConexion(cliente);
         }
         
-        return false;
+        return result;
     }
     
     public List<ProductoMenu> obtenerListaProductosMenu(){
-        return consultas.getListaProductosMenu();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> productos = consultas.getListaProductosMenu(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     public List<String> obtenerDatosTabla(List<ProductoMenu> listaProductos) {
@@ -73,19 +91,22 @@ public class ControladorProductoMenu {
 
     public boolean registrarProductoMenu(String nombre, double precio, double costoElaboracion, Object tipoProducto, JTable tableIngredientes, 
                                         Object estado, List<ProductoInventario> listaProductosInventario) {
-        
+        boolean result = false;
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
-            
-            consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            if (consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes, cliente)){
+                result = true;
+            }
+            conexion.cerrarConexion(cliente);
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
             DefaultTableModel model = (DefaultTableModel) tableIngredientes.getModel();
             model.setRowCount(0);
-            return true;
         }
-        return false;
+        return result;
     }
     
     public ObjectId obtenerIdProducto(List<ProductoInventario> listaProductosInventario, String nombreProducto) {
@@ -129,19 +150,35 @@ public class ControladorProductoMenu {
     }
     
     public List<ProductoMenu> ProductosenMenu(List<String> productos){
-        return consultas.ProductosenMenu(productos);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.ProductosenMenu(productos, cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public List<ProductoMenu> Platillos(){
-        return consultas.PlatillosyBebidas("Platillo");
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.PlatillosyBebidas("Platillo", cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public List<ProductoMenu> Bebidas(){
-        return consultas.PlatillosyBebidas("Bebida");
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.PlatillosyBebidas("Bebida", cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public ProductoMenu ObtenerProductoNombre(String nombre){
-        return consultas.ObtenerProductoporNombre(nombre);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        ProductoMenu menu = consultas.ObtenerProductoporNombre(nombre ,cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     
