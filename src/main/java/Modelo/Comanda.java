@@ -56,23 +56,19 @@ public class Comanda {
         return id;
     }
     
-    public Comanda BuscarComanda(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public Comanda BuscarComanda(ObjectId id, MongoClient cliente){
+        
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
         Document doc = coleccion.find(eq("_id", id)).first();    
         Comanda comanda = new Comanda(doc.getObjectId("_id"), doc.getList("ListaProductosConsumo", String.class), doc.getString("Notas"), doc.getDouble("Monto"));
         
-        conexion.cerrarConexion(cliente);
         return comanda;
     }
     
-    public Comanda UltimaComanda(){
+    public Comanda UltimaComanda(MongoClient cliente){
         List<Comanda> Comandas = new ArrayList<>();
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
@@ -82,13 +78,10 @@ public class Comanda {
             Comandas.add(comanda);
         }
         
-        conexion.cerrarConexion(cliente);
         return Comandas.get(Comandas.size()-1);
     }
 
-    public void RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void RegistrarComanda(double Monto, List<String> Platillos_Bebida, String Notes, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
@@ -98,19 +91,13 @@ public class Comanda {
                             .append("Monto", Monto);
 
         coleccion.insertOne(Comanda);
-        conexion.cerrarConexion(cliente);
     }
 
-    public void eliminarComanda(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
-
+    public void eliminarComanda(ObjectId id,  MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Comanda");
 
         Document filtro = new Document("_id", id);
         coleccion.deleteOne(filtro);
-
-        conexion.cerrarConexion(cliente);
     }
 }

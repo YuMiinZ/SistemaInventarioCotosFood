@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Consumo_Cliente;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,19 +26,35 @@ public class ControladorReportes {
     public ControladorReportes(){}
     
     public List<ProductoInventario> ReporteMinimos(){
-        return inventario.ReporteMinimo();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoInventario> productos = inventario.ReporteMinimo(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     public List<ProductoMenu> ReporteProductosEstancados(){
-        return producto.ReporteProductosEstancados();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> productos = producto.ReporteProductosEstancados(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     public List<Consumo_Cliente> ReporteVentas(Date fechaI, Date fechaF){
-        return consumo.ReporteVentas(fechaI, fechaF);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        List<Consumo_Cliente> clientes = consumo.ReporteVentas(fechaI, fechaF, clienteE);
+        conexion.cerrarConexion(clienteE);
+        return clientes;
     }
     
     public List<ProductoMenu> ReporteCostoMasVendidos(){
-        return producto.ReporteCostoProductosMasVendidos();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> productos = producto.ReporteCostoProductosMasVendidos(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     public List<String[]> LlenarTablaMenu(List<ProductoMenu> menu, int opcion){

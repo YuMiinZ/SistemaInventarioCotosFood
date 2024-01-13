@@ -48,9 +48,7 @@ public class Empleado {
     public void setId(ObjectId id) {
         this.id = id;
     }
-
     
-
     public String getNombre() {
         return nombre;
     }
@@ -108,9 +106,8 @@ public class Empleado {
     }
     
     public void registrarEmpleado(String nombre, String telefono, String alergias, String tipoSangre, int vacaciones, 
-                                  Date fechaIngreso, Date fechaVencimientoCarnet){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+                                  Date fechaIngreso, Date fechaVencimientoCarnet, MongoClient cliente){
+
         
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
@@ -124,27 +121,20 @@ public class Empleado {
                                 .append("Fecha_Vencimiento_Carnet", fechaVencimientoCarnet);
 
         coleccion.insertOne(empleado);
-
-        conexion.cerrarConexion(cliente);
     }
     
-    public Empleado getEmpleado(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public Empleado getEmpleado(ObjectId id, MongoClient cliente){
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
 
         Document doc = coleccion.find(eq("_id", id)).first();    
         Empleado Empleado = new Empleado(doc.getObjectId("_id"), doc.getString("Nombre"), doc.getString("Telefono"), doc.getString("Alergias"), doc.getString("Tipo_de_Sangre"), doc.getInteger("Vacaciones"), doc.getDate("Fecha_de_Ingreso"), doc.getDate("Fecha_Vencimiento_Carnet"));
-        conexion.cerrarConexion(cliente);
 
         return Empleado;
     }
     
     public void modificarEmpleado(ObjectId id, String nombre, String telefono, String alergias, String tipoSangre, int vacaciones,
-                              Date fechaIngreso, Date fechaVencimientoCarnet) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+                              Date fechaIngreso, Date fechaVencimientoCarnet, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
@@ -162,13 +152,9 @@ public class Empleado {
         Document updateDocumento = new Document("$set", datosActualizar);
 
         coleccion.updateOne(filtro, updateDocumento);
-
-        conexion.cerrarConexion(cliente);
     }
     
-    public List<Empleado> getListaEmpleados(){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public List<Empleado> getListaEmpleados(MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
@@ -193,13 +179,11 @@ public class Empleado {
             listaEmpleados.add(empleado);
         }
 
-        conexion.cerrarConexion(cliente);
+
         return listaEmpleados;
     }
     
-    public void eliminarEmpleado(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void eliminarEmpleado(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
@@ -207,12 +191,9 @@ public class Empleado {
         Document filtro = new Document("_id", id);
         coleccion.deleteOne(filtro);
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public List<String[]> getEmpleadosProximosAVencer() {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public List<String[]> getEmpleadosProximosAVencer(MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Empleado");
@@ -236,7 +217,6 @@ public class Empleado {
             }
         }
 
-        conexion.cerrarConexion(cliente);
         return empleadosProximosAVencer;
     }
 

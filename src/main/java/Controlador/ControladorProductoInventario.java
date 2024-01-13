@@ -4,10 +4,12 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.ProductoInventario;
 import Modelo.Proveedor;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -34,8 +36,11 @@ public class ControladorProductoInventario {
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
         
         if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
             consultas.registrarProductoInventario(nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima);
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente);
+            conexion.cerrarConexion(cliente);
             
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
@@ -50,8 +55,12 @@ public class ControladorProductoInventario {
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){
         
          if(validarDatos(nombre, indexProveedor, precio, cantidad, cantMinima, diaCompra, estado, unidadMedida)){
+             ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
             consultas.modificarProductoInventario(id, nombre, precio, listaProveedores.get(indexProveedor).getId(), estado.toString(), cantidad, 
-                                                  unidadMedida, diaCompra.toString(), cantMinima);
+                                                  unidadMedida, diaCompra.toString(), cantMinima, cliente);
+            conexion.cerrarConexion(cliente);
+
             
             return true;
         }
@@ -76,7 +85,11 @@ public class ControladorProductoInventario {
     }
     
     public List<ProductoInventario> obtenerListaProductosInventario(){
-        return consultas.getListaProductosInventario();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoInventario> productos = consultas.getListaProductosInventario(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     
@@ -103,6 +116,9 @@ public class ControladorProductoInventario {
     }
     
     public void eliminarProductoInventario(ObjectId id){
-        consultas.eliminarProductoInventario(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        consultas.eliminarProductoInventario(id, cliente);
+        conexion.cerrarConexion(cliente);
     }
 }

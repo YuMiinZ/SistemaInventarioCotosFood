@@ -58,9 +58,7 @@ public class Proveedor {
         this.telefono = telefono;
     }
     
-    public void registrarProveedor (String nombre, String telefono){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void registrarProveedor (String nombre, String telefono, MongoClient cliente){
         
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Proveedor");
@@ -70,12 +68,9 @@ public class Proveedor {
 
         coleccion.insertOne(proveedor);
         
-        conexion.cerrarConexion(cliente);
     }
     
-    public void modificarProveedor(ObjectId id, String nombre, String telefono){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void modificarProveedor(ObjectId id, String nombre, String telefono, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Proveedor");
@@ -86,12 +81,9 @@ public class Proveedor {
 
         coleccion.updateOne(filtro, updateDocumento);
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void eliminarProveedor(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void eliminarProveedor(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Proveedor");
@@ -99,13 +91,10 @@ public class Proveedor {
         Document filtro = new Document("_id", id);
         coleccion.deleteOne(filtro);
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public List<Proveedor> getListaProveedores() {
+    public List<Proveedor> getListaProveedores(MongoClient cliente) {
         List<Proveedor> listaProveedores;
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Proveedor");
@@ -122,7 +111,6 @@ public class Proveedor {
             listaProveedores.add(proveedor);
         }
 
-        conexion.cerrarConexion(cliente);
         return listaProveedores;
     }
     

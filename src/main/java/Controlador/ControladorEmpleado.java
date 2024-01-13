@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Empleado;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ public class ControladorEmpleado {
     private ManejadorComponentes manejador;
     FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
 
-    public ControladorEmpleado() {
-    }
+    public ControladorEmpleado() {}
         
     
     
@@ -33,7 +34,11 @@ public class ControladorEmpleado {
     }
     
     public Empleado obtenerEmpelado(ObjectId id){
-        return consultas.getEmpleado(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        Empleado empleado = consultas.getEmpleado(id, cliente);
+        conexion.cerrarConexion(cliente);
+        return empleado;
     }
     
     public List<Object> obtenerListaObjetosEmpleado(List<Empleado> Empleados){
@@ -62,7 +67,10 @@ public class ControladorEmpleado {
 
            fechaIngresoDate = formatoFecha.parse(fechaIngreso);
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
-           consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate);
+           ConexionBD conexion = new ConexionBD();
+           MongoClient cliente = conexion.crearConexion();
+           consultas.registrarEmpleado(nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente);
+           conexion.cerrarConexion(cliente);
            manejador.limpiarCamposTexto();
            manejador.limpiarCmbox();
            manejador.limpiarSpinner();
@@ -90,7 +98,11 @@ public class ControladorEmpleado {
     }
     
     public List<Empleado> obtenerListaEmpleados(){
-        return consultas.getListaEmpleados();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<Empleado> empleados = consultas.getListaEmpleados(cliente);
+        conexion.cerrarConexion(cliente);
+        return empleados;
     }
     
     public boolean modificarProveedor(ObjectId id, String nombre, String telefono, int vacaciones, String fechaVencimientoCarnet, String alergias, Object tipoSangre, 
@@ -102,13 +114,19 @@ public class ControladorEmpleado {
 
            fechaIngresoDate = formatoFecha.parse(fechaIngreso);
            fechaVencimientoDate = formatoFecha.parse(fechaVencimientoCarnet);
-           consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate);
+           ConexionBD conexion = new ConexionBD();
+           MongoClient cliente = conexion.crearConexion();
+           consultas.modificarEmpleado(id, nombre, telefono, alergias, tipoSangre.toString(), vacaciones, fechaIngresoDate, fechaVencimientoDate, cliente);
+           conexion.cerrarConexion(cliente);
            return true;
        } 
        return false;
     }
     
     public void eliminarEmpleado(ObjectId id){
-        consultas.eliminarEmpleado(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        consultas.eliminarEmpleado(id, cliente);
+        conexion.cerrarConexion(cliente);
     }
 }

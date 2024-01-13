@@ -4,8 +4,10 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Consumo_Cliente;
 import Modelo.Consumo_Empleado;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,27 +29,53 @@ public class ControladorConsumo {
      * @return 
      */
     public List<Consumo_Cliente> ConsultarCliente(ObjectId NumMesa){
-        return cliente.ConsumoClienteEspecifico(NumMesa);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        List<Consumo_Cliente> clientes = cliente.ConsumoClienteEspecifico(NumMesa, clienteE);
+        conexion.cerrarConexion(clienteE);
+        return clientes;
     }
     
+    public List<Consumo_Empleado> ConsultarEmpleado(ObjectId NumEmpleado){
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        List<Consumo_Empleado> empeleados = Empleado.ConsumoEmpleadoEspecifico(NumEmpleado, clienteE);
+        conexion.cerrarConexion(clienteE);
+        return empeleados;
+    }
     public void CrearCliente(ObjectId comanda, ObjectId mesa, double monto, Date fecha){
-        cliente.NuevaCompra(comanda, mesa, monto, fecha);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        cliente.NuevaCompra(comanda, mesa, monto, fecha, clienteE);
+        conexion.cerrarConexion(clienteE);
     }
     
     public void CrearEmpleado(ObjectId comanda, ObjectId mesa, double monto){
-        Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        Empleado.Nuevo_Consumo_Empleado(comanda, mesa, monto, clienteE);
+        conexion.cerrarConexion(clienteE);
     }
     
     public void ElminarCuentaCliente(ObjectId idMesa, ObjectId idComanda){
-        cliente.eliminar(idMesa, idComanda);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        cliente.eliminar(idMesa, idComanda, clienteE);
+        conexion.cerrarConexion(clienteE);
     }
     
     public void ElminarCuentaEmpleado(ObjectId idEmpleado, ObjectId idComanda){
-        Empleado.eliminar(idEmpleado, idComanda);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        Empleado.eliminar(idEmpleado, idComanda, clienteE);
+        conexion.cerrarConexion(clienteE);
     }
     
     public void Pagar(ObjectId cuenta, String opcion){
-        cliente.Pagar(cuenta, opcion);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient clienteE = conexion.crearConexion();
+        cliente.Pagar(cuenta, opcion, clienteE);
+        conexion.cerrarConexion(clienteE);
     }
     
     public List<Object> obtenerListaObjetosConsumoCliente( List<Consumo_Cliente> listaConsumo){
@@ -66,9 +94,7 @@ public class ControladorConsumo {
         return listaObjetos;
     }
     
-    public List<Consumo_Empleado> ConsultarEmpleado(ObjectId NumEmpleado){
-        return Empleado.ConsumoEmpleadoEspecifico(NumEmpleado);
-    }
+
     
     public List<String[]> LlenarTablaClientes(List<Consumo_Cliente> clientes){ 
         List<String[]> consumo = new ArrayList<>();

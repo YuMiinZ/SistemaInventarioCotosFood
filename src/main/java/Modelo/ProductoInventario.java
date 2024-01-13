@@ -113,9 +113,7 @@ public class ProductoInventario {
     }
     
     public void registrarProductoInventario(String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, String unidadMedida,
-                                            String diaCompra, int cantidadMinima) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+                                            String diaCompra, int cantidadMinima, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -131,13 +129,10 @@ public class ProductoInventario {
 
         coleccion.insertOne(producto);
 
-        conexion.cerrarConexion(cliente);
     }
     
     public void modificarProductoInventario(ObjectId id, String nombre, double precio, ObjectId idProveedor, String estado, double cantidad, 
-                                            String unidadMedida, String diaCompra, int cantidadMinima) {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+                                            String unidadMedida, String diaCompra, int cantidadMinima, MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -155,25 +150,18 @@ public class ProductoInventario {
 
         coleccion.updateOne(filtro, updateDocumento);
 
-        conexion.cerrarConexion(cliente);
     }
     
-    public void eliminarProductoInventario(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public void eliminarProductoInventario(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
 
         Document filtro = new Document("_id", id);
         coleccion.deleteOne(filtro);
-
-        conexion.cerrarConexion(cliente);
     }
     
-    public ProductoInventario getProductoInventario(ObjectId id){
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public ProductoInventario getProductoInventario(ObjectId id, MongoClient cliente){
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -184,13 +172,10 @@ public class ProductoInventario {
         ProductoInventario producto = new ProductoInventario(productoDoc.getObjectId("_id"), productoDoc.getObjectId("ID_Proveedor"), productoDoc.getString("Nombre"),productoDoc.getString("Estado"), productoDoc.getString("Unidad_Medida"), 
                 productoDoc.getString("Dia_Compra"), productoDoc.getDouble("Precio"), productoDoc.getDouble("Cantidad"),productoDoc.getInteger("Cantidad_Minima"));
         
-        conexion.cerrarConexion(cliente);
         return producto;
     }
     
-    public List<ProductoInventario> getListaProductosInventario() {
-        ConexionBD conexion = new ConexionBD();
-        MongoClient cliente = conexion.crearConexion();
+    public List<ProductoInventario> getListaProductosInventario(MongoClient cliente) {
 
         MongoDatabase db = cliente.getDatabase("SistemaInventarioCotosFood");
         MongoCollection<Document> coleccion = db.getCollection("Producto_Inventario");
@@ -208,13 +193,12 @@ public class ProductoInventario {
             listaProductos.add(producto);
         }
 
-        conexion.cerrarConexion(cliente);
         return listaProductos;
     }
     
-    public List<ProductoInventario> ReporteMinimo(){
+    public List<ProductoInventario> ReporteMinimo(MongoClient cliente){
         List<ProductoInventario> listaMinimos = new ArrayList<>();
-        List<ProductoInventario> listaProductos = getListaProductosInventario();
+        List<ProductoInventario> listaProductos = getListaProductosInventario(cliente);
         
         for (ProductoInventario producto: listaProductos){
             if (producto.getCantidad() <= producto.getCantidadMinima()){

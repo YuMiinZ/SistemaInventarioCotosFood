@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.Proveedor;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -30,7 +32,10 @@ public class ControladorProveedor {
     public boolean registrarProveedor(String nombre, String telefono){
         if(validarDatos(nombre, telefono)){
             manejador.limpiarCamposTexto();
-            consultas.registrarProveedor(nombre, telefono);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.registrarProveedor(nombre, telefono, cliente);
+            conexion.cerrarConexion(cliente);
             return true;
         } else {
             return false;
@@ -48,12 +53,18 @@ public class ControladorProveedor {
     }
     
     public List<Proveedor> obtenerListaProveedores(){
-        return consultas.getListaProveedores();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<Proveedor>  proveedor = consultas.getListaProveedores(cliente);
+        conexion.cerrarConexion(cliente);
+        return proveedor;
     }
     
     public boolean modificarProveedor(ObjectId id, String nombre, String telefono){
         if(validarDatos(nombre, telefono)){
-            consultas.modificarProveedor(id, nombre, telefono);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.modificarProveedor(id, nombre, telefono, cliente);
             return true;
         } else {
             return false;
@@ -61,6 +72,9 @@ public class ControladorProveedor {
     }
     
     public void eliminarProveedor(ObjectId id){
-        consultas.eliminarProveedor(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        consultas.eliminarProveedor(id, cliente);
+        conexion.cerrarConexion(cliente);
     }
 }

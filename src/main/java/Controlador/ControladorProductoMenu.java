@@ -4,11 +4,13 @@
  */
 package Controlador;
 
+import Modelo.ConexionBD;
 import Modelo.ProductoInventario;
 import Modelo.ProductoMenu;
 import Modelo.ProductoMenu.Ingrediente;
 import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
+import com.mongodb.client.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -31,7 +33,10 @@ public class ControladorProductoMenu {
     }
     
     public void eliminarProductoMenu(ObjectId id){
-        consultas.eliminarProductoMenu(id);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        consultas.eliminarProductoMenu(id, cliente);
+        conexion.cerrarConexion(cliente);
     }
     
     public boolean modificarProductoMenu(ObjectId id, String nombre, double precio, double costoElaboracion, Object tipoProducto, 
@@ -39,7 +44,10 @@ public class ControladorProductoMenu {
         
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
-            consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.modificarProductoMenu(id, nombre, estado.toString(), tipoProducto.toString(), precio, costoElaboracion, listaIngredientes, cliente);
+            conexion.cerrarConexion(cliente);
             return true;
         }
         
@@ -47,7 +55,11 @@ public class ControladorProductoMenu {
     }
     
     public List<ProductoMenu> obtenerListaProductosMenu(){
-        return consultas.getListaProductosMenu();
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> productos = consultas.getListaProductosMenu(cliente);
+        conexion.cerrarConexion(cliente);
+        return productos;
     }
     
     public List<String> obtenerDatosTabla(List<ProductoMenu> listaProductos) {
@@ -75,8 +87,10 @@ public class ControladorProductoMenu {
         
         if(validarDatos(nombre, precio, costoElaboracion, tipoProducto, tableIngredientes, estado)){
             List<Ingrediente> listaIngredientes = obtenerDatosTabla(tableIngredientes, listaProductosInventario);
-            
-            consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes);
+            ConexionBD conexion = new ConexionBD();
+            MongoClient cliente = conexion.crearConexion();
+            consultas.registrarProductoMenu(nombre, estado.toString(), tipoProducto.toString() , precio, costoElaboracion, listaIngredientes, cliente);
+            conexion.cerrarConexion(cliente);
             manejadorComponentes.limpiarCamposTexto();
             manejadorComponentes.limpiarCmbox();
             manejadorComponentes.limpiarSpinner();
@@ -127,19 +141,35 @@ public class ControladorProductoMenu {
     }
     
     public List<ProductoMenu> ProductosenMenu(List<String> productos){
-        return consultas.ProductosenMenu(productos);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.ProductosenMenu(productos, cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public List<ProductoMenu> Platillos(){
-        return consultas.PlatillosyBebidas("Platillo");
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.PlatillosyBebidas("Platillo", cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public List<ProductoMenu> Bebidas(){
-        return consultas.PlatillosyBebidas("Bebida");
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        List<ProductoMenu> menu = consultas.PlatillosyBebidas("Bebida", cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     public ProductoMenu ObtenerProductoNombre(String nombre){
-        return consultas.ObtenerProductoporNombre(nombre);
+        ConexionBD conexion = new ConexionBD();
+        MongoClient cliente = conexion.crearConexion();
+        ProductoMenu menu = consultas.ObtenerProductoporNombre(nombre ,cliente);
+        conexion.cerrarConexion(cliente);
+        return menu;
     }
     
     
