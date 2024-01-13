@@ -36,9 +36,8 @@ public class JF_Inventario extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
-        //this.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
+        this.setExtendedState(JF_Inventario.MAXIMIZED_BOTH);
     }
 
     /**

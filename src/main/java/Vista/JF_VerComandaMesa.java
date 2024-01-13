@@ -51,6 +51,7 @@ public class JF_VerComandaMesa extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         customComponents();
         eventComponents(); 
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");

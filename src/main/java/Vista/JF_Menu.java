@@ -38,7 +38,7 @@ public class JF_Menu extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-       //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       this.setExtendedState(JF_Menu.MAXIMIZED_BOTH);
         
     }
 

@@ -30,7 +30,7 @@ public class JF_RegistrarProveedor extends javax.swing.JFrame {
         eventComponents();
 
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_RegistrarProveedor.MAXIMIZED_BOTH);
         
     }
 

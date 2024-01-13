@@ -33,7 +33,7 @@ public class JF_Notificaciones extends javax.swing.JFrame {
         customComponents();
         eventComponents();        
         
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JF_Notificaciones.MAXIMIZED_BOTH);
         
     }
 

@@ -50,6 +50,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
+        this.setExtendedState(JF_NuevaComandaEmpleado.MAXIMIZED_BOTH);
     }
     private void customComponents(){
         menu.setButtonIcon(jButton1, "/Imagenes/IconoMenu.png");
@@ -228,7 +229,7 @@ public class JF_NuevaComandaEmpleado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 820, 199, 50));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 550, 199, 50));
 
         tableBebidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -36,9 +36,8 @@ public class JF_CompraDia extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        this.setExtendedState(JF_CompraDia.MAXIMIZED_BOTH);
+
     }
 
     /**

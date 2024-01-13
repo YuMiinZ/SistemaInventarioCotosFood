@@ -39,9 +39,7 @@ public class JF_CompraProveedor extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        this.setExtendedState(JF_CompraProveedor.MAXIMIZED_BOTH);        
     }
 
     /**
