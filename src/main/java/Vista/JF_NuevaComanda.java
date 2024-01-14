@@ -336,21 +336,10 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         ArrayList<String> Productos = new ArrayList<>();
         ProductoMenu producto;
         double MontoTotal = 0;
-        if (tablePlatilllos.getRowCount() > 0){
-            if (!funcionesGenerales.validarTablaDatos(tablePlatilllos)){
-                JOptionPane.showMessageDialog(null, "Inserte bien los datos en platillos");
-                return;
-            }
-        }
-        if (tableBebidas.getRowCount() > 0){
-            if (!funcionesGenerales.validarTablaDatos(tableBebidas)){
-                JOptionPane.showMessageDialog(null, "Inserte bien los datos en bebidas");
-                return;
-            }
-        }
-        if (tableBebidas.getRowCount() == 0 && tablePlatilllos.getRowCount() == 0){
-            JOptionPane.showMessageDialog(null, "Inserte datos");
-                return;
+        
+        if (!funcionesGenerales.validarTablaComandas(tablePlatilllos, tableBebidas)) {
+            JOptionPane.showMessageDialog(null, "Inserte datos válidos en platillos o bebidas con su nombre y cantidad");
+            return;
         }
         
         for (int i = 0; i < tablePlatilllos.getRowCount(); i++){

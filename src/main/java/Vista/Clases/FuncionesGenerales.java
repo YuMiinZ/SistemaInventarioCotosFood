@@ -127,20 +127,49 @@ public class FuncionesGenerales {
         return !(!tablaNoVacia || !datosValidos);
     }
     
-    public boolean validarTablaDatos(JTable tablaIngredientes){
-        boolean datosValidos = false;
-        int rowCount = tablaIngredientes.getRowCount();
-        
+    
+    /**
+     * Validación de ambas tablas de la comanda (platillos y bebidas)
+     * Retornará true si cualquiera de las variables booleanas contiene un true y sino un false idicando que ambas no cumplen
+     * con las validaciones y es false.
+     * @param tablaPlatillos
+     * @param tablaBebidas
+     * @return 
+     */
+    public boolean validarTablaComandas(JTable tablaPlatillos, JTable tablaBebidas) {
+        boolean datosValidosPlatillos = validarTablaDatosEspecificaComanda(tablaPlatillos);
+        boolean datosValidosBebidas = validarTablaDatosEspecificaComanda(tablaBebidas);
+
+        return datosValidosPlatillos || datosValidosBebidas;
+    }
+    
+    /**
+     * Validación específica de las tablas de las comandas, realiza las siguientes validaciones:
+     * 1. Permite que al menos una fila sea null y continua con la segunda validación
+     * 2. Busca al menos una fila con datos válidos y retorna true
+     * 3. Si encontró al menos una fila con null, pero no encontró ninguna con datos válidos retorna false, indicando
+     *    que no hay filas con datos válidos.
+     * @param tabla
+     * @return 
+     */
+    public boolean validarTablaDatosEspecificaComanda(JTable tabla) {
+        int rowCount = tabla.getRowCount();
+
         for (int i = 0; i < rowCount; i++) {
-            Object ingrediente = tablaIngredientes.getValueAt(i, 0);
-            Object cantidad = tablaIngredientes.getValueAt(i, 1);
-            if (!ingrediente.toString().isEmpty() && cantidad instanceof Double) {
+            Object dato = tabla.getValueAt(i, 0);
+            Object cantidad = tabla.getValueAt(i, 1);
+
+            if (dato == null && cantidad == null) {
+                continue; 
+            }
+
+            if (dato != null && !dato.toString().isEmpty() && cantidad instanceof Double) {
                 if ((double) cantidad > 0.0) {
-                    datosValidos = true;
-                    break;
+                    return true; 
                 }
             }
         }
-        return datosValidos;
+
+        return false; 
     }
 }
