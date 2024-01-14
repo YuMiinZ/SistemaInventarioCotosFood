@@ -35,6 +35,8 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
     private java.util.List<ProductoInventario> listaProductosInventario;
     private FuncionesGenerales funcionesGenerales = new FuncionesGenerales();
     private java.util.List<String[]> notificaciones;
+    ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
+    private java.util.List<ProductoMenu> listaProductosMenu; 
     /**
      * Creates new form JF_Principal
      * @param dato
@@ -47,7 +49,7 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
+        listaProductosMenu = controlador.obtenerListaProductosMenu();
         this.setExtendedState(JF_ModificarProductoMenu.MAXIMIZED_BOTH);
         
     }
@@ -410,11 +412,14 @@ public class JF_ModificarProductoMenu extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
-        if (controlador.modificarProductoMenu(dato.getId(), txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(),
-            cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
-            listaProductosInventario)) {
-        JOptionPane.showMessageDialog(null, "Modificación exitosa");
+        if(!controlador.verificarNombreProducto(listaProductosMenu, txtNombre.getText(),1, dato.getNombre())){
+            if (controlador.modificarProductoMenu(dato.getId(), txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(),
+                cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
+                listaProductosInventario)) {
+            JOptionPane.showMessageDialog(null, "Modificación exitosa");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe un producto con ese nombre", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 

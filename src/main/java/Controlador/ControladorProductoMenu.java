@@ -33,6 +33,24 @@ public class ControladorProductoMenu {
         this.manejadorComponentes = manejador; 
     }
     
+    public boolean verificarNombreProducto(List<ProductoMenu> lista, String nombreVerificar, int opcion, String nombreActual){
+        for(ProductoMenu producto : lista){
+            if(producto.getNombre().equals(nombreVerificar) && opcion == 0){
+                return true;
+            } else if (opcion == 1) {
+                if(nombreVerificar.equals(nombreActual)){
+                    return false;
+                } else {
+                    if (producto.getNombre().equals(nombreVerificar)){
+                        return true;
+                    }
+                   
+                }
+            }
+        }
+        return false;
+    }
+    
     public boolean eliminarProductoMenu(ObjectId id){
         boolean result = false;
         ConexionBD conexion = new ConexionBD();

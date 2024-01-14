@@ -7,6 +7,7 @@ package Vista;
 import Controlador.ControladorProductoInventario;
 import Controlador.ControladorProductoMenu;
 import Modelo.ProductoInventario;
+import Modelo.ProductoMenu;
 import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.TablaSpinnerPersonalizada;
 import Vista.Clases.MenuBoton;
@@ -28,7 +29,8 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     private final ControladorProductoInventario controladorProductoInventario = new ControladorProductoInventario();
     private java.util.List<ProductoInventario> listaProductosInventario;
     private java.util.List<String[]> notificaciones;
-    
+    ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
+    private java.util.List<ProductoMenu> listaProductosMenu;
     /**
      * Creates new form JF_Principal
      */
@@ -39,7 +41,7 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
+        listaProductosMenu = controlador.obtenerListaProductosMenu();
         this.setExtendedState(JF_RegistrarProductoMenu.MAXIMIZED_BOTH);
         
     }
@@ -317,13 +319,16 @@ public class JF_RegistrarProductoMenu extends javax.swing.JFrame {
     
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        ControladorProductoMenu controlador = new ControladorProductoMenu(manejadorComponentes);
-        if (controlador.registrarProductoMenu(txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(), 
-                                                    cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
-                                                    listaProductosInventario)) {
-            spnPrecio.setValue(0.0);
-            spnCostoElaboracion.setValue(0.0);
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
+        if(!controlador.verificarNombreProducto(listaProductosMenu, txtNombre.getText(),0, null)){
+            if (controlador.registrarProductoMenu(txtNombre.getText(), (double) spnPrecio.getValue(), (double) spnCostoElaboracion.getValue(), 
+                                                        cmboxTipoProducto.getSelectedItem(), tableIngredientes, cmboxEstado.getSelectedItem(),
+                                                        listaProductosInventario)) {
+                spnPrecio.setValue(0.0);
+                spnCostoElaboracion.setValue(0.0);
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe un producto con ese nombre", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

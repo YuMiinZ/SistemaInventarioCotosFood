@@ -30,7 +30,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
     private MenuBoton menu;
     private FuncionesGenerales funciones = new FuncionesGenerales();
     private java.util.List<String[]> notificaciones;
-
+    private java.util.List<ProductoInventario> listaProductosInventario;
     /**
      * Creates new form JF_Principal
      * @param dato
@@ -42,6 +42,7 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
         menu = new MenuBoton(300, getContentPane().getHeight() - 185, this, notificaciones);
         customComponents();
         eventComponents();
+        listaProductosInventario = controladorProductoInventario.obtenerListaProductosInventario();
         this.setExtendedState(JF_ModificarProductoInventario.MAXIMIZED_BOTH);
     }
 
@@ -326,11 +327,15 @@ public class JF_ModificarProductoInventario extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        if(controladorProductoInventario.modificarProductoInventario(dato.getId(), txtNombre.getText(), cmboxProveedor.getSelectedIndex(), 
-                                                                    (double) spnPrecio.getValue(), (double) spnCantidad.getValue(), 
-                                                                    (int) spnCantidadMinima.getValue(), cmboxDiaCompra.getSelectedItem(), 
-                                                                    cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), listaProveedores)){
-            JOptionPane.showMessageDialog(null, "Modificación exitosa");
+        if(!controladorProductoInventario.verificarNombreProducto(listaProductosInventario, txtNombre.getText(),1, dato.getNombre())){
+            if(controladorProductoInventario.modificarProductoInventario(dato.getId(), txtNombre.getText(), cmboxProveedor.getSelectedIndex(), 
+                                                                        (double) spnPrecio.getValue(), (double) spnCantidad.getValue(), 
+                                                                        (int) spnCantidadMinima.getValue(), cmboxDiaCompra.getSelectedItem(), 
+                                                                        cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), listaProveedores)){
+                JOptionPane.showMessageDialog(null, "Modificación exitosa");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe un producto con ese nombre", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 

@@ -30,7 +30,23 @@ public class ControladorProductoInventario {
         this.manejadorComponentes = manejador; 
     }
     
-    
+    public boolean verificarNombreProducto(List<ProductoInventario> lista, String nombreVerificar, int opcion, String nombreActual){
+        for(ProductoInventario producto : lista){
+            if(producto.getNombre().equals(nombreVerificar) && opcion == 0){
+                return true;
+            } else if (opcion == 1) {
+                if(nombreVerificar.equals(nombreActual)){
+                    return false;
+                } else {
+                    if (producto.getNombre().equals(nombreVerificar)){
+                        return true;
+                    }
+                   
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean registrarProductoInventario(String nombre, int indexProveedor, double precio, double cantidad, int cantMinima, Object diaCompra,
                                                 Object estado, String unidadMedida, List<Proveedor> listaProveedores){

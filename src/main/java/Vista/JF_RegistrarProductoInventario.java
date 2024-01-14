@@ -6,7 +6,9 @@ package Vista;
 
 import Controlador.ControladorProductoInventario;
 import Controlador.ControladorProveedor;
+import Modelo.ProductoInventario;
 import Modelo.Proveedor;
+import Vista.Clases.FuncionesGenerales;
 import Vista.Clases.ManejadorComponentes;
 import Vista.Clases.MenuBoton;
 import java.awt.*;
@@ -24,6 +26,9 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
     private final ControladorProveedor controladorProveedor = new ControladorProveedor(manejadorComponentes);
     private java.util.List<String[]> notificaciones;
     private java.util.List<Proveedor> listaProveedores;
+    
+    ControladorProductoInventario controlador = new ControladorProductoInventario(manejadorComponentes);
+    private java.util.List<ProductoInventario> listaProductosInventario;
 
     /**
      * Creates new form JF_Principal
@@ -35,7 +40,7 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
         customComponents();
         eventComponents();
 
-        
+        listaProductosInventario = controlador.obtenerListaProductosInventario();
         this.setExtendedState(JF_RegistrarProductoInventario.MAXIMIZED_BOTH);
         
     }
@@ -295,15 +300,18 @@ public class JF_RegistrarProductoInventario extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        ControladorProductoInventario controlador = new ControladorProductoInventario(manejadorComponentes);
         
-        if (controlador.registrarProductoInventario(txtNombre.getText(), cmboxProveedor.getSelectedIndex(), (double) spnPrecio.getValue(), 
-                                                    (double) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
-                                                    cmboxDiaCompra.getSelectedItem(), cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), 
-                                                    listaProveedores)) {
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
-            spnPrecio.setValue(0.0);
-            spnCantidad.setValue(0.0);
+        if(!controlador.verificarNombreProducto(listaProductosInventario, txtNombre.getText(),0, null)){
+            if (controlador.registrarProductoInventario(txtNombre.getText(), cmboxProveedor.getSelectedIndex(), (double) spnPrecio.getValue(), 
+                                                        (double) spnCantidad.getValue(), (int) spnCantidadMinima.getValue(), 
+                                                        cmboxDiaCompra.getSelectedItem(), cmboxEstado.getSelectedItem(), txtUnidadMedida.getText(), 
+                                                        listaProveedores)) {
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
+                spnPrecio.setValue(0.0);
+                spnCantidad.setValue(0.0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe un producto con ese nombre", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
