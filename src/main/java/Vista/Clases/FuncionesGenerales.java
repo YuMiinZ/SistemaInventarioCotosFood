@@ -6,7 +6,9 @@ package Vista.Clases;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -130,17 +132,25 @@ public class FuncionesGenerales {
     
     /**
      * Validación de ambas tablas de la comanda (platillos y bebidas)
-     * Retornará true si cualquiera de las variables booleanas contiene un true y sino un false idicando que ambas no cumplen
+     * Retornará una lista de booleano:
+     * Pos 0 almacena true si cualquiera de las variables booleanas contiene un true y sino un false idicando que ambas no cumplen
+     * Pos 1 el resultado de platillos
+     * Pos 2 el resultado de bebidas
      * con las validaciones y es false.
      * @param tablaPlatillos
      * @param tablaBebidas
      * @return 
      */
-    public boolean validarTablaComandas(JTable tablaPlatillos, JTable tablaBebidas) {
+    public List<Boolean> validarTablaComandas(JTable tablaPlatillos, JTable tablaBebidas) {
         boolean datosValidosPlatillos = validarTablaDatosEspecificaComanda(tablaPlatillos);
         boolean datosValidosBebidas = validarTablaDatosEspecificaComanda(tablaBebidas);
-
-        return datosValidosPlatillos || datosValidosBebidas;
+        
+        List<Boolean> resultados = new ArrayList<>();
+        resultados.add(datosValidosPlatillos || datosValidosBebidas);
+        resultados.add(datosValidosPlatillos);
+        resultados.add(datosValidosBebidas);
+        
+        return resultados;
     }
     
     /**

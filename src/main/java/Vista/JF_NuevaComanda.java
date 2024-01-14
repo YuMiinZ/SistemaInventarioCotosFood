@@ -336,32 +336,47 @@ public class JF_NuevaComanda extends javax.swing.JFrame {
         ArrayList<String> Productos = new ArrayList<>();
         ProductoMenu producto;
         double MontoTotal = 0;
-        
-        if (!funcionesGenerales.validarTablaComandas(tablePlatilllos, tableBebidas)) {
-            JOptionPane.showMessageDialog(null, "Inserte datos válidos en platillos o bebidas con su nombre y cantidad");
+        List<Boolean> resultado = funcionesGenerales.validarTablaComandas(tablePlatilllos, tableBebidas);
+        if (!resultado.get(0)) {
+            JOptionPane.showMessageDialog(null, "Inserte datos válidos en platillos o bebidas con su nombre y cantidad", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        for (int i = 0; i < tablePlatilllos.getRowCount(); i++){
-            producto = Menu.ObtenerProductoNombre(tablePlatilllos.getModel().getValueAt(i, 0).toString());
-            for (int j = 0; j < Double.parseDouble(tablePlatilllos.getModel().getValueAt(i, 1).toString()); j++){
-                Productos.add(producto.getNombre());
-                MontoTotal += producto.getPrecio();
-            }
-        }
-        for (int i = 0; i < tablePlatilllos.getRowCount(); i++){
-            producto = Menu.ObtenerProductoNombre(tablePlatilllos.getModel().getValueAt(i, 0).toString());
-            for (int j = 0; j < Double.parseDouble(tablePlatilllos.getModel().getValueAt(i, 1).toString()); j++){
-                Productos.add(producto.getNombre());
-                MontoTotal += producto.getPrecio();
+        if (resultado.get(1)) {
+            for (int i = 0; i < tablePlatilllos.getRowCount(); i++) {
+                Object valueAtNombre = tablePlatilllos.getModel().getValueAt(i, 0);
+                Object valueAtCantidad = tablePlatilllos.getModel().getValueAt(i, 1);
+
+                if (valueAtNombre != null && valueAtCantidad != null &&
+                    valueAtNombre.toString() != null && valueAtCantidad.toString() != null &&
+                    Double.parseDouble(valueAtCantidad.toString()) != 0) {
+
+                    producto = Menu.ObtenerProductoNombre(valueAtNombre.toString());
+
+                    for (int j = 0; j < Double.parseDouble(valueAtCantidad.toString()); j++) {
+                        Productos.add(producto.getNombre());
+                        MontoTotal += producto.getPrecio();
+                    }
+                }
             }
         }
         
-        for (int i = 0; i < tableBebidas.getRowCount(); i++){
-            producto = Menu.ObtenerProductoNombre(tableBebidas.getModel().getValueAt(i, 0).toString());
-            for (int j = 0; j < Double.parseDouble(tableBebidas.getModel().getValueAt(i, 1).toString()); j++){
-                Productos.add(producto.getNombre());
-                MontoTotal += producto.getPrecio();
+        if (resultado.get(2)) {
+            for (int i = 0; i < tableBebidas.getRowCount(); i++) {
+                Object valueAtNombre = tableBebidas.getModel().getValueAt(i, 0);
+                Object valueAtCantidad = tableBebidas.getModel().getValueAt(i, 1);
+
+                if (valueAtNombre != null && valueAtCantidad != null &&
+                    valueAtNombre.toString() != null && valueAtCantidad.toString() != null &&
+                    Double.parseDouble(valueAtCantidad.toString()) != 0) {
+
+                    producto = Menu.ObtenerProductoNombre(valueAtNombre.toString());
+
+                    for (int j = 0; j < Double.parseDouble(valueAtCantidad.toString()); j++) {
+                        Productos.add(producto.getNombre());
+                        MontoTotal += producto.getPrecio();
+                    }
+                }
             }
         }
         
