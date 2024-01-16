@@ -147,6 +147,13 @@ public final class MenuBoton extends JPopupMenu{
         this.setPreferredSize(new Dimension(x, y));
         programarMenu(notificaciones);
         agregarFocusListener();
+        
+        iniciarIconoPrograma(dad);
+    }
+    
+    private void iniciarIconoPrograma(JFrame dad){
+        ImageIcon icono = new ImageIcon(getClass().getResource("/Imagenes/iconoCotosFood2.png"));
+        dad.setIconImage(icono.getImage());
     }
     
     private void agregarFocusListener() {
